@@ -24,7 +24,7 @@ export default function Loop() {
     { node: <SiSoundcloud />, title: "SoundCloud", href: "https://soundcloud.com" },
   ];
 
-  const loops = Array.from({ length: 3 }).map((_, i) => {
+  const loops = Array.from({ length: 4 }).map((_, i) => {
     // random speed between 80 and 150
     const speed = Math.floor(Math.random() * 70) + 80;
     // random direction left or right
@@ -48,7 +48,7 @@ export default function Loop() {
   return (
     <section className="bg-black text-white min-h-screen flex flex-col items-center justify-center">
       <CurvedLoop
-        marqueeText="Be ✦ Game ✦ Coding ✦ Producer ✦ Bits ✦"
+        marqueeText="Be ✦ Gamer ✦ Coder ✦ Producer ✦ Bits ✦"
         speed={3}
         curveAmount={500}
         direction="right"
