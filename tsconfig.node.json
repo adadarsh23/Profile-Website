@@ -1,0 +1,29 @@
+// tsconfig.node.json
+{
+  "extends": "./tsconfig.json", // Inherit base settings
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "./node_modules/.tsbuildinfo/tsconfig.node.tsbuildinfo",
+    "target": "ES2022", // Or "ESNext" - modern JS for Node.js
+    "lib": ["ES2022"], // Only standard JS libraries, no DOM
+    "module": "ESNext", // Or "Node16", "CommonJS" depending on your Node.js setup and preference
+    "moduleResolution": "Node16", // Or "Node" - specific to Node.js module resolution
+    "allowJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": false, // Can be false for Node.js scripts if not bundled
+    "noEmit": true, // Node.js typically executes .ts files via ts-node or transpiles them
+    "types": ["node"] // Include Node.js type definitions
+  },
+  "include": [
+    "vite.config.ts", // Example: Include Vite config
+    "postcss.config.ts", // Example: Include PostCSS config
+    "tailwind.config.ts" // Example: Include Tailwind config
+    // Add any other Node.js specific files here, e.g., "src/server/**/*.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

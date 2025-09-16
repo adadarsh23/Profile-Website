@@ -1,0 +1,29 @@
+// tsconfig.app.json
+{
+  "extends": "./tsconfig.json", // Inherit base settings from tsconfig.json
+  "compilerOptions": {
+    "composite": true, // Required if referenced by other tsconfig files
+    "tsBuildInfoFile": "./node_modules/.tsbuildinfo/tsconfig.app.tsbuildinfo", // For faster incremental builds
+    "target": "ES2022", // Or "ESNext" - modern JS for browser environments
+    "lib": ["ES2022", "DOM", "DOM.Iterable"], // Standard modern JS libs plus DOM for browser APIs
+    "module": "ESNext", // Or "ES2022" - use modern module system
+    "skipLibCheck": true, // Skip type checking of declaration files, reduces build time
+    "moduleResolution": "bundler", // Modern module resolution for bundlers like Vite
+    "allowJs": true, // Allow JavaScript files to be part of the project
+    "jsx": "react-jsx", // Support JSX syntax for React
+    "esModuleInterop": true, // Enable compatibility for default imports from CommonJS modules
+    "forceConsistentCasingInFileNames": true, // Enforce consistent casing for file names
+    "strict": true, // Enable all strict type-checking options (recommended)
+    "noUnusedLocals": true, // Report errors on unused local variables
+    "noUnusedParameters": true, // Report errors on unused parameters
+    "noFallthroughCasesInSwitch": true, // Report errors for fallthrough cases in switch statements
+    "isolatedModules": true, // Ensure each file can be safely transpiled without relying on other files (good for bundlers)
+    "noEmit": true, // Do not emit output files (bundler handles this)
+    "paths": {
+      "@/*": ["./src/*"] // Keep your path alias
+    },
+    "baseUrl": "." // Keep base URL
+  },
+  "include": ["src"], // Include all files in the src directory
+  "exclude": ["node_modules", "dist"] // Exclude node_modules and build output
+}
