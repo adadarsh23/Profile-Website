@@ -2,15 +2,20 @@ import React from "react";
 import ChromaGrid from "../components/ChromaGrid";
 import styles from "../Modules/bubble.module.css";
 import { items } from "../Data/BlogItems";
+import { motion } from "framer-motion";
 
 const BubbleText = () => (
-  <h2 className="text-center text-3xl md:text-6xl font-thin text-white bg-black p-4 md:p-6 rounded-lg mb-8 md:mb-16">
+  <motion.h2 className="text-center text-3xl md:text-6xl font-thin text-white bg-black p-4 md:p-6 rounded-lg mb-8 md:mb-16"
+    initial={{ y: -20, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+  >
     {"Blog Posts".split("").map((char, idx) => (
       <span className={styles.hoverText} key={idx}>
         {char}
       </span>
     ))}
-  </h2>
+  </motion.h2>
 );
 
 export default function Blog() {

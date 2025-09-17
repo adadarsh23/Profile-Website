@@ -1,10 +1,22 @@
-import React from 'react'
+import React from 'react';
 import LogoLoop from '../components/LogoLoop.jsx';
-import { 
-  SiInstagram, SiFacebook, SiWhatsapp, SiYoutube, SiLinkedin, SiTiktok, SiSnapchat, SiReddit, SiPinterest, SiTelegram, SiDiscord, SiMedium, SiTwitch, SiSoundcloud
-} from "react-icons/si";
 import CurvedLoop from '../components/CurvedLoop.jsx';
-
+import {
+  SiInstagram,
+  SiFacebook,
+  SiWhatsapp,
+  SiYoutube,
+  SiLinkedin,
+  SiTiktok,
+  SiSnapchat,
+  SiReddit,
+  SiPinterest,
+  SiTelegram,
+  SiDiscord,
+  SiMedium,
+  SiTwitch,
+  SiSoundcloud
+} from "react-icons/si";
 
 export default function Loop() {
   const techLogos = [
@@ -20,31 +32,19 @@ export default function Loop() {
     { node: <SiTwitch />, title: "Twitch", href: "https://www.twitch.tv" },
     { node: <SiWhatsapp />, title: "WhatsApp", href: "https://www.whatsapp.com" },
     { node: <SiYoutube />, title: "YouTube", href: "https://www.youtube.com" },
-    { node: <SiSnapchat />, title: "Snapchat", href: "https://www.snapchat.com" },
     { node: <SiSoundcloud />, title: "SoundCloud", href: "https://soundcloud.com" },
   ];
 
-  const loops = Array.from({ length: 4 }).map((_, i) => {
-    // random speed between 80 and 150
-    const speed = Math.floor(Math.random() * 70) + 80;
-    // random direction left or right
-    const direction = Math.random() > 0.5 ? "left" : "right";
-    return (
-      <LogoLoop
-        key={i}
-        logos={techLogos}
-        speed={speed}
-        direction={direction}
-        logoHeight={48}
-        gap={40}
-        pauseOnHover
-        scaleOnHover
-        fadeOut
-        fadeOutColor="#ffffff"
-        ariaLabel="Technology partners"
-      />
-    );
-  });
+  const NUM_LOOPS = 4;
+  const SPEED_RANGE = { min: 80, max: 150 };
+  const LOGO_HEIGHT = 48;
+  const GAP = 40;
+  const FADE_OUT_COLOR = "#000000";
+  const ARIA_LABEL = "Technology partners";
+
+  const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+  const getRandomDirection = () => (Math.random() > 0.5 ? "left" : "right");
+
   return (
     <section className="bg-black text-white min-h-screen flex flex-col items-center justify-center">
       <CurvedLoop
@@ -53,14 +53,33 @@ export default function Loop() {
         curveAmount={500}
         direction="right"
         interactive={true}
-        className="custom-text-style"
+        className="custom-text-style sm:text-9xl md:text-9xl lg:text-9xl xl:text-9xl 2xl:text-9xl"
       />
-      <div
-        style={{ height: '200px', position: 'relative', overflow: 'hidden' }}
-        className="mt-20 mb-20 sm:h-48 h-32 w-full"
-      >
-        {loops}
+
+      <div style={{ width: '100%' }} className="mt-20 mb-20 space-y-10">
+        {Array.from({ length: NUM_LOOPS }, (_, i) => (
+          <div
+            key={i}
+            style={{ height: '60px', position: 'relative', overflow: 'hidden' }}
+            className="relative overflow-hidden h-24 sm:h-32 md:h-48 w-full"
+          >
+            <LogoLoop
+              logos={techLogos}
+              speed={getRandomInt(SPEED_RANGE.min, SPEED_RANGE.max)}
+              direction={getRandomDirection()}
+              logoHeight={LOGO_HEIGHT}
+              gap={GAP}
+              pauseOnHover
+              scaleOnHover
+              fadeOut
+              fadeOutColor={FADE_OUT_COLOR}
+              ariaLabel={ARIA_LABEL}
+            />
+          </div>
+        ))}
       </div>
     </section>
-  )
+
+  );
 }
+

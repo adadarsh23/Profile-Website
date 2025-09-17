@@ -1013,7 +1013,7 @@ export default function InfiniteMenu({ items = [] }) {
           h-[60px]
           grid
           place-items-center
-          bg-[#00ffff]
+          bg-[#ff1818]
           border-[5px]
           border-black
           rounded-full

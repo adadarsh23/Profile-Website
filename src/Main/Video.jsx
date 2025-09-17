@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import styles from "../Modules/bubble.module.css";
 // import video from "../Video/demovideo.mp4";
+import {motion} from 'framer-motion';
+
 
 function Video() {
   const [videoId, setVideoId] = useState(null);
@@ -48,13 +50,16 @@ function Video() {
     return <div className="text-center text-white text-xl">No video found.</div>;
   }
   const BubbleText = () => (
-    <h2 className="text-center text-4xl md:text-7xl font-thin text-white bg-black p-4 rounded-lg mb-10 md:mb-16">
+    <motion.h2 className="text-center text-4xl md:text-7xl font-thin text-white bg-black p-4 rounded-lg mb-10 md:mb-16"
+    initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}>
       {"Latest Video".split("").map((child, idx) => (
         <span className={styles.hoverText} key={idx}>
           {child}
         </span>
       ))}
-    </h2>
+    </motion.h2>
   );
   return (
     <section className="bg-black text-white min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">

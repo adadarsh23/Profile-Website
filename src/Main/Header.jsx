@@ -30,12 +30,25 @@ export default function Header() {
           animateBy="words"
           direction="top"
           onAnimationComplete={handleAnimationComplete}
-          className="text-5xl md:text-7xl font-extrabold mb-10 text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.9)] flex flex-row flex-nowrap space-x-2 text-center justify-center items-center hover:scale-105  transition-transform duration-500 hover:text-gradient hover:animate-shine"
+          className="
+    text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl
+    font-extrabold
+    mb-8 md:mb-10
+    text-white
+    drop-shadow-[0_0_20px_rgba(255,255,255,0.9)]
+    flex flex-wrap justify-center items-center
+    space-x-1 sm:space-x-2
+    text-center
+    hover:scale-105
+    transition-transform duration-500
+    hover:text-gradient
+    hover:animate-shine
+  "
           style={{
             backgroundImage: 'linear-gradient(90deg, #ff6ec4, #7873f5, #42e695)',
             WebkitBackgroundClip: 'text',
             color: 'transparent',
-            animation: 'shine 3s linear infinite',  // if you defined shine in Tailwind keyframes
+            animation: 'shine 3s linear infinite',
           }}
         />
       </div>
