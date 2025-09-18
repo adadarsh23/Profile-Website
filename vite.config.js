@@ -88,6 +88,9 @@ export default defineConfig({
   },
 
   build: {
+    commonjsOptions: {
+      transformMixedEsModules: true
+    },
     chunkSizeWarningLimit: 3000,
     cssCodeSplit: true,
     rollupOptions: {
@@ -99,7 +102,8 @@ export default defineConfig({
             if (id.includes('lodash')) return 'vendor_lodash';
             if (id.includes('framer-motion')) return 'vendor_framer-motion';
             if (id.includes('three')) return 'vendor_three';
-            return 'vendor';
+            if (id.includes('react-globe.gl')) return 'vendor_globe';
+            return 'vendor'; // generic fallback
           }
         },
       },
@@ -113,6 +117,6 @@ export default defineConfig({
   },
 
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'lodash'],
+    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'lodash', 'three', 'react-globe.gl'],
   },
 });

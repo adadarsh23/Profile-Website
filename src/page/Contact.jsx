@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // import Globe from 'react-globe.gl';
 const Globe = lazy(() => import("react-globe.gl"));
 import styles from "../Modules/bubble.module.css";
+import ErrorBoundary from '../components/ErrorBoundary';
 
 import * as THREE from 'three';
 
@@ -229,19 +230,23 @@ export default function Contact() {
             animate="visible"
           >
             {dimensions.width > 0 && (
-              <Suspense fallback={<div className="text-center p-6">🌍 Loading Globe...</div>}>
+              <ErrorBoundary>
+                <Suspense fallback={<div className="text-center p-6">🌍 Loading Globe...</div>}>
                 <Globe
-                ref={globeEl}
-                globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
-                backgroundColor="rgba(0,0,0,1)"
-                width={globeDimensions.width}
-                height={globeDimensions.height}
-                showGlobe={true}
-                showAtmosphere={true}
-                atmosphereColor="#3b82f6"
-                atmosphereAltitude={0.12}
-              />
+                  ref={globeEl}
+                  globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
+                  backgroundColor="rgba(0,0,0,0)"
+                  width={globeDimensions.width}
+                  height={globeDimensions.height}
+                  showGlobe={true}
+                  showAtmosphere={true}
+                  atmosphereColor="#3b82f6"
+                  atmosphereAltitude={0.15}
+                  waitForGlobeReady={true} // Add this
+                  animateIn={true} // Add this
+                />
               </Suspense>
+              </ErrorBoundary>
             )}
             {/* Gradient overlay for smooth transition */}
             <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent"></div>
@@ -377,19 +382,23 @@ export default function Contact() {
               animate="visible"
             >
               {dimensions.width > 0 && (
-                <Suspense fallback={<div className="text-center p-6">🌍 Loading Globe...</div>}>
+                <ErrorBoundary>
+                  <Suspense fallback={<div className="text-center p-6">🌍 Loading Globe...</div>}>
                   <Globe
-                  ref={globeEl}
-                  globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
-                  backgroundColor="rgba(0,0,0,0)"
-                  width={globeDimensions.width}
-                  height={globeDimensions.height}
-                  showGlobe={true}
-                  showAtmosphere={true}
-                  atmosphereColor="#3b82f6"
-                  atmosphereAltitude={0.15}
-                />
+                    ref={globeEl}
+                    globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
+                    backgroundColor="rgba(0,0,0,0)"
+                    width={globeDimensions.width}
+                    height={globeDimensions.height}
+                    showGlobe={true}
+                    showAtmosphere={true}
+                    atmosphereColor="#3b82f6"
+                    atmosphereAltitude={0.15}
+                    waitForGlobeReady={true} // Add this
+                    animateIn={true} // Add this
+                  />
                 </Suspense>
+                </ErrorBoundary>
               )}
 
               {/* Floating info cards */}
