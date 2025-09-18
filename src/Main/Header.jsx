@@ -4,6 +4,7 @@ import PrismaticBurst from '../components/PrismaticBurst';
 
 export default function Header() {
   const handleAnimationComplete = () => {
+    console.log('Animation completed!');  
   };
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black">

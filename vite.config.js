@@ -6,6 +6,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import compression from 'vite-plugin-compression';
 import { VitePWA } from 'vite-plugin-pwa';
 import ViteSitemap from 'vite-plugin-sitemap';
+import removeConsole from 'vite-plugin-remove-console';
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -14,6 +15,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     visualizer({ open: true, filename: './stats.html' }),
+    removeConsole(),
     
     // Compression for production
     isProd &&
