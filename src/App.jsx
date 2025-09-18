@@ -11,6 +11,7 @@ import AnalyticsTracker from "./AnalyticsTracker";
 const Home = lazy(() => import('./page/Home.jsx'));
 const About = lazy(() => import('./page/About.jsx'));
 const Contact = lazy(() => import('./page/Contact.jsx'));
+const Sample = lazy(() => import('./page/Sample.jsx')); 
 const Blog = lazy(() => import('./page/Blog.jsx'));
 const NotFound = lazy(() => import('./page/NotFound.jsx'));
 
@@ -43,6 +44,7 @@ export default function App() {
             { label: 'Home', href: '/' },
             { label: 'About', href: '/about' },
             { label: 'Contact', href: '/contact' },
+            { label: 'Sample', href: '/sample'},
             { label: 'Blog', href: '/blog' }
           ]}
           activeHref="/"
@@ -61,6 +63,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/sample" element={<Sample />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
