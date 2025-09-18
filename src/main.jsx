@@ -22,7 +22,7 @@ if (import.meta.env.PROD) {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <Sentry.ErrorBoundary fallback={<p>Something went wrong.</p>}>
+      <Sentry.ErrorBoundary fallback={<p className='error-message'>Something went wrong.</p>}>
         <App />
       </Sentry.ErrorBoundary>
     </BrowserRouter>
