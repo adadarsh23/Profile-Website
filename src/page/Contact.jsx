@@ -4,7 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 // import Globe from 'react-globe.gl';
 const Globe = lazy(() => import("react-globe.gl"));
 import styles from "../Modules/bubble.module.css";
-import { Scene, PerspectiveCamera, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial } from 'three';
+
+import * as THREE from 'three';
+
+
 export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null);

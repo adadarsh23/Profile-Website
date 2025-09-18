@@ -17,20 +17,20 @@ export default defineConfig({
     tailwindcss(),
     visualizer({ open: true, filename: './stats.html' }),
     removeConsole(),
-    
+
     // Compression for production
     isProd &&
-      compression({
-        algorithm: 'brotliCompress',
-        ext: '.br',
-        threshold: 1024, // only compress files > 1KB
-      }),
+    compression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 1024, // only compress files > 1KB
+    }),
     isProd &&
-      compression({
-        algorithm: 'gzip',
-        ext: '.gz',
-        threshold: 1024,
-      }),
+    compression({
+      algorithm: 'gzip',
+      ext: '.gz',
+      threshold: 1024,
+    }),
 
     // PWA plugin
     VitePWA({
@@ -77,13 +77,12 @@ export default defineConfig({
       hostname: 'https://adadarsh23.netlify.app',
     }),
   ],
-
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-    },
+      'three/examples/jsm': path.resolve(__dirname, 'node_modules/three/examples/jsm')
+    }
   },
-
   server: {
     open: true,
   },
@@ -104,12 +103,6 @@ export default defineConfig({
           }
         },
       },
-       external: [
-        'three/webgpu',
-        'three/tsl',
-        'three/nodes', 
-        'three/…' // add any missing specifiers
-      ]
     },
     terserOptions: {
       compress: {
