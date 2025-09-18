@@ -37,7 +37,7 @@ export default defineConfig({
       includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MB
+        maximumFileSizeToCacheInBytes: 7 * 1024 * 1024, // 5 MB
         runtimeCaching: [
           {
             urlPattern: /\/api\/.*\/*.json/,
