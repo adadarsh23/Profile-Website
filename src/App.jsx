@@ -5,6 +5,7 @@ import PillNav from './components/PillNav';
 import Footer from './components/Footer.jsx';
 import SplashCursor from './components/SplashCursor';
 import Loading from './components/Loading';
+import AnalyticsTracker from "./AnalyticsTracker";
 
 // ✅ Lazy load pages
 const Home = lazy(() => import('./page/Home.jsx'));
@@ -33,6 +34,7 @@ export default function App() {
     <>
       {/* Navigation bar stays on top for all pages */}
       <SplashCursor />
+      <AnalyticsTracker />
       <nav className='absolute top-0 left-0 w-full p-4 z-50 flex justify-center items-center'>
         <PillNav
           logo={logo}
