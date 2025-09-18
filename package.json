@@ -25,6 +25,7 @@
     "framer-motion": "^12.23.13",
     "gl-matrix": "^3.4.4",
     "gsap": "^3.13.0",
+    "logrocket": "^10.1.0",
     "lucide-react": "^0.544.0",
     "motion": "^12.23.12",
     "ogl": "^1.0.11",
