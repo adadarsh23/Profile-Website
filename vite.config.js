@@ -8,6 +8,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 import ViteSitemap from 'vite-plugin-sitemap';
 import removeConsole from 'vite-plugin-remove-console';
 
+
 const isProd = process.env.NODE_ENV === 'production';
 
 export default defineConfig({
@@ -103,6 +104,12 @@ export default defineConfig({
           }
         },
       },
+       external: [
+        'three/webgpu',
+        'three/tsl',
+        'three/nodes', 
+        'three/…' // add any missing specifiers
+      ]
     },
     terserOptions: {
       compress: {
