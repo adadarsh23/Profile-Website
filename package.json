@@ -1,5 +1,5 @@
 {
-  "name": "link",
+  "name": "adadarsh23",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "install-pages": "npm install"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
