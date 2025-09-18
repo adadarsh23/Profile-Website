@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import logo from './assets/Âd Adarsh.png';
 import PillNav from './components/PillNav';
-import Home from './page/Home.jsx';
-import About from './page/About.jsx';
-import Contact from './page/Contact.jsx';
-import Blog from './page/Blog.jsx';
 import Footer from './components/Footer.jsx';
-import NotFound from './page/NotFound';
 import SplashCursor from './components/SplashCursor';
 import Loading from './components/Loading';
+
+// ✅ Lazy load pages
+const Home = lazy(() => import('./page/Home.jsx'));
+const About = lazy(() => import('./page/About.jsx'));
+const Contact = lazy(() => import('./page/Contact.jsx'));
+const Blog = lazy(() => import('./page/Blog.jsx'));
+const NotFound = lazy(() => import('./page/NotFound.jsx'));
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -51,14 +53,16 @@ export default function App() {
         />
       </nav>
 
-      {/* Define routes */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      {/* ✅ Wrap routes in Suspense */}
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
 
       {/* Footer stays at the bottom */}
       <Footer />

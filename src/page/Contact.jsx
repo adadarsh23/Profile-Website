@@ -1,6 +1,8 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { Suspense, lazy } from "react";
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Globe from 'react-globe.gl';
+// import Globe from 'react-globe.gl';
+const Globe = lazy(() => import("react-globe.gl"));
 import styles from "../Modules/bubble.module.css";
 
 export default function Contact() {
@@ -224,7 +226,8 @@ export default function Contact() {
             animate="visible"
           >
             {dimensions.width > 0 && (
-              <Globe
+              <Suspense fallback={<div className="text-center p-6">🌍 Loading Globe...</div>}>
+                <Globe
                 ref={globeEl}
                 globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
                 backgroundColor="rgba(0,0,0,1)"
@@ -235,6 +238,7 @@ export default function Contact() {
                 atmosphereColor="#3b82f6"
                 atmosphereAltitude={0.12}
               />
+              </Suspense>
             )}
             {/* Gradient overlay for smooth transition */}
             <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent"></div>
@@ -370,7 +374,8 @@ export default function Contact() {
               animate="visible"
             >
               {dimensions.width > 0 && (
-                <Globe
+                <Suspense fallback={<div className="text-center p-6">🌍 Loading Globe...</div>}>
+                  <Globe
                   ref={globeEl}
                   globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
                   backgroundColor="rgba(0,0,0,0)"
@@ -381,6 +386,7 @@ export default function Contact() {
                   atmosphereColor="#3b82f6"
                   atmosphereAltitude={0.15}
                 />
+                </Suspense>
               )}
 
               {/* Floating info cards */}
