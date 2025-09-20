@@ -64,7 +64,7 @@ function Music() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx="true">{`
   /* Slow rotation for outer elements */
   .animate-spin-slow {
     animation: spin-slow 10s linear infinite;

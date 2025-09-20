@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import styles from "../Modules/bubble.module.css";
 // import video from "../Video/demovideo.mp4";
-import {motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 
 
 function Video() {
@@ -109,7 +109,7 @@ function Video() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx="true">{`
   /* Slow rotation for outer elements */
   .animate-spin-slow {
     animation: spin-slow 10s linear infinite;
