@@ -12,7 +12,7 @@ function Video() {
   useEffect(() => {
     const fetchLatestVideo = async () => {
       try {
-        const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
+        const API_KEY = import.meta.env.VITE_TUBE_API_KEY;
         const CHANNEL_ID = import.meta.env.VITE_YOUTUBE_CHANNEL_ID;
 
         const channelRes = await axios.get(
