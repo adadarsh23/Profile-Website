@@ -81,7 +81,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      'three/examples/jsm': path.resolve(__dirname, 'node_modules/three/examples/jsm')
     }
   },
   server: {
@@ -99,7 +98,7 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react')) return 'vendor_react';
+            if (id.includes('react') && !id.includes('react-dom')) return 'vendor_react';
             if (id.includes('react-dom')) return 'vendor_react-dom';
             if (id.includes('lodash')) return 'vendor_lodash';
             if (id.includes('framer-motion')) return 'vendor_framer-motion';
@@ -113,11 +112,15 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true,
       },
+      mangle: {
+        keep_classnames: true,
+        keep_fnames: true,
+      },
     },
   },
 
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'lodash', 'three'],
+    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'lodash', 'ogl'],
   },
   test: {
     include: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],
