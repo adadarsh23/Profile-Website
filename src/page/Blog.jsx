@@ -8,7 +8,7 @@ const ChromaGrid = lazy(() => import("../components/ChromaGrid"));
 
 const BubbleText = () => (
   <motion.h2
-    className="text-center text-3xl md:text-6xl font-thin text-white bg-black p-4 md:p-6 rounded-lg mb-8 md:mb-16"
+    className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white p-6 mb-12 z-10 drop-shadow-lg"
     initial={{ y: -20, opacity: 0 }}
     animate={{ y: 0, opacity: 1 }}
     transition={{ duration: 0.6, ease: "easeOut" }}

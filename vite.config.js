@@ -101,8 +101,6 @@ export default defineConfig({
             if (id.includes('react-dom')) return 'vendor_react-dom';
             if (id.includes('lodash')) return 'vendor_lodash';
             if (id.includes('framer-motion')) return 'vendor_framer-motion';
-            if (id.includes('three')) return 'vendor_three';
-            if (id.includes('react-globe.gl')) return 'vendor_globe';
             return 'vendor'; // generic fallback
           }
         },

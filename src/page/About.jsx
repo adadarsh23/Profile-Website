@@ -15,7 +15,7 @@ const Button = lazy(() => import("@/components/ui/button").then(m => ({ default:
 export default function About() {
   const BubbleText = () => (
     <motion.h2
-      className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-thin text-white bg-black p-6 rounded-lg mb-12"
+      className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white p-6 mb-12 z-10 drop-shadow-lg"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
