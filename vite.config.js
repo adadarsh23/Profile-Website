@@ -7,6 +7,7 @@ import compression from 'vite-plugin-compression';
 import { VitePWA } from 'vite-plugin-pwa';
 import ViteSitemap from 'vite-plugin-sitemap';
 import removeConsole from 'vite-plugin-remove-console';
+import { configDefaults } from 'vitest/config';
 
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -87,6 +88,7 @@ export default defineConfig({
     open: true,
   },
 
+
   build: {
     commonjsOptions: {
       transformMixedEsModules: true
@@ -117,4 +119,14 @@ export default defineConfig({
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'lodash', 'three', 'react-globe.gl'],
   },
+  test: {
+    include: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],
+    exclude: [
+      ...configDefaults.exclude, // includes node_modules, dist, etc.
+      '**/cypress/**',
+      '**/.{idea,git,cache,output,temp}/**',
+      '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*'
+    ],
+    environment: 'jsdom', // or 'node' depending on your tests
+  }
 });
