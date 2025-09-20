@@ -117,7 +117,7 @@ export default defineConfig({
   },
 
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'lodash', 'three', 'react-globe.gl'],
+    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'lodash', 'three'],
   },
   test: {
     include: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],

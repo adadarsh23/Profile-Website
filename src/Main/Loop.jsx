@@ -46,7 +46,7 @@ export default function Loop() {
   const getRandomDirection = () => (Math.random() > 0.5 ? "left" : "right");
 
   return (
-    <section className="bg-black text-white min-h-screen flex flex-col items-center justify-center">
+    <section className="bg-black text-white">
       <CurvedLoop
         marqueeText="Be ✦ Gamer ✦ Coder ✦ Producer ✦ Bits ✦"
         speed={3}
@@ -56,7 +56,7 @@ export default function Loop() {
         className="custom-text-style sm:text-9xl md:text-9xl lg:text-9xl xl:text-9xl 2xl:text-9xl"
       />
 
-      <div style={{ width: '100%' }} className="mt-20 mb-20 space-y-10">
+      <div style={{ width: '100%' }} className="flex flex-col space-y-10">
         {Array.from({ length: NUM_LOOPS }, (_, i) => (
           <div
             key={i}

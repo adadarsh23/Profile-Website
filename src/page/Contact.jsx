@@ -6,7 +6,6 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(null);
 
-  // Handle form submission without redirect
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -33,10 +32,9 @@ export default function Contact() {
     }
   };
 
-  // Animated bubble heading
   const BubbleText = () => (
     <motion.h2
-      className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white p-6 mb-12 z-10 drop-shadow-lg"
+      className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white p-4 sm:p-6 mb-8 md:mb-12 z-10 drop-shadow-lg"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -50,16 +48,18 @@ export default function Contact() {
   );
 
   return (
-    <div className="relative bg-black text-white min-h-screen flex flex-col items-center justify-center px-6 py-12 overflow-hidden mt-10 md:mt-20 md:px-0 mb-10">
+   <div className="relative bg-black text-white min-h-screen flex flex-col items-center justify-center
+                px-4 sm:px-6 md:px-12 py-12
+                mt-10 mx-4 sm:mx-6 md:mx-12 lg:mx-16
+                overflow-hidden">
       <BubbleText />
 
-      {/* Contact Form */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8 }}
-        className="bg-white text-black p-8 rounded-2xl shadow-[0_0_30px_rgba(0,0,0,0.7)] w-[90%] max-w-lg relative z-10 backdrop-blur-lg bg-opacity-95"
+        className="bg-white text-black p-6 sm:p-8 md:p-10 rounded-2xl shadow-xl w-full max-w-xl relative z-10 backdrop-blur-md bg-opacity-90"
       >
         <AnimatePresence mode="wait">
           {submitted ? (
@@ -69,7 +69,7 @@ export default function Contact() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-center text-green-600 font-semibold text-lg"
+              className="text-center text-green-600 font-semibold text-lg sm:text-xl"
             >
               ✅ Thank you for reaching out! We’ll get back to you soon.
             </motion.div>
@@ -84,8 +84,8 @@ export default function Contact() {
               className="flex flex-col space-y-5"
             >
               {/* Name */}
-              <div>
-                <label htmlFor="name" className="block font-semibold">
+              <div className="flex flex-col">
+                <label htmlFor="name" className="block font-medium mb-1 text-gray-700">
                   Name
                 </label>
                 <input
@@ -93,13 +93,13 @@ export default function Contact() {
                   type="text"
                   name="name"
                   required
-                  className="w-full p-3 rounded-lg border border-gray-400 bg-white text-black focus:ring-2 focus:ring-black outline-none"
+                  className="w-full p-3 rounded-lg border border-gray-300 bg-white text-black focus:ring-2 focus:ring-black outline-none transition-all"
                 />
               </div>
 
               {/* Email */}
-              <div>
-                <label htmlFor="email" className="block font-semibold">
+              <div className="flex flex-col">
+                <label htmlFor="email" className="block font-medium mb-1 text-gray-700">
                   Email
                 </label>
                 <input
@@ -107,21 +107,21 @@ export default function Contact() {
                   type="email"
                   name="email"
                   required
-                  className="w-full p-3 rounded-lg border border-gray-400 bg-white text-black focus:ring-2 focus:ring-black outline-none"
+                  className="w-full p-3 rounded-lg border border-gray-300 bg-white text-black focus:ring-2 focus:ring-black outline-none transition-all"
                 />
               </div>
 
               {/* Message */}
-              <div>
-                <label htmlFor="message" className="block font-semibold">
+              <div className="flex flex-col">
+                <label htmlFor="message" className="block font-medium mb-1 text-gray-700">
                   Message
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   required
-                  rows="4"
-                  className="w-full p-3 rounded-lg border border-gray-400 bg-white text-black focus:ring-2 focus:ring-black outline-none"
+                  rows="5"
+                  className="w-full p-3 rounded-lg border border-gray-300 bg-white text-black focus:ring-2 focus:ring-black outline-none transition-all resize-none"
                 ></textarea>
               </div>
 
@@ -130,13 +130,15 @@ export default function Contact() {
                 type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-900 transition-all"
+                className="bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-900 transition-colors"
               >
                 Send
               </motion.button>
 
-              {/* Error message */}
-              {error && <p className="text-red-600 text-center mt-2">{error}</p>}
+              {/* Error */}
+              {error && (
+                <p className="text-red-600 text-center mt-2 text-sm sm:text-base">{error}</p>
+              )}
             </motion.form>
           )}
         </AnimatePresence>

@@ -15,11 +15,11 @@ const Button = lazy(() => import("@/components/ui/button").then(m => ({ default:
 export default function About() {
   const BubbleText = () => (
     <motion.h2
-      className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white p-6 mb-12 z-10 drop-shadow-lg"
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
+          className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white p-4 sm:p-6 mb-8 md:mb-12 z-10 drop-shadow-lg"
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
       {"About Us".split("").map((char, idx) => (
         <span className={styles.hoverText} key={idx}>
           {char}
@@ -29,7 +29,10 @@ export default function About() {
   );
 
   return (
-    <div className="bg-black text-white min-h-screen flex flex-col items-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24">
+<div className="relative bg-black text-white min-h-screen flex flex-col items-center justify-center
+                px-4 sm:px-6 md:px-12 py-12
+                mt-10 mx-4 sm:mx-6 md:mx-12 lg:mx-16
+                overflow-hidden">
       <BubbleText />
 
       <div className="w-full max-w-7xl mx-auto flex flex-col items-center">

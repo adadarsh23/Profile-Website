@@ -598,8 +598,8 @@ class InfiniteGridMenu {
   constructor(canvas, items, onActiveItemChange, onMovementChange, onInit = null) {
     this.canvas = canvas;
     this.items = items || [];
-    this.onActiveItemChange = onActiveItemChange || (() => {});
-    this.onMovementChange = onMovementChange || (() => {});
+    this.onActiveItemChange = onActiveItemChange || (() => { });
+    this.onMovementChange = onMovementChange || (() => { });
     this.#init(onInit);
   }
 
@@ -960,74 +960,71 @@ export default function InfiniteMenu({ items = [] }) {
 
       {activeItem && (
         <>
+          {/* Title */}
           <h2
             className={`
           select-none
           absolute
           font-black
-          [font-size:4rem]
-          left-[1.6em]
-          top-1/2
+          text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl
+          left-3 sm:left-4 md:left-6 lg:left-8 xl:left-10
+          top-[45%] sm:top-1/2
           transform
-          translate-x-[20%]
+          translate-x-1/4
           -translate-y-1/2
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          ${
-            isMoving
-              ? 'opacity-0 pointer-events-none duration-[100ms]'
-              : 'opacity-100 pointer-events-auto duration-[500ms]'
-          }
+          ${isMoving
+                ? 'opacity-0 pointer-events-none duration-[100ms]'
+                : 'opacity-100 pointer-events-auto duration-[500ms]'}
         `}
           >
             {activeItem.title}
           </h2>
 
+          {/* Description */}
           <p
             className={`
           select-none
           absolute
-          max-w-[10ch]
-          text-[1.5rem]
-          top-1/2
-          right-[1%]
+          max-w-[12ch] sm:max-w-[15ch] md:max-w-[18ch] lg:max-w-[22ch] xl:max-w-[28ch]
+          text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl
+          top-[55%]
+          right-1 sm:right-2 md:right-4 lg:right-6 xl:right-8
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          ${
-            isMoving
-              ? 'opacity-0 pointer-events-none duration-[100ms] translate-x-[-60%] -translate-y-1/2'
-              : 'opacity-100 pointer-events-auto duration-[500ms] translate-x-[-90%] -translate-y-1/2'
-          }
+          ${isMoving
+                ? 'opacity-0 pointer-events-none duration-[100ms] translate-x-[-50%] -translate-y-1/2'
+                : 'opacity-100 pointer-events-auto duration-[500ms] translate-x-[-90%] -translate-y-1/2'}
         `}
           >
             {activeItem.description}
           </p>
 
+          {/* Responsive Button */}
           <div
             onClick={handleButtonClick}
             className={`
           absolute
           left-1/2
           z-10
-          w-[60px]
-          h-[60px]
-          grid
-          place-items-center
-          bg-[#ff1818]
-          border-[5px]
-          border-black
+          w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24
+          grid place-items-center
+          bg-[#ff0000]
+          border-4 sm:border-5 md:border-6 lg:border-8 xl:border-10 border-black
           rounded-full
           cursor-pointer
-          transition-all
-          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          ${
-            isMoving
-              ? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2'
-              : 'bottom-[3.8em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'
-          }
+          shadow-lg
+          hover:scale-110 active:scale-95
+          transition-transform duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
+          ${isMoving
+                ? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2'
+                : 'bottom-[4em] sm:bottom-[3.8em] md:bottom-[4em] lg:bottom-[4.5em] xl:bottom-[5em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'}
         `}
           >
-            <p className="select-none relative text-[#060010] top-[2px] text-[26px]">&#x2197;</p>
+            <p className="select-none relative text-[#060010] top-[2px] text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+              &#x2197;
+            </p>
           </div>
         </>
       )}

@@ -50,8 +50,8 @@ function Video() {
     return <div className="text-center text-white text-xl">No video found.</div>;
   }
   const BubbleText = () => (
-    <motion.h2 className="text-center text-4xl md:text-7xl font-thin text-white bg-black p-4 rounded-lg mb-10 md:mb-16"
-    initial={{ y: -20, opacity: 0 }}
+    <motion.h2 className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white p-4 sm:p-6 mb-8 md:mb-12 z-10 drop-shadow-lg"
+      initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}>
       {"Latest Video".split("").map((child, idx) => (
