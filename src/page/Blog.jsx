@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import styles from "../Modules/bubble.module.css";
 import { items } from "../Data/BlogItems";
 import { motion } from "framer-motion";
+import Loading from "@/components/Loading";
 
 // ✅ Lazy load ChromaGrid
 const ChromaGrid = lazy(() => import("../components/ChromaGrid"));
@@ -30,7 +31,7 @@ export default function Blog() {
       <BubbleText />
       <div className="relative w-full max-w-7xl">
         {items.length > 0 ? (
-          <Suspense fallback={<div className="text-center text-gray-400">Loading posts...</div>}>
+          <Suspense fallback={<div><Loading/></div>}>
             <ChromaGrid
               items={items}
               radius={300}

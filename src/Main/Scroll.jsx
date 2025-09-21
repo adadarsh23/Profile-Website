@@ -13,8 +13,8 @@ export default function Scroll() {
     { image: githubImg, link: 'https://github.com/adadarsh23', title: 'GitHub', description: 'Explore my projects and contributions.' }
   ];
   return (
-    <section className=" bg-black">
-      <div className="">
+    <section className="bg-black">
+      <div className="pt-10 pb-10">
         <InfiniteMenu items={items} />
       </div>
     </section>

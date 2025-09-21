@@ -1,6 +1,6 @@
 import React from 'react';
 import LogoLoop from '../components/LogoLoop.jsx';
-import CurvedLoop from '../components/CurvedLoop.jsx';
+// import CurvedLoop from '../components/CurvedLoop.jsx';
 import {
   SiInstagram,
   SiFacebook,
@@ -46,15 +46,15 @@ export default function Loop() {
   const getRandomDirection = () => (Math.random() > 0.5 ? "left" : "right");
 
   return (
-    <section className="bg-black text-white">
-      <CurvedLoop
+    <section className="bg-black text-white mt-30 mb-30 flex flex-col space-y-10">
+      {/* <CurvedLoop
         marqueeText="Be ✦ Gamer ✦ Coder ✦ Producer ✦ Bits ✦"
         speed={3}
         curveAmount={500}
         direction="right"
         interactive={true}
         className="custom-text-style sm:text-9xl md:text-9xl lg:text-9xl xl:text-9xl 2xl:text-9xl"
-      />
+      /> */}
 
       <div style={{ width: '100%' }} className="flex flex-col space-y-10">
         {Array.from({ length: NUM_LOOPS }, (_, i) => (

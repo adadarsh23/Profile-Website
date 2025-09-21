@@ -3,6 +3,7 @@ import styles from "../Modules/bubble.module.css";
 import { items } from "../Data/BlogItems";
 import { motion } from "framer-motion";
 import { sampleBeats } from "../Data/SampleBest";
+import Loading from "@/components/Loading";
 
 const Beats = lazy(() => import("../components/Beats"));
 
@@ -30,7 +31,7 @@ export default function Sample() {
       <BubbleText />
       <div className="relative w-full max-w-7xl flex justify-center items-center mt-30 md:mt-16">
         {items.length > 0 ? (
-          <Suspense fallback={<div className="text-center text-gray-400">Loading Beats...</div>}>
+          <Suspense fallback={<div><Loading /></div>}>
             <div className="flex justify-center items-center w-full">
               <Beats
                 items={sampleBeats}

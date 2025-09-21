@@ -1,22 +1,41 @@
-import React, { Suspense, lazy } from 'react';
+import React, { lazy } from "react";
+import LazyLoadSection from "../components/LazyLoadSection";
+import Loading from "@/components/Loading";
 
-// ✅ Lazy load components
-const Header = lazy(() => import('../Main/Header'));
-const Scroll = lazy(() => import('../Main/Scroll'));
-const Loop = lazy(() => import('../Main/Loop'));
-const Video = lazy(() => import('../Main/Video'));
-const Music = lazy(() => import('../Main/Music'));
+// ✅ Lazy import
+const Header = lazy(() => import("../Main/Header"));
+const Scroll = lazy(() => import("../Main/Scroll"));
+const Velocity = lazy(() => import("../Main/Velocity"));
+const Loop = lazy(() => import("../Main/Loop"));
+const Video = lazy(() => import("../Main/Video"));
+const Music = lazy(() => import("../Main/Music"));
 
 export default function Home() {
   return (
     <main>
-      <Suspense fallback={<div className="text-center p-4">Loading section...</div>}>
+      <LazyLoadSection fallback={<div><Loading/></div>}>
         <Header />
+      </LazyLoadSection>
+
+      <LazyLoadSection>
         <Scroll />
+      </LazyLoadSection>
+
+      <LazyLoadSection>
+        <Velocity/>
+      </LazyLoadSection>
+
+      <LazyLoadSection>
         <Loop />
+      </LazyLoadSection>
+
+      <LazyLoadSection>
         <Video />
+      </LazyLoadSection>
+
+      <LazyLoadSection>
         <Music />
-      </Suspense>
+      </LazyLoadSection>
     </main>
   );
 }

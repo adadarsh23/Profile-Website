@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import styles from "../Modules/bubble.module.css";
 import { motion } from "framer-motion";
 import { aboutCards } from "../Data/AboutItems";
+import Loading from '@/components/Loading';
 
 // ✅ Lazy load shadcn/ui components
 const Card = lazy(() => import("@/components/ui/card").then(m => ({ default: m.Card })));
@@ -42,7 +43,7 @@ export default function About() {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
-          <Suspense fallback={<div className="text-gray-400">Loading cards...</div>}>
+          <Suspense fallback={<div ><Loading/></div>}>
             {aboutCards.map((card, idx) => (
               <Card
                 key={idx}
@@ -62,7 +63,7 @@ export default function About() {
         </div>
 
         <div className="mt-16">
-          <Suspense fallback={<div>Loading button...</div>}>
+          <Suspense fallback={<div><Loading/></div>}>
             <a href="/contact">
               <Button
                 variant="outline"

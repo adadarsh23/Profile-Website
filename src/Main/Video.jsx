@@ -3,6 +3,7 @@ import axios from "axios";
 import styles from "../Modules/bubble.module.css";
 // import video from "../Video/demovideo.mp4";
 import { motion } from 'framer-motion';
+import Loading from '@/components/Loading';
 
 
 function Video() {
@@ -12,7 +13,7 @@ function Video() {
   useEffect(() => {
     const fetchLatestVideo = async () => {
       try {
-        const API_KEY = import.meta.env.TUBE_API_KEY;
+        const API_KEY = import.meta.env.VITE_TUBE_API_KEY;
         const CHANNEL_ID = import.meta.env.VITE_YOUTUBE_CHANNEL_ID;
 
         const channelRes = await axios.get(
@@ -43,7 +44,7 @@ function Video() {
   }, []);
 
   if (loading) {
-    return <div className="text-center text-white text-xl">Loading latest video...</div>;
+    return <div className="text-center text-white text-xl"><Loading/></div>;
   }
 
   if (!videoId) {
@@ -62,10 +63,10 @@ function Video() {
     </motion.h2>
   );
   return (
-    <section className="bg-black text-white min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
+    <section className="bg-black text-white min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden mb-8 sm:mb-12 lg:mb-20">
       <BubbleText />
 
-      <div className="relative w-full max-w-xl sm:max-w-2xl md:max-w-4xl mx-auto">
+      <div className="relative w-full max-w-xl sm:max-w-2xl md:max-w-4xl mx-auto mb-10">
         {/* Outer glow ring in grayscale */}
         <div className="absolute -inset-4 bg-gradient-to-r from-gray-800 via-gray-600 to-gray-800 rounded-3xl opacity-60 animate-pulse blur-xl"></div>
 

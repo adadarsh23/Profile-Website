@@ -8,20 +8,50 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: black;
-  color: white;
-  font-family: 'Bitcount Grid Double', system-ui;
+  font-family: 'Bitcount Grid Double', system-ui, sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
+  overflow-x: hidden;
 }
 
+/* 🌙 Dark Theme (default) */
 body {
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+  background: black;
+  color: white;
 }
+
+/* ✨ Text Selection */
+::selection {
+  background: #ffffff; /* violet-900 */
+  color: #000000;
+}
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: white black; /* thumb color, track color */
+}
+
+/* Chrome, Edge, Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: black; /* Scrollbar track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: white; /* Scrollbar thumb */
+  border-radius: 6px;
+  border: 3px solid black; /* optional: border to create padding effect */
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #e0e0e0; /* lighter on hover */
+}
+
 @keyframes shine {
   0% {
     background-position: 0% 50%;

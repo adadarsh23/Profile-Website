@@ -4,7 +4,7 @@ import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 function Footer() {
   return (
     <footer className="bg-black text-white py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
         <div className=" mt-10.5 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
           <span className="text-sm text-gray-300 text-center md:text-left">
             © 2025 - Built by{' '}

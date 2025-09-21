@@ -17,10 +17,10 @@ function Music() {
     </motion.h2>
   );
   return (
-    <section className="bg-black text-white min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
+    <section className="bg-black text-white min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden mb-8 sm:mb-12 lg:mb-20">
       <BubbleText />
 
-      <div className="relative w-full max-w-xl sm:max-w-2xl md:max-w-4xl mx-auto">
+      <div className="relative w-full max-w-xl sm:max-w-2xl md:max-w-4xl mx-auto mb-10">
         {/* Outer glow ring in grayscale */}
         <div className="absolute -inset-4 bg-gradient-to-r from-gray-800 via-gray-600 to-gray-800 rounded-3xl opacity-60 animate-pulse blur-xl"></div>
 
