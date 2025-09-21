@@ -29,7 +29,7 @@ export default function Sample() {
                 mt-10 mx-4 sm:mx-6 md:mx-12 lg:mx-16
                 overflow-hidden">
       <BubbleText />
-      <div className="relative w-full max-w-7xl flex justify-center items-center mt-30 md:mt-16">
+      <div className="relative w-full max-w-7xl flex justify-center items-center mt-30 mb-30 md:mt-16">
         {items.length > 0 ? (
           <Suspense fallback={<div><Loading /></div>}>
             <div className="flex justify-center items-center w-full">

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Renderer, Program, Mesh, Triangle, Texture } from 'ogl';
+import * as OGL from 'ogl';
 
 const vertexShader = `#version 300 es
 in vec2 position;
@@ -235,7 +235,7 @@ const PrismaticBurst = ({
     if (!container) return;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const renderer = new Renderer({ dpr, alpha: false, antialias: false });
+    const renderer = new OGL.Renderer({ dpr, alpha: false, antialias: false });
     rendererRef.current = renderer;
 
     const gl = renderer.gl;
@@ -247,7 +247,7 @@ const PrismaticBurst = ({
     container.appendChild(gl.canvas);
 
     const white = new Uint8Array([255, 255, 255, 255]);
-    const gradientTex = new Texture(gl, {
+    const gradientTex = new OGL.Texture(gl, {
       image: white,
       width: 1,
       height: 1,
@@ -261,7 +261,7 @@ const PrismaticBurst = ({
     gradientTex.wrapT = gl.CLAMP_TO_EDGE;
     gradTexRef.current = gradientTex;
 
-    const program = new Program(gl, {
+    const program = new OGL.Program(gl, {
       vertex: vertexShader,
       fragment: fragmentShader,
       uniforms: {
@@ -283,8 +283,8 @@ const PrismaticBurst = ({
 
     programRef.current = program;
 
-    const triangle = new Triangle(gl);
-    const mesh = new Mesh(gl, { geometry: triangle, program });
+    const triangle = new OGL.Triangle(gl);
+    const mesh = new OGL.Mesh(gl, { geometry: triangle, program });
     triRef.current = triangle;
     meshRef.current = mesh;
 
