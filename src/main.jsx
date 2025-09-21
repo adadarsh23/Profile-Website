@@ -4,19 +4,19 @@ import './index.css';
 import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 
-// import { initLogRocket, initSentry, Sentry } from './monitoring.js';
+import { initLogRocket, initSentry, Sentry } from './monitoring.js';
 
 // --- Initialize monitoring ---
-// initLogRocket();
-// initSentry();
+initLogRocket();
+initSentry();
 
 // --- Render React app ---
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      {/* <Sentry.ErrorBoundary fallback={<p className="error-message">Something went wrong.</p>}> */}
+      <Sentry.ErrorBoundary fallback={<p className="error-message">Something went wrong.</p>}>
         <App />
-      {/* </Sentry.ErrorBoundary> */}
+      </Sentry.ErrorBoundary>
     </BrowserRouter>
   </StrictMode>
 );
