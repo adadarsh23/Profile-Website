@@ -1,6 +1,5 @@
 // monitoring.js
 import * as Sentry from '@sentry/react';
-import { BrowserTracing } from '@sentry/tracing';
 import LogRocket from 'logrocket';
 
 const LOGROCKET_APP_ID = import.meta.env.VITE_LOGROCKET_APP_ID;
@@ -30,7 +29,6 @@ export function initSentry() {
   if (import.meta.env.PROD && SENTRY_DSN) {
     Sentry.init({
       dsn: SENTRY_DSN,
-      integrations: [new BrowserTracing()],
       tracesSampleRate: TRACES_SAMPLE_RATE,
     });
   }
