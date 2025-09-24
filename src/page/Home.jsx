@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <main>
       <LazyLoadSection fallback={<div><Loading/></div>}>
-        {/* <Header /> */}
+        <Header />
       </LazyLoadSection>
 
       <LazyLoadSection>
