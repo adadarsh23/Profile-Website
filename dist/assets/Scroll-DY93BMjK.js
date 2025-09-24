@@ -1,4 +1,4 @@
-import{r as T,j as x}from"./vendor_react-Dy7FbJ6m.js";import{an as m,ao as c,ap as f,aq as d}from"./vendor-CR2JlbqS.js";import{l as _}from"./index-Cihyqz--.js";import"./vendor_react-dom-qqiilNzR.js";const w=`#version 300 es
+import{r as T,j as x}from"./vendor_react-Dy7FbJ6m.js";import{an as m,ao as c,ap as f,aq as d}from"./vendor-CR2JlbqS.js";import{l as _}from"./index-BCCP8LQ1.js";import"./vendor_react-dom-qqiilNzR.js";const w=`#version 300 es
 
 uniform mat4 uWorldMatrix;
 uniform mat4 uViewMatrix;
