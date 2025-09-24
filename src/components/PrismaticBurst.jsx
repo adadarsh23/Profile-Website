@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Renderer, Texture, Program, Triangle, Mesh } from 'ogl';
+import { Renderer, Program, Mesh, Triangle, Texture } from 'ogl';
 
 const vertexShader = `#version 300 es
 in vec2 position;
