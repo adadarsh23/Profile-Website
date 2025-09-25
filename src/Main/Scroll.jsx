@@ -1,6 +1,6 @@
 import React from 'react'
 import InfiniteMenu from '../components/InfiniteMenu';
-import logo from '../assets/Âd Adarsh.png';
+import logo from '../assets/Adarsh.png';
 import instaImg from '../assets/insta.png';
 import spotifyImg from '../assets/spotify.png';
 import githubImg from '../assets/git.jpg';

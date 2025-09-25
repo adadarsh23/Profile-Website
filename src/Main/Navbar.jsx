@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../assets/Âd Adarsh.png';
+import logo from '../assets/Adarsh.png';
 import PillNav from '../components/PillNav';
 
 export default function Navbar() {
