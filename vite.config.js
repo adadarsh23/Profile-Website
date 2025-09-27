@@ -179,7 +179,4 @@ export default defineConfig({
     ],
     environment: 'jsdom', // or 'node' depending on your tests
   },
-  esbuild: {
-  drop: isProd ? ['console', 'debugger'] : []
-}
 });
