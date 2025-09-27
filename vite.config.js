@@ -7,31 +7,51 @@ import compression from 'vite-plugin-compression';
 import { VitePWA } from 'vite-plugin-pwa';
 import ViteSitemap from 'vite-plugin-sitemap';
 import removeConsole from 'vite-plugin-remove-console';
+import legacy from '@vitejs/plugin-legacy'; // ✅ for old browsers support
 import { configDefaults } from 'vitest/config';
-
+import chalk from "chalk";
 
 const isProd = process.env.NODE_ENV === 'production';
+
+// ✅ Custom Terminal Banner Plugin
+function terminalBannerPlugin() {
+  return {
+    name: "terminal-banner",
+    configureServer() {
+      console.log("\n===================================");
+      console.log(" 🚀 Vite Dev Server is Running!");
+      console.log(" 📂 Project: React + Vite Setup");
+      console.log(" 🌐 URL: http://localhost:5173/");
+      console.log("===================================\n");
+      console.log(
+        chalk.bgBlue.white.bold("\n 🚀 Vite Dev Server is Running! \n")
+      );
+      console.log(chalk.green("📂 Project: React + Vite Setup"));
+      console.log(chalk.cyan("🌐 URL: http://localhost:5173/\n"));
+    },
+  };
+}
 
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    terminalBannerPlugin(),
     visualizer({ open: true, filename: './stats.html' }),
     removeConsole(),
-
     // Compression for production
     isProd &&
-    compression({
-      algorithm: 'brotliCompress',
-      ext: '.br',
-      threshold: 1024, // only compress files > 1KB
-    }),
+      compression({
+        algorithm: 'brotliCompress',
+        ext: '.br',
+        threshold: 1024, // only compress files > 1KB
+      }),
     isProd &&
-    compression({
-      algorithm: 'gzip',
-      ext: '.gz',
-      threshold: 1024,
-    }),
+      compression({
+        algorithm: 'gzip',
+        ext: '.gz',
+        threshold: 1024,
+      }),
 
     // PWA plugin
     VitePWA({
@@ -39,7 +59,7 @@ export default defineConfig({
       includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
-        maximumFileSizeToCacheInBytes: 7 * 1024 * 1024, // 5 MB
+        maximumFileSizeToCacheInBytes: 7 * 1024 * 1024, // 7 MB
         runtimeCaching: [
           {
             urlPattern: /\/api\/.*\/*.json/,
@@ -50,7 +70,7 @@ export default defineConfig({
             },
           },
           {
-            urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
+            urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/i,
             handler: 'CacheFirst',
             options: {
               cacheName: 'image-cache',
@@ -60,9 +80,9 @@ export default defineConfig({
         ],
       },
       manifest: {
-        name: 'Âd Adarsh Porfile',
+        name: 'Âd Adarsh Profile',
         short_name: 'Adarsh',
-        description: 'Porfile of Ad Adarsh',
+        description: 'Profile of Ad Adarsh',
         theme_color: '#000000',
         background_color: '#000000',
         display: 'standalone',
@@ -77,28 +97,49 @@ export default defineConfig({
     ViteSitemap({
       hostname: 'https://adadarsh23.netlify.app',
     }),
+
+    // ✅ Legacy plugin for IE11 / old Safari / old mobile browsers
+    legacy({
+      targets: [
+        'defaults', // common modern targets
+        'not IE 11', // IE 11 is almost dead, but you can add it if needed
+        'Android >= 6', // ensures old Android phones
+        'iOS >= 12', // ensures old iPhones/iPads
+      ],
+      additionalLegacyPolyfills: ['regenerator-runtime/runtime'], // async/await support
+    }),
   ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-    }
+      '@components': path.resolve(__dirname, './src/components'),
+      '@assets': path.resolve(__dirname, './src/assets'),
+      '@Data': path.resolve(__dirname, './src/Data'),
+      '@Main': path.resolve(__dirname, './src/Main'),
+      '@pages': path.resolve(__dirname, './src/pages'),
+      '@utils': path.resolve(__dirname, './src/utils'),
+      '@Modules': path.resolve(__dirname, './src/Modules'),
+    },
   },
   server: {
     open: true,
+    host: true, // ✅ allows testing from other devices in LAN
   },
-
-
   build: {
     commonjsOptions: {
-      transformMixedEsModules: true
+      transformMixedEsModules: true,
     },
-    chunkSizeWarningLimit: 3000,
+    chunkSizeWarningLimit: 5000,
+    sourcemap: !isProd,
     cssCodeSplit: true,
+    outDir: 'dist',
+    assetsDir: 'assets',
     rollupOptions: {
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react') && !id.includes('react-dom')) return 'vendor_react';
+            if (id.includes('react') && !id.includes('react-dom'))
+              return 'vendor_react';
             if (id.includes('react-dom')) return 'vendor_react-dom';
             if (id.includes('lodash')) return 'vendor_lodash';
             if (id.includes('framer-motion')) return 'vendor_framer-motion';
@@ -118,9 +159,15 @@ export default defineConfig({
       },
     },
   },
-
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'lodash', 'ogl'],
+    include: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      'framer-motion',
+      'lodash',
+      'ogl',
+    ],
   },
   test: {
     include: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],
@@ -128,8 +175,11 @@ export default defineConfig({
       ...configDefaults.exclude, // includes node_modules, dist, etc.
       '**/cypress/**',
       '**/.{idea,git,cache,output,temp}/**',
-      '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*'
+      '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*',
     ],
     environment: 'jsdom', // or 'node' depending on your tests
-  }
+  },
+  esbuild: {
+  drop: isProd ? ['console', 'debugger'] : []
+}
 });
