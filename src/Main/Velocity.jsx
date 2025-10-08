@@ -3,7 +3,7 @@ import ScrollVelocity from '../components/ScrollVelocity';
 
 export default function Velocity() {
   return (
-    <div className='overflow-hidden mb-30 flex flex-col space-y-10'>
+    <div className='overflow-hidden flex flex-col space-y-10'>
       <ScrollVelocity
         texts={[
           'Beat Maker',

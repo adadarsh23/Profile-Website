@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import Loading from "@/components/Loading";
+import CirclePhoto from "@/Main/CirclePhoto";
 
 const Header = lazy(() => import("../Main/Header"));
 const Scroll = lazy(() => import("../Main/Scroll"));
@@ -15,6 +16,7 @@ export default function Home() {
         <Header />
         <Scroll />
         <Velocity />
+        <CirclePhoto />
         <Loop />
         <Video />
         <Music />

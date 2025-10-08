@@ -7,7 +7,7 @@ export default function Navbar() {
     <nav className='absolute top-0 left-0 w-full p-4 z-50 flex justify-center items-center'>
       <PillNav
         logo={logo}
-        logoAlt="Company Logo"
+        logoAlt="Adarsh Logo"
         items={[
           { label: 'Home', href: '/' },
           { label: 'About', href: '/about' },
