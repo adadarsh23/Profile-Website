@@ -1,6 +1,7 @@
 // monitoring.js
 import * as Sentry from '@sentry/react';
-import LogRocket from 'logrocket';
+import LogRocket from 'logrocket'; // ✅ Use ES module build for modern bundlers
+
 
 const LOGROCKET_APP_ID = import.meta.env.VITE_LOGROCKET_APP_ID;
 const LOGROCKET_USER_ID = import.meta.env.VITE_LOGROCKET_USER_ID;

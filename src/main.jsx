@@ -4,11 +4,7 @@ import './index.css';
 import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 
-import { initLogRocket, initSentry, Sentry } from './monitoring.js';
-
-// --- Initialize monitoring ---
-initLogRocket();
-initSentry();
+import { Sentry } from './monitoring.js';
 
 // --- Render React app ---
 createRoot(document.getElementById('root')).render(

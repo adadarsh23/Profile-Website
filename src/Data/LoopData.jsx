@@ -1,22 +1,21 @@
 import React from "react";
-import {
-  SiInstagram,
-  SiFacebook,
-  SiWhatsapp,
-  SiYoutube,
-  SiLinkedin,
-  SiSnapchat,
-  SiReddit,
-  SiPinterest,
-  SiTelegram,
-  SiDiscord,
-  SiTwitch,
-  SiSoundcloud,
-  SiSpotify,
-  SiApple,
-  SiThreads,
-  SiMessenger
-} from "react-icons/si";
+import { SiInstagram } from "react-icons/si";
+import { SiFacebook } from "react-icons/si";
+import { SiWhatsapp } from "react-icons/si";
+import { SiYoutube } from "react-icons/si";
+import { SiLinkedin } from "react-icons/si";
+import { SiSnapchat } from "react-icons/si";
+import { SiReddit } from "react-icons/si";
+import { SiPinterest } from "react-icons/si";
+import { SiTelegram } from "react-icons/si";
+import { SiDiscord } from "react-icons/si";
+import { SiTwitch } from "react-icons/si";
+import { SiSoundcloud } from "react-icons/si";
+import { SiSpotify } from "react-icons/si";
+import { SiApple } from "react-icons/si";
+import { SiThreads } from "react-icons/si";
+import { SiMessenger } from "react-icons/si";
+
 import { FaGamepad } from "react-icons/fa";
 
 // Music Producer Focused Links

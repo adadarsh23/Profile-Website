@@ -1,0 +1,1 @@
+import{e as a,u as n,r as e}from"./vendor_react-BtRciHc0.js";import"./vendor-CheDl41J.js";const c="G-X34L2QSKRG",i=()=>{a.initialize(c)},o=t=>{a.send({hitType:"pageview",page:t})};function p(){const t=n();return e.useEffect(()=>{i()},[]),e.useEffect(()=>{o(t.pathname)},[t]),null}export{p as default};

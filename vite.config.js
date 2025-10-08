@@ -133,6 +133,7 @@ export default defineConfig({
     sourcemap: !isProd,
     cssCodeSplit: true,
     outDir: 'dist',
+    // target: 'esnext',
     assetsDir: 'assets',
     rollupOptions: {
       output: {
