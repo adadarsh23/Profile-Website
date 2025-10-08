@@ -189,13 +189,27 @@ import compression from 'vite-plugin-compression';
 import { VitePWA } from 'vite-plugin-pwa';
 import removeConsole from 'vite-plugin-remove-console';
 import legacy from '@vitejs/plugin-legacy';
+import chalk from 'chalk';
 
 const isProd = process.env.NODE_ENV === 'production';
+
+// ✅ Custom Terminal Banner Plugin
+function terminalBannerPlugin() {
+  return {
+    name: 'terminal-banner',
+    configureServer() {
+      console.log(chalk.bgBlue.white.bold('\n🚀 Vite Dev Server Running!\n'));
+      console.log(chalk.green('📂 Project: React + Vite Setup'));
+      console.log(chalk.cyan('🌐 URL: http://localhost:5173/\n'));
+    },
+  };
+}
 
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    terminalBannerPlugin(),
     removeConsole(),
 
     // ✅ Compression (gzip + brotli for production)
@@ -212,7 +226,7 @@ export default defineConfig({
         threshold: 1024,
       }),
 
-    // ✅ PWA support
+    // ✅ PWA plugin
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'robots.txt'],
@@ -247,8 +261,13 @@ export default defineConfig({
     },
   },
 
+  server: {
+    open: true,
+    host: true,
+  },
+
   build: {
-    sourcemap: false, // Disable for smaller prod builds
+    sourcemap: !isProd,
     cssCodeSplit: true,
     outDir: 'dist',
     assetsDir: 'assets',
