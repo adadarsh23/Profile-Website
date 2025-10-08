@@ -25,6 +25,7 @@ function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-gray-400 transition-colors duration-300"
+              aria-label="Github"
             >
               <FaGithub size={20} />
             </a>
@@ -33,6 +34,7 @@ function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-gray-400 transition-colors duration-300"
+              aria-label="Linkedin"
             >
               <FaLinkedin size={20} />
             </a>
@@ -41,6 +43,7 @@ function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-gray-400 transition-colors duration-300"
+              aria-label="Twitter"
             >
               <FaSquareXTwitter  size={20} />
             </a>

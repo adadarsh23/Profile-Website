@@ -56,7 +56,24 @@ export default defineConfig({
     // PWA plugin
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
+      includeAssets: [
+        'favicon.ico',
+        'robots.txt',
+        'apple-touch-icon.png',
+        'android-chrome-192x192.png',
+        'android-chrome-512x512.png',
+        'apple-touch-icon-57x57.png',
+        'apple-touch-icon-60x60.png',
+        'apple-touch-icon-72x72.png',
+        'apple-touch-icon-76x76.png',
+        'apple-touch-icon-114x114.png',
+        'apple-touch-icon-120x120.png',
+        'apple-touch-icon-144x144.png',
+        'apple-touch-icon-152x152.png',
+        'apple-touch-icon-180x180.png',
+        'favicon-16x16.png',
+        'favicon-32x32.png',
+      ],
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
         maximumFileSizeToCacheInBytes: 7 * 1024 * 1024, // 7 MB
@@ -86,9 +103,21 @@ export default defineConfig({
         theme_color: '#000000',
         background_color: '#000000',
         display: 'standalone',
+        scope: '/',
+        start_url: '/',
+        lang: 'en',
+        orientation: 'portrait',
         icons: [
-          { src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png' },
-          { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png' },
+          {
+            src: 'android-chrome-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'android-chrome-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          }
         ],
       },
     }),
@@ -96,6 +125,9 @@ export default defineConfig({
     // Sitemap plugin
     ViteSitemap({
       hostname: 'https://adadarsh23.netlify.app',
+      robots: [
+        { userAgent: '*', allow: '/' },
+      ],
     }),
 
     // ✅ Legacy plugin for IE11 / old Safari / old mobile browsers

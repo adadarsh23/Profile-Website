@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import logo from '../assets/Adarsh.png';
-import PillNav from '../components/PillNav';
+const PillNav = lazy(() => import('../components/PillNav'));
 
 export default function Navbar() {
   return (
-    <nav className='absolute top-0 left-0 w-full p-4 z-50 flex justify-center items-center'>
+    <nav role="menubar" className='absolute top-0 left-0 w-full p-4 z-50 flex justify-center items-center'>
       <PillNav
         logo={logo}
         logoAlt="Adarsh Logo"
