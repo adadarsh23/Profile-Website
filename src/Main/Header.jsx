@@ -78,9 +78,9 @@ export default function Header() {
         </p>
 
         {/* Call-to-Action */}
-        <button className="mt-6 px-8 py-4 bg-gradient-to-r from-gray-800 via-gray-600 to-gray-400 text-white font-semibold rounded-full shadow-lg hover:scale-110 hover:bg-gray-700 hover:shadow-2xl transition-transform duration-300 ease-in-out transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50">
+        {/* <button className="mt-6 px-8 py-4 bg-gradient-to-r from-gray-800 via-gray-600 to-gray-400 text-white font-semibold rounded-full shadow-lg hover:scale-110 hover:bg-gray-700 hover:shadow-2xl transition-transform duration-300 ease-in-out transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50">
           View Projects
-        </button>
+        </button> */}
 
 
       </div>
