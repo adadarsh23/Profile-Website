@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BlurText from "../components/BlurText";
 import PrismaticBurst from '../components/PrismaticBurst';
-import GlitchText from '../components/GlitchText'; 
+import GlitchText from '../components/GlitchText';
 
 export default function Header({ onAnimationComplete }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -57,23 +57,8 @@ export default function Header({ onAnimationComplete }) {
           animateBy="words"
           direction="top"
           onAnimationComplete={handleAnimationComplete}
-          className="
-            text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl
-            font-extrabold
-            mb-6 sm:mb-8
-            drop-shadow-[0_0_25px_rgba(255,255,255,0.95)]
-            flex flex-wrap justify-center items-center
-            space-x-1 sm:space-x-2
-            transform transition-all duration-500 hover:scale-105 hover:animate-shine
-          "
-          style={{
-            backgroundImage: 'linear-gradient(90deg, #ff6ec4, #7873f5, #42e695)',
-            WebkitBackgroundClip: 'text',
-            color: 'transparent',
-            animation: 'shine 3s linear infinite',
-            backgroundSize: '200% 100%',
-          }}
-        />
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-center mb-6 sm:mb-8 flex flex-wrap justify-center items-center space-x-1 sm:space-x-2 transition-all duration-700 ease-in-out hover:scale-110 hover:text-white"
+          />
 
         <p className="mt-4 text-sm sm:text-base md:text-lg text-gray-300 max-w-xl">
           Explore my projects, beats, and music production works.

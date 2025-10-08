@@ -17,7 +17,6 @@ body {
 
 /* 🌙 Dark Theme (default) */
 body {
-
   background: black;
   color: white;
 }
@@ -50,18 +49,6 @@ body {
 
 *::-webkit-scrollbar-thumb:hover {
   background-color: #e0e0e0; /* lighter on hover */
-}
-
-@keyframes shine {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 
