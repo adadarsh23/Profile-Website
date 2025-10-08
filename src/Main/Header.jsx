@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import BlurText from "../components/BlurText";
 import PrismaticBurst from '../components/PrismaticBurst';
 
-export default function Header() {
+export default function Header({ onAnimationComplete }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const handleAnimationComplete = () => {
     console.log('Animation completed!');
+    onAnimationComplete?.();
   };
 
   // Track mouse/touch for interactive burst
@@ -50,7 +51,7 @@ export default function Header() {
       {/* Centered Animated Text */}
       <div className="relative z-10 text-center flex flex-col items-center justify-center">
         <BlurText
-          text="Welcome To Âd Adarsh Profile"
+          text="Welcome To Adarsh Profile"
           delay={100}
           animateBy="words"
           direction="top"

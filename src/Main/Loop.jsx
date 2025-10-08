@@ -30,7 +30,7 @@ export default function Loop() {
     }));
   }, []);
   return (
-    <section className="bg-black text-white mt-30 mb-30 flex flex-col space-y-10">
+    <section className="bg-black text-white mb-30 flex flex-col space-y-10">
       {/* <CurvedLoop
         marqueeText="Be ✦ Gamer ✦ Coder ✦ Producer ✦ Bits ✦"
         speed={3}
