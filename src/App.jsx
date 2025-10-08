@@ -1,13 +1,14 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
- // ✅ import import WebSocketComponent from './WebSocketComponent'; // ✅ import
+// ✅ import import WebSocketComponent from './WebSocketComponent'; // ✅ import
 
 const SplashCursor = lazy(() => import('./components/SplashCursor'));
 const Navbar = lazy(() => import("./Main/Navbar"));
 const Footer = lazy(() => import("./components/Footer"));
 
 import Loading from './components/Loading';
-const AnalyticsTracker = lazy(() => import("./AnalyticsTracker")); 
+const StatsigSetup = lazy(() => import('./StatsigSetup.jsx'));
+const AnalyticsTracker = lazy(() => import("./AnalyticsTracker"));
 const LazyLoadSection = lazy(() => import('./components/LazyLoadSection.jsx'));
 
 // Lazy load pages
@@ -20,7 +21,6 @@ const NotFound = lazy(() => import('./page/NotFound.jsx'));
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
-
   // Defer monitoring initialization until after the first render
   useEffect(() => {
     if (import.meta.env.PROD) {
@@ -36,44 +36,43 @@ export default function App() {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 3000);
-
     return () => clearTimeout(timer);
   }, []);
-
   if (isLoading) {
     return <Loading />;
   }
 
   return (
-    <>
-      {/* ✅ Render WebSocketComponent once at top level */}
-      {/* <WebSocketComponent /> */}
+    <Suspense fallback={<Loading />}>
+      <StatsigSetup>
+        {/* ✅ Render WebSocketComponent once at top level */}
+        {/* <WebSocketComponent /> */}
 
-      {/* Navigation bar stays on top for all pages */}
-      <LazyLoadSection>
-        <SplashCursor />
-      </LazyLoadSection>
-      <AnalyticsTracker />
-      <LazyLoadSection>
-        <Navbar />
-      </LazyLoadSection>
-
-      {/* Wrap routes in Suspense */}
-      <Suspense fallback={<Loading />}>
         <LazyLoadSection>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/sample" element={<Sample />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <SplashCursor />
         </LazyLoadSection>
-      </Suspense>
+        <AnalyticsTracker />
+        <LazyLoadSection>
+          <Navbar />
+        </LazyLoadSection>
 
-      {/* Footer stays at the bottom */}
-      <Footer />
-    </>
+        {/* Wrap routes in Suspense */}
+        <Suspense fallback={<Loading />}>
+          <LazyLoadSection>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/sample" element={<Sample />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </LazyLoadSection>
+        </Suspense>
+
+        {/* Footer stays at the bottom */}
+        <Footer />
+      </StatsigSetup>
+    </Suspense>
   );
 }

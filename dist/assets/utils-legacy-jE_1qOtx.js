@@ -1,0 +1,1 @@
+System.register(["./vendor-legacy-BW4Qp-_L.js"],function(e,r){"use strict";var t,n;return{setters:[function(e){t=e.b1,n=e.b2}],execute:function(){e("c",function(){for(var e=arguments.length,r=new Array(e),c=0;c<e;c++)r[c]=arguments[c];return t(n(r))})}}});
