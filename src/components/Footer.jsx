@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaSquareXTwitter } from "react-icons/fa6";
 
 function Footer() {
   return (
@@ -9,7 +10,7 @@ function Footer() {
           <span className="text-sm text-gray-300 text-center md:text-left">
             © 2025 - Built by{' '}
             <a
-              href="#"
+              href="https://github.com/adadarsh23"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white font-semibold hover:text-gray-400 transition-colors duration-300"
@@ -20,7 +21,7 @@ function Footer() {
           </span>
           <div className="flex space-x-4">
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/adadarsh23"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-gray-400 transition-colors duration-300"
@@ -28,7 +29,7 @@ function Footer() {
               <FaGithub size={20} />
             </a>
             <a
-              href="https://linkedin.com/in/yourusername"
+              href="https://linkedin.com/in/adadarsh23"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-gray-400 transition-colors duration-300"
@@ -36,18 +37,18 @@ function Footer() {
               <FaLinkedin size={20} />
             </a>
             <a
-              href="https://twitter.com/yourusername"
+              href="https://twitter.com/adadarsh23"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-gray-400 transition-colors duration-300"
             >
-              <FaTwitter size={20} />
+              <FaSquareXTwitter  size={20} />
             </a>
           </div>
         </div>
         <hr className="my-6 border-gray-700" />
         <p className="text-xs text-gray-400 text-center">
-          Designed with ❤️ and React
+          Designed with ❤️ by Ad Adarsh
         </p>
       </div>
     </footer>

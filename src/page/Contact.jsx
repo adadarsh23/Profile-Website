@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { Suspense, lazy, useState } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "../Modules/bubble.module.css";
-
+// import ThreeBackground from "../components/ThreeBackground";
+const Map = lazy(() => import("../components/Map"));
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+    setLoading(true);
 
     const form = e.target;
     const data = new FormData(form);
@@ -28,8 +31,10 @@ export default function Contact() {
         setError(result.error || "Something went wrong. Please try again.");
       }
     } catch {
-      setError("Network error. Please try again.");
+      setError("Network error. Please check your connection and try again.");
     }
+
+    setLoading(false);
   };
 
   const BubbleText = () => (
@@ -47,11 +52,51 @@ export default function Contact() {
     </motion.h2>
   );
 
+  const formFields = [
+    { id: "name", label: "Name", type: "text", autoComplete: "name" },
+    { id: "email", label: "Email", type: "email", autoComplete: "email" },
+    {
+      id: "message",
+      label: "Message",
+      type: "textarea",
+      props: { rows: 5, className: "resize-none" },
+    },
+  ];
+
+  const FormInput = ({ id, label, type, autoComplete, props = {} }) => (
+    <div className="flex flex-col">
+      <label htmlFor={id} className="block font-medium mb-1 text-gray-700">
+        {label}
+      </label>
+      {type === "textarea" ? (
+        <textarea id={id} name={id} required className={`w-full p-3 rounded-lg border border-gray-300 bg-white text-black focus:ring-2 focus:ring-black outline-none transition-all ${props.className}`} {...props}></textarea>
+      ) : (
+        <input id={id} type={type} name={id} required className="w-full p-3 rounded-lg border border-gray-300 bg-white text-black focus:ring-2 focus:ring-black outline-none transition-all" autoComplete={autoComplete} {...props} />
+      )}
+    </div>
+  );
+
   return (
-   <div className="relative bg-black text-white min-h-screen flex flex-col items-center justify-center
+    <div
+      className="relative bg-black text-white min-h-screen flex flex-col items-center justify-center
                 px-4 sm:px-6 md:px-12 py-12
                 mt-10 mx-4 sm:mx-6 md:mx-12 lg:mx-16
-                overflow-hidden">
+                overflow-hidden"
+    >
+      {/* 3D background layer */}
+      <Suspense
+        fallback={<div className="absolute inset-0 bg-black" />}
+      >
+        <Map
+          interactive={false}
+          className="absolute inset-0 w-full h-full z-10"
+          height="100%"
+        />
+      </Suspense>
+
+      {/* Overlay for readability */}
+      <div className="absolute inset-0 bg-black/60 z-0" />
+
       <BubbleText />
 
       <motion.div
@@ -83,56 +128,27 @@ export default function Contact() {
               transition={{ duration: 0.5 }}
               className="flex flex-col space-y-5"
             >
-              {/* Name */}
-              <div className="flex flex-col">
-                <label htmlFor="name" className="block font-medium mb-1 text-gray-700">
-                  Name
-                </label>
-                <input
-                  id="name"
-                  type="text"
-                  name="name"
-                  required
-                  className="w-full p-3 rounded-lg border border-gray-300 bg-white text-black focus:ring-2 focus:ring-black outline-none transition-all"
-                />
-              </div>
-
-              {/* Email */}
-              <div className="flex flex-col">
-                <label htmlFor="email" className="block font-medium mb-1 text-gray-700">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  required
-                  className="w-full p-3 rounded-lg border border-gray-300 bg-white text-black focus:ring-2 focus:ring-black outline-none transition-all"
-                />
-              </div>
-
-              {/* Message */}
-              <div className="flex flex-col">
-                <label htmlFor="message" className="block font-medium mb-1 text-gray-700">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows="5"
-                  className="w-full p-3 rounded-lg border border-gray-300 bg-white text-black focus:ring-2 focus:ring-black outline-none transition-all resize-none"
-                ></textarea>
-              </div>
+              {formFields.map((field) => (
+                <FormInput key={field.id} {...field} />
+              ))}
 
               {/* Submit */}
               <motion.button
                 type="submit"
+                disabled={loading}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-900 transition-colors"
+                className="bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-900 transition-colors disabled:bg-gray-500 disabled:cursor-not-allowed flex items-center justify-center"
               >
-                Send
+                {loading ? (
+                  <>
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Sending...
+                  </>
+                ) : "Send"}
               </motion.button>
 
               {/* Error */}

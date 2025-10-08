@@ -50,7 +50,7 @@ export default function Header() {
       {/* Centered Animated Text */}
       <div className="relative z-10 text-center flex flex-col items-center justify-center">
         <BlurText
-          text="Welcome To Ad Adarsh Profile"
+          text="Welcome To Âd Adarsh Profile"
           delay={100}
           animateBy="words"
           direction="top"
@@ -74,7 +74,7 @@ export default function Header() {
         />
 
         <p className="mt-4 text-sm sm:text-base md:text-lg text-gray-300 max-w-xl">
-          Explore my projects, music, and web development works. Fully responsive, interactive, and visually engaging on all devices.
+          Explore my projects, beats, and music production works.
         </p>
 
         {/* Call-to-Action */}

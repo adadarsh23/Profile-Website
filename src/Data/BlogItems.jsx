@@ -2,21 +2,20 @@ export const items = [
   {
     image: "https://i.pravatar.cc/300?img=1",
     title: "Sarah Johnson",
-    subtitle: "Frontend Developer",
-    handle: "@sarahjohnson",
-    borderColor: "#3B82F6",
-    gradient: "linear-gradient(145deg, #3B82F6, #000)",
-    url: "https://github.com/sarahjohnson",
+    subtitle: "Music Producer & Beatmaker",
+    handle: "@sarahbeats",
+    borderColor: "#FF4D6D",
+    gradient: "linear-gradient(145deg, #FF4D6D, #000)",
+    url: "https://soundcloud.com/sarahjohnson",
   },
   {
     image: "https://i.pravatar.cc/300?img=2",
     title: "Mike Chen",
-    subtitle: "Backend Engineer",
-    handle: "@mikechen",
-    borderColor: "#10B981",
-    gradient: "linear-gradient(180deg, #10B981, #000)",
-    url: "https://linkedin.com/in/mikechen",
+    subtitle: "Electronic Music Producer",
+    handle: "@mikeelectro",
+    borderColor: "#F59E0B",
+    gradient: "linear-gradient(180deg, #F59E0B, #000)",
+    url: "https://spotify.com/artist/mikechen",
   },
-  // Add more items here
+  // Add more music producers here
 ];
-
