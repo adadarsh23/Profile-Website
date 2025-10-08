@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BlurText from "../components/BlurText";
 import PrismaticBurst from '../components/PrismaticBurst';
+import GlitchText from '../components/GlitchText'; 
 
 export default function Header({ onAnimationComplete }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });

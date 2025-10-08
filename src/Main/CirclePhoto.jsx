@@ -1,24 +1,24 @@
-import React, { useRef } from "react";
+import React from "react";
 import styles from "../Modules/bubble.module.css";
 import CircularGallery from "../components/CircularGallery";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 export default function CirclePhoto() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const { ref, inView: isInView } = useInView({ once: true, amount: 0.3 });
   const BubbleText = () => (
-      <motion.h2 className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white p-4 sm:p-6 mb-8 md:mb-12 z-10 drop-shadow-lg"
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        {"PhotoGraphy".split("").map((child, idx) => (
-          <span className={styles.hoverText} key={idx}>
-            {child}
-          </span>
-        ))}
-      </motion.h2>
-    );
+    <motion.h2 className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white p-4 sm:p-6 mb-8 md:mb-12 z-10 drop-shadow-lg"
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      {"PhotoGraphy".split("").map((child, idx) => (
+        <span className={styles.hoverText} key={idx}>
+          {child}
+        </span>
+      ))}
+    </motion.h2>
+  );
   return (
     <section
       ref={ref}
