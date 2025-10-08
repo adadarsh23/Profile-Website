@@ -1,0 +1,1 @@
+System.register(["./vendor-legacy-lz3Sn4Gw.js"],function(e,r){"use strict";var t,n;return{setters:[function(e){t=e.aV,n=e.aW}],execute:function(){e("c",function(){for(var e=arguments.length,r=new Array(e),c=0;c<e;c++)r[c]=arguments[c];return t(n(r))})}}});
