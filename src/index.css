@@ -23,6 +23,33 @@ body {
   background-color: #000000;
   color: #ffffff;
 }
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(90deg, #ff007a 0%, #4d3dff 100%);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  z-index: 9999;
+  pointer-events: none;
+  transition: width 0.12s ease-out, opacity 0.3s ease;
+  opacity: 0; /* initially hidden */
+  will-change: width, opacity; /* smoother animation */
+}
+.scroll-progress.active {
+  opacity: 1;
+}
+
+.parallax {
+  background-image: url('your-image.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
+
 /* ✨ Text Selection */
 ::selection {
   background: #ffffff; /* violet-900 */
