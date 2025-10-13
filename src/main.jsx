@@ -10,7 +10,13 @@ import { Sentry } from './monitoring.js';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <Sentry.ErrorBoundary fallback={<p className="error-message">Something went wrong.</p>}>
+      <Sentry.ErrorBoundary
+        fallback={
+          <p className="flex items-center justify-center min-h-screen text-center text-lg font-medium text-red-600">
+            Something went wrong.
+          </p>
+        }
+      >
         <App />
       </Sentry.ErrorBoundary>
     </BrowserRouter>

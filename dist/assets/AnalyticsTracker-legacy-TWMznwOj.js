@@ -1,0 +1,1 @@
+System.register(["./vendor_react-legacy-D7Uy2FeJ.js","./vendor-legacy-Btopm06p.js"],function(n,e){"use strict";var t,u;return{setters:[function(n){t=n.u,u=n.r},null],execute:function(){n("default",function(){var n=t();return u.useEffect(function(){initGA()},[]),u.useEffect(function(){trackPage(n.pathname)},[n]),null});var initGA=function(){},trackPage=function(n){}}}});

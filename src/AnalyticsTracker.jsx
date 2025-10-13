@@ -1,17 +1,18 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { initGA, trackPage } from "./analytics";
+import { initGA, trackPage } from "./analytics.js";
 
 export default function AnalyticsTracker() {
   const location = useLocation();
 
   useEffect(() => {
-    initGA(); // Initialize once
+    initGA();
   }, []);
 
   useEffect(() => {
-    trackPage(location.pathname); // Track each route change
+    trackPage(location.pathname);
   }, [location]);
 
   return null;
 }
+

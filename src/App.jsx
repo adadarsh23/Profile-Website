@@ -1,8 +1,9 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-// ✅ import import WebSocketComponent from './WebSocketComponent'; // ✅ import
 
+// ✅ import import WebSocketComponent from './WebSocketComponent'; // ✅ import
 const SplashCursor = lazy(() => import('./components/SplashCursor'));
+
 const Navbar = lazy(() => import("./Main/Navbar"));
 const Footer = lazy(() => import("./components/Footer"));
 
@@ -10,6 +11,7 @@ import Loading from './components/Loading';
 const StatsigSetup = lazy(() => import('./StatsigSetup.jsx'));
 const AnalyticsTracker = lazy(() => import("./AnalyticsTracker"));
 const LazyLoadSection = lazy(() => import('./components/LazyLoadSection.jsx'));
+const SmoothScrollProvider = lazy(() => import('./components/SmoothScrollProvider.jsx'));
 
 // Lazy load pages
 const Home = lazy(() => import('./page/Home.jsx'));
@@ -22,6 +24,7 @@ const NotFound = lazy(() => import('./page/NotFound.jsx'));
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   // Defer monitoring initialization until after the first render
+
   useEffect(() => {
     if (import.meta.env.PROD) {
       import('./monitoring.js').then(({ initLogRocket, initSentry }) => {
@@ -47,7 +50,6 @@ export default function App() {
       <StatsigSetup>
         {/* ✅ Render WebSocketComponent once at top level */}
         {/* <WebSocketComponent /> */}
-
         <LazyLoadSection>
           <SplashCursor />
         </LazyLoadSection>
@@ -56,6 +58,9 @@ export default function App() {
           <Navbar />
         </LazyLoadSection>
 
+        <LazyLoadSection>
+          <SmoothScrollProvider />
+        </LazyLoadSection>
         {/* Wrap routes in Suspense */}
         <Suspense fallback={<Loading />}>
           <LazyLoadSection>
