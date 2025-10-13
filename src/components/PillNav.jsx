@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 
 const PillNav = ({
   logo,
   logoAlt = 'Logo',
   items,
-  activeHref,
   className = '',
   ease = 'power3.easeOut',
   baseColor = '#fff',
@@ -16,6 +15,7 @@ const PillNav = ({
   onMobileMenuClick,
   initialLoadAnimation = true
 }) => {
+  const location = useLocation();
   const resolvedPillTextColor = pillTextColor ?? baseColor;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const circleRefs = useRef([]);
@@ -84,7 +84,7 @@ const PillNav = ({
     window.addEventListener('resize', onResize);
 
     if (document.fonts?.ready) {
-      document.fonts.ready.then(layout).catch(() => {});
+      document.fonts.ready.then(layout).catch(() => { });
     }
 
     const menu = mobileMenuRef.current;
@@ -283,7 +283,7 @@ const PillNav = ({
             style={{ gap: 'var(--pill-gap)' }}
           >
             {items.map((item, i) => {
-              const isActive = activeHref === item.href;
+              const isActive = location.pathname === item.href;
 
               const pillStyle = {
                 background: 'var(--pill-bg, #fff)',
@@ -325,7 +325,7 @@ const PillNav = ({
                   </span>
                   {isActive && (
                     <span
-                      className="absolute left-1/2 -bottom-[6px] -translate-x-1/2 w-3 h-3 rounded-full z-[4]"
+                      className="absolute left-1/2 -bottom-[6px] -translate-x-1/2 w-3 h-3 rounded-full z-[4] "
                       style={{ background: 'var(--base, #000)' }}
                       aria-hidden="true"
                     />
@@ -419,7 +419,7 @@ const PillNav = ({
               'block py-3 px-4 text-[16px] font-medium rounded-[50px] transition-all duration-200 ease-[cubic-bezier(0.25,0.1,0.25,1)]';
 
             return (
-              <li key={item.href}>
+              <li key={item.href} role="none">
                 {isRouterLink(item.href) ? (
                   <Link
                     to={item.href}
@@ -427,7 +427,7 @@ const PillNav = ({
                     style={defaultStyle}
                     onMouseEnter={hoverIn}
                     onMouseLeave={hoverOut}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={toggleMobileMenu}
                   >
                     {item.label}
                   </Link>
@@ -438,7 +438,7 @@ const PillNav = ({
                     style={defaultStyle}
                     onMouseEnter={hoverIn}
                     onMouseLeave={hoverOut}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={toggleMobileMenu}
                   >
                     {item.label}
                   </a>

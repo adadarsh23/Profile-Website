@@ -9,49 +9,54 @@ import ViteSitemap from 'vite-plugin-sitemap';
 import removeConsole from 'vite-plugin-remove-console';
 import legacy from '@vitejs/plugin-legacy'; // ✅ for old browsers support
 import { configDefaults } from 'vitest/config';
-import chalk from "chalk";
+import terminalBannerPlugin from './src/plugins/terminalBanner.jsx';
+// import { version } from 'logrocket';
+import { readFileSync } from 'fs';
+import LogRocket from 'logrocket';
+
+// Read package.json for version
+const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
 
 const isProd = process.env.NODE_ENV === 'production';
 
 // ✅ Custom Terminal Banner Plugin
-function terminalBannerPlugin() {
-  return {
-    name: "terminal-banner",
-    configureServer() {
-      console.log("\n===================================");
-      console.log(" 🚀 Vite Dev Server is Running!");
-      console.log(" 📂 Project: React + Vite Setup");
-      console.log(" 🌐 URL: http://localhost:5173/");
-      console.log("===================================\n");
-      console.log(
-        chalk.bgBlue.white.bold("\n 🚀 Vite Dev Server is Running! \n")
-      );
-      console.log(chalk.green("📂 Project: React + Vite Setup"));
-      console.log(chalk.cyan("🌐 URL: http://localhost:5173/\n"));
-    },
-  };
-}
 
 export default defineConfig({
+  base: '/',
+  logLevel: 'info',
   plugins: [
     react(),
     tailwindcss(),
-    terminalBannerPlugin(),
+    terminalBannerPlugin({
+      projectName: `My Profile Website v${pkg.version}`,
+      showTimestamp: true,
+      showEnvironment: true,
+      showSystemInfo: true,
+      showProjectStats: true,
+      showDependencies: true,
+      showStorage: true,
+      customMessages: [
+        '🎨 UI: React + Tailwind CSS + shadcn/ui',
+        '🔥 Backend: Node.js + Express + MongoDB',
+        '🚀 State: Redux Toolkit',
+        '📡 API: REST + GraphQL'
+      ]
+    }),
     visualizer({ open: true, filename: './stats.html' }),
     removeConsole(),
     // Compression for production
     isProd &&
-      compression({
-        algorithm: 'brotliCompress',
-        ext: '.br',
-        threshold: 1024, // only compress files > 1KB
-      }),
+    compression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 1024, // only compress files > 1KB
+    }),
     isProd &&
-      compression({
-        algorithm: 'gzip',
-        ext: '.gz',
-        threshold: 1024,
-      }),
+    compression({
+      algorithm: 'gzip',
+      ext: '.gz',
+      threshold: 1024,
+    }),
 
     // PWA plugin
     VitePWA({

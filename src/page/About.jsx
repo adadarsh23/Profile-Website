@@ -2,14 +2,15 @@ import React, { Suspense, lazy } from 'react';
 import styles from "../Modules/bubble.module.css";
 import { motion } from "framer-motion";
 import { aboutCards } from "../Data/AboutItems";
-import Loading from '@/components/Loading';
-
-// ✅ Lazy load shadcn/ui components
-const Card = lazy(() => import("@/components/ui/card").then(m => ({ default: m.Card })));
-const CardContent = lazy(() => import("@/components/ui/card").then(m => ({ default: m.CardContent })));
-const CardHeader = lazy(() => import("@/components/ui/card").then(m => ({ default: m.CardHeader })));
-const CardTitle = lazy(() => import("@/components/ui/card").then(m => ({ default: m.CardTitle })));
-const CardDescription = lazy(() => import("@/components/ui/card").then(m => ({ default: m.CardDescription })));
+const Loading = lazy(() => import('@/components/Loading')) ;
+// Lazy load all card components in a single chunk for better performance
+const { Card, CardContent, CardHeader, CardTitle, CardDescription } = {
+  Card: lazy(() => import("@/components/ui/card").then(m => ({ default: m.Card }))),
+  CardContent: lazy(() => import("@/components/ui/card").then(m => ({ default: m.CardContent }))),
+  CardHeader: lazy(() => import("@/components/ui/card").then(m => ({ default: m.CardHeader }))),
+  CardTitle: lazy(() => import("@/components/ui/card").then(m => ({ default: m.CardTitle }))),
+  CardDescription: lazy(() => import("@/components/ui/card").then(m => ({ default: m.CardDescription })))
+};
 
 const Button = lazy(() => import("@/components/ui/button").then(m => ({ default: m.Button })));
 
@@ -37,16 +38,27 @@ export default function About() {
       <BubbleText />
 
       <div className="w-full max-w-7xl mx-auto flex flex-col items-center">
+        {/* <motion.div
+        className="my-6 md:my-12 w-full max-w-4xl"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+      >
+        <img
+          src="https://images.unsplash.com/photo-1484704849700-f032a568e944?q=80&w=2070&auto=format&fit=crop"
+          alt="Creative music production setup"
+          className="rounded-lg shadow-2xl w-full h-64 sm:h-80 md:h-96 object-cover"
+        />
+      </motion.div> */}
         <p className="max-w-3xl text-center text-base sm:text-lg md:text-xl mb-16 leading-relaxed">
           Welcome to our platform. We focus on creating immersive music and beats using the latest production tools.
           Our mission is to deliver high-quality, engaging, and unique sound experiences while leveraging modern software and creative techniques.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
-          <Suspense fallback={<div ><Loading /></div>}>
-            {aboutCards.map((card, idx) => (
+          {aboutCards.map((card, idx) => (
+            <Suspense key={idx} fallback={<div ><Loading /></div>}>
               <Card
-                key={idx}
                 className="bg-black-900 border border-gray-700 transform transition-transform duration-300 hover:scale-105 hover:shadow-lg"
               >
                 <CardHeader>
@@ -58,8 +70,8 @@ export default function About() {
                   </CardDescription>
                 </CardContent>
               </Card>
-            ))}
-          </Suspense>
+            </Suspense>
+          ))}
         </div>
 
         <div className="mt-16">
@@ -78,4 +90,3 @@ export default function About() {
     </div>
   );
 }
-

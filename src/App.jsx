@@ -6,6 +6,9 @@ const SplashCursor = lazy(() => import('./components/SplashCursor'));
 
 const Navbar = lazy(() => import("./Main/Navbar"));
 const Footer = lazy(() => import("./components/Footer"));
+const LiquidCursor = lazy(() =>
+  import("./components/LiquidCursor.tsx").then(module => ({ default: module.LiquidCursor }))
+);
 
 import Loading from './components/Loading';
 const StatsigSetup = lazy(() => import('./StatsigSetup.jsx'));
@@ -22,7 +25,7 @@ const Blog = lazy(() => import('./page/Blog.jsx'));
 const NotFound = lazy(() => import('./page/NotFound.jsx'));
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   // Defer monitoring initialization until after the first render
 
   useEffect(() => {
@@ -34,20 +37,21 @@ export default function App() {
     }
   }, []);
 
-  useEffect(() => {
-    // Simulate app loading
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
-  if (isLoading) {
-    return <Loading />;
-  }
+  // useEffect(() => {
+  //   // Simulate app loading
+  //   const timer = setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 3000);
+  //   return () => clearTimeout(timer);
+  // }, []);
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
 
   return (
     <Suspense fallback={<Loading />}>
       <StatsigSetup>
+        <LiquidCursor size={20} />
         {/* ✅ Render WebSocketComponent once at top level */}
         {/* <WebSocketComponent /> */}
         <LazyLoadSection>

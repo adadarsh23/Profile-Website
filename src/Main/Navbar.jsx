@@ -23,6 +23,7 @@ export default function Navbar() {
         hoveredPillTextColor="#ffffff"
         pillTextColor="#000000"
       />
+      
     </nav>
   )
 }
