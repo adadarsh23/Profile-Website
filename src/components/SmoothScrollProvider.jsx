@@ -1,75 +1,99 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Lenis from "@studio-freight/lenis";
 
 export default function SmoothScrollProvider({ children }) {
   const lenisRef = useRef(null);
   const progressRef = useRef(null);
   const rafRef = useRef(null);
-  const parallaxRef = useRef(null);
+  const parallaxElementsRef = useRef([]);
 
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(false);
+  const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  };
 
   useEffect(() => {
-    // Initialize Lenis
-    const lenis = new Lenis({
-      duration: 0.6,
-      easing: (t) => t,
-      smoothWheel: true,
-      smoothTouch: true,
-      orientation: "vertical",
+    const isTouchDevice = "ontouchstart" in window;
+
+    if (!isTouchDevice) {
+      // Initialize Lenis for non-touch devices
+      const lenis = new Lenis({
+        duration: 0.6,
+        easing: (t) => t,
+        smoothWheel: true,
+        smoothTouch: false, // Disable for touch devices
+        orientation: "vertical",
+      });
+      lenisRef.current = lenis;
+    }
+
+    // Find parallax elements once
+    const parallaxElements = document.querySelectorAll("[data-parallax]");
+    parallaxElements.forEach(el => {
+      // Hint to the browser to optimize for transform changes
+      el.style.willChange = 'transform';
     });
-    lenisRef.current = lenis;
+    parallaxElementsRef.current = parallaxElements;
 
-    // Update scroll progress & fade-in/out logic
-    const updateScrollProgress = () => {
-      const scrollHeight = document.body.scrollHeight - window.innerHeight;
-      const progress = scrollHeight > 0 ? (lenis.scroll / scrollHeight) * 100 : 0;
-
-      setScrollProgress(progress);
-      setIsScrolling(lenis.scroll > 10);
-
-      if (progressRef.current) {
-        progressRef.current.style.width = `${progress}%`;
-        progressRef.current.style.opacity = lenis.scroll > 10 ? "1" : "0";
-      }
-    };
-
-    // Main RAF loop
+    // Main animation frame loop
     const rafLoop = (time) => {
-      lenis.raf(time);
-      updateScrollProgress();
+      const lenis = lenisRef.current;
+      if (lenis) {
+        lenis.raf(time);
+      }
+
+      const scroll = lenis ? lenis.scroll : window.scrollY;
+
+      // 1. Update scroll progress bar
+      if (progressRef.current) {
+        const scrollHeight = document.body.scrollHeight - window.innerHeight;
+        const progress = scrollHeight > 0 ? (scroll / scrollHeight) * 100 : 0;
+        progressRef.current.style.width = `${progress}%`;
+        progressRef.current.style.opacity = scroll > 10 ? "1" : "0";
+      }
+
+      // 2. Apply parallax effect
+      for (let i = 0; i < parallaxElementsRef.current.length; i++) {
+        const el = parallaxElementsRef.current[i];
+        const speed = parseFloat(el.getAttribute("data-parallax")) || 0.1;
+        const rect = el.getBoundingClientRect();
+        // Only apply transform if element is visible for performance
+        if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+          el.style.transform = `translateY(${scroll * speed}px)`;
+        }
+      }
+
+      // Continue the loop
       rafRef.current = requestAnimationFrame(rafLoop);
     };
+
+    // Start the loop
     rafRef.current = requestAnimationFrame(rafLoop);
 
-    // Parallax loop for elements with data-parallax
-    const parallaxLoop = () => {
-      const elements = document.querySelectorAll("[data-parallax]");
-      elements.forEach((el) => {
-        const speed = parseFloat(el.getAttribute("data-parallax")) || 0.1;
-
-        // Only apply transform if element is visible in viewport for performance
-        const rect = el.getBoundingClientRect();
-        if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
-          el.style.transform = `translateY(${lenis.scroll * speed}px)`;
-        }
-      });
-      parallaxRef.current = requestAnimationFrame(parallaxLoop);
-    };
-    parallaxRef.current = requestAnimationFrame(parallaxLoop);
-
-    // Update on window resize
-    const handleResize = () => updateScrollProgress();
-    window.addEventListener("resize", handleResize);
+    // Debounce the resize handler for better performance
+    const debouncedResizeHandler = debounce(() => {
+      // No need to restart the loop, it will self-adjust.
+      // We just need to ensure calculations are correct on the next frame.
+    }, 100);
+    window.addEventListener("resize", debouncedResizeHandler);
 
     return () => {
-      lenis.destroy();
-      cancelAnimationFrame(rafRef.current);
-      cancelAnimationFrame(parallaxRef.current);
-      window.removeEventListener("resize", handleResize);
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+      }
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+      window.removeEventListener("resize", debouncedResizeHandler);
     };
-  }, []);
+  }, []); // Empty dependency array ensures this runs only once on mount
 
   return (
     <>
