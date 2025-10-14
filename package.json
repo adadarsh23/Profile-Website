@@ -10,6 +10,31 @@
     "type": "git",
     "url": "https://github.com/adadarsh23/Profile-Website"
   },
+  "browserslist": "defaults",
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "printWidth": 80,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "arrowParens": "always",
+    "endOfLine": "lf"
+  },
+  "vitest": {
+    "test": {
+      "environment": "jsdom"
+    }
+  },
+  "vite": {
+    "plugins": [
+      "@vitejs/plugin-react",
+      "vite-plugin-compression",
+      "vite-plugin-sitemap",
+      "vite-plugin-remove-console",
+      "vite-plugin-pwa",
+      "@vitejs/plugin-legacy"
+    ]
+  },
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
@@ -26,7 +51,8 @@
   },
   "homepage": "https://github.com/adadarsh23/Profile-Website",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite & npm run lighthouse-audit",
+    "lighthouse-audit": "node -e \"setTimeout(()=>import('./lighthouse-audit.js'),5000)\"",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint --ext .js,.ts,.jsx,.tsx src",
@@ -81,12 +107,14 @@
     "@types/react-dom": "^19.2.1",
     "@vitejs/plugin-legacy": "^7.2.1",
     "@vitejs/plugin-react": "^5.0.4",
+    "chrome-launcher": "^1.2.1",
     "eslint": "^9.37.0",
     "eslint-plugin-react-hooks": "^6.1.1",
     "eslint-plugin-react-refresh": "^0.4.23",
     "gh-pages": "^6.3.0",
     "globals": "^16.4.0",
     "jsdom": "^27.0.0",
+    "lighthouse": "^13.0.0",
     "postcss": "^8.5.6",
     "rollup-plugin-visualizer": "^6.0.4",
     "tailwindcss": "^4.1.14",

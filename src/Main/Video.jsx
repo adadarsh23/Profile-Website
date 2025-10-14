@@ -44,7 +44,7 @@ function Video() {
   }, []);
 
   if (loading) {
-    return <div className="text-center text-white text-xl"><Loading/></div>;
+    return <div className="text-center text-white text-xl"><Loading /></div>;
   }
 
   if (!videoId) {
@@ -63,7 +63,7 @@ function Video() {
     </motion.h2>
   );
   return (
-    <section className="bg-black text-white flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden mb-8 sm:mb-12 lg:mb-20">
+    <section className="bg-black text-white flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12 lg:mb-20">
       <BubbleText />
 
       <div className="relative w-full max-w-xl sm:max-w-2xl md:max-w-4xl mx-auto mb-10">
@@ -149,5 +149,3 @@ function Video() {
 }
 
 export default Video;
-
-

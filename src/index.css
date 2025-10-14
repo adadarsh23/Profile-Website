@@ -43,7 +43,6 @@ body {
 }
 
 .parallax {
-  background-image: url('your-image.jpg');
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
