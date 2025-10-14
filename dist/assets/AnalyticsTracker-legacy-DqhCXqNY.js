@@ -1,0 +1,1 @@
+System.register(["./vendor_react-legacy-C2mTGldB.js","./vendor-legacy-BOUAOTBd.js"],function(e,n){"use strict";var t,u;return{setters:[function(e){t=e.e,u=e.r},null],execute:function(){e("default",function(){var e=t();return u.useEffect(function(){initGA()},[]),u.useEffect(function(){trackPage(e.pathname)},[e]),null});var initGA=function(){},trackPage=function(e){}}}});

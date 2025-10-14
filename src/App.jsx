@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // ✅ import import WebSocketComponent from './WebSocketComponent'; // ✅ import
@@ -15,6 +15,7 @@ const StatsigSetup = lazy(() => import('./StatsigSetup.jsx'));
 const AnalyticsTracker = lazy(() => import("./AnalyticsTracker"));
 const LazyLoadSection = lazy(() => import('./components/LazyLoadSection.jsx'));
 const SmoothScrollProvider = lazy(() => import('./components/SmoothScrollProvider.jsx'));
+const IpLogger = lazy(() => import('./components/IpLogger.jsx'));
 
 // Lazy load pages
 const Home = lazy(() => import('./page/Home.jsx'));
@@ -58,10 +59,10 @@ export default function App() {
           <SplashCursor />
         </LazyLoadSection>
         <AnalyticsTracker />
+        <IpLogger />
         <LazyLoadSection>
           <Navbar />
         </LazyLoadSection>
-
         <LazyLoadSection>
           <SmoothScrollProvider />
         </LazyLoadSection>
