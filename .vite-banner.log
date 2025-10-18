@@ -1,0 +1,54 @@
+[2025-10-18T15:49:30.083Z] [INFO] Config resolved for mode: development
+[2025-10-18T15:49:43.976Z] [INFO] Config resolved for mode: development
+[2025-10-18T15:49:52.734Z] [INFO] Vite dev server started successfully
+[2025-10-18T15:49:52.738Z] [INFO] Production build started
+[2025-10-18T15:55:23.551Z] [INFO] Config resolved for mode: development
+[2025-10-18T15:55:32.292Z] [INFO] Vite dev server started successfully
+[2025-10-18T15:55:32.296Z] [INFO] Production build started
+[2025-10-18T15:58:29.503Z] [INFO] Config resolved for mode: development
+[2025-10-18T15:58:37.425Z] [INFO] Vite dev server started successfully
+[2025-10-18T15:58:37.431Z] [INFO] Production build started
+[2025-10-18T16:01:06.419Z] [INFO] Config resolved for mode: development
+[2025-10-18T16:01:17.575Z] [INFO] Vite dev server started successfully
+[2025-10-18T16:01:17.580Z] [INFO] Production build started
+[2025-10-18T16:05:40.564Z] [INFO] Config resolved for mode: development
+[2025-10-18T16:05:50.822Z] [INFO] Vite dev server started successfully
+[2025-10-18T16:05:50.866Z] [INFO] Production build completed in 273287ms
+[2025-10-18T16:05:50.874Z] [INFO] Vite dev server stopped
+[2025-10-18T16:05:50.880Z] [INFO] Vite dev server stopped
+[2025-10-18T16:05:51.225Z] [INFO] Production build started
+[2025-10-18T16:08:04.394Z] [INFO] Production build completed in 133169ms
+[2025-10-18T16:08:04.397Z] [INFO] Vite dev server stopped
+[2025-10-18T16:08:04.398Z] [INFO] Vite dev server stopped
+[2025-10-18T16:09:13.543Z] [INFO] Config resolved for mode: development
+[2025-10-18T16:09:13.562Z] [ERROR] Error reading package.json: fs.readFileSync is not a function
+[2025-10-18T16:09:27.880Z] [INFO] Config resolved for mode: development
+[2025-10-18T16:09:27.900Z] [ERROR] Error reading package.json: fs.readFileSync is not a function
+[2025-10-18T16:09:34.455Z] [INFO] Vite dev server started successfully
+[2025-10-18T16:09:34.459Z] [INFO] Production build started
+[2025-10-18T16:24:01.227Z] [INFO] Config resolved for mode: development
+[2025-10-18T16:24:20.553Z] [INFO] Config resolved for mode: development
+[2025-10-18T16:24:25.795Z] [INFO] Vite dev server started successfully
+[2025-10-18T16:24:25.798Z] [INFO] Production build started
+[2025-10-18T16:27:56.722Z] [INFO] Config resolved for mode: development
+[2025-10-18T16:28:04.680Z] [INFO] Vite dev server started successfully
+[2025-10-18T16:28:04.683Z] [INFO] Production build started
+[2025-10-18T16:28:55.628Z] [INFO] Config resolved for mode: development
+[2025-10-18T16:29:06.558Z] [INFO] Vite dev server started successfully
+[2025-10-18T16:29:06.568Z] [INFO] Production build completed in 61885ms
+[2025-10-18T16:29:06.571Z] [INFO] Vite dev server stopped
+[2025-10-18T16:29:06.574Z] [INFO] Vite dev server stopped
+[2025-10-18T16:29:06.579Z] [INFO] Production build started
+[2025-10-18T16:30:00.891Z] [INFO] Config resolved for mode: development
+[2025-10-18T16:30:07.550Z] [INFO] Vite dev server started successfully
+[2025-10-18T16:30:07.554Z] [INFO] Production build started
+[2025-10-18T16:39:08.669Z] [INFO] Config resolved for mode: development
+[2025-10-18T16:39:18.161Z] [INFO] Vite dev server started successfully
+[2025-10-18T16:39:18.167Z] [INFO] Production build started
+[2025-10-18T16:43:41.887Z] [INFO] Config resolved for mode: development
+[2025-10-18T16:43:51.363Z] [INFO] Vite dev server started successfully
+[2025-10-18T16:43:51.368Z] [INFO] Production build started
+[2025-10-18T16:44:24.504Z] [INFO] Config resolved for mode: production
+[2025-10-18T16:44:25.879Z] [INFO] Production build started
+[2025-10-18T16:44:46.500Z] [INFO] Production build completed in 20616ms
+[2025-10-18T16:46:10.734Z] [INFO] Vite dev server stopped

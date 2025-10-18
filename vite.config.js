@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
@@ -15,8 +16,16 @@ import { readFileSync } from 'fs';
 import LogRocket from 'logrocket';
 
 // Read package.json for version
-const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
+import { fileURLToPath } from 'node:url';
+import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
+const dirname =
+  typeof __dirname !== 'undefined'
+    ? __dirname
+    : path.dirname(fileURLToPath(import.meta.url));
 
+// More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
+
+const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
 const isProd = process.env.NODE_ENV === 'production';
 
 // ✅ Custom Terminal Banner Plugin
@@ -39,25 +48,27 @@ export default defineConfig({
         '🎨 UI: React + Tailwind CSS + shadcn/ui',
         '🔥 Backend: Node.js + Express + MongoDB',
         '🚀 State: Redux Toolkit',
-        '📡 API: REST + GraphQL'
-      ]
+        '📡 API: REST + GraphQL',
+      ],
     }),
-    visualizer({ open: true, filename: './stats.html' }),
+    visualizer({
+      open: true,
+      filename: './stats.html',
+    }),
     removeConsole(),
     // Compression for production
     isProd &&
-    compression({
-      algorithm: 'brotliCompress',
-      ext: '.br',
-      threshold: 1024, // only compress files > 1KB
-    }),
+      compression({
+        algorithm: 'brotliCompress',
+        ext: '.br',
+        threshold: 1024, // only compress files > 1KB
+      }),
     isProd &&
-    compression({
-      algorithm: 'gzip',
-      ext: '.gz',
-      threshold: 1024,
-    }),
-
+      compression({
+        algorithm: 'gzip',
+        ext: '.gz',
+        threshold: 1024,
+      }),
     // PWA plugin
     VitePWA({
       registerType: 'autoUpdate',
@@ -81,14 +92,18 @@ export default defineConfig({
       ],
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
-        maximumFileSizeToCacheInBytes: 7 * 1024 * 1024, // 7 MB
+        maximumFileSizeToCacheInBytes: 7 * 1024 * 1024,
+        // 7 MB
         runtimeCaching: [
           {
             urlPattern: /\/api\/.*\/*.json/,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'api-cache',
-              expiration: { maxEntries: 50, maxAgeSeconds: 5 * 60 },
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 5 * 60,
+              },
             },
           },
           {
@@ -96,7 +111,10 @@ export default defineConfig({
             handler: 'CacheFirst',
             options: {
               cacheName: 'image-cache',
-              expiration: { maxEntries: 100, maxAgeSeconds: 24 * 60 * 60 },
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 24 * 60 * 60,
+              },
             },
           },
         ],
@@ -122,25 +140,29 @@ export default defineConfig({
             src: 'android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-          }
+          },
         ],
       },
     }),
-
     // Sitemap plugin
     ViteSitemap({
       hostname: 'https://adadarsh23.netlify.app',
       robots: [
-        { userAgent: '*', allow: '/' },
+        {
+          userAgent: '*',
+          allow: '/',
+        },
       ],
     }),
-
     // ✅ Legacy plugin for IE11 / old Safari / old mobile browsers
     legacy({
       targets: [
-        'defaults', // common modern targets
-        'not IE 11', // IE 11 is almost dead, but you can add it if needed
-        'Android >= 6', // ensures old Android phones
+        'defaults',
+        // common modern targets
+        'not IE 11',
+        // IE 11 is almost dead, but you can add it if needed
+        'Android >= 6',
+        // ensures old Android phones
         'iOS >= 12', // ensures old iPhones/iPads
       ],
       additionalLegacyPolyfills: ['regenerator-runtime/runtime'], // async/await support
@@ -210,11 +232,63 @@ export default defineConfig({
   test: {
     include: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],
     exclude: [
-      ...configDefaults.exclude, // includes node_modules, dist, etc.
+      ...configDefaults.exclude,
+      // includes node_modules, dist, etc.
       '**/cypress/**',
       '**/.{idea,git,cache,output,temp}/**',
       '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*',
     ],
-    environment: 'jsdom', // or 'node' depending on your tests
+    environment: 'jsdom',
+    // or 'node' depending on your tests
+    projects: [
+      {
+        extends: true,
+        plugins: [
+          // The plugin will run tests for the stories defined in your Storybook config
+          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+          storybookTest({
+            configDir: path.join(dirname, '.storybook'),
+          }),
+        ],
+        test: {
+          name: 'storybook',
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: 'playwright',
+            instances: [
+              {
+                browser: 'chromium',
+              },
+            ],
+          },
+          setupFiles: ['.storybook/vitest.setup.ts'],
+        },
+      },
+      {
+        extends: true,
+        plugins: [
+          // The plugin will run tests for the stories defined in your Storybook config
+          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+          storybookTest({
+            configDir: path.join(dirname, '.storybook'),
+          }),
+        ],
+        test: {
+          name: 'storybook',
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: 'playwright',
+            instances: [
+              {
+                browser: 'chromium',
+              },
+            ],
+          },
+          setupFiles: ['.storybook/vitest.setup.ts'],
+        },
+      },
+    ],
   },
 });

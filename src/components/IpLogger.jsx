@@ -29,22 +29,23 @@ export default function IpLogger() {
       if (localStorage.getItem("visitorLogged")) return;
 
       try {
-        // 1️⃣ Fetch IP data
-        const ipApiUrl = "https://ipapi.co/json/";
+        // 1️⃣ Validate IP API URL
+        const ipApiUrl = import.meta.env.VITE_IP_API_URL;
+        if (!ipApiUrl) throw new Error("IP API URL not configured");
+        // 2️⃣ Fetch IP data with retry
         const ipResponse = await retry(() => fetch(ipApiUrl, { signal }), 3, 500);
-
         if (!ipResponse.ok) throw new Error(`IP API error: ${ipResponse.status}`);
-        const ipData = await ipResponse.json();
 
+        const ipData = await ipResponse.json();
         if (!ipData?.ip) throw new Error("IP data missing");
 
-        // 2️⃣ Build visitor payload
+        // Optional: fill missing fields with 'Unknown'
         const visitorData = {
           unique_id: uuidv4(),
           ip: ipData.ip,
-          city: ipData.city,
-          region: ipData.region,
-          country: ipData.country_name,
+          city: ipData.city || "Unknown",
+          region: ipData.region || "Unknown",
+          country: ipData.country_name || "Unknown",
           user_agent: navigator.userAgent,
           timestamp: new Date().toISOString(),
         };
@@ -58,21 +59,20 @@ export default function IpLogger() {
           localStorage.setItem("visitorLogged", "true");
         }
       } catch (err) {
-        // Ignore AbortError caused by component unmount
-        if (err.name !== "AbortError") {
-          console.error("Visitor data logging failed:", err);
-        }
+        // Better logging for debugging
+        if (err.name === "AbortError") return; // ignore fetch abort
+        console.error("Visitor data logging failed:", err.message || err);
       }
-    };
+  };
 
-    logVisitor();
+  logVisitor();
 
-    // Cleanup on unmount
-    return () => {
-      isMounted = false;
-      controller.abort();
-    };
-  }, []);
+  // Cleanup on unmount
+  return () => {
+    isMounted = false;
+    controller.abort();
+  };
+}, []);
 
-  return null;
+return null;
 }

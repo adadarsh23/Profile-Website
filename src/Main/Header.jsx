@@ -1,32 +1,15 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
-const BlurText = lazy(() => import("../components/BlurText"));
-const PrismaticBurst = lazy(() => import("../components/PrismaticBurst"));
+import React, { lazy, Suspense } from 'react';
 const Loading = lazy(() => import("../components/Loading"));
+const Hyperspeed = lazy(() => import("../components/Hyperspeed"));
+const BlurText = lazy(() => import("../components/BlurText"));
+// const PrismaticBurst = lazy(() => import("../components/PrismaticBurst"));
 
 export default function Header({ onAnimationComplete }) {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const handleAnimationComplete = () => {
     console.log('Animation completed!');
     onAnimationComplete?.();
   };
-
-  // Track mouse/touch for interactive burst
-  useEffect(() => {
-    const handleMouseMove = (e) => setMousePos({ x: e.clientX, y: e.clientY });
-    const handleTouchMove = (e) => {
-      const touch = e.touches[0];
-      setMousePos({ x: touch.clientX, y: touch.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleTouchMove);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
-    };
-  }, []);
 
   return (
     <section className="relative w-full h-screen overflow-hidden bg-black flex flex-col items-center justify-center px-4 sm:px-6 md:px-12">
@@ -34,20 +17,44 @@ export default function Header({ onAnimationComplete }) {
       {/* Interactive Prismatic Burst */}
       <div className="absolute inset-0 w-full h-full pointer-events-none">
         <Suspense fallback={<div><Loading /></div>}>
-          <PrismaticBurst
-            animationType="rotate3d"
-            intensity={2.5}
-            speed={0.5}
-            distort={10}
-            paused={false}
-            offset={{
-              x: (mousePos.x / window.innerWidth - 0.5) * 2,
-              y: (mousePos.y / window.innerHeight - 0.5) * 2,
+          <Hyperspeed
+            effectOptions={{
+              onSpeedUp: () => { },
+              onSlowDown: () => { },
+              distortion: 'deepDistortion',
+              length: 400,
+              roadWidth: 18,
+              islandWidth: 2,
+              lanesPerRoad: 3,
+              fov: 90,
+              fovSpeedUp: 150,
+              speedUp: 2,
+              carLightsFade: 0.4,
+              totalSideLightSticks: 50,
+              lightPairsPerRoadWay: 50,
+              shoulderLinesWidthPercentage: 0.05,
+              brokenLinesWidthPercentage: 0.1,
+              brokenLinesLengthPercentage: 0.5,
+              lightStickWidth: [0.12, 0.5],
+              lightStickHeight: [1.3, 1.7],
+              movingAwaySpeed: [60, 80],
+              movingCloserSpeed: [-120, -160],
+              carLightsLength: [400 * 0.05, 400 * 0.15],
+              carLightsRadius: [0.05, 0.14],
+              carWidthPercentage: [0.3, 0.5],
+              carShiftX: [-0.2, 0.2],
+              carFloorSeparation: [0.05, 1],
+              colors: {
+                roadColor: 0x080808,
+                islandColor: 0x0a0a0a,
+                background: 0x000000,
+                shoulderLines: 0x131318,
+                brokenLines: 0x131318,
+                leftCars: [0xff322f, 0xa33010, 0xa81508],
+                rightCars: [0xfdfdf0, 0xf3dea0, 0xe2bb88],
+                sticks: 0xfdfdf0
+              }
             }}
-            hoverDampness={1}
-            rayCount={0}
-            mixBlendMode="lighten"
-            colors={['#000000', '#9239db', '#000000']}
           />
         </Suspense>
       </div>
@@ -68,7 +75,6 @@ export default function Header({ onAnimationComplete }) {
         <p className="mt-4 text-sm sm:text-base md:text-lg text-gray-300 max-w-xl">
           Explore my projects, beats, and music production works.
         </p>
-
       </div>
     </section>
   );
