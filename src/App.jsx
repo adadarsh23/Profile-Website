@@ -4,13 +4,13 @@ import { Routes, Route } from 'react-router-dom';
 // ✅ import import WebSocketComponent from './WebSocketComponent'; // ✅ import
 const SplashCursor = lazy(() => import('./components/SplashCursor'));
 
+import Loading from './components/Loading';
 const Navbar = lazy(() => import("./Main/Navbar"));
 const Footer = lazy(() => import("./components/Footer"));
 const LiquidCursor = lazy(() =>
   import("./components/LiquidCursor.tsx").then(module => ({ default: module.LiquidCursor }))
 );
 
-import Loading from './components/Loading';
 const StatsigSetup = lazy(() => import('./StatsigSetup.jsx'));
 const AnalyticsTracker = lazy(() => import("./AnalyticsTracker"));
 const LazyLoadSection = lazy(() => import('./components/LazyLoadSection.jsx'));
@@ -52,14 +52,19 @@ export default function App() {
   return (
     <Suspense fallback={<Loading />}>
       <StatsigSetup>
-        <LiquidCursor size={20} />
+        <AnalyticsTracker />
+        <IpLogger />
+        <LazyLoadSection>
+          <div className="hidden md:block">
+            <LiquidCursor size={20} />
+          </div>
+
+        </LazyLoadSection>
         {/* ✅ Render WebSocketComponent once at top level */}
         {/* <WebSocketComponent /> */}
         <LazyLoadSection>
           <SplashCursor />
         </LazyLoadSection>
-        <AnalyticsTracker />
-        <IpLogger />
         <LazyLoadSection>
           <Navbar />
         </LazyLoadSection>

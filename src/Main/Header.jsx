@@ -60,10 +60,10 @@ export default function Header({ onAnimationComplete }) {
       </div>
 
       {/* Centered Animated Text */}
-      <div className="relative z-10 text-center flex flex-col items-center justify-center">
+      <div className="relative z-10 text-center flex flex-col items-center justify-center ">
         <Suspense fallback={<div><Loading /></div>}>
           <BlurText
-            text="Welcome To Adarsh Profile"
+            text="Welcome To Ad Adarsh Profile"
             delay={100}
             animateBy="words"
             direction="top"
