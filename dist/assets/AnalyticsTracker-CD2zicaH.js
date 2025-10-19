@@ -1,0 +1,1 @@
+import{e as n,r as e}from"./vendor_react-Cc2E5jzY.js";import"./vendor-CBjGBlE2.js";const r=()=>{{console.warn("GA4 Measurement ID is not defined in .env");return}},a=t=>{};function c(){const t=n();return e.useEffect(()=>{r()},[]),e.useEffect(()=>{a(t.pathname)},[t]),null}export{c as default};

@@ -17,6 +17,7 @@ const LazyLoadSection = lazy(() => import('./components/LazyLoadSection.jsx'));
 const SmoothScrollProvider = lazy(() => import('./components/SmoothScrollProvider.jsx'));
 const IpLogger = lazy(() => import('./components/IpLogger.jsx'));
 const ScrollToTopButton = lazy(() => import('./components/ScrollToTopButton.jsx'));
+const InternetStatus = lazy(() => import('./components/InternetStatus.jsx'));
 
 // Lazy load pages
 const Home = lazy(() => import('./page/Home.jsx'));
@@ -85,10 +86,14 @@ export default function App() {
             </Routes>
           </LazyLoadSection>
         </Suspense>
+        <Suspense>
+          <LazyLoadSection>
+            <InternetStatus />
+          </LazyLoadSection>
+        </Suspense>
         <LazyLoadSection>
           <ScrollToTopButton />
         </LazyLoadSection>
-
         {/* Footer stays at the bottom */}
         <Footer />
       </StatsigSetup>
