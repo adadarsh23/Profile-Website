@@ -1,6 +1,0 @@
-# SPA redirect to index.html
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = true                  # Ensures SPA routing works even on refresh
