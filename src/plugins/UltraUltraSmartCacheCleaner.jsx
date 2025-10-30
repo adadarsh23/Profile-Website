@@ -717,7 +717,7 @@ export default function EnhancedCacheCleaner(props) {
           onClick={() => debug && setShowDebug((s) => !s)}
           aria-label={`Cache cleaner status: ${phase}`}
           style={{
-            position: "fixed",
+            position: "fixed", // Keep fixed position
             bottom: "clamp(10px, 2vw, 20px)",
             left: "clamp(10px, 2vw, 20px)",
             display: "flex",
@@ -795,7 +795,7 @@ export default function EnhancedCacheCleaner(props) {
             bottom: "clamp(60px, 10vh, 80px)",
             left: "clamp(10px, 2vw, 20px)",
             width: "clamp(260px, 80vw, 400px)",
-            maxHeight: "50vh",
+            maxHeight: "clamp(40vh, 70vh, 50vh)", // Adjust max height for smaller screens
             backgroundColor: "#1a1a1a",
             border: "1px solid #333",
             borderRadius: "12px",
@@ -814,7 +814,7 @@ export default function EnhancedCacheCleaner(props) {
               alignItems: "center",
               backgroundColor: "#0a0a0a",
             }}
-          >
+          > {/* Debug Panel Header */}
             <span style={{ color: "#fff", fontSize: "14px", fontWeight: 600 }}>
               Debug Logs
             </span>
@@ -829,7 +829,7 @@ export default function EnhancedCacheCleaner(props) {
               }}
               aria-label="Close debug panel"
             >
-              ×
+              &times; {/* Use HTML entity for 'x' for better rendering */}
             </button>
           </div>
 
@@ -837,7 +837,7 @@ export default function EnhancedCacheCleaner(props) {
             style={{
               padding: "12px",
               overflowY: "auto",
-              maxHeight: "calc(50vh - 50px)",
+              maxHeight: "calc(100% - 50px)", // Max height relative to panel height
               fontSize: "clamp(10px, 2vw, 12px)",
               lineHeight: 1.6,
             }}
@@ -854,7 +854,7 @@ export default function EnhancedCacheCleaner(props) {
                   style={{
                     color: "#fff",
                     fontSize: "13px",
-                    fontWeight: 600,
+                    fontWeight: 600, // Keep font weight consistent
                     marginBottom: "8px",
                   }}
                 >
@@ -867,7 +867,7 @@ export default function EnhancedCacheCleaner(props) {
                     borderRadius: "8px",
                     overflowX: "auto",
                     color: "#eee",
-                    fontSize: "11px",
+                    fontSize: "clamp(9px, 1.8vw, 11px)", // Responsive font size for pre
                     lineHeight: 1.4,
                   }}
                 >
@@ -922,12 +922,32 @@ export default function EnhancedCacheCleaner(props) {
       }
 
       @media (max-width: 480px) {
-        button[aria-label^="Cache cleaner status"] span {
-          display: none; /* hide text on very small devices */
-        }
+        /* Status Indicator on very small screens */
         button[aria-label^="Cache cleaner status"] {
-          padding: 8px;
-          border-radius: 50%;
+          bottom: 10px;
+          left: 10px;
+          padding: 8px; /* Make it a square button */
+          min-width: 40px; /* Ensure it's clickable */
+          justify-content: center;
+        }
+        button[aria-label^="Cache cleaner status"] span { /* Hide text */
+          display: none;
+        }
+        button[aria-label^="Cache cleaner status"] div { /* Adjust dot size */
+          width: 10px;
+          height: 10px;
+        }
+
+        /* Debug Panel on very small screens */
+        div[aria-label="Debug logs"] {
+          bottom: 60px;
+          left: 10px;
+          right: 10px; /* Make it span almost full width */
+          width: auto; /* Override clamp width */
+          max-height: 60vh; /* Allow more vertical space */
+        }
+        div[aria-label="Debug logs"] .debug-panel-header span {
+          font-size: 13px; /* Slightly smaller header font */
         }
       }
     `}
