@@ -221,7 +221,7 @@ class StorageCleaner {
             document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;`;
             document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=${window.location.hostname}`;
             deleted++;
-          } catch (err) {
+          } catch {
             this.logger.log(`Failed to delete cookie: ${name}`, LOG_LEVELS.WARN);
           }
         }
@@ -298,7 +298,7 @@ class StorageCleaner {
             timeout,
             "IndexedDB.databases()"
           )) || [];
-        } catch (err) {
+        } catch {
           this.logger.log(
             "IndexedDB.databases() not available, skipping",
             LOG_LEVELS.WARN
@@ -482,7 +482,7 @@ export default function EnhancedCacheCleaner(props) {
       if (!forced) {
         const lastRun = Number(localStorage.getItem("__cleanup_last_run__") || 0);
         const hoursSinceLastRun = (Date.now() - lastRun) / (1000 * 60 * 60);
-        
+
         if (hoursSinceLastRun < ttlHours) {
           logger.log(
             `Cleanup not needed (${hoursSinceLastRun.toFixed(1)}h < ${ttlHours}h)`,
@@ -718,12 +718,12 @@ export default function EnhancedCacheCleaner(props) {
           aria-label={`Cache cleaner status: ${phase}`}
           style={{
             position: "fixed",
-            bottom: "20px",
-            left: "20px",
+            bottom: "clamp(10px, 2vw, 20px)",
+            left: "clamp(10px, 2vw, 20px)",
             display: "flex",
             alignItems: "center",
-            gap: "10px",
-            padding: "8px 14px",
+            gap: "clamp(6px, 1.5vw, 10px)",
+            padding: "clamp(6px, 1.5vw, 8px) clamp(10px, 3vw, 14px)",
             borderRadius: "20px",
             backgroundColor: "rgba(0, 0, 0, 0.7)",
             backdropFilter: "blur(10px)",
@@ -742,26 +742,25 @@ export default function EnhancedCacheCleaner(props) {
         >
           <div
             style={{
-              width: "12px",
-              height: "12px",
+              width: "clamp(10px, 2vw, 12px)",
+              height: "clamp(10px, 2vw, 12px)",
               borderRadius: "50%",
               backgroundColor:
                 phase === CLEANUP_PHASES.RUNNING
                   ? "#3b82f6"
                   : phase === CLEANUP_PHASES.SUCCESS
-                  ? "#22c55e"
-                  : phase === CLEANUP_PHASES.ERROR
-                  ? "#ef4444"
-                  : "#6b7280",
-              boxShadow: `0 0 8px ${
-                phase === CLEANUP_PHASES.RUNNING
+                    ? "#22c55e"
+                    : phase === CLEANUP_PHASES.ERROR
+                      ? "#ef4444"
+                      : "#6b7280",
+              boxShadow: `0 0 8px ${phase === CLEANUP_PHASES.RUNNING
                   ? "#3b82f6"
                   : phase === CLEANUP_PHASES.SUCCESS
-                  ? "#22c55e"
-                  : phase === CLEANUP_PHASES.ERROR
-                  ? "#ef4444"
-                  : "transparent"
-              }`,
+                    ? "#22c55e"
+                    : phase === CLEANUP_PHASES.ERROR
+                      ? "#ef4444"
+                      : "transparent"
+                }`,
               animation:
                 phase === CLEANUP_PHASES.RUNNING ? "pulse 2s infinite" : "none",
             }}
@@ -769,7 +768,7 @@ export default function EnhancedCacheCleaner(props) {
           <span
             style={{
               color: "#fff",
-              fontSize: "13px",
+              fontSize: "clamp(11px, 2vw, 13px)",
               fontWeight: 600,
               letterSpacing: "0.3px",
             }}
@@ -777,10 +776,10 @@ export default function EnhancedCacheCleaner(props) {
             {phase === CLEANUP_PHASES.RUNNING
               ? `Cleaning ${progress}%`
               : phase === CLEANUP_PHASES.SUCCESS
-              ? "✓ Clean"
-              : phase === CLEANUP_PHASES.ERROR
-              ? "✗ Error"
-              : "Ready"}
+                ? "✓ Clean"
+                : phase === CLEANUP_PHASES.ERROR
+                  ? "✗ Error"
+                  : "Ready"}
           </span>
         </button>
       )}
@@ -793,9 +792,9 @@ export default function EnhancedCacheCleaner(props) {
           aria-label="Debug logs"
           style={{
             position: "fixed",
-            bottom: "70px",
-            left: "20px",
-            width: "400px",
+            bottom: "clamp(60px, 10vh, 80px)",
+            left: "clamp(10px, 2vw, 20px)",
+            width: "clamp(260px, 80vw, 400px)",
             maxHeight: "50vh",
             backgroundColor: "#1a1a1a",
             border: "1px solid #333",
@@ -833,15 +832,50 @@ export default function EnhancedCacheCleaner(props) {
               ×
             </button>
           </div>
+
           <div
             style={{
               padding: "12px",
               overflowY: "auto",
               maxHeight: "calc(50vh - 50px)",
-              fontSize: "12px",
+              fontSize: "clamp(10px, 2vw, 12px)",
               lineHeight: 1.6,
             }}
           >
+            {healthStatus && (
+              <div
+                style={{
+                  marginBottom: "16px",
+                  paddingBottom: "16px",
+                  borderBottom: "1px solid #444",
+                }}
+              >
+                <div
+                  style={{
+                    color: "#fff",
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    marginBottom: "8px",
+                  }}
+                >
+                  Health Status
+                </div>
+                <pre
+                  style={{
+                    backgroundColor: "#2a2a2a",
+                    padding: "10px",
+                    borderRadius: "8px",
+                    overflowX: "auto",
+                    color: "#eee",
+                    fontSize: "11px",
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {JSON.stringify(healthStatus, null, 2)}
+                </pre>
+              </div>
+            )}
+
             {logger.getLogs().length === 0 ? (
               <div style={{ color: "#666", textAlign: "center", padding: "20px" }}>
                 No logs yet
@@ -865,10 +899,10 @@ export default function EnhancedCacheCleaner(props) {
                         log.level === LOG_LEVELS.ERROR
                           ? "#ef4444"
                           : log.level === LOG_LEVELS.WARN
-                          ? "#f59e0b"
-                          : log.level === LOG_LEVELS.INFO
-                          ? "#3b82f6"
-                          : "#8b5cf6",
+                            ? "#f59e0b"
+                            : log.level === LOG_LEVELS.INFO
+                              ? "#3b82f6"
+                              : "#8b5cf6",
                     }}
                   >
                     {log.message}
@@ -882,11 +916,21 @@ export default function EnhancedCacheCleaner(props) {
 
       <style>
         {`
-          @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-          }
-        `}
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+
+      @media (max-width: 480px) {
+        button[aria-label^="Cache cleaner status"] span {
+          display: none; /* hide text on very small devices */
+        }
+        button[aria-label^="Cache cleaner status"] {
+          padding: 8px;
+          border-radius: 50%;
+        }
+      }
+    `}
       </style>
     </>
   );
