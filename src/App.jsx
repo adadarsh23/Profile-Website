@@ -18,6 +18,7 @@ const SmoothScrollProvider = lazy(() => import('./components/SmoothScrollProvide
 const IpLogger = lazy(() => import('./components/IpLogger.jsx'));
 const ScrollToTopButton = lazy(() => import('./components/ScrollToTopButton.jsx'));
 const InternetStatus = lazy(() => import('./components/InternetStatus.jsx'));
+const CacheClean = lazy(() => import('./Main/CacheClean.jsx'));
 
 // Lazy load pages
 const Home = lazy(() => import('./page/Home.jsx'));
@@ -56,11 +57,11 @@ export default function App() {
       <StatsigSetup>
         <AnalyticsTracker />
         <IpLogger />
+        <CacheClean />
         <LazyLoadSection>
           <div className="hidden md:block">
             <LiquidCursor size={20} />
           </div>
-
         </LazyLoadSection>
         {/* ✅ Render WebSocketComponent once at top level */}
         {/* <WebSocketComponent /> */}

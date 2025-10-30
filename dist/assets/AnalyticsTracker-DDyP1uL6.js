@@ -1,0 +1,1 @@
+import{e,f as n,r as a}from"./vendor_react-CPmtnjo4.js";import"./vendor-BExhudyu.js";const c="G-X34L2QSKRG",o=()=>{e.initialize(c)},s=t=>{e.send({page:t})};function f(){const t=n();return a.useEffect(()=>{o()},[]),a.useEffect(()=>{s(t.pathname)},[t]),null}export{f as default};
