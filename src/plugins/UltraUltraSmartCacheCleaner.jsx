@@ -685,7 +685,7 @@ export default function EnhancedCacheCleaner(props) {
   return (
     <>
       {/* Progress Bar */}
-      {progressUI && phase === CLEANUP_PHASES.RUNNING && (
+      {/* {progressUI && phase === CLEANUP_PHASES.RUNNING && (
         <div
           role="progressbar"
           aria-valuenow={progress}
@@ -714,7 +714,7 @@ export default function EnhancedCacheCleaner(props) {
             }}
           />
         </div>
-      )}
+      )} */}
 
       {/* Status Indicator */}
       {statusIndicator && (

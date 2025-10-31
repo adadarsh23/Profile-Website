@@ -72,13 +72,20 @@ const ScrollToTopButton = () => {
     <button
       onClick={handleScrollToTop}
       aria-label="Scroll to top"
-      className={`group fixed z-50 bottom-4 right-4 w-8 h-8 flex items-center justify-center rounded-full
+      className={`group fixed z-50 flex items-center justify-center rounded-full
       bg-white-900/80 dark:bg-gray-900/80 backdrop-blur-md
       border-2 border-gray-200 dark:border-gray-700
       shadow-lg dark:shadow-2xl dark:shadow-black/25
       transition-all duration-300 ease-out
       hover:scale-110 hover:shadow-xl hover:border-black dark:hover:border-white
       active:scale-100
+      
+      /* Mobile devices */
+      w-6 h-6 bottom-4 right-4
+      /* Tablets */
+      sm:w-8 sm:h-8 sm:bottom-6 sm:right-6
+      /* Desktop */
+      lg:w-8 lg:h-8 lg:bottom-8 lg:right-8
       ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"}`}
     >
       <svg className="absolute w-full h-full -rotate-90" viewBox="0 0 50 50">
@@ -107,9 +114,9 @@ const ScrollToTopButton = () => {
         />
       </svg>
 
-      <div className="relative w-6 h-6 flex items-center justify-center">
-        <ChevronUp className="absolute w-6 h-6 text-gray-800 dark:text-gray-200 transition-all duration-200 ease-in-out group-hover:opacity-0 group-hover:scale-75 group-hover:-translate-y-1" />
-        <span className="absolute text-sm font-bold text-gray-800 dark:text-gray-200 opacity-0 scale-75 transition-all duration-200 ease-in-out group-hover:opacity-100 group-hover:scale-100">
+      <div className="relative flex items-center justify-center w-full h-full">
+        <ChevronUp className="absolute w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-gray-200 dark:text-gray-800 transition-all duration-200 ease-in-out group-hover:opacity-0 group-hover:scale-75 group-hover:-translate-y-1" />
+        <span className="absolute text-xs sm:text-sm lg:text-base font-bold text-gray-800 dark:text-gray-200 opacity-0 scale-75 transition-all duration-200 ease-in-out group-hover:opacity-100 group-hover:scale-100">
           {Math.round(scrollProgress)}%
         </span>
       </div>
