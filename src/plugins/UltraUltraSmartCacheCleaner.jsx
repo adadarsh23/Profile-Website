@@ -676,6 +676,11 @@ export default function EnhancedCacheCleaner(props) {
   // ============================================================================
   // UI RENDERING
   // ============================================================================
+  useEffect(() => {
+    document.body.style.overflow = showDebug ? "hidden" : "auto";
+    return () => (document.body.style.overflow = "auto");
+  }, [showDebug]);
+
 
   return (
     <>
@@ -754,12 +759,12 @@ export default function EnhancedCacheCleaner(props) {
                       ? "#ef4444"
                       : "#6b7280",
               boxShadow: `0 0 8px ${phase === CLEANUP_PHASES.RUNNING
-                  ? "#3b82f6"
-                  : phase === CLEANUP_PHASES.SUCCESS
-                    ? "#22c55e"
-                    : phase === CLEANUP_PHASES.ERROR
-                      ? "#ef4444"
-                      : "transparent"
+                ? "#3b82f6"
+                : phase === CLEANUP_PHASES.SUCCESS
+                  ? "#22c55e"
+                  : phase === CLEANUP_PHASES.ERROR
+                    ? "#ef4444"
+                    : "transparent"
                 }`,
               animation:
                 phase === CLEANUP_PHASES.RUNNING ? "pulse 2s infinite" : "none",
@@ -785,6 +790,7 @@ export default function EnhancedCacheCleaner(props) {
       )}
 
       {/* Debug Panel */}
+      {/* Debug Panel */}
       {debug && showDebug && (
         <div
           ref={debugPanelRef}
@@ -795,16 +801,20 @@ export default function EnhancedCacheCleaner(props) {
             bottom: "clamp(60px, 10vh, 80px)",
             left: "clamp(10px, 2vw, 20px)",
             width: "clamp(260px, 80vw, 400px)",
-            maxHeight: "clamp(40vh, 70vh, 50vh)", // Adjust max height for smaller screens
+            maxHeight: "min(70vh, 400px)",
             backgroundColor: "#1a1a1a",
             border: "1px solid #333",
             borderRadius: "12px",
             boxShadow: "0 8px 32px rgba(0, 0, 0, 0.5)",
             zIndex: 10000,
-            overflow: "hidden",
+            display: "flex",
+            flexDirection: "column",
             fontFamily: "monospace",
+            overflow: "hidden",
+            pointerEvents: "auto", // let interaction work inside panel
           }}
         >
+          {/* Header */}
           <div
             style={{
               padding: "12px 16px",
@@ -813,8 +823,9 @@ export default function EnhancedCacheCleaner(props) {
               justifyContent: "space-between",
               alignItems: "center",
               backgroundColor: "#0a0a0a",
+              flexShrink: 0,
             }}
-          > {/* Debug Panel Header */}
+          >
             <span style={{ color: "#fff", fontSize: "14px", fontWeight: 600 }}>
               Debug Logs
             </span>
@@ -829,17 +840,20 @@ export default function EnhancedCacheCleaner(props) {
               }}
               aria-label="Close debug panel"
             >
-              &times; {/* Use HTML entity for 'x' for better rendering */}
+              &times;
             </button>
           </div>
 
+          {/* Scrollable Logs */}
           <div
             style={{
-              padding: "12px",
+              flex: 1,
               overflowY: "auto",
-              maxHeight: "calc(100% - 50px)", // Max height relative to panel height
+              padding: "12px",
               fontSize: "clamp(10px, 2vw, 12px)",
               lineHeight: 1.6,
+              scrollbarWidth: "thin",
+              scrollbarColor: "#444 #1a1a1a",
             }}
           >
             {healthStatus && (
@@ -854,7 +868,7 @@ export default function EnhancedCacheCleaner(props) {
                   style={{
                     color: "#fff",
                     fontSize: "13px",
-                    fontWeight: 600, // Keep font weight consistent
+                    fontWeight: 600,
                     marginBottom: "8px",
                   }}
                 >
@@ -867,8 +881,10 @@ export default function EnhancedCacheCleaner(props) {
                     borderRadius: "8px",
                     overflowX: "auto",
                     color: "#eee",
-                    fontSize: "clamp(9px, 1.8vw, 11px)", // Responsive font size for pre
+                    fontSize: "clamp(9px, 1.8vw, 11px)",
                     lineHeight: 1.4,
+                    whiteSpace: "pre-wrap",
+                    wordBreak: "break-word",
                   }}
                 >
                   {JSON.stringify(healthStatus, null, 2)}
@@ -913,8 +929,8 @@ export default function EnhancedCacheCleaner(props) {
           </div>
         </div>
       )}
-
       <style>
+
         {`
       @keyframes pulse {
         0%, 100% { opacity: 1; }

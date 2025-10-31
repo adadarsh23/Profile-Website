@@ -19,6 +19,7 @@ const IpLogger = lazy(() => import('./components/IpLogger.jsx'));
 const ScrollToTopButton = lazy(() => import('./components/ScrollToTopButton.jsx'));
 const InternetStatus = lazy(() => import('./components/InternetStatus.jsx'));
 const CacheClean = lazy(() => import('./Main/CacheClean.jsx'));
+const WebSocket = lazy(()=> import('./WebSocket.jsx'))
 
 // Lazy load pages
 const Home = lazy(() => import('./page/Home.jsx'));
@@ -58,6 +59,7 @@ export default function App() {
         <AnalyticsTracker />
         <IpLogger />
         <CacheClean />
+        <WebSocket />
         <LazyLoadSection>
           <div className="hidden md:block">
             <LiquidCursor size={20} />
