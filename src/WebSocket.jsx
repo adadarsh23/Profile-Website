@@ -4,9 +4,9 @@ import WebSocketClient from "./components/WebSocketClient";
 export default function WebSocket() {
   const wsRef = useRef();
 
-  const handleMessage = (msg) => console.log("📩 Message from server:", msg);
-  const handleOpen = () => console.log("🚀 Connected!");
-  const handleClose = () => console.log("🔌 Connection closed.");
+  // const handleMessage = (msg) => console.log("📩 Message from server:", msg);
+  // const handleOpen = () => console.log("🚀 Connected!");
+  // const handleClose = () => console.log("🔌 Connection closed.");
 
   // const sendTestMessage = () => {
   //   wsRef.current?.sendMessage({ type: "custom", text: "Hello Server!" });
@@ -17,9 +17,9 @@ export default function WebSocket() {
       <WebSocketClient
         ref={wsRef}
         url="wss://echo.websocket.events"
-        onMessage={handleMessage}
-        onOpen={handleOpen}
-        onClose={handleClose}
+        // onMessage={handleMessage}
+        // onOpen={handleOpen}
+        // onClose={handleClose}
         debug={true}
       />
 
