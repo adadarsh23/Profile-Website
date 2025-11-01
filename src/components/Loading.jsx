@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-export default function Loading() {
+const Loading = memo(() => {
   return (
     <div className="flex justify-center items-center h-screen w-screen bg-black text-white">
       <div aria-label="Loading..." role="status" className="flex flex-col items-center space-y-8">
@@ -51,4 +51,6 @@ export default function Loading() {
       `}</style>
     </div>
   );
-}
+});
+
+export default Loading;

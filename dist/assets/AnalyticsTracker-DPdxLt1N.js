@@ -1,0 +1,1 @@
+import{f as e,g as n,a}from"./vendor_react-RnE43CiF.js";import"./vendor_react-dom-BwtVtmH1.js";import"./vendor-CewzeS4l.js";const o="G-X34L2QSKRG",c=()=>{e.initialize(o)},s=t=>{e.send({page:t})};function p(){const t=n();return a.useEffect(()=>{c()},[]),a.useEffect(()=>{s(t.pathname)},[t]),null}export{p as default};

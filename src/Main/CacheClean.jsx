@@ -13,7 +13,14 @@ function CacheClean() {
         statusIndicator={true}
         ttlHours={12} // cleanup every 12 hours
         manual={false} // auto-run
-        preserveKeys={["auth", "token", "user", "theme", "session"]}
+        preserveKeys={[
+          // Default important keys
+          "auth", "token", "user", "theme", "session", "visitor",
+          // Keys for common libraries/frameworks
+          "statsig", "logrocket", "sentry", "ga", "framer",
+          // Keys that might store settings or state
+          "settings", "config", "state", "redux", "recoil"
+        ]}
         retries={3}
         taskTimeoutMS={20000}
         enableHealthCheck={true}

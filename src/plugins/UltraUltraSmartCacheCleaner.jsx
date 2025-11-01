@@ -624,8 +624,6 @@ export default function EnhancedCacheCleaner(props) {
 
   // Mount effect
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
     logger.log("CacheCleaner initialized", LOG_LEVELS.INFO, config);
 
     // Expose API
@@ -650,28 +648,25 @@ export default function EnhancedCacheCleaner(props) {
       const timer = setTimeout(() => executeCleanup(false), runDelay);
       return () => clearTimeout(timer);
     }
-  }, [config, executeCleanup, logger, manual, runDelay, performHealthCheck, enableHealthCheck]);
+  }, [config, executeCleanup, logger, manual, runDelay, performHealthCheck, enableHealthCheck]); // Removed early return
 
   // Debug panel auto-hide
   useEffect(() => {
-    if (!showDebug) return;
+    if (showDebug) {
+      const timer = setTimeout(() => setShowDebug(false), 10000);
+      const handleClickOutside = (e) => {
+        if (debugPanelRef.current && !debugPanelRef.current.contains(e.target)) {
+          setShowDebug(false);
+        }
+      };
 
-    const timer = setTimeout(() => setShowDebug(false), 10000);
-    const handleClickOutside = (e) => {
-      if (debugPanelRef.current && !debugPanelRef.current.contains(e.target)) {
-        setShowDebug(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      clearTimeout(timer);
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        clearTimeout(timer);
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
   }, [showDebug]);
-
-  // Render nothing if invisible
-  if (!visible) return null;
 
   // ============================================================================
   // UI RENDERING
@@ -680,6 +675,9 @@ export default function EnhancedCacheCleaner(props) {
     document.body.style.overflow = showDebug ? "hidden" : "auto";
     return () => (document.body.style.overflow = "auto");
   }, [showDebug]);
+
+  // Render nothing if invisible or not in a browser environment
+  if (!visible || typeof window === "undefined") return null;
 
 
   return (
@@ -734,7 +732,7 @@ export default function EnhancedCacheCleaner(props) {
             backdropFilter: "blur(10px)",
             border: "1px solid rgba(255, 255, 255, 0.1)",
             cursor: debug ? "pointer" : "default",
-            zIndex: 9999,
+            zIndex: 48,
             transition: "all 0.3s ease",
             userSelect: "none",
           }}
@@ -806,7 +804,7 @@ export default function EnhancedCacheCleaner(props) {
             border: "1px solid #333",
             borderRadius: "12px",
             boxShadow: "0 8px 32px rgba(0, 0, 0, 0.5)",
-            zIndex: 10000,
+            zIndex: 49,
             display: "flex",
             flexDirection: "column",
             fontFamily: "monospace",

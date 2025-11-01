@@ -1,4 +1,4 @@
-import { StrictMode} from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.jsx';
@@ -10,8 +10,10 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <Sentry.ErrorBoundary
         fallback={
-          <p className="flex items-center justify-center min-h-screen text-center text-lg font-medium text-red-600">
-            Something went wrong.Refresh the page.
+          <p className="flex flex-col items-center justify-center min-h-screen text-center text-lg font-medium text-red-500 bg-black">
+            <span className="text-2xl mb-2">⚠️</span>
+            <span className="font-bold">Something went wrong.</span>
+            <span className="text-base text-gray-400 mt-1">The website may be broken due to a critical error. Please try refreshing the page.</span>
           </p>
         }
       >
