@@ -154,7 +154,6 @@
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-pwa": "^1.0.3",
     "vite-plugin-remove-console": "^2.2.0",
-    "vite-plugin-sitemap": "^0.8.2",
-    "vitest": "^3.2.4"
+    "vite-plugin-sitemap": "^0.8.2"
   }
 }
