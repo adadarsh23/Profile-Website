@@ -513,7 +513,7 @@ export default function RobotHead({ cursor, isHovered }) {
       const positions = positionAttribute?.array;
       const velocities = particles.velocities
 
-      for (let i = 0; i < positions.length; i += 3) {
+      if (positions) for (let i = 0; i < positions.length; i += 3) {
         positions[i] += velocities[i] * emotionData.energyLevel
         positions[i + 1] += velocities[i + 1] * emotionData.energyLevel + Math.sin(t + i) * 0.005
         positions[i + 2] += velocities[i + 2] * emotionData.energyLevel
@@ -528,7 +528,7 @@ export default function RobotHead({ cursor, isHovered }) {
           positions[i + 2] = radius * Math.cos(phi)
         }
       }
-      particlesRef.current.geometry.attributes.position.needsUpdate = true
+      if (particlesRef.current.geometry.attributes.position) particlesRef.current.geometry.attributes.position.needsUpdate = true
 
       // update particle color/opacity with emotion
       if (particlesRef.current.material) {
