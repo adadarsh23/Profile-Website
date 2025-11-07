@@ -1,0 +1,1 @@
+import{f as e,u as n,r as a}from"./vendor_react-CqoAiNkk.js";import"./vendor-o_G25PcJ.js";import"./vendor_react-dom-CqtPPDu3.js";const o="G-X34L2QSKRG",c=()=>{e.initialize(o)},s=t=>{e.send({page:t})};function u(){const t=n();return a.useEffect(()=>{c()},[]),a.useEffect(()=>{s(t.pathname)},[t]),null}export{u as default};
