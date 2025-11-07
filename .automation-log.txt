@@ -1,0 +1,69 @@
+[2025-11-05T06:36:31.231Z] INFO: No history available yet
+[2025-11-05T06:36:31.362Z] SUCCESS: ✨ Operation completed!
+[2025-11-05T15:29:10.277Z] INFO: Creating project backup...
+[2025-11-05T15:29:10.788Z] SUCCESS: Backup location: C:\Users\adars\Downloads\New folder\Profile-Website\.backups\2025-11-05T15-29-10
+[2025-11-05T15:29:10.799Z] INFO: Backup size: 58.68 MB
+[2025-11-05T15:29:10.799Z] SUCCESS: ✨ Operation completed!
+[2025-11-05T15:30:30.447Z] INFO: Clearing caches...
+[2025-11-05T15:30:31.720Z] SUCCESS: All caches cleaned
+[2025-11-05T15:30:31.721Z] SUCCESS: ✨ Operation completed!
+[2025-11-05T15:31:11.663Z] INFO: No history available yet
+[2025-11-05T15:31:11.680Z] SUCCESS: ✨ Operation completed!
+[2025-11-05T15:31:28.078Z] SUCCESS: ✨ Operation completed!
+[2025-11-05T16:36:22.115Z] INFO: Will free approximately 0 Bytes
+[2025-11-05T16:36:23.458Z] SUCCESS: Freed 0 Bytes
+[2025-11-05T16:36:33.083Z] INFO: Installing dependencies...
+[2025-11-05T16:47:18.205Z] ERROR: Install error: Command failed: npm install
+[2025-11-05T16:47:18.224Z] ERROR: Operation encountered an error
+[2025-11-06T09:33:50.197Z] INFO: Creating project backup...
+[2025-11-06T09:33:50.625Z] SUCCESS: Backup location: C:\Users\adars\Downloads\New folder\Profile-Website\.backups\2025-11-06T09-33-50
+[2025-11-06T09:33:50.637Z] INFO: Backup size: 58.69 MB
+[2025-11-06T09:33:50.638Z] SUCCESS: ✨ Operation completed!
+[2025-11-06T09:35:41.221Z] SUCCESS: .env.example created
+[2025-11-06T09:35:41.302Z] SUCCESS: ✨ Operation completed!
+[2025-11-06T09:37:25.976Z] SUCCESS: Project is in excellent health! 🎉
+[2025-11-06T09:37:26.080Z] INFO: Task completed in 8532ms
+[2025-11-06T09:37:26.081Z] SUCCESS: ✨ Operation completed!
+[2025-11-06T09:38:43.998Z] INFO: Running: npm run help
+[2025-11-06T09:38:44.584Z] SUCCESS: Script completed
+[2025-11-06T09:38:44.584Z] SUCCESS: ✨ Operation completed!
+[2025-11-06T09:42:51.157Z] INFO: Creating project backup...
+[2025-11-06T09:42:51.578Z] SUCCESS: Backup location: C:\Users\adars\Downloads\New folder\Profile-Website\.backups\2025-11-06T09-42-51
+[2025-11-06T09:42:51.588Z] INFO: Backup size: 58.69 MB
+[2025-11-06T09:42:51.589Z] SUCCESS: ✨ Operation completed!
+[2025-11-06T09:43:37.921Z] SUCCESS: Project is in excellent health! 🎉
+[2025-11-06T09:43:37.941Z] INFO: Task completed in 6904ms
+[2025-11-06T09:43:37.942Z] SUCCESS: ✨ Operation completed!
+[2025-11-06T09:45:20.153Z] INFO: Analyzing bundle size...
+[2025-11-06T09:45:20.270Z] SUCCESS: ✨ Operation completed!
+[2025-11-06T09:47:01.915Z] INFO: Running linter...
+[2025-11-06T09:47:09.891Z] INFO: Running lint fix...
+[2025-11-06T09:47:11.192Z] WARNING: Some issues require manual fixing
+[2025-11-06T09:47:11.192Z] INFO: 
+Formatting code...
+[2025-11-06T09:47:28.523Z] INFO: 
+Type checking...
+[2025-11-06T09:47:29.472Z] INFO: Task completed in 27550ms
+[2025-11-06T09:47:29.473Z] SUCCESS: ✨ Operation completed!
+[2025-11-06T09:48:14.595Z] INFO: Running test suite...
+[2025-11-06T09:48:49.702Z] ERROR: Some tests failed
+[2025-11-06T09:48:49.709Z] INFO: Task completed in 35110ms
+[2025-11-06T09:48:49.710Z] SUCCESS: ✨ Operation completed!
+[2025-11-07T05:05:03.780Z] INFO: Creating project backup...
+[2025-11-07T05:05:04.127Z] SUCCESS: Backup location: C:\Users\adars\Downloads\New folder\Profile-Website\.backups\2025-11-07T05-05-03
+[2025-11-07T05:05:04.137Z] INFO: Backup size: 58.7 MB
+[2025-11-07T05:05:04.138Z] SUCCESS: ✨ Operation completed!
+[2025-11-07T05:30:16.396Z] INFO: Creating project backup...
+[2025-11-07T05:30:16.925Z] SUCCESS: Backup location: C:\Users\adars\Downloads\New folder\Profile-Website\.backups\2025-11-07T05-30-16
+[2025-11-07T05:30:16.940Z] INFO: Backup size: 58.7 MB
+[2025-11-07T05:30:16.941Z] SUCCESS: ✨ Operation completed!
+[2025-11-07T05:31:17.758Z] SUCCESS: .env.example created
+[2025-11-07T05:31:17.900Z] SUCCESS: ✨ Operation completed!
+[2025-11-07T05:32:24.400Z] SUCCESS: Project is in excellent health! 🎉
+[2025-11-07T05:32:24.423Z] INFO: Task completed in 12011ms
+[2025-11-07T05:32:24.423Z] SUCCESS: ✨ Operation completed!
+[2025-11-07T06:04:48.046Z] SUCCESS: ✨ Operation completed!
+[2025-11-07T08:27:18.235Z] INFO: Creating project backup...
+[2025-11-07T08:27:18.482Z] SUCCESS: Backup location: C:\Users\adars\Downloads\New folder\Profile-Website\.backups\2025-11-07T08-27-18
+[2025-11-07T08:27:18.491Z] INFO: Backup size: 59.24 MB
+[2025-11-07T08:27:18.491Z] SUCCESS: ✨ Operation completed!

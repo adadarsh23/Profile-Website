@@ -34,7 +34,14 @@ export default defineConfig({
   base: '/',
   logLevel: 'info',
   plugins: [
-    react(),
+    react({
+      jsxRuntime: 'automatic',
+      fastRefresh: true,
+      babel: {
+        babelrc: false,
+        configFile: false,
+      },
+    }),
     tailwindcss(),
     terminalBannerPlugin({
       projectName: `My Profile Website v${pkg.version}`,
@@ -155,18 +162,22 @@ export default defineConfig({
       ],
     }),
     // ✅ Legacy plugin for IE11 / old Safari / old mobile browsers
-    legacy({
-      targets: [
-        'defaults',
-        // common modern targets
-        'not IE 11',
-        // IE 11 is almost dead, but you can add it if needed
-        'Android >= 6',
-        // ensures old Android phones
-        'iOS >= 12', // ensures old iPhones/iPads
-      ],
-      additionalLegacyPolyfills: ['regenerator-runtime/runtime'], // async/await support
-    }),
+    // Only enable legacy builds when explicitly requested via LEGACY_BUILD=true.
+    // Legacy bundles can alter module loading order and cause runtime issues in the
+    // generated vendor chunks. Disable by default for modern deployments.
+    process.env.LEGACY_BUILD === 'true' &&
+      legacy({
+        targets: [
+          'defaults',
+          // common modern targets
+          'not IE 11',
+          // IE 11 is almost dead, but you can add it if needed
+          'Android >= 6',
+          // ensures old Android phones
+          'iOS >= 12', // ensures old iPhones/iPads
+        ],
+        additionalLegacyPolyfills: ['regenerator-runtime/runtime'], // async/await support
+      }),
   ],
   resolve: {
     alias: {
@@ -185,6 +196,9 @@ export default defineConfig({
     host: true, // ✅ allows testing from other devices in LAN
   },
   build: {
+    modulePreload: {
+      polyfill: true,
+    },
     commonjsOptions: {
       transformMixedEsModules: true,
     },
@@ -192,103 +206,104 @@ export default defineConfig({
     sourcemap: !isProd,
     cssCodeSplit: true,
     outDir: 'dist',
-    // target: 'esnext',
     assetsDir: 'assets',
     rollupOptions: {
       output: {
         manualChunks(id) {
+          // Group all node_modules into categorized vendor chunks
           if (id.includes('node_modules')) {
             if (id.includes('react') && !id.includes('react-dom'))
               return 'vendor_react';
             if (id.includes('react-dom')) return 'vendor_react-dom';
-            if (id.includes('lodash')) return 'vendor_lodash';
-            if (id.includes('framer-motion')) return 'vendor_framer-motion';
-            return 'vendor'; // generic fallback
+            if (id.includes('react-router-dom') || id.includes('framer-motion'))
+              return 'vendor';
+            return 'vendor';
           }
+          return undefined;
+        },
+      },
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+        },
+        mangle: {
+          keep_classnames: true,
+          keep_fnames: true,
         },
       },
     },
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-      mangle: {
-        keep_classnames: true,
-        keep_fnames: true,
-      },
+    optimizeDeps: {
+      include: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        'framer-motion',
+        'lodash',
+        'ogl',
+      ],
     },
-  },
-  optimizeDeps: {
-    include: [
-      'react',
-      'react-dom',
-      'react-router-dom',
-      'framer-motion',
-      'lodash',
-      'ogl',
-    ],
-  },
-  test: {
-    include: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],
-    exclude: [
-      ...configDefaults.exclude,
-      // includes node_modules, dist, etc.
-      '**/cypress/**',
-      '**/.{idea,git,cache,output,temp}/**',
-      '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*',
-    ],
-    environment: 'jsdom',
-    // or 'node' depending on your tests
-    projects: [
-      {
-        extends: true,
-        plugins: [
-          // The plugin will run tests for the stories defined in your Storybook config
-          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
-          storybookTest({
-            configDir: path.join(dirname, '.storybook'),
-          }),
-        ],
-        test: {
-          name: 'storybook',
-          browser: {
-            enabled: true,
-            headless: true,
-            provider: 'playwright',
-            instances: [
-              {
-                browser: 'chromium',
-              },
-            ],
+    test: {
+      include: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],
+      exclude: [
+        ...configDefaults.exclude,
+        // includes node_modules, dist, etc.
+        '**/cypress/**',
+        '**/.{idea,git,cache,output,temp}/**',
+        '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*',
+      ],
+      environment: 'jsdom',
+      // or 'node' depending on your tests
+      projects: [
+        {
+          extends: true,
+          plugins: [
+            // The plugin will run tests for the stories defined in your Storybook config
+            // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+            storybookTest({
+              configDir: path.join(dirname, '.storybook'),
+            }),
+          ],
+          test: {
+            name: 'storybook',
+            browser: {
+              enabled: true,
+              headless: true,
+              provider: 'playwright',
+              instances: [
+                {
+                  browser: 'chromium',
+                },
+              ],
+            },
+            setupFiles: ['.storybook/vitest.setup.ts'],
           },
-          setupFiles: ['.storybook/vitest.setup.ts'],
         },
-      },
-      {
-        extends: true,
-        plugins: [
-          // The plugin will run tests for the stories defined in your Storybook config
-          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
-          storybookTest({
-            configDir: path.join(dirname, '.storybook'),
-          }),
-        ],
-        test: {
-          name: 'storybook',
-          browser: {
-            enabled: true,
-            headless: true,
-            provider: 'playwright',
-            instances: [
-              {
-                browser: 'chromium',
-              },
-            ],
+        {
+          extends: true,
+          plugins: [
+            // The plugin will run tests for the stories defined in your Storybook config
+            // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+            storybookTest({
+              configDir: path.join(dirname, '.storybook'),
+            }),
+          ],
+          test: {
+            name: 'storybook',
+            browser: {
+              enabled: true,
+              headless: true,
+              provider: 'playwright',
+              instances: [
+                {
+                  browser: 'chromium',
+                },
+              ],
+            },
+            setupFiles: ['.storybook/vitest.setup.ts'],
           },
-          setupFiles: ['.storybook/vitest.setup.ts'],
         },
-      },
-    ],
+      ],
+    },
   },
 });

@@ -1,1 +1,219 @@
-if(!self.define){let s,e={};const l=(l,i)=>(l=new URL(l+".js",i).href,e[l]||new Promise(e=>{if("document"in self){const s=document.createElement("script");s.src=l,s.onload=e,document.head.appendChild(s)}else s=l,importScripts(l),e()}).then(()=>{let s=e[l];if(!s)throw new Error(`Module ${l} didn’t register its module`);return s}));self.define=(i,n)=>{const r=s||("document"in self?document.currentScript.src:"")||location.href;if(e[r])return;let a={};const o=s=>l(s,r),u={module:{uri:r},exports:a,require:o};e[r]=Promise.all(i.map(s=>u[s]||o(s))).then(s=>(n(...s),a))}}define(["./workbox-e20531c6"],function(s){"use strict";self.skipWaiting(),s.clientsClaim(),s.precacheAndRoute([{url:"android-icon-144x144.png",revision:"562c68d971c1c83233b40e45799b979c"},{url:"android-icon-192x192.png",revision:"8b346a02e79277cfbc1434bac92ebf90"},{url:"android-icon-36x36.png",revision:"8bc122ebe8323b1a5189a241ac099f36"},{url:"android-icon-48x48.png",revision:"90ae290b1f2b75548e6a5ca4174f3867"},{url:"android-icon-72x72.png",revision:"fae4675e183766d8b96fb9c3d852749f"},{url:"android-icon-96x96.png",revision:"3a18f23eca25ade55d09e907a6eaae10"},{url:"apple-icon-114x114.png",revision:"eaeb8ef945123f9badbaa023cff9fd62"},{url:"apple-icon-120x120.png",revision:"4a9c9a3eecbfa7c3903acef655b18696"},{url:"apple-icon-144x144.png",revision:"562c68d971c1c83233b40e45799b979c"},{url:"apple-icon-152x152.png",revision:"af0386af9509f6a241f8a3e5e21404f5"},{url:"apple-icon-180x180.png",revision:"ee90b32c5af4dd82e1338f34c61fe7cf"},{url:"apple-icon-57x57.png",revision:"5d9b9a0577d00d3b87325893f0dc739f"},{url:"apple-icon-60x60.png",revision:"8e1f06ed7838c83f5060a4837600a212"},{url:"apple-icon-72x72.png",revision:"fae4675e183766d8b96fb9c3d852749f"},{url:"apple-icon-76x76.png",revision:"69c7593817355bd918f3e51970b5fff9"},{url:"apple-icon-precomposed.png",revision:"2484acaaf914001c648ffb60d5b6c540"},{url:"apple-icon.png",revision:"2484acaaf914001c648ffb60d5b6c540"},{url:"assets/About-DJFdpDrA.js",revision:null},{url:"assets/About-legacy-BYtmuA0J.js",revision:null},{url:"assets/Adarsh-BDG0zI57.png",revision:null},{url:"assets/Adarsh-CZA3O52o.js",revision:null},{url:"assets/Adarsh-legacy-DCaVxZAr.js",revision:null},{url:"assets/ai-chat-DXc46lk6.js",revision:null},{url:"assets/ai-chat-legacy-DkqNWrwf.js",revision:null},{url:"assets/AnalyticsTracker-CYUUOShp.js",revision:null},{url:"assets/AnalyticsTracker-legacy-7WjZg5FO.js",revision:null},{url:"assets/Beats-B_PRwrxt.js",revision:null},{url:"assets/Beats-legacy-DjaFyRJ8.js",revision:null},{url:"assets/Blog-ChQAkoBN.js",revision:null},{url:"assets/Blog-legacy-DxBfj78E.js",revision:null},{url:"assets/BlurText-CNJDd2x_.js",revision:null},{url:"assets/BlurText-legacy-tmEYh2k5.js",revision:null},{url:"assets/bubble-eNBnBll4.css",revision:null},{url:"assets/bubble.module-ga2zaxKg.js",revision:null},{url:"assets/bubble.module-legacy-BhI3k04W.js",revision:null},{url:"assets/button-0ELkKNA5.js",revision:null},{url:"assets/button-legacy-Dm5IrcpH.js",revision:null},{url:"assets/CacheClean-C6hwLPQV.js",revision:null},{url:"assets/CacheClean-legacy-Y7tQj1BP.js",revision:null},{url:"assets/card-B7hG34mb.js",revision:null},{url:"assets/card-legacy-uMwMZigk.js",revision:null},{url:"assets/ChromaGrid-BsaJbyBN.js",revision:null},{url:"assets/ChromaGrid-legacy-sncqahpF.js",revision:null},{url:"assets/CirclePhoto-Bt4sSqQi.js",revision:null},{url:"assets/CirclePhoto-legacy-dHcm04J2.js",revision:null},{url:"assets/Contact-B4AVmXFq.js",revision:null},{url:"assets/Contact-legacy-MnOLCIdy.js",revision:null},{url:"assets/Footer-CpPr2kin.js",revision:null},{url:"assets/Footer-legacy-DMk_Ew0G.js",revision:null},{url:"assets/FuzzyText-legacy-D3V0TZtO.js",revision:null},{url:"assets/FuzzyText-XL9kJm_U.js",revision:null},{url:"assets/Header-BcPMJlG0.js",revision:null},{url:"assets/Header-legacy-hPTy1ekc.js",revision:null},{url:"assets/Home-b6yv-x_k.js",revision:null},{url:"assets/Home-legacy-mOS4uxWO.js",revision:null},{url:"assets/Hyperspeed-BBTIgEI0.js",revision:null},{url:"assets/Hyperspeed-legacy-ClYipVrY.js",revision:null},{url:"assets/index-BVuV9vh1.js",revision:null},{url:"assets/index-legacy-B07cflOV.js",revision:null},{url:"assets/index-tlS9lgSc.css",revision:null},{url:"assets/insta-DfgTjsCq.png",revision:null},{url:"assets/InternetStatus-BpSZcFtI.js",revision:null},{url:"assets/InternetStatus-legacy-BYSMVoV2.js",revision:null},{url:"assets/IpLogger-DBvakJnb.js",revision:null},{url:"assets/IpLogger-legacy-9-gvIU41.js",revision:null},{url:"assets/LazyLoadSection-C3xJHxeR.js",revision:null},{url:"assets/LazyLoadSection-legacy-CHCufU34.js",revision:null},{url:"assets/LiquidCursor-B8lNC7rP.js",revision:null},{url:"assets/LiquidCursor-legacy-31eLMilC.js",revision:null},{url:"assets/Loop-DOrvmYgW.js",revision:null},{url:"assets/Loop-legacy-CBhRjSo0.js",revision:null},{url:"assets/Map-DdrA9o8e.js",revision:null},{url:"assets/Map-legacy-DjPRwodr.js",revision:null},{url:"assets/monitoring-legacy-zG4UoO7H.js",revision:null},{url:"assets/monitoring-ZAZLHRpl.js",revision:null},{url:"assets/Music-fsbMlAUc.js",revision:null},{url:"assets/Music-legacy-_eng5G5d.js",revision:null},{url:"assets/Navbar-BUC0Wd04.js",revision:null},{url:"assets/Navbar-legacy-C4UlT8SJ.js",revision:null},{url:"assets/NotFound-Dkot1oV1.js",revision:null},{url:"assets/NotFound-legacy-VIA2k5Cl.js",revision:null},{url:"assets/PillNav-DG67IsF_.js",revision:null},{url:"assets/PillNav-legacy-DFl3NK-y.js",revision:null},{url:"assets/polyfills-legacy-Bq95w8k4.js",revision:null},{url:"assets/RobotFace-BNZq-o0L.js",revision:null},{url:"assets/RobotFace-legacy-CtYi5idQ.js",revision:null},{url:"assets/RobotHead-CG89YD2q.js",revision:null},{url:"assets/RobotHead-legacy-Bb5oGs1m.js",revision:null},{url:"assets/Sample-CGbz-kn9.js",revision:null},{url:"assets/Sample-legacy-DCEXL5QU.js",revision:null},{url:"assets/Scroll-Fd97s2Nb.js",revision:null},{url:"assets/Scroll-legacy-DuGVskaX.js",revision:null},{url:"assets/ScrollToTopButton-DqTojdfO.js",revision:null},{url:"assets/ScrollToTopButton-legacy-DkjVgx7U.js",revision:null},{url:"assets/SmoothScrollProvider-legacy-Cyjnu-8P.js",revision:null},{url:"assets/SmoothScrollProvider-UCIQLCnD.js",revision:null},{url:"assets/SplashCursor-CNFyfh5y.js",revision:null},{url:"assets/SplashCursor-legacy-r_-0Fqyf.js",revision:null},{url:"assets/spotify-D_PSz9Uq.png",revision:null},{url:"assets/StatsigSetup-BKR63b8r.js",revision:null},{url:"assets/StatsigSetup-legacy-BoBuLjec.js",revision:null},{url:"assets/utils-Dsxj53Rc.js",revision:null},{url:"assets/utils-legacy-C3OTL7-n.js",revision:null},{url:"assets/Velocity-DVZrB0-v.js",revision:null},{url:"assets/Velocity-legacy-DpU9Pnx6.js",revision:null},{url:"assets/vendor_framer-motion-legacy-BgRplyiV.js",revision:null},{url:"assets/vendor_framer-motion-z8EhOI4C.js",revision:null},{url:"assets/vendor_react-BCVK0lR1.js",revision:null},{url:"assets/vendor_react-dom-BPdpdgpO.js",revision:null},{url:"assets/vendor_react-dom-legacy-FKbmXNA2.js",revision:null},{url:"assets/vendor_react-legacy-6VxedhaZ.js",revision:null},{url:"assets/vendor-BimC8_hE.js",revision:null},{url:"assets/vendor-legacy-_CNXLam7.js",revision:null},{url:"assets/Video-BhI_Gd0X.js",revision:null},{url:"assets/Video-legacy-CqpY7czr.js",revision:null},{url:"assets/WebSocket-C3srCVN5.js",revision:null},{url:"assets/WebSocket-legacy-CLWyVkJP.js",revision:null},{url:"favicon-16x16.png",revision:"10792ce25679ad503a91b657c4f68077"},{url:"favicon-32x32.png",revision:"4eb9d2da4b242cc2ffd8e50cf02fbfa6"},{url:"favicon-96x96.png",revision:"3a18f23eca25ade55d09e907a6eaae10"},{url:"index.html",revision:"a890fb5e9831f7c70d2149410bcfc1c5"},{url:"ms-icon-144x144.png",revision:"562c68d971c1c83233b40e45799b979c"},{url:"ms-icon-150x150.png",revision:"265b4269b23b47e09fbb9798f18e2bf9"},{url:"ms-icon-310x310.png",revision:"65cad6ec9f2dd8a8e72a98efbff70b8a"},{url:"ms-icon-70x70.png",revision:"9d231c94483f09b7a2509802c323df69"},{url:"registerSW.js",revision:"1872c500de691dce40960bb85481de07"},{url:"favicon-16x16.png",revision:"10792ce25679ad503a91b657c4f68077"},{url:"favicon-32x32.png",revision:"4eb9d2da4b242cc2ffd8e50cf02fbfa6"},{url:"favicon.ico",revision:"a337660878d8cac4314889e55df5704a"},{url:"robots.txt",revision:"8590ab3cae7cd602bd8eefc2285efb9b"},{url:"manifest.webmanifest",revision:"0281d0e91cb3ad0fa81543bf771ae54e"}],{}),s.cleanupOutdatedCaches(),s.registerRoute(new s.NavigationRoute(s.createHandlerBoundToURL("index.html"))),s.registerRoute(/\/api\/.*\/*.json/,new s.NetworkFirst({cacheName:"api-cache",plugins:[new s.ExpirationPlugin({maxEntries:50,maxAgeSeconds:300})]}),"GET"),s.registerRoute(/\.(?:png|jpg|jpeg|svg|gif|webp)$/i,new s.CacheFirst({cacheName:"image-cache",plugins:[new s.ExpirationPlugin({maxEntries:100,maxAgeSeconds:86400})]}),"GET")});
+if (!self.define) {
+  let s,
+    e = {};
+  const i = (i, n) => (
+    (i = new URL(i + '.js', n).href),
+    e[i] ||
+      new Promise((e) => {
+        if ('document' in self) {
+          const s = document.createElement('script');
+          ((s.src = i), (s.onload = e), document.head.appendChild(s));
+        } else ((s = i), importScripts(i), e());
+      }).then(() => {
+        let s = e[i];
+        if (!s) throw new Error(`Module ${i} didn’t register its module`);
+        return s;
+      })
+  );
+  self.define = (n, l) => {
+    const r =
+      s ||
+      ('document' in self ? document.currentScript.src : '') ||
+      location.href;
+    if (e[r]) return;
+    let o = {};
+    const a = (s) => i(s, r),
+      u = { module: { uri: r }, exports: o, require: a };
+    e[r] = Promise.all(n.map((s) => u[s] || a(s))).then((s) => (l(...s), o));
+  };
+}
+define(['./workbox-5bbf8303'], function (s) {
+  'use strict';
+  (self.skipWaiting(),
+    s.clientsClaim(),
+    s.precacheAndRoute(
+      [
+        {
+          url: 'android-icon-144x144.png',
+          revision: '562c68d971c1c83233b40e45799b979c',
+        },
+        {
+          url: 'android-icon-192x192.png',
+          revision: '8b346a02e79277cfbc1434bac92ebf90',
+        },
+        {
+          url: 'android-icon-36x36.png',
+          revision: '8bc122ebe8323b1a5189a241ac099f36',
+        },
+        {
+          url: 'android-icon-48x48.png',
+          revision: '90ae290b1f2b75548e6a5ca4174f3867',
+        },
+        {
+          url: 'android-icon-72x72.png',
+          revision: 'fae4675e183766d8b96fb9c3d852749f',
+        },
+        {
+          url: 'android-icon-96x96.png',
+          revision: '3a18f23eca25ade55d09e907a6eaae10',
+        },
+        {
+          url: 'apple-icon-114x114.png',
+          revision: 'eaeb8ef945123f9badbaa023cff9fd62',
+        },
+        {
+          url: 'apple-icon-120x120.png',
+          revision: '4a9c9a3eecbfa7c3903acef655b18696',
+        },
+        {
+          url: 'apple-icon-144x144.png',
+          revision: '562c68d971c1c83233b40e45799b979c',
+        },
+        {
+          url: 'apple-icon-152x152.png',
+          revision: 'af0386af9509f6a241f8a3e5e21404f5',
+        },
+        {
+          url: 'apple-icon-180x180.png',
+          revision: 'ee90b32c5af4dd82e1338f34c61fe7cf',
+        },
+        {
+          url: 'apple-icon-57x57.png',
+          revision: '5d9b9a0577d00d3b87325893f0dc739f',
+        },
+        {
+          url: 'apple-icon-60x60.png',
+          revision: '8e1f06ed7838c83f5060a4837600a212',
+        },
+        {
+          url: 'apple-icon-72x72.png',
+          revision: 'fae4675e183766d8b96fb9c3d852749f',
+        },
+        {
+          url: 'apple-icon-76x76.png',
+          revision: '69c7593817355bd918f3e51970b5fff9',
+        },
+        {
+          url: 'apple-icon-precomposed.png',
+          revision: '2484acaaf914001c648ffb60d5b6c540',
+        },
+        { url: 'apple-icon.png', revision: '2484acaaf914001c648ffb60d5b6c540' },
+        { url: 'assets/About-dF-Wuv8d.js', revision: null },
+        { url: 'assets/Adarsh-BDG0zI57.png', revision: null },
+        { url: 'assets/ai-chat-kUgo_fpA.js', revision: null },
+        { url: 'assets/AnalyticsTracker-B8mDhV9P.js', revision: null },
+        { url: 'assets/Beats-BV5M0bxO.js', revision: null },
+        { url: 'assets/Blog-DtDBu3yS.js', revision: null },
+        { url: 'assets/BlurText-aIIrJdMN.js', revision: null },
+        { url: 'assets/bubble-C_vl8Ga6.css', revision: null },
+        { url: 'assets/bubble.module-Bdvz9-Ck.js', revision: null },
+        { url: 'assets/button-MMdNCqjI.js', revision: null },
+        { url: 'assets/CacheClean-5lIHUlWD.js', revision: null },
+        { url: 'assets/card-DQ-fVX4b.js', revision: null },
+        { url: 'assets/ChromaGrid-KFCe3sRO.js', revision: null },
+        { url: 'assets/CirclePhoto-BuY-i2d0.js', revision: null },
+        { url: 'assets/Contact-Dl-yo5U5.js', revision: null },
+        { url: 'assets/FuzzyText-D8xXALiU.js', revision: null },
+        { url: 'assets/Header-BM_2v3As.js', revision: null },
+        { url: 'assets/Home-DbgBXsib.js', revision: null },
+        { url: 'assets/Hyperspeed-DKyRrFij.js', revision: null },
+        { url: 'assets/index-BpajaV4b.css', revision: null },
+        { url: 'assets/index-BtU_4mIL.js', revision: null },
+        { url: 'assets/insta-DfgTjsCq.png', revision: null },
+        { url: 'assets/InternetStatus-CnLxz9iE.js', revision: null },
+        { url: 'assets/IpLogger-MPu9KPUk.js', revision: null },
+        { url: 'assets/LiquidCursor-DALQkbVo.js', revision: null },
+        { url: 'assets/Loop-B7KAfhh7.js', revision: null },
+        { url: 'assets/Map-BbP92-Ad.js', revision: null },
+        { url: 'assets/monitoring-BZ7egMF9.js', revision: null },
+        { url: 'assets/Music-Buixa2xT.js', revision: null },
+        { url: 'assets/NotFound-2lqlNOTu.js', revision: null },
+        { url: 'assets/PillNav-BUfJtngY.js', revision: null },
+        { url: 'assets/RobotFace-CtYroGWF.js', revision: null },
+        { url: 'assets/RobotFaceWrapper-CxGE9MKh.js', revision: null },
+        { url: 'assets/RobotHead-DZ_fjAOB.js', revision: null },
+        { url: 'assets/Sample-D3FbdwkF.js', revision: null },
+        { url: 'assets/Scroll-kxC1LQEn.js', revision: null },
+        { url: 'assets/ScrollToTopButton-DBdOncsn.js', revision: null },
+        { url: 'assets/SmoothScrollProvider-O5822lEx.js', revision: null },
+        { url: 'assets/SplashCursor-Bn-LssCJ.js', revision: null },
+        { url: 'assets/spotify-D_PSz9Uq.png', revision: null },
+        { url: 'assets/utils-x720GUhr.js', revision: null },
+        { url: 'assets/Velocity-BVCDw_Fy.js', revision: null },
+        { url: 'assets/vendor_react-C8wG62CJ.js', revision: null },
+        { url: 'assets/vendor_react-dom-DKAsGG5-.js', revision: null },
+        { url: 'assets/vendor-Grk_15WJ.js', revision: null },
+        { url: 'assets/Video-DTOfuPNl.js', revision: null },
+        { url: 'assets/WebSocket-hSlT2FKG.js', revision: null },
+        {
+          url: 'favicon-16x16.png',
+          revision: '10792ce25679ad503a91b657c4f68077',
+        },
+        {
+          url: 'favicon-32x32.png',
+          revision: '4eb9d2da4b242cc2ffd8e50cf02fbfa6',
+        },
+        {
+          url: 'favicon-96x96.png',
+          revision: '3a18f23eca25ade55d09e907a6eaae10',
+        },
+        { url: 'index.html', revision: 'e9e446a895e7d646f5b978b339ada3f8' },
+        {
+          url: 'ms-icon-144x144.png',
+          revision: '562c68d971c1c83233b40e45799b979c',
+        },
+        {
+          url: 'ms-icon-150x150.png',
+          revision: '265b4269b23b47e09fbb9798f18e2bf9',
+        },
+        {
+          url: 'ms-icon-310x310.png',
+          revision: '65cad6ec9f2dd8a8e72a98efbff70b8a',
+        },
+        {
+          url: 'ms-icon-70x70.png',
+          revision: '9d231c94483f09b7a2509802c323df69',
+        },
+        { url: 'registerSW.js', revision: '1872c500de691dce40960bb85481de07' },
+        {
+          url: 'favicon-16x16.png',
+          revision: '10792ce25679ad503a91b657c4f68077',
+        },
+        {
+          url: 'favicon-32x32.png',
+          revision: '4eb9d2da4b242cc2ffd8e50cf02fbfa6',
+        },
+        { url: 'favicon.ico', revision: 'a337660878d8cac4314889e55df5704a' },
+        { url: 'robots.txt', revision: '8590ab3cae7cd602bd8eefc2285efb9b' },
+        {
+          url: 'manifest.webmanifest',
+          revision: '0281d0e91cb3ad0fa81543bf771ae54e',
+        },
+      ],
+      {}
+    ),
+    s.cleanupOutdatedCaches(),
+    s.registerRoute(
+      new s.NavigationRoute(s.createHandlerBoundToURL('index.html'))
+    ),
+    s.registerRoute(
+      /\/api\/.*\/*.json/,
+      new s.NetworkFirst({
+        cacheName: 'api-cache',
+        plugins: [
+          new s.ExpirationPlugin({ maxEntries: 50, maxAgeSeconds: 300 }),
+        ],
+      }),
+      'GET'
+    ),
+    s.registerRoute(
+      /\.(?:png|jpg|jpeg|svg|gif|webp)$/i,
+      new s.CacheFirst({
+        cacheName: 'image-cache',
+        plugins: [
+          new s.ExpirationPlugin({ maxEntries: 100, maxAgeSeconds: 86400 }),
+        ],
+      }),
+      'GET'
+    ));
+});

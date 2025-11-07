@@ -1,0 +1,112 @@
+import React, { useEffect, Suspense, lazy } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+const SplashCursor = lazy(() => import('./components/SplashCursor'));
+
+import Loading from './components/Loading';
+const Navbar = lazy(() => import('./Main/Navbar'));
+const Footer = lazy(() => import('./components/Footer'));
+const LiquidCursor = lazy(() =>
+  import('./components/LiquidCursor.tsx').then((module) => ({
+    default: module.LiquidCursor,
+  }))
+);
+
+const StatsigSetup = lazy(() => import('./StatsigSetup.jsx'));
+const AnalyticsTracker = lazy(() => import('./AnalyticsTracker'));
+const LazyLoadSection = lazy(() => import('./components/LazyLoadSection.jsx'));
+const SmoothScrollProvider = lazy(
+  () => import('./components/SmoothScrollProvider.jsx')
+);
+const IpLogger = lazy(() => import('./components/IpLogger.jsx'));
+const ScrollToTopButton = lazy(
+  () => import('./components/ScrollToTopButton.jsx')
+);
+const InternetStatus = lazy(() => import('./components/InternetStatus.jsx'));
+const CacheClean = lazy(() => import('./Main/CacheClean.jsx'));
+const WebSocket = lazy(() => import('./WebSocket.jsx'));
+const RobotFace = lazy(() => import('./components/RobotFace.jsx'));
+
+// Lazy load pages
+const Home = lazy(() => import('./page/Home.jsx'));
+const About = lazy(() => import('./page/About.jsx'));
+const Contact = lazy(() => import('./page/Contact.jsx'));
+const Sample = lazy(() => import('./page/Sample.jsx'));
+const Blog = lazy(() => import('./page/Blog.jsx'));
+const NotFound = lazy(() => import('./page/NotFound.jsx'));
+
+export default function App() {
+  // const [isLoading, setIsLoading] = useState(true);
+  // Defer monitoring initialization until after the first render
+
+  useEffect(() => {
+    if (import.meta.env.PROD) {
+      import('./monitoring.js').then(({ initLogRocket, initSentry }) => {
+        initLogRocket();
+        initSentry();
+      });
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   // Simulate app loading
+  //   const timer = setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 3000);
+  //   return () => clearTimeout(timer);
+  // }, []);
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
+
+  return (
+    <Suspense fallback={<Loading />}>
+      <AnalyticsTracker />
+      <StatsigSetup>
+        <IpLogger />
+        <CacheClean />
+        <WebSocket />
+        <RobotFace />
+        <LazyLoadSection>
+          <div className="hidden md:block">
+            <LiquidCursor size={20} />
+          </div>
+        </LazyLoadSection>
+        {/* ✅ Render WebSocketComponent once at top level */}
+        {/* <WebSocketComponent /> */}
+        <LazyLoadSection>
+          <SplashCursor />
+        </LazyLoadSection>
+        <LazyLoadSection>
+          <Navbar />
+        </LazyLoadSection>
+        <LazyLoadSection>
+          <SmoothScrollProvider />
+        </LazyLoadSection>
+        {/* Wrap routes in Suspense */}
+        <Suspense fallback={<Loading />}>
+          <LazyLoadSection>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/sample" element={<Sample />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </LazyLoadSection>
+        </Suspense>
+        <Suspense>
+          <LazyLoadSection>
+            <InternetStatus />
+          </LazyLoadSection>
+        </Suspense>
+        <LazyLoadSection>
+          <ScrollToTopButton />
+        </LazyLoadSection>
+        {/* Footer stays at the bottom */}
+        <Footer />
+      </StatsigSetup>
+    </Suspense>
+  );
+}

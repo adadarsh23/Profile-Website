@@ -1,0 +1,56 @@
+import { r as p } from './vendor_react-C8wG62CJ.js';
+import { a0 as u, a1 as g } from './vendor-Grk_15WJ.js';
+import './vendor_react-dom-DKAsGG5-.js';
+const I = 'https://tppissuzgiecmtejvcyy.supabase.co',
+  m =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRwcGlzc3V6Z2llY210ZWp2Y3l5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAzOTk2MjksImV4cCI6MjA3NTk3NTYyOX0.y0m02BaKdPyeM3yvM8vJlIgljw37TwjN4Okvete_6U0',
+  w = u(I, m);
+async function c(r, i = 3, o = 500) {
+  try {
+    return await r();
+  } catch (s) {
+    if (i <= 0) throw s;
+    return (await new Promise((t) => setTimeout(t, o)), c(r, i - 1, o * 2));
+  }
+}
+function d() {
+  return (
+    p.useEffect(() => {
+      const r = new AbortController(),
+        i = r.signal;
+      let o = !0;
+      return (
+        (async () => {
+          if (!localStorage.getItem('visitorLogged'))
+            try {
+              const t = 'https://ipapi.co/json',
+                n = await c(() => fetch(t, { signal: i }), 3, 500);
+              if (!n.ok) throw new Error(`IP API error: ${n.status}`);
+              const e = await n.json();
+              if (!e?.ip) throw new Error('IP data missing');
+              const l = {
+                  unique_id: g(),
+                  ip: e.ip,
+                  city: e.city || 'Unknown',
+                  region: e.region || 'Unknown',
+                  country: e.country_name || 'Unknown',
+                  user_agent: navigator.userAgent,
+                  timestamp: new Date().toISOString(),
+                },
+                { error: a } = await w.from('Producer').insert([l]);
+              if (a) throw a;
+              o && localStorage.setItem('visitorLogged', 'true');
+            } catch (t) {
+              if (t.name === 'AbortError') return;
+              console.error('Visitor data logging failed:', t.message || t);
+            }
+        })(),
+        () => {
+          ((o = !1), r.abort());
+        }
+      );
+    }, []),
+    null
+  );
+}
+export { d as default };

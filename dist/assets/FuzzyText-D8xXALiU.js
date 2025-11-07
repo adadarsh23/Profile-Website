@@ -1,0 +1,127 @@
+import { r as G, j as V, R as Z } from './vendor_react-C8wG62CJ.js';
+import './vendor-Grk_15WJ.js';
+import './vendor_react-dom-DKAsGG5-.js';
+const nt = ({
+  children: E,
+  fontSize: c = 'clamp(2rem, 10vw, 10rem)',
+  fontWeight: p = 900,
+  fontFamily: v = 'inherit',
+  color: L = '#fff',
+  enableHover: a = !0,
+  baseIntensity: R = 0.18,
+  hoverIntensity: C = 0.5,
+}) => {
+  const F = G.useRef(null);
+  return (
+    G.useEffect(() => {
+      let x,
+        g = !1;
+      const t = F.current;
+      return t
+        ? ((async () => {
+            if ((document.fonts?.ready && (await document.fonts.ready), g))
+              return;
+            const m = t.getContext('2d');
+            if (!m) return;
+            const z =
+                v === 'inherit'
+                  ? window.getComputedStyle(t).fontFamily || 'sans-serif'
+                  : v,
+              M = typeof c == 'number' ? `${c}px` : c;
+            let f;
+            if (typeof c == 'number') f = c;
+            else {
+              const e = document.createElement('span');
+              ((e.style.fontSize = c), document.body.appendChild(e));
+              const n = window.getComputedStyle(e).fontSize;
+              ((f = parseFloat(n)), document.body.removeChild(e));
+            }
+            const T = Z.Children.toArray(E).join(''),
+              h = document.createElement('canvas'),
+              o = h.getContext('2d');
+            if (!o) return;
+            ((o.font = `${p} ${M} ${z}`), (o.textBaseline = 'alphabetic'));
+            const i = o.measureText(T),
+              A = i.actualBoundingBoxLeft ?? 0,
+              J = i.actualBoundingBoxRight ?? i.width,
+              $ = i.actualBoundingBoxAscent ?? f,
+              K = i.actualBoundingBoxDescent ?? f * 0.2,
+              j = Math.ceil(A + J),
+              r = Math.ceil($ + K),
+              D = 10,
+              u = j + D;
+            ((h.width = u), (h.height = r));
+            const S = D / 2;
+            ((o.font = `${p} ${M} ${z}`),
+              (o.textBaseline = 'alphabetic'),
+              (o.fillStyle = L),
+              o.fillText(T, S - A, $));
+            const w = 50,
+              y = 0;
+            ((t.width = u + w * 2), (t.height = r + y * 2), m.translate(w, y));
+            const X = w + S,
+              Y = y,
+              N = X + j,
+              P = Y + r;
+            let l = !1;
+            const d = 30,
+              b = () => {
+                if (g) return;
+                m.clearRect(-d, -d, u + 2 * d, r + 2 * d);
+                const e = l ? C : R;
+                for (let n = 0; n < r; n++) {
+                  const s = Math.floor(e * (Math.random() - 0.5) * d);
+                  m.drawImage(h, 0, n, u, 1, s, n, u, 1);
+                }
+                x = window.requestAnimationFrame(b);
+              };
+            b();
+            const q = (e, n) => e >= X && e <= N && n >= Y && n <= P,
+              I = (e) => {
+                if (!a) return;
+                const n = t.getBoundingClientRect(),
+                  s = e.clientX - n.left,
+                  B = e.clientY - n.top;
+                l = q(s, B);
+              },
+              O = () => {
+                l = !1;
+              },
+              W = (e) => {
+                if (!a) return;
+                e.preventDefault();
+                const n = t.getBoundingClientRect(),
+                  s = e.touches[0],
+                  B = s.clientX - n.left,
+                  U = s.clientY - n.top;
+                l = q(B, U);
+              },
+              k = () => {
+                l = !1;
+              };
+            a &&
+              (t.addEventListener('mousemove', I),
+              t.addEventListener('mouseleave', O),
+              t.addEventListener('touchmove', W, { passive: !1 }),
+              t.addEventListener('touchend', k));
+            const Q = () => {
+              (window.cancelAnimationFrame(x),
+                a &&
+                  (t.removeEventListener('mousemove', I),
+                  t.removeEventListener('mouseleave', O),
+                  t.removeEventListener('touchmove', W),
+                  t.removeEventListener('touchend', k)));
+            };
+            t.cleanupFuzzyText = Q;
+          })(),
+          () => {
+            ((g = !0),
+              window.cancelAnimationFrame(x),
+              t && t.cleanupFuzzyText && t.cleanupFuzzyText());
+          })
+        : void 0;
+    }, [E, c, p, v, L, a, R, C]),
+    V.jsx('canvas', { ref: F })
+  );
+};
+export { nt as default };

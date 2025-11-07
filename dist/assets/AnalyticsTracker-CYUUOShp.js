@@ -1,1 +1,0 @@
-import{f as e,g as n,a}from"./vendor_react-BCVK0lR1.js";import"./vendor_react-dom-BPdpdgpO.js";import"./vendor-BimC8_hE.js";const o="G-X34L2QSKRG",c=()=>{e.initialize(o)},s=t=>{e.send({page:t})};function p(){const t=n();return a.useEffect(()=>{c()},[]),a.useEffect(()=>{s(t.pathname)},[t]),null}export{p as default};

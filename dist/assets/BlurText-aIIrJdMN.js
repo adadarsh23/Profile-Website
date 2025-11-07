@@ -1,0 +1,87 @@
+import { r as a, j as x } from './vendor_react-C8wG62CJ.js';
+import { Z as A } from './vendor-Grk_15WJ.js';
+import './vendor_react-dom-DKAsGG5-.js';
+const C = (r, l) => {
+    const u = new Set([...Object.keys(r), ...l.flatMap((t) => Object.keys(t))]),
+      n = {};
+    return (
+      u.forEach((t) => {
+        n[t] = [r[t], ...l.map((c) => c[t])];
+      }),
+      n
+    );
+  },
+  R = ({
+    text: r = '',
+    delay: l = 200,
+    className: u = '',
+    animateBy: n = 'words',
+    direction: t = 'top',
+    threshold: c = 0.1,
+    rootMargin: m = '0px',
+    animationFrom: w,
+    animationTo: h,
+    easing: d = (o) => o,
+    onAnimationComplete: j,
+    stepDuration: v = 0.35,
+  }) => {
+    const o = n === 'words' ? r.split(' ') : r.split(''),
+      [g, E] = a.useState(!1),
+      i = a.useRef(null);
+    a.useEffect(() => {
+      if (!i.current) return;
+      const s = new IntersectionObserver(
+        ([e]) => {
+          e.isIntersecting && (E(!0), s.unobserve(i.current));
+        },
+        { threshold: c, rootMargin: m }
+      );
+      return (s.observe(i.current), () => s.disconnect());
+    }, [c, m]);
+    const S = a.useMemo(
+        () =>
+          t === 'top'
+            ? { filter: 'blur(10px)', opacity: 0, y: -50 }
+            : { filter: 'blur(10px)', opacity: 0, y: 50 },
+        [t]
+      ),
+      k = a.useMemo(
+        () => [
+          { filter: 'blur(5px)', opacity: 0.5, y: t === 'top' ? 5 : -5 },
+          { filter: 'blur(0px)', opacity: 1, y: 0 },
+        ],
+        [t]
+      ),
+      f = w ?? S,
+      y = h ?? k,
+      p = y.length + 1,
+      I = v * (p - 1),
+      O = Array.from({ length: p }, (s, e) => (p === 1 ? 0 : e / (p - 1)));
+    return x.jsx('p', {
+      ref: i,
+      className: `blur-text ${u} flex flex-wrap`,
+      children: o.map((s, e) => {
+        const T = C(f, y),
+          b = { duration: I, times: O, delay: (e * l) / 1e3 };
+        return (
+          (b.ease = d),
+          x.jsxs(
+            A.span,
+            {
+              className: 'inline-block will-change-[transform,filter,opacity]',
+              initial: f,
+              animate: g ? T : f,
+              transition: b,
+              onAnimationComplete: e === o.length - 1 ? j : void 0,
+              children: [
+                s === ' ' ? ' ' : s,
+                n === 'words' && e < o.length - 1 && ' ',
+              ],
+            },
+            e
+          )
+        );
+      }),
+    });
+  };
+export { R as default };

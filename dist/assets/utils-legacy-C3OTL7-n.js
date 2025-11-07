@@ -1,1 +1,0 @@
-System.register(["./vendor-legacy-_CNXLam7.js"],function(e,r){"use strict";var t,n;return{setters:[function(e){t=e.bT,n=e.bU}],execute:function(){e("c",function(){for(var e=arguments.length,r=new Array(e),c=0;c<e;c++)r[c]=arguments[c];return t(n(r))})}}});
