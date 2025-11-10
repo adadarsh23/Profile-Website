@@ -23,6 +23,6 @@
     },
     "baseUrl": "." // Keep base URL
   },
-  "include": ["src"], // Include all files in the src directory
+  "include": ["src", "vite-env.d.ts"], // Include all files in the src directory
   "exclude": ["node_modules", "dist"] // Exclude node_modules and build output
 }

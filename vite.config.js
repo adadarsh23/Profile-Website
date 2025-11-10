@@ -65,17 +65,17 @@ export default defineConfig({
     removeConsole(),
     // Compression for production
     isProd &&
-      compression({
-        algorithm: 'brotliCompress',
-        ext: '.br',
-        threshold: 1024, // only compress files > 1KB
-      }),
+    compression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 1024, // only compress files > 1KB
+    }),
     isProd &&
-      compression({
-        algorithm: 'gzip',
-        ext: '.gz',
-        threshold: 1024,
-      }),
+    compression({
+      algorithm: 'gzip',
+      ext: '.gz',
+      threshold: 1024,
+    }),
     // PWA plugin
     VitePWA({
       registerType: 'autoUpdate',
@@ -166,18 +166,18 @@ export default defineConfig({
     // Legacy bundles can alter module loading order and cause runtime issues in the
     // generated vendor chunks. Disable by default for modern deployments.
     process.env.LEGACY_BUILD === 'true' &&
-      legacy({
-        targets: [
-          'defaults',
-          // common modern targets
-          'not IE 11',
-          // IE 11 is almost dead, but you can add it if needed
-          'Android >= 6',
-          // ensures old Android phones
-          'iOS >= 12', // ensures old iPhones/iPads
-        ],
-        additionalLegacyPolyfills: ['regenerator-runtime/runtime'], // async/await support
-      }),
+    legacy({
+      targets: [
+        'defaults',
+        // common modern targets
+        'not IE 11',
+        // IE 11 is almost dead, but you can add it if needed
+        'Android >= 6',
+        // ensures old Android phones
+        'iOS >= 12', // ensures old iPhones/iPads
+      ],
+      additionalLegacyPolyfills: ['regenerator-runtime/runtime'], // async/await support
+    }),
   ],
   resolve: {
     alias: {
@@ -203,7 +203,8 @@ export default defineConfig({
       transformMixedEsModules: true,
     },
     chunkSizeWarningLimit: 5000,
-    sourcemap: !isProd,
+    sourcemap : true,
+    // sourcemap: !isProd,
     cssCodeSplit: true,
     outDir: 'dist',
     assetsDir: 'assets',
@@ -222,88 +223,88 @@ export default defineConfig({
           return undefined;
         },
       },
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-        },
-        mangle: {
-          keep_classnames: true,
-          keep_fnames: true,
-        },
+    },
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+      mangle: {
+        keep_classnames: true,
+        keep_fnames: true,
       },
     },
-    optimizeDeps: {
-      include: [
-        'react',
-        'react-dom',
-        'react-router-dom',
-        'framer-motion',
-        'lodash',
-        'ogl',
-      ],
-    },
-    test: {
-      include: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],
-      exclude: [
-        ...configDefaults.exclude,
-        // includes node_modules, dist, etc.
-        '**/cypress/**',
-        '**/.{idea,git,cache,output,temp}/**',
-        '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*',
-      ],
-      environment: 'jsdom',
-      // or 'node' depending on your tests
-      projects: [
-        {
-          extends: true,
-          plugins: [
-            // The plugin will run tests for the stories defined in your Storybook config
-            // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
-            storybookTest({
-              configDir: path.join(dirname, '.storybook'),
-            }),
-          ],
-          test: {
-            name: 'storybook',
-            browser: {
-              enabled: true,
-              headless: true,
-              provider: 'playwright',
-              instances: [
-                {
-                  browser: 'chromium',
-                },
-              ],
-            },
-            setupFiles: ['.storybook/vitest.setup.ts'],
+  },
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      'framer-motion',
+      'lodash',
+      'ogl',
+    ],
+  },
+  test: {
+    include: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],
+    exclude: [
+      ...configDefaults.exclude,
+      // includes node_modules, dist, etc.
+      '**/cypress/**',
+      '**/.{idea,git,cache,output,temp}/**',
+      '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*',
+    ],
+    environment: 'jsdom',
+    // or 'node' depending on your tests
+    projects: [
+      {
+        extends: true,
+        plugins: [
+          // The plugin will run tests for the stories defined in your Storybook config
+          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+          storybookTest({
+            configDir: path.join(dirname, '.storybook'),
+          }),
+        ],
+        test: {
+          name: 'storybook',
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: 'playwright',
+            instances: [
+              {
+                browser: 'chromium',
+              },
+            ],
           },
+          setupFiles: ['.storybook/vitest.setup.ts'],
         },
-        {
-          extends: true,
-          plugins: [
-            // The plugin will run tests for the stories defined in your Storybook config
-            // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
-            storybookTest({
-              configDir: path.join(dirname, '.storybook'),
-            }),
-          ],
-          test: {
-            name: 'storybook',
-            browser: {
-              enabled: true,
-              headless: true,
-              provider: 'playwright',
-              instances: [
-                {
-                  browser: 'chromium',
-                },
-              ],
-            },
-            setupFiles: ['.storybook/vitest.setup.ts'],
+      },
+      {
+        extends: true,
+        plugins: [
+          // The plugin will run tests for the stories defined in your Storybook config
+          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+          storybookTest({
+            configDir: path.join(dirname, '.storybook'),
+          }),
+        ],
+        test: {
+          name: 'storybook',
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: 'playwright',
+            instances: [
+              {
+                browser: 'chromium',
+              },
+            ],
           },
+          setupFiles: ['.storybook/vitest.setup.ts'],
         },
-      ],
-    },
+      },
+    ],
   },
 });

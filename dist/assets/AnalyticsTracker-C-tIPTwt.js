@@ -1,0 +1,2 @@
+import{f as e,u as n,r as a}from"./vendor_react-Ds5Dw94k.js";import"./vendor-CthcAJlN.js";import"./vendor_react-dom-BnmT66wm.js";const o="G-X34L2QSKRG",c=()=>{e.initialize(o)},s=t=>{e.send({page:t})};function u(){const t=n();return a.useEffect(()=>{c()},[]),a.useEffect(()=>{s(t.pathname)},[t]),null}export{u as default};
+//# sourceMappingURL=AnalyticsTracker-C-tIPTwt.js.map
