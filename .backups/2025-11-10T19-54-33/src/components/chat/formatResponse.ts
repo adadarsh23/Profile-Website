@@ -6,10 +6,6 @@
 //     .trim();
 // }
 
-
-
-
-
 /**
  * Formats and sanitizes a raw text response, often from an AI,
  * to ensure it's clean, readable, and safe for rendering.
@@ -39,5 +35,3 @@ export function formatResponse(text: string | null | undefined): string {
   // Trim leading/trailing whitespace from the entire response.
   return formattedText.trim();
 }
-
-

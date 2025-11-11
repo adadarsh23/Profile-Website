@@ -1,13 +1,38 @@
 import React, { memo } from 'react';
-import "../Modules/Skeleton.css"
+import '../Modules/Skeleton.css';
 
 const ChatLoadingSkeleton = memo(() => {
   const messages = [
-    { width: 'w-3/4', height: 'h-10', align: 'self-start', color: 'bg-gray-700/50' },
-    { width: 'w-2/3', height: 'h-12', align: 'self-end ml-auto', color: 'bg-gray-600/50' },
-    { width: 'w-1/2', height: 'h-8', align: 'self-start', color: 'bg-gray-700/50' },
-    { width: 'w-5/6', height: 'h-10', align: 'self-end ml-auto', color: 'bg-gray-600/50' },
-    { width: 'w-2/3', height: 'h-8', align: 'self-start', color: 'bg-gray-700/50' },
+    {
+      width: 'w-3/4',
+      height: 'h-10',
+      align: 'self-start',
+      color: 'bg-gray-700/50',
+    },
+    {
+      width: 'w-2/3',
+      height: 'h-12',
+      align: 'self-end ml-auto',
+      color: 'bg-gray-600/50',
+    },
+    {
+      width: 'w-1/2',
+      height: 'h-8',
+      align: 'self-start',
+      color: 'bg-gray-700/50',
+    },
+    {
+      width: 'w-5/6',
+      height: 'h-10',
+      align: 'self-end ml-auto',
+      color: 'bg-gray-600/50',
+    },
+    {
+      width: 'w-2/3',
+      height: 'h-8',
+      align: 'self-start',
+      color: 'bg-gray-700/50',
+    },
   ];
 
   return (

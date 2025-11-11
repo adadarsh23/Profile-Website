@@ -25,22 +25,25 @@ export async function runChat(
   }));
 
   try {
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model,
-        messages: formattedMessages,
-        temperature: 0.7,
-        max_tokens: 1024, // Gemini supports longer completions
-        top_p: 0.9,
-        frequency_penalty: 0.2,
-        presence_penalty: 0.1,
-      }),
-    });
+    const response = await fetch(
+      'https://openrouter.ai/api/v1/chat/completions',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model,
+          messages: formattedMessages,
+          temperature: 0.7,
+          max_tokens: 1024, // Gemini supports longer completions
+          top_p: 0.9,
+          frequency_penalty: 0.2,
+          presence_penalty: 0.1,
+        }),
+      }
+    );
 
     if (!response.ok) {
       let errorMessage = `HTTP ${response.status} - ${response.statusText}`;

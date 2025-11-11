@@ -65,17 +65,17 @@ export default defineConfig({
     removeConsole(),
     // Compression for production
     isProd &&
-    compression({
-      algorithm: 'brotliCompress',
-      ext: '.br',
-      threshold: 1024, // only compress files > 1KB
-    }),
+      compression({
+        algorithm: 'brotliCompress',
+        ext: '.br',
+        threshold: 1024, // only compress files > 1KB
+      }),
     isProd &&
-    compression({
-      algorithm: 'gzip',
-      ext: '.gz',
-      threshold: 1024,
-    }),
+      compression({
+        algorithm: 'gzip',
+        ext: '.gz',
+        threshold: 1024,
+      }),
     // PWA plugin
     VitePWA({
       registerType: 'autoUpdate',
@@ -166,18 +166,18 @@ export default defineConfig({
     // Legacy bundles can alter module loading order and cause runtime issues in the
     // generated vendor chunks. Disable by default for modern deployments.
     process.env.LEGACY_BUILD === 'true' &&
-    legacy({
-      targets: [
-        'defaults',
-        // common modern targets
-        'not IE 11',
-        // IE 11 is almost dead, but you can add it if needed
-        'Android >= 6',
-        // ensures old Android phones
-        'iOS >= 12', // ensures old iPhones/iPads
-      ],
-      additionalLegacyPolyfills: ['regenerator-runtime/runtime'], // async/await support
-    }),
+      legacy({
+        targets: [
+          'defaults',
+          // common modern targets
+          'not IE 11',
+          // IE 11 is almost dead, but you can add it if needed
+          'Android >= 6',
+          // ensures old Android phones
+          'iOS >= 12', // ensures old iPhones/iPads
+        ],
+        additionalLegacyPolyfills: ['regenerator-runtime/runtime'], // async/await support
+      }),
   ],
   resolve: {
     alias: {
@@ -203,8 +203,7 @@ export default defineConfig({
       transformMixedEsModules: true,
     },
     chunkSizeWarningLimit: 5000,
-    sourcemap : true,
-    // sourcemap: !isProd,
+    sourcemap: !isProd,
     cssCodeSplit: true,
     outDir: 'dist',
     assetsDir: 'assets',

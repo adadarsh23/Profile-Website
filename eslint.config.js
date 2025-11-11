@@ -1,114 +1,31 @@
-// // eslint.config.js
-// import js from '@eslint/js';
-// import globals from 'globals';
-// import reactHooks from 'eslint-plugin-react-hooks';
-// import reactRefresh from 'eslint-plugin-react-refresh';
-// import reactPlugin from 'eslint-plugin-react';
-// import storybook from 'eslint-plugin-storybook';
-// import { defineConfig, globalIgnores } from 'eslint/config';
-
-// export default defineConfig([
-//   globalIgnores(['dist', 'node_modules']),
-//   js.configs.recommended,
-//   reactHooks.configs['recommended-latest'],
-//   reactRefresh.configs.vite,
-//   {
-//     files: ['**/*.{js,jsx}'],
-//     languageOptions: {
-//       ecmaVersion: 'latest',
-//       sourceType: 'module',
-//       globals: globals.browser,
-//       parserOptions: {
-//         ecmaFeatures: { jsx: true },
-//       },
-//     },
-//     plugins: {
-//       react: reactPlugin,
-//       storybook,
-//       'react-hooks': reactHooks,
-//       'react-refresh': reactRefresh,
-//     },
-//     rules: {
-//       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
-//       'react/react-in-jsx-scope': 'off',
-//     },
-//   },
-// ]);
-
-// // eslint.config.js
-// import js from '@eslint/js';
-// import globals from 'globals';
-// import reactHooks from 'eslint-plugin-react-hooks';
-// import reactRefresh from 'eslint-plugin-react-refresh';
-// import reactPlugin from 'eslint-plugin-react';
-// import storybook from 'eslint-plugin-storybook';
-// import { FlatCompat } from '@eslint/eslintrc';
-// import { defineConfig, globalIgnores } from 'eslint/config';
-
-// const compat = new FlatCompat({
-//   baseDirectory: import.meta.dirname,
-// });
-
-// export default defineConfig([
-//   globalIgnores(['dist', 'node_modules']),
-//   js.configs.recommended,
-//   reactHooks.configs['recommended-latest'],
-//   reactRefresh.configs.vite,
-//   ...compat.config({
-//     extends: ['plugin:storybook/recommended'], // handles old-format plugins
-//   }),
-//   {
-//     files: ['**/*.{js,jsx}'],
-//     languageOptions: {
-//       ecmaVersion: 'latest',
-//       sourceType: 'module',
-//       globals: globals.browser,
-//       parserOptions: {
-//         ecmaFeatures: { jsx: true },
-//       },
-//     },
-//     plugins: {
-//       react: reactPlugin,
-//       storybook,
-//       'react-hooks': reactHooks,
-//       'react-refresh': reactRefresh,
-//     },
-//     rules: {
-//       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
-//       'react/react-in-jsx-scope': 'off',
-//     },
-//   },
-// ]);
-
 // eslint.config.js
 import js from '@eslint/js';
 import globals from 'globals';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
 import reactPlugin from 'eslint-plugin-react';
-import storybook from 'eslint-plugin-storybook';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import reactRefreshPlugin from 'eslint-plugin-react-refresh';
+// import storybookPlugin from 'eslint-plugin-storybook';
 import { FlatCompat } from '@eslint/eslintrc';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
-// Create compat instance to handle old-style plugins like Storybook
+// Compat instance to handle old-style configs
 const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname,
+  baseDirectory: import.meta.url, // fixed dirname
 });
 
 export default defineConfig([
+  // Ignore these folders globally
   globalIgnores(['dist', 'node_modules']),
 
-  // Modern flat configs
+  // Core recommended JS rules
   js.configs.recommended,
-  reactHooks.configs['recommended-latest'],
-  reactRefresh.configs.vite,
 
-  // ✅ Wrap old ESLint 8-style configs here
+  // Wrap old ESLint 8-style configs safely
   ...compat.config({
-    extends: ['plugin:storybook/recommended'], // old-style config now handled safely
+    extends: ['plugin:storybook/recommended'],
   }),
 
-  // Your project rules
+  // Your project-specific rules
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
@@ -121,13 +38,14 @@ export default defineConfig([
     },
     plugins: {
       react: reactPlugin,
-      storybook,
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
+      'react-hooks': reactHooksPlugin,
+      'react-refresh': reactRefreshPlugin,
     },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
       'react/react-in-jsx-scope': 'off',
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
     },
   },
 ]);
