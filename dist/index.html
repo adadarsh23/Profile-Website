@@ -119,45 +119,23 @@
         }
       }
     </script>
-    <script type="module" crossorigin src="/assets/index-TjyNd_uT.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/vendor-CLKqtzgM.js" />
-    <link rel="stylesheet" crossorigin href="/assets/index-D4Pt6dGf.css" />
-    <link
-      rel="sitemap"
-      type="application/xml"
-      title="Sitemap"
-      href="/sitemap.xml"
-    />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script>
-  </head>
+    <script type="module" crossorigin src="/assets/index-Bqv6npWW.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-CYRj25Sh.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-Ds3F76-4.css">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
 
   <body>
     <div id="root"></div>
-
-    <script>
-      window.addEventListener('load', () => {
-        const perfData = performance.getEntriesByType('navigation')[0];
-        console.log(
-          '%c⚡ Performance Metrics',
-          'color: #42b983; font-weight: bold; font-size: 14px;'
-        );
-        console.log(
-          'DOM Content Loaded:',
-          Math.round(
-            perfData.domContentLoadedEventEnd -
-              perfData.domContentLoadedEventStart
-          ) + 'ms'
-        );
-        console.log(
-          'Page Load Time:',
-          Math.round(perfData.loadEventEnd - perfData.loadEventStart) + 'ms'
-        );
-        console.log(
-          'Total Load Time:',
-          Math.round(perfData.loadEventEnd - perfData.fetchStart) + 'ms'
-        );
-      });
-    </script>
-  </body>
+  
+          <script>
+            window.addEventListener('load', () => {
+              const perfData = performance.getEntriesByType('navigation')[0];
+              console.log('%c⚡ Performance Metrics', 'color: #42b983; font-weight: bold; font-size: 14px;');
+              console.log('DOM Content Loaded:', Math.round(perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart) + 'ms');
+              console.log('Page Load Time:', Math.round(perfData.loadEventEnd - perfData.loadEventStart) + 'ms');
+              console.log('Total Load Time:', Math.round(perfData.loadEventEnd - perfData.fetchStart) + 'ms');
+            });
+          </script>
+        </body>
 </html>

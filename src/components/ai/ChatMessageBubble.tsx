@@ -29,7 +29,7 @@ const CodeBlock = memo(({ inline, className, children }) => {
 
   const handleCopyCode = () => copy(codeString);
 
-  return !inline && match ? (
+  if (!inline) {
     <div className="relative my-2">
       <button
         onClick={handleCopyCode}
@@ -43,7 +43,7 @@ const CodeBlock = memo(({ inline, className, children }) => {
         )}
       </button>
       <SyntaxHighlighter
-        language={match[1]}
+        language={match ? match[1] : 'text'}
         PreTag="div"
         showLineNumbers={false}
         wrapLongLines
@@ -58,8 +58,10 @@ const CodeBlock = memo(({ inline, className, children }) => {
       >
         {codeString}
       </SyntaxHighlighter>
-    </div>
-  ) : (
+    </div>;
+  }
+
+  return (
     <code className="px-1.5 py-1 rounded bg-white/20 text-[0.9em]">
       {children}
     </code>
