@@ -1263,3 +1263,6 @@
 [2025-11-16T15:07:11.026Z] [INFO] Config resolved for mode: test
 [2025-11-16T15:07:16.718Z] [INFO] Vite dev server started successfully
 [2025-11-16T15:07:47.933Z] [INFO] Config resolved for mode: production
+[2025-11-16T15:22:19.292Z] [INFO] Config resolved for mode: development
+[2025-11-16T15:22:32.827Z] [INFO] Vite dev server started successfully
+[2025-11-16T15:22:32.834Z] [INFO] Production build started

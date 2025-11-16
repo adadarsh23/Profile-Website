@@ -61,27 +61,27 @@ export default defineConfig({
     // ✅ Bundle Visualizer - only run when ANALYZE=true
     ...(isAnalyze
       ? [
-          visualizer({
-            open: true, // Set to true to automatically open the report in your browser
-            filename: './stats.html',
-          }),
-        ]
+        visualizer({
+          open: true, // Set to true to automatically open the report in your browser
+          filename: './stats.html',
+        }),
+      ]
       : []),
     // removeConsole(),
     // ✅ Compression for production (Brotli + Gzip)
     ...(isProd
       ? [
-          compression({
-            algorithm: 'brotliCompress',
-            ext: '.br',
-            threshold: 1024, // Compress files > 1KB
-          }),
-          compression({
-            algorithm: 'gzip',
-            ext: '.gz',
-            threshold: 1024,
-          }),
-        ]
+        compression({
+          algorithm: 'brotliCompress',
+          ext: '.br',
+          threshold: 1024, // Compress files > 1KB
+        }),
+        compression({
+          algorithm: 'gzip',
+          ext: '.gz',
+          threshold: 1024,
+        }),
+      ]
       : []),
     // PWA plugin
     VitePWA({
@@ -109,11 +109,12 @@ export default defineConfig({
         maximumFileSizeToCacheInBytes: 7 * 1024 * 1024,
         // 7 MB
         runtimeCaching: [
+          // Cache API calls to your backend
           {
-            urlPattern: /\/api\/.*\.json$/,
+            urlPattern: ({ url }) => url.origin === 'https://ai-assistant-server-colf.onrender.com',
             handler: 'NetworkFirst',
             options: {
-              cacheName: 'api-cache',
+              cacheName: 'ai-assistant-api-cache',
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 5 * 60,
@@ -172,11 +173,11 @@ export default defineConfig({
     // generated vendor chunks. Disable by default for modern deployments.
     ...(process.env.LEGACY_BUILD === 'true'
       ? [
-          legacy({
-            targets: ['defaults', 'Android >= 6', 'iOS >= 12'],
-            additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
-          }),
-        ]
+        legacy({
+          targets: ['defaults', 'Android >= 6', 'iOS >= 12'],
+          additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
+        }),
+      ]
       : []),
   ],
   resolve: {
@@ -194,6 +195,15 @@ export default defineConfig({
   server: {
     open: true,
     host: true, // ✅ allows testing from other devices in LAN
+    proxy: {
+      // Proxy API requests to your backend server during development
+      '/api': {
+        target: 'https://ai-assistant-server-colf.onrender.com',
+        changeOrigin: true,
+        // Optional: if your backend doesn't have the '/api' prefix
+        // rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
   },
   build: {
     modulePreload: {
