@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, memo } from 'react';
+import { useState, memo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
@@ -17,19 +17,17 @@ import {
   X,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
+import { useSpeechSynthesis } from '@/hooks/useSpeechSynthesis';
 import type { ChatMessage } from '../chat/chatTypes';
 
 // Memoized CodeBlock component for performance and clean code
 const CodeBlock = memo(({ inline, className, children }) => {
-  const [copied, setCopied] = useState(false);
+  const { copied, copy } = useCopyToClipboard();
   const match = /language-(\w+)/.exec(className || '');
   const codeString = String(children).replace(/\n$/, '');
 
-  const handleCopyCode = () => {
-    navigator.clipboard.writeText(codeString);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  const handleCopyCode = () => copy(codeString);
 
   return !inline && match ? (
     <div className="relative my-2">
@@ -51,9 +49,11 @@ const CodeBlock = memo(({ inline, className, children }) => {
         wrapLongLines
         style={vscDarkPlus}
         customStyle={{
+          fontFamily: 'ui-monospace, monospace',
           borderRadius: '0.5rem',
           padding: '1rem',
           fontSize: '0.875rem',
+          overflowX: 'auto',
         }}
       >
         {codeString}
@@ -66,6 +66,126 @@ const CodeBlock = memo(({ inline, className, children }) => {
   );
 });
 
+const ChatMessageActions = ({
+  msg,
+  allMessages,
+  onRegenerate,
+  isVisible,
+}: {
+  msg: ChatMessage;
+  allMessages?: ChatMessage[];
+  onRegenerate?: () => void;
+  isVisible: boolean;
+}) => {
+  const isAI = msg.sender === 'ai';
+  const [liked, setLiked] = useState(false);
+  const [disliked, setDisliked] = useState(false);
+  const { copied: singleCopied, copy: copySingle } = useCopyToClipboard();
+  const { copied: allCopied, copy: copyAll } = useCopyToClipboard();
+  const { isSpeaking, speak, stop } = useSpeechSynthesis(msg.text);
+
+  const handleCopyAll = useCallback(() => {
+    if (!allMessages || !allMessages.length) return;
+    const text = allMessages
+      .map((m) => `${m.sender === 'ai' ? 'AI' : 'User'}: ${m.text}`)
+      .join('\n\n');
+    copyAll(text);
+  }, [allMessages, copyAll]);
+
+  const handleSpeak = () => {
+    if (isSpeaking) {
+      stop();
+    } else {
+      speak();
+    }
+  };
+
+  return (
+    <div
+      className={cn(
+        'absolute -bottom-4 right-0 flex items-center gap-1 p-1 rounded-full bg-black/20 border border-white/10 opacity-0 transition-all duration-300',
+        // Show on group-hover (desktop) or when isVisible is true (mobile tap)
+        'group-hover:opacity-100 group-hover:-bottom-5',
+        isVisible && 'opacity-100 -bottom-5'
+      )}
+    >
+      {isAI && (
+        <>
+          <button
+            onClick={() => {
+              setLiked(!liked);
+              setDisliked(false);
+            }}
+            title="Like"
+            className={cn('icon-action-btn', liked && 'text-green-400')}
+          >
+            <ThumbsUp className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => {
+              setDisliked(!disliked);
+              setLiked(false);
+            }}
+            title="Dislike"
+            className={cn('icon-action-btn', disliked && 'text-red-400')}
+          >
+            <ThumbsDown className="w-4 h-4" />
+          </button>
+        </>
+      )}
+
+      {allMessages && allMessages.length > 1 && (
+        <button
+          onClick={handleCopyAll}
+          title={allCopied ? 'Copied All!' : 'Copy All Messages'}
+          className={cn('icon-action-btn', allCopied && 'text-green-400')}
+        >
+          {allCopied ? (
+            <Check className="w-4 h-4" />
+          ) : (
+            <Copy className="w-4 h-4 rotate-45" />
+          )}
+        </button>
+      )}
+      <button
+        onClick={() => copySingle(msg.text)}
+        title={singleCopied ? 'Copied!' : 'Copy Message'}
+        className={cn('icon-action-btn', singleCopied && 'text-green-400')}
+      >
+        {singleCopied ? (
+          <Check className="w-4 h-4" />
+        ) : (
+          <Copy className="w-4 h-4" />
+        )}
+      </button>
+
+      {isAI && onRegenerate && !isSpeaking && (
+        <button
+          onClick={onRegenerate}
+          title="Regenerate"
+          className="icon-action-btn"
+        >
+          <RefreshCw className="w-4 h-4" />
+        </button>
+      )}
+
+      {isAI && (
+        <button
+          onClick={handleSpeak}
+          title={isSpeaking ? 'Stop' : 'Speak'}
+          className={cn('icon-action-btn', isSpeaking && 'text-blue-400')}
+        >
+          {isSpeaking ? (
+            <X className="w-4 h-4 animate-pulse" />
+          ) : (
+            <Volume2 className="w-4 h-4" />
+          )}
+        </button>
+      )}
+    </div>
+  );
+};
+
 export default function ChatMessageBubble({
   msg,
   onRegenerate,
@@ -76,61 +196,7 @@ export default function ChatMessageBubble({
   allMessages?: ChatMessage[];
 }) {
   const isAI = msg.sender === 'ai';
-  const [liked, setLiked] = useState(false);
-  const [disliked, setDisliked] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false);
   const [actionsVisible, setActionsVisible] = useState(false);
-
-  // Copy single message
-  const handleCopy = () => {
-    navigator.clipboard.writeText(msg.text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
-  };
-
-  // Copy all messages
-  const handleCopyAll = () => {
-    if (!allMessages || !allMessages.length) return;
-    const text = allMessages
-      .map((m) => `${m.sender === 'ai' ? 'AI' : 'User'}: ${m.text}`)
-      .join('\n\n');
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
-  };
-
-  // Speak / Stop Speaking
-  const handleSpeak = () => {
-    if (isSpeaking) {
-      speechSynthesis.cancel();
-      setIsSpeaking(false);
-      return;
-    }
-    if (!msg.text) return;
-    const utter = new SpeechSynthesisUtterance(msg.text);
-
-    // --- Voice Tone Enhancement ---
-    // Find a high-quality voice if available
-    const voices = speechSynthesis.getVoices();
-    const preferredVoice =
-      voices.find(
-        (voice) =>
-          /en-US/i.test(voice.lang) && /google|microsoft/i.test(voice.name)
-      ) || voices.find((voice) => /en-US/i.test(voice.lang));
-
-    if (preferredVoice) {
-      utter.voice = preferredVoice;
-    }
-    utter.pitch = 1; // Range from 0 to 2, 1 is default
-    utter.rate = 1.1; // Range from 0.1 to 10, 1 is default
-    // --- End Enhancement ---
-
-    utter.onstart = () => setIsSpeaking(true);
-    utter.onend = () => setIsSpeaking(false);
-    utter.onerror = () => setIsSpeaking(false);
-    speechSynthesis.speak(utter);
-  };
 
   return (
     <motion.div
@@ -165,82 +231,12 @@ export default function ChatMessageBubble({
       </div>
 
       {/* Action Buttons - Appear on Hover */}
-      <div
-        className={cn(
-          'absolute -bottom-4 right-0 flex items-center gap-1 p-1 rounded-full bg-black/20 border border-white/10 opacity-0 transition-all duration-300',
-          // Show on group-hover (desktop) or when actionsVisible is true (mobile tap)
-          'group-hover:opacity-100 group-hover:-bottom-5',
-          actionsVisible && 'opacity-100 -bottom-5'
-        )}
-      >
-        {isAI && (
-          <>
-            <button
-              onClick={() => {
-                setLiked(!liked);
-                setDisliked(false);
-              }}
-              title="Like"
-              className={cn('icon-action-btn', liked && 'text-green-400')}
-            >
-              <ThumbsUp className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => {
-                setDisliked(!disliked);
-                setLiked(false);
-              }}
-              title="Dislike"
-              className={cn('icon-action-btn', disliked && 'text-red-400')}
-            >
-              <ThumbsDown className="w-4 h-4" />
-            </button>
-          </>
-        )}
-
-        {allMessages && allMessages.length > 1 && (
-          <button
-            onClick={handleCopyAll}
-            title="Copy All Messages"
-            className="icon-action-btn"
-          >
-            <Copy className="w-4 h-4 rotate-45" />
-          </button>
-        )}
-        <button
-          onClick={handleCopy}
-          title={copied ? 'Copied!' : 'Copy Message'}
-          className={cn('icon-action-btn', copied && 'text-green-400')}
-        >
-          {copied ? (
-            <Check className="w-4 h-4" />
-          ) : (
-            <Copy className="w-4 h-4" />
-          )}
-        </button>
-
-        {isAI && onRegenerate && !isSpeaking && (
-          <button
-            onClick={onRegenerate}
-            title="Regenerate"
-            className="icon-action-btn"
-          >
-            <RefreshCw className="w-4 h-4" />
-          </button>
-        )}
-
-        <button
-          onClick={handleSpeak}
-          title={isSpeaking ? 'Stop' : 'Speak'}
-          className={cn('icon-action-btn', isSpeaking && 'text-blue-400')}
-        >
-          {isSpeaking ? (
-            <X className="w-4 h-4 animate-pulse" />
-          ) : (
-            <Volume2 className="w-4 h-4" />
-          )}
-        </button>
-      </div>
+      <ChatMessageActions
+        msg={msg}
+        allMessages={allMessages}
+        onRegenerate={onRegenerate}
+        isVisible={actionsVisible}
+      />
     </motion.div>
   );
 }
