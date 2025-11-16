@@ -80,6 +80,7 @@ export default function ChatMessageBubble({
   const [disliked, setDisliked] = useState(false);
   const [copied, setCopied] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [actionsVisible, setActionsVisible] = useState(false);
 
   // Copy single message
   const handleCopy = () => {
@@ -136,11 +137,13 @@ export default function ChatMessageBubble({
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
+      onClick={() => setActionsVisible((v) => !v)}
       className={cn(
         'group max-w-[80%] px-4 py-3 rounded-xl shadow-md backdrop-blur-md break-words whitespace-pre-wrap relative mb-4',
         isAI // AI messages: light gray on dark background
           ? 'bg-white/10 text-white self-start' // User messages: vibrant blue
-          : 'bg-white/85 text-black font-semibold self-end'
+          : 'bg-white/85 text-black font-semibold self-end',
+        actionsVisible && 'z-10' // Ensure it's on top when actions are visible
       )}
     >
       {/* Markdown Content */}
@@ -162,7 +165,14 @@ export default function ChatMessageBubble({
       </div>
 
       {/* Action Buttons - Appear on Hover */}
-      <div className="absolute -bottom-4 right-0 flex items-center gap-1 p-1 rounded-full bg-black/20 border border-white/10 opacity-0 group-hover:opacity-100 group-hover:-bottom-5 transition-all duration-300">
+      <div
+        className={cn(
+          'absolute -bottom-4 right-0 flex items-center gap-1 p-1 rounded-full bg-black/20 border border-white/10 opacity-0 transition-all duration-300',
+          // Show on group-hover (desktop) or when actionsVisible is true (mobile tap)
+          'group-hover:opacity-100 group-hover:-bottom-5',
+          actionsVisible && 'opacity-100 -bottom-5'
+        )}
+      >
         {isAI && (
           <>
             <button
