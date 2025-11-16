@@ -1,5 +1,12 @@
 [
   {
+    "action": "full-clean",
+    "status": "success",
+    "duration": 705217,
+    "timestamp": "2025-11-16T09:53:01.396Z",
+    "user": "adars"
+  },
+  {
     "action": "tests",
     "status": "failed",
     "duration": 19204,
