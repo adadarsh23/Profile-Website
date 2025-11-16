@@ -111,7 +111,7 @@ export default defineConfig({
         runtimeCaching: [
           // Cache API calls to your backend
           {
-            urlPattern: ({ url }) => url.origin === 'https://ai-assistant-server-colf.onrender.com',
+            urlPattern: ({ url }) => url.origin === 'https://ai-assistant-server-colf.onrender.com/api/gemini',
             handler: 'NetworkFirst',
             options: {
               cacheName: 'ai-assistant-api-cache',
@@ -198,7 +198,7 @@ export default defineConfig({
     proxy: {
       // Proxy API requests to your backend server during development
       '/api': {
-        target: 'https://ai-assistant-server-colf.onrender.com',
+        target: 'https://ai-assistant-server-colf.onrender.com/api/gemini',
         changeOrigin: true,
         // Optional: if your backend doesn't have the '/api' prefix
         // rewrite: (path) => path.replace(/^\/api/, ''),
