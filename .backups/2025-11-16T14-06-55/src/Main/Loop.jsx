@@ -33,17 +33,22 @@ export default function Loop() {
   }, []);
   return (
     <section className="bg-black text-white mb-30 flex flex-col space-y-10">
-      <Suspense fallback={
-        <div>
-          <Loading />
-        </div>
-      }
+      <Suspense
+        fallback={
+          <div>
+            <Loading />
+          </div>
+        }
       >
         <div style={{ width: '100%' }} className="flex flex-col space-y-10">
           {loopConfigurations.map((config, i) => (
             <div
               key={i}
-              style={{ height: '60px', position: 'relative', overflow: 'hidden' }}
+              style={{
+                height: '60px',
+                position: 'relative',
+                overflow: 'hidden',
+              }}
               className="relative overflow-hidden h-24 sm:h-32 md:h-48 w-full"
             >
               <LogoLoop

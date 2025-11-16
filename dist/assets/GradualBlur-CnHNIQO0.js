@@ -1,0 +1,208 @@
+import { R as e, r as t, p as o, n as i, j as r } from './vendor-CLKqtzgM.js';
+const n = {
+    position: 'bottom',
+    strength: 2,
+    height: '6rem',
+    divCount: 5,
+    exponential: !1,
+    zIndex: 1e3,
+    animated: !1,
+    duration: '0.3s',
+    easing: 'ease-out',
+    opacity: 1,
+    curve: 'linear',
+    responsive: !1,
+    target: 'parent',
+    className: '',
+    style: {},
+  },
+  s = {
+    top: { position: 'top', height: '6rem' },
+    bottom: { position: 'bottom', height: '6rem' },
+    left: { position: 'left', height: '6rem' },
+    right: { position: 'right', height: '6rem' },
+    subtle: { height: '4rem', strength: 1, opacity: 0.8, divCount: 3 },
+    intense: { height: '10rem', strength: 4, divCount: 8, exponential: !0 },
+    smooth: { height: '8rem', curve: 'bezier', divCount: 10 },
+    sharp: { height: '5rem', curve: 'linear', divCount: 4 },
+    header: { position: 'top', height: '8rem', curve: 'ease-out' },
+    footer: { position: 'bottom', height: '8rem', curve: 'ease-out' },
+    sidebar: { position: 'left', height: '6rem', strength: 2.5 },
+    'page-header': {
+      position: 'top',
+      height: '10rem',
+      target: 'page',
+      strength: 3,
+    },
+    'page-footer': {
+      position: 'bottom',
+      height: '10rem',
+      target: 'page',
+      strength: 3,
+    },
+  },
+  a = {
+    linear: (e) => e,
+    bezier: (e) => e * e * (3 - 2 * e),
+    'ease-in': (e) => e * e,
+    'ease-out': (e) => 1 - Math.pow(1 - e, 2),
+    'ease-in-out': (e) =>
+      e < 0.5 ? 2 * e * e : 1 - Math.pow(-2 * e + 2, 2) / 2,
+  },
+  getGradientDirection = (e) =>
+    ({
+      top: 'to top',
+      bottom: 'to bottom',
+      left: 'to left',
+      right: 'to right',
+    })[e] || 'to bottom',
+  useResponsiveDimension = (e, o, i) => {
+    const [r, n] = t.useState(o[i]);
+    return (
+      t.useEffect(() => {
+        if (!e) return;
+        const calc = () => {
+            const e = window.innerWidth;
+            let t = o[i];
+            (e <= 480 && o['mobile' + i[0].toUpperCase() + i.slice(1)]
+              ? (t = o['mobile' + i[0].toUpperCase() + i.slice(1)])
+              : e <= 768 && o['tablet' + i[0].toUpperCase() + i.slice(1)]
+                ? (t = o['tablet' + i[0].toUpperCase() + i.slice(1)])
+                : e <= 1024 &&
+                  o['desktop' + i[0].toUpperCase() + i.slice(1)] &&
+                  (t = o['desktop' + i[0].toUpperCase() + i.slice(1)]),
+              n(t));
+          },
+          t = ((e, t) => {
+            let o;
+            return (...i) => {
+              (clearTimeout(o), (o = setTimeout(() => e(...i), t)));
+            };
+          })(calc, 100);
+        return (
+          calc(),
+          window.addEventListener('resize', t),
+          () => window.removeEventListener('resize', t)
+        );
+      }, [e, o, i]),
+      e ? r : o[i]
+    );
+  },
+  l = e.memo((e) => {
+    const l = t.useRef(null),
+      [p, u] = t.useState(!1),
+      h = t.useMemo(() => {
+        const t = e.preset && s[e.preset] ? s[e.preset] : {};
+        return ((...e) => e.reduce((e, t) => ({ ...e, ...t }), {}))(n, t, e);
+      }, [e]),
+      d = useResponsiveDimension(h.responsive, h, 'height'),
+      c = useResponsiveDimension(h.responsive, h, 'width'),
+      m = ((e, o = !1) => {
+        const [i, r] = t.useState(!o);
+        return (
+          t.useEffect(() => {
+            if (!o || !e.current) return;
+            const t = new IntersectionObserver(([e]) => r(e.isIntersecting), {
+              threshold: 0.1,
+            });
+            return (t.observe(e.current), () => t.disconnect());
+          }, [e, o]),
+          i
+        );
+      })(l, 'scroll' === h.animated),
+      g = t.useMemo(() => {
+        const e = [],
+          t = 100 / h.divCount,
+          n =
+            p && h.hoverIntensity ? h.strength * h.hoverIntensity : h.strength,
+          s = a[h.curve] || a.linear;
+        for (let a = 1; a <= h.divCount; a++) {
+          let l,
+            p = a / h.divCount;
+          ((p = s(p)),
+            (l = h.exponential
+              ? 0.0625 * o(2, 4 * p) * n
+              : 0.0625 * (p * h.divCount + 1) * n));
+          const u = i(10 * (t * a - t)) / 10,
+            d = i(t * a * 10) / 10,
+            c = i(10 * (t * a + t)) / 10,
+            m = i(10 * (t * a + 2 * t)) / 10;
+          let g = `transparent ${u}%, black ${d}%`;
+          (c <= 100 && (g += `, black ${c}%`),
+            m <= 100 && (g += `, transparent ${m}%`));
+          const v = getGradientDirection(h.position),
+            b = {
+              position: 'absolute',
+              inset: '0',
+              maskImage: `linear-gradient(${v}, ${g})`,
+              WebkitMaskImage: `linear-gradient(${v}, ${g})`,
+              backdropFilter: `blur(${l.toFixed(3)}rem)`,
+              WebkitBackdropFilter: `blur(${l.toFixed(3)}rem)`,
+              opacity: h.opacity,
+              transition:
+                h.animated && 'scroll' !== h.animated
+                  ? `backdrop-filter ${h.duration} ${h.easing}`
+                  : void 0,
+            };
+          e.push(r.jsx('div', { style: b }, a));
+        }
+        return e;
+      }, [h, p]),
+      v = t.useMemo(() => {
+        const e = ['top', 'bottom'].includes(h.position),
+          t = ['left', 'right'].includes(h.position),
+          o = 'page' === h.target,
+          i = {
+            position: o ? 'fixed' : 'absolute',
+            pointerEvents: h.hoverIntensity ? 'auto' : 'none',
+            opacity: m ? 1 : 0,
+            transition: h.animated
+              ? `opacity ${h.duration} ${h.easing}`
+              : void 0,
+            zIndex: o ? h.zIndex + 100 : h.zIndex,
+            ...h.style,
+          };
+        return (
+          e
+            ? ((i.height = d),
+              (i.width = c || '100%'),
+              (i[h.position] = 0),
+              (i.left = 0),
+              (i.right = 0))
+            : t &&
+              ((i.width = c || d),
+              (i.height = '100%'),
+              (i[h.position] = 0),
+              (i.top = 0),
+              (i.bottom = 0)),
+          i
+        );
+      }, [h, d, c, m]),
+      {
+        hoverIntensity: b,
+        animated: f,
+        onAnimationComplete: C,
+        duration: $,
+      } = h;
+    return (
+      t.useEffect(() => {
+        if (m && 'scroll' === f && C) {
+          const e = setTimeout(() => C(), 1e3 * parseFloat($));
+          return () => clearTimeout(e);
+        }
+      }, [m, f, C, $]),
+      r.jsx('div', {
+        ref: l,
+        className: `gradual-blur ${'page' === h.target ? 'gradual-blur-page' : 'gradual-blur-parent'} ${h.className}`,
+        style: v,
+        onMouseEnter: b ? () => u(!0) : void 0,
+        onMouseLeave: b ? () => u(!1) : void 0,
+        children: r.jsx('div', {
+          className: 'gradual-blur-inner relative w-full h-full',
+          children: g,
+        }),
+      })
+    );
+  });
+((l.displayName = 'GradualBlur'), (l.PRESETS = s), (l.CURVE_FUNCTIONS = a));
+export { l as default };

@@ -202,11 +202,7 @@ export default function AIChatCard({
       <div className="relative flex flex-col w-full h-full rounded-xl border border-white/10 overflow-hidden bg-black/90 backdrop-blur-xl">
         {/* Header */}
         <div className="flex justify-between items-center px-4 py-3 border-b border-white/10 z-10 flex-wrap gap-2">
-          <img
-            src={logoUrl}
-            alt="Adarsh Logo"
-            className="w-8 h-8 rounded"
-          />
+          <img src={logoUrl} alt="Adarsh Logo" className="w-8 h-8 rounded" />
           <h2 className="text-lg font-semibold text-white">AD Assistant</h2>
           <div className="flex items-center gap-3">
             <button

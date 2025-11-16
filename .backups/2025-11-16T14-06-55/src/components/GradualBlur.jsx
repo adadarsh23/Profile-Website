@@ -16,7 +16,7 @@ const DEFAULT_CONFIG = {
   responsive: false,
   target: 'parent',
   className: '',
-  style: {}
+  style: {},
 };
 
 const PRESETS = {
@@ -31,26 +31,37 @@ const PRESETS = {
   header: { position: 'top', height: '8rem', curve: 'ease-out' },
   footer: { position: 'bottom', height: '8rem', curve: 'ease-out' },
   sidebar: { position: 'left', height: '6rem', strength: 2.5 },
-  'page-header': { position: 'top', height: '10rem', target: 'page', strength: 3 },
-  'page-footer': { position: 'bottom', height: '10rem', target: 'page', strength: 3 }
+  'page-header': {
+    position: 'top',
+    height: '10rem',
+    target: 'page',
+    strength: 3,
+  },
+  'page-footer': {
+    position: 'bottom',
+    height: '10rem',
+    target: 'page',
+    strength: 3,
+  },
 };
 
 const CURVE_FUNCTIONS = {
-  linear: p => p,
-  bezier: p => p * p * (3 - 2 * p),
-  'ease-in': p => p * p,
-  'ease-out': p => 1 - Math.pow(1 - p, 2),
-  'ease-in-out': p => (p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2)
+  linear: (p) => p,
+  bezier: (p) => p * p * (3 - 2 * p),
+  'ease-in': (p) => p * p,
+  'ease-out': (p) => 1 - Math.pow(1 - p, 2),
+  'ease-in-out': (p) => (p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2),
 };
 
-const mergeConfigs = (...configs) => configs.reduce((acc, c) => ({ ...acc, ...c }), {});
+const mergeConfigs = (...configs) =>
+  configs.reduce((acc, c) => ({ ...acc, ...c }), {});
 
-const getGradientDirection = position => {
+const getGradientDirection = (position) => {
   const directions = {
     top: 'to top',
     bottom: 'to bottom',
     left: 'to left',
-    right: 'to right'
+    right: 'to right',
   };
   return directions[position] || 'to bottom';
 };
@@ -72,9 +83,15 @@ const useResponsiveDimension = (responsive, config, key) => {
       let v = config[key];
       if (w <= 480 && config['mobile' + key[0].toUpperCase() + key.slice(1)])
         v = config['mobile' + key[0].toUpperCase() + key.slice(1)];
-      else if (w <= 768 && config['tablet' + key[0].toUpperCase() + key.slice(1)])
+      else if (
+        w <= 768 &&
+        config['tablet' + key[0].toUpperCase() + key.slice(1)]
+      )
         v = config['tablet' + key[0].toUpperCase() + key.slice(1)];
-      else if (w <= 1024 && config['desktop' + key[0].toUpperCase() + key.slice(1)])
+      else if (
+        w <= 1024 &&
+        config['desktop' + key[0].toUpperCase() + key.slice(1)]
+      )
         v = config['desktop' + key[0].toUpperCase() + key.slice(1)];
       setVal(v);
     };
@@ -92,7 +109,10 @@ const useIntersectionObserver = (ref, shouldObserve = false) => {
   useEffect(() => {
     if (!shouldObserve || !ref.current) return;
 
-    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.1 });
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
 
     observer.observe(ref.current);
     return () => observer.disconnect();
@@ -101,24 +121,38 @@ const useIntersectionObserver = (ref, shouldObserve = false) => {
   return isVisible;
 };
 
-const GradualBlur = props => {
+const GradualBlur = (props) => {
   const containerRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
   const config = useMemo(() => {
-    const presetConfig = props.preset && PRESETS[props.preset] ? PRESETS[props.preset] : {};
+    const presetConfig =
+      props.preset && PRESETS[props.preset] ? PRESETS[props.preset] : {};
     return mergeConfigs(DEFAULT_CONFIG, presetConfig, props);
   }, [props]);
 
-  const responsiveHeight = useResponsiveDimension(config.responsive, config, 'height');
-  const responsiveWidth = useResponsiveDimension(config.responsive, config, 'width');
-  const isVisible = useIntersectionObserver(containerRef, config.animated === 'scroll');
+  const responsiveHeight = useResponsiveDimension(
+    config.responsive,
+    config,
+    'height'
+  );
+  const responsiveWidth = useResponsiveDimension(
+    config.responsive,
+    config,
+    'width'
+  );
+  const isVisible = useIntersectionObserver(
+    containerRef,
+    config.animated === 'scroll'
+  );
 
   const blurDivs = useMemo(() => {
     const divs = [];
     const increment = 100 / config.divCount;
     const currentStrength =
-      isHovered && config.hoverIntensity ? config.strength * config.hoverIntensity : config.strength;
+      isHovered && config.hoverIntensity
+        ? config.strength * config.hoverIntensity
+        : config.strength;
 
     const curveFunc = CURVE_FUNCTIONS[config.curve] || CURVE_FUNCTIONS.linear;
 
@@ -153,7 +187,7 @@ const GradualBlur = props => {
         transition:
           config.animated && config.animated !== 'scroll'
             ? `backdrop-filter ${config.duration} ${config.easing}`
-            : undefined
+            : undefined,
       };
 
       divs.push(<div key={i} style={divStyle} />);
@@ -171,9 +205,11 @@ const GradualBlur = props => {
       position: isPageTarget ? 'fixed' : 'absolute',
       pointerEvents: config.hoverIntensity ? 'auto' : 'none',
       opacity: isVisible ? 1 : 0,
-      transition: config.animated ? `opacity ${config.duration} ${config.easing}` : undefined,
+      transition: config.animated
+        ? `opacity ${config.duration} ${config.easing}`
+        : undefined,
       zIndex: isPageTarget ? config.zIndex + 100 : config.zIndex,
-      ...config.style
+      ...config.style,
     };
 
     if (isVertical) {
@@ -196,7 +232,10 @@ const GradualBlur = props => {
   const { hoverIntensity, animated, onAnimationComplete, duration } = config;
   useEffect(() => {
     if (isVisible && animated === 'scroll' && onAnimationComplete) {
-      const t = setTimeout(() => onAnimationComplete(), parseFloat(duration) * 1000);
+      const t = setTimeout(
+        () => onAnimationComplete(),
+        parseFloat(duration) * 1000
+      );
       return () => clearTimeout(t);
     }
   }, [isVisible, animated, onAnimationComplete, duration]);
@@ -209,7 +248,9 @@ const GradualBlur = props => {
       onMouseEnter={hoverIntensity ? () => setIsHovered(true) : undefined}
       onMouseLeave={hoverIntensity ? () => setIsHovered(false) : undefined}
     >
-      <div className="gradual-blur-inner relative w-full h-full">{blurDivs}</div>
+      <div className="gradual-blur-inner relative w-full h-full">
+        {blurDivs}
+      </div>
     </div>
   );
 };

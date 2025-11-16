@@ -7,7 +7,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
         <div className=" mt-10.5 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
           <span className="text-sm text-gray-300 text-center md:text-left">
-             &copy; 2025 - Built by{' '}
+            &copy; 2025 - Built by{' '}
             <a
               href="https://github.com/adadarsh23"
               target="_blank"

@@ -13,5 +13,5 @@ export const initGA = () => {
 
 export const trackPage = (path) => {
   if (!GA_MEASUREMENT_ID) return;
-  ReactGA.send({ hitType: "pageview", page: path });
+  ReactGA.send({ hitType: 'pageview', page: path });
 };

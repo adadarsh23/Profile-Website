@@ -1,4 +1,4 @@
-import React, { useEffect, useState , lazy } from 'react';
+import React, { useEffect, useState, lazy } from 'react';
 const Loading = lazy(() => import('./Loading.jsx'));
 
 // Safer dynamic loader that logs module shape and falls back gracefully.

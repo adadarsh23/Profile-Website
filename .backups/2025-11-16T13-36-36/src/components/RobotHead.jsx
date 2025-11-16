@@ -5,7 +5,6 @@ import * as THREE from 'three';
 // Ultra-Enhanced Config (unchanged)
 import CONFIG from '../Config/robotConfig.js';
 
-
 export default function RobotHead({ cursor, isHovered }) {
   const headRef = useRef();
   const leftEyeRef = useRef();

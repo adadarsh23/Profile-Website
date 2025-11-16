@@ -417,7 +417,7 @@ npm run build
 # - Sitemap
 
 # Bundle Analysis
-ANALYZE=true npm run build
+$env:ANALYZE="true"; npm run build
 # Generates stats.html treemap for analysis
 
 # Legacy Support (optional)

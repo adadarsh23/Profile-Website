@@ -27,7 +27,8 @@ export class ErrorBoundary extends React.Component {
               Oops! Something went wrong.
             </h2>
             <p className="mb-4 max-w-md">
-              An unexpected error occurred. We've logged the issue and are looking into it. Please try reloading the page.
+              An unexpected error occurred. We've logged the issue and are
+              looking into it. Please try reloading the page.
             </p>
             <button
               onClick={() => window.location.reload()}

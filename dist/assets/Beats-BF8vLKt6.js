@@ -1,0 +1,155 @@
+import { r as e, j as t, m as a, aE as i, aF as s } from './vendor-CLKqtzgM.js';
+const l = e.memo(function ({ items: l = [], baseRadius: r = 220 }) {
+  const [o, n] = e.useState(window.innerWidth),
+    [d, c] = e.useState(null);
+  e.useEffect(() => {
+    const handleResize = () => n(window.innerWidth);
+    return (
+      window.addEventListener('resize', handleResize),
+      () => window.removeEventListener('resize', handleResize)
+    );
+  }, []);
+  const u = e.useMemo(() => Math.min(Math.max(o / 5, 120), 1.6 * r), [o, r]),
+    m = o < 480 || l.length > 10,
+    h = e.useMemo(() => {
+      if (m) return [];
+      const e = l.length;
+      return l.map((t, a) => {
+        const i = (a / e) * 2 * Math.PI;
+        return { x: u + u * Math.cos(i) - 80, y: u + u * Math.sin(i) - 90 };
+      });
+    }, [l, u, m]);
+  return t.jsxs('div', {
+    className:
+      'relative mx-auto ' +
+      (m ? 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6' : ''),
+    style: m ? {} : { width: 2 * u, height: 2 * u },
+    children: [
+      0 === l.length &&
+        t.jsx('div', {
+          className: 'text-center text-gray-400 py-12 w-full',
+          children: '🎧 No beats available yet',
+        }),
+      l.map((e, l) => {
+        const { x: r, y: o } = h[l] || {},
+          n = d === e.id;
+        return t.jsx(
+          a.div,
+          {
+            role: 'article',
+            'aria-label': `Beat: ${e.title}`,
+            tabIndex: 0,
+            style: m
+              ? {}
+              : {
+                  position: 'absolute',
+                  left: r,
+                  top: o,
+                  width: 'clamp(130px, 20vw, 210px)',
+                  height: 'clamp(170px, 30vw, 250px)',
+                },
+            whileHover: {
+              scale: 1.06,
+              rotate: 0,
+              transition: { duration: 0.25 },
+            },
+            whileTap: { scale: 0.95 },
+            initial: { opacity: 0, scale: 0.85 },
+            animate: { opacity: 1, scale: 1 },
+            transition: { duration: 0.5, delay: 0.08 * l },
+            children: t.jsx('div', {
+              className:
+                'relative group bg-black/90 backdrop-blur-xl rounded-2xl p-3 w-full h-full shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/10 focus-within:ring-2 focus-within:ring-white/30',
+              children: t.jsxs('div', {
+                className: 'flex flex-col h-full',
+                children: [
+                  t.jsxs('div', {
+                    className:
+                      'relative mb-3 aspect-[4/3] overflow-hidden rounded-lg',
+                    children: [
+                      t.jsx('img', {
+                        src: e.image,
+                        alt: e.title || 'Beat Cover',
+                        className:
+                          'w-full h-full object-cover rounded-lg shadow-md group-hover:scale-105 transition-transform duration-300',
+                        loading: 'lazy',
+                      }),
+                      t.jsx('div', {
+                        className:
+                          'absolute inset-0 bg-gradient-to-t from-black/70 to-transparent',
+                      }),
+                      t.jsx('button', {
+                        onClick: () =>
+                          ((e) => {
+                            if (d === e) {
+                              const t = document.getElementById(`audio-${e}`);
+                              (t && t.pause(), c(null));
+                            } else {
+                              if (null !== d) {
+                                const e = document.getElementById(`audio-${d}`);
+                                e && e.pause();
+                              }
+                              const t = document.getElementById(`audio-${e}`);
+                              t && (t.play(), c(e));
+                            }
+                          })(e.id, e.url),
+                        className:
+                          'absolute bottom-3 right-3 p-2 bg-white/20 backdrop-blur-md rounded-full hover:bg-white/40 transition',
+                        'aria-label': n ? 'Pause preview' : 'Play preview',
+                        children: n
+                          ? t.jsx(i, { className: 'w-4 h-4 text-white' })
+                          : t.jsx(s, { className: 'w-4 h-4 text-white' }),
+                      }),
+                      t.jsx('audio', { id: `audio-${e.id}`, src: e.url }),
+                    ],
+                  }),
+                  t.jsx('h3', {
+                    className:
+                      'text-white text-sm md:text-base font-semibold truncate mb-0.5',
+                    children: e.title,
+                  }),
+                  t.jsx('p', {
+                    className:
+                      'text-gray-400 text-xs md:text-sm mb-1 font-medium truncate',
+                    children: e.artist,
+                  }),
+                  t.jsxs('div', {
+                    className:
+                      'flex flex-wrap items-center gap-2 text-[10px] md:text-xs text-gray-300 mb-2',
+                    children: [
+                      e.bpm &&
+                        t.jsxs('span', {
+                          className: 'px-2 py-0.5 bg-white/10 rounded-full',
+                          children: [e.bpm, ' BPM'],
+                        }),
+                      e.duration &&
+                        t.jsx('span', {
+                          className: 'px-2 py-0.5 bg-white/10 rounded-full',
+                          children: e.duration,
+                        }),
+                    ],
+                  }),
+                  t.jsx('div', {
+                    className: 'mt-auto',
+                    children: t.jsx('a', {
+                      href: e.download,
+                      'aria-label': `Download or buy ${e.title}`,
+                      download: 'Free' === e.price || void 0,
+                      className: `block text-center focus:outline-none focus:ring-2 focus:ring-white/40 ${'Free' === e.price ? 'bg-white text-black hover:bg-gray-200' : 'bg-gradient-to-r from-gray-800 to-black hover:from-black hover:to-gray-900 text-white'} font-medium text-xs md:text-sm py-2 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-xl`,
+                      children:
+                        'Free' === e.price
+                          ? '⬇ Download'
+                          : `💳 Buy ${e.price}`,
+                    }),
+                  }),
+                ],
+              }),
+            }),
+          },
+          e.id || l
+        );
+      }),
+    ],
+  });
+});
+export { l as default };

@@ -251,7 +251,7 @@ npm run build
 ### Bundle Analysis
 
 ```bash
-ANALYZE=true npm run build
+$env:ANALYZE="true"; npm run build
 # Opens visual bundle analysis in stats.html
 ```
 

@@ -51,9 +51,7 @@ const RobotFaceWrapper = loadComponent(
   import('./components/RobotFaceWrapper.jsx')
 );
 
-const GradualBlur = loadComponent(
-  import('./components/GradualBlur.jsx')
-);
+const GradualBlur = loadComponent(import('./components/GradualBlur.jsx'));
 
 export default function App() {
   // const [isLoading, setIsLoading] = useState(true);
