@@ -6,7 +6,7 @@ export const musicData = [
     isSong: true,
     isLoading: false,
     previewUrl:
-      "https://adadarsh23.github.io/Profile-Website/Audio/Silent.mp3"
+      "/Profile-Website/Audio/Silent.mp3"
   },
   {
     artist: "Âd Adarsh",
@@ -15,7 +15,7 @@ export const musicData = [
     isSong: true,
     isLoading: false,
     previewUrl:
-      "https://adadarsh23.github.io/Profile-Website/Audio/Haqeeqat.mp3"
+      "/Profile-Website/Audio/Haqeeqat.mp3"
   },
   {
     artist: "Âd Adarsh",
@@ -24,7 +24,7 @@ export const musicData = [
     isSong: true,
     isLoading: false,
     previewUrl:
-      "https://adadarsh23.github.io/Profile-Website/Audio/NUmBer.mp3"
+      "/Profile-Website/Audio/NUmBer.mp3"
   },
   {
     artist: "Âd Adarsh",
@@ -33,7 +33,7 @@ export const musicData = [
     isSong: true,
     isLoading: false,
     previewUrl:
-      "https://adadarsh23.github.io/Profile-Website/Audio/Unfelling.mp3"
+      "/Profile-Website/Audio/Unfelling.mp3"
   },
   {
     artist: "Âd Adarsh",
@@ -42,6 +42,6 @@ export const musicData = [
     isSong: true,
     isLoading: false,
     previewUrl:
-      "https://adadarsh23.github.io/Profile-Website/Audio/Phaser.mp3"
+      "/Profile-Website/Audio/Phaser.mp3"
   }
 ];

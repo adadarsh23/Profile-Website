@@ -22,7 +22,7 @@ function Music1() {
   return (
     <section className="bg-black text-white  flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12 lg:mb-20">
       <BubbleText />
-      <div className="flex flex-wrap items-center justify-center gap-32">
+      <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 lg:gap-24 xl:gap-32">
         {musicData.map((song, index) => (
           <MusicArtwork key={index} {...song} />
         ))}
