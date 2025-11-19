@@ -6,7 +6,7 @@ export const musicData = [
     isSong: true,
     isLoading: false,
     previewUrl:
-      "https://raw.githubusercontent.com/adadarsh23/Profile-Website/blob/main/src/Data/Audio/Silent.mp3"
+      "https://adadarsh23.github.io/Profile-Website/Audio/Silent.mp3"
   },
   {
     artist: "Âd Adarsh",
@@ -14,7 +14,8 @@ export const musicData = [
     albumArt: "https://i1.sndcdn.com/artworks-WyygoNytrVM35zM8-e0lpEg-t1080x1080.png",
     isSong: true,
     isLoading: false,
-    previewUrl: "https://raw.githubusercontent.com/adadarsh23/Profile-Website/blob/main/src/Data/Audio/Haqeeqat.mp3" // Example URL
+    previewUrl:
+      "https://adadarsh23.github.io/Profile-Website/Audio/Haqeeqat.mp3"
   },
   {
     artist: "Âd Adarsh",
@@ -22,7 +23,8 @@ export const musicData = [
     albumArt: "https://i1.sndcdn.com/artworks-lJpQmt2g4vYhTHzf-IKxLfg-t1080x1080.jpg",
     isSong: true,
     isLoading: false,
-    previewUrl: "https://raw.githubusercontent.com/adadarsh23/Profile-Website/blob/main/src/Data/Audio/NUmBer.mp3" // Example URL
+    previewUrl:
+      "https://adadarsh23.github.io/Profile-Website/Audio/NUmBer.mp3"
   },
   {
     artist: "Âd Adarsh",
@@ -30,7 +32,8 @@ export const musicData = [
     albumArt: "https://i1.sndcdn.com/artworks-bomjdi0cYLIK2ise-FqxckA-t1080x1080.png",
     isSong: true,
     isLoading: false,
-    previewUrl: "https://raw.githubusercontent.com/adadarsh23/Profile-Website/blob/main/src/Data/Audio/Unfelling.mp3" // Example URL
+    previewUrl:
+      "https://adadarsh23.github.io/Profile-Website/Audio/Unfelling.mp3"
   },
   {
     artist: "Âd Adarsh",
@@ -38,6 +41,7 @@ export const musicData = [
     albumArt: "https://i1.sndcdn.com/artworks-njDMD8VzFGzRePRy-vDyuoA-t1080x1080.png",
     isSong: true,
     isLoading: false,
-    previewUrl: "https://raw.githubusercontent.com/adadarsh23/Profile-Website/blob/main/src/Data/Audio/Phaser.mp3" // Example URL
+    previewUrl:
+      "https://adadarsh23.github.io/Profile-Website/Audio/Phaser.mp3"
   }
 ];
