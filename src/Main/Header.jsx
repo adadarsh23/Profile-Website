@@ -93,8 +93,8 @@
 import React, { lazy, Suspense } from 'react';
 import '../font/Striper_Complete/Fonts/WEB/css/striper.css';
 import Loading from '../components/Loading';
-// import BlurText from '../components/BlurText';
-const BlurText = lazy(() => import('../components/BlurText'));
+import BlurText from '../components/BlurText';
+// const BlurText = lazy(() => import('../components/BlurText'));
 const Vortex = lazy(() => import('../components/Vortex'));
 
 // const Header = memo(function Header({ onAnimationComplete }) {
