@@ -95,6 +95,7 @@ import React, { lazy, Suspense } from 'react';
 const Loading = lazy(() => import('../components/Loading'));
 const BlurText = lazy(() => import('../components/BlurText'));
 const Vortex = lazy(() => import('../components/Vortex'));
+import '../font/Striper_Complete/Fonts/WEB/css/striper.css';
 
 export default function Header({ onAnimationComplete }) {
     const handleAnimationComplete = () => {
@@ -119,16 +120,16 @@ export default function Header({ onAnimationComplete }) {
           }
         >
           <BlurText
-            text="Welcome To Ad Adarsh Profile"
+            text="Welcome To Âd Adarsh Profile"
             delay={100}
             animateBy="words"
             direction="top"
             onAnimationComplete={handleAnimationComplete}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-center mb-6 sm:mb-8 flex flex-wrap justify-center items-center space-x-1 sm:space-x-2 text-white"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-center mb-6 sm:mb-8 flex flex-wrap justify-center items-center space-x-1 sm:space-x-2 text-white striper-regular"
           />
         </Suspense>
         </h2>
-        <p className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center">
+        <p className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center striper-regular">
           Explore my projects, beats, and music production works.
         </p>
         {/* <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
