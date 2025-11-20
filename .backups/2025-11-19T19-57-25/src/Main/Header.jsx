@@ -5,10 +5,10 @@
 // // const PrismaticBurst = lazy(() => import("../components/PrismaticBurst"));
 
 // export default function Header({ onAnimationComplete }) {
-  // const handleAnimationComplete = () => {
-  //   console.log('Animation completed!');
-  //   onAnimationComplete?.();
-  // };
+// const handleAnimationComplete = () => {
+//   console.log('Animation completed!');
+//   onAnimationComplete?.();
+// };
 
 //   return (
 //     <section className="relative w-full h-screen overflow-hidden bg-black flex flex-col items-center justify-center px-4 sm:px-6 md:px-12">
@@ -90,14 +90,13 @@
 //   );
 // }
 
-
 import React, { lazy, Suspense } from 'react';
 const Loading = lazy(() => import('../components/Loading'));
 const BlurText = lazy(() => import('../components/BlurText'));
 const Vortex = lazy(() => import('../components/Vortex'));
 
 export default function Header({ onAnimationComplete }) {
-    const handleAnimationComplete = () => {
+  const handleAnimationComplete = () => {
     console.log('Animation completed!');
     onAnimationComplete?.();
   };
@@ -112,21 +111,21 @@ export default function Header({ onAnimationComplete }) {
       >
         <h2 className="text-white text-2xl md:text-6xl font-bold text-center">
           <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
-          <BlurText
-            text="Welcome To Ad Adarsh Profile"
-            delay={100}
-            animateBy="words"
-            direction="top"
-            onAnimationComplete={handleAnimationComplete}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-center mb-6 sm:mb-8 flex flex-wrap justify-center items-center space-x-1 sm:space-x-2 text-white"
-          />
-        </Suspense>
+            fallback={
+              <div>
+                <Loading />
+              </div>
+            }
+          >
+            <BlurText
+              text="Welcome To Ad Adarsh Profile"
+              delay={100}
+              animateBy="words"
+              direction="top"
+              onAnimationComplete={handleAnimationComplete}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-center mb-6 sm:mb-8 flex flex-wrap justify-center items-center space-x-1 sm:space-x-2 text-white"
+            />
+          </Suspense>
         </h2>
         <p className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center">
           Explore my projects, beats, and music production works.
@@ -139,5 +138,5 @@ export default function Header({ onAnimationComplete }) {
         </div> */}
       </Vortex>
     </div>
-  )
+  );
 }

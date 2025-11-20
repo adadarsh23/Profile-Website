@@ -12,7 +12,12 @@ export default async function handler(req, res) {
     const CHANNEL_ID = process.env.VITE_YOUTUBE_CHANNEL_ID;
 
     if (!API_KEY || !CHANNEL_ID) {
-      return res.status(500).json({ error: 'YouTube API Key or Channel ID is not configured on the server.' });
+      return res
+        .status(500)
+        .json({
+          error:
+            'YouTube API Key or Channel ID is not configured on the server.',
+        });
     }
 
     // Step 1: Get the 'uploads' playlist ID from the channel ID
@@ -32,7 +37,8 @@ export default async function handler(req, res) {
       `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=1&key=${API_KEY}`
     );
 
-    const videoId = playlistRes.data.items?.[0]?.snippet?.resourceId?.videoId || null;
+    const videoId =
+      playlistRes.data.items?.[0]?.snippet?.resourceId?.videoId || null;
 
     return res.status(200).json({ videoId });
   } catch (error) {

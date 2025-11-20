@@ -12,7 +12,8 @@ const GAP = 40;
 const FADE_OUT_COLOR = '#000000';
 const ARIA_LABEL = 'My Socials and Platforms';
 
-const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const getRandomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
 const getRandomDirection = () => (Math.random() > 0.5 ? 'left' : 'right');
 
 // Fisher-Yates shuffle algorithm

@@ -48,7 +48,7 @@ export default function RobotHead({ cursor, isHovered }) {
       setTimeout(() => setBlinkState(1), CONFIG.eyes.blinkDuration);
       const nextBlink =
         Math.random() *
-        (CONFIG.eyes.blinkInterval[1] - CONFIG.eyes.blinkInterval[0]) +
+          (CONFIG.eyes.blinkInterval[1] - CONFIG.eyes.blinkInterval[0]) +
         CONFIG.eyes.blinkInterval[0];
       setTimeout(blinkLoop, nextBlink * (emotion === 'sleepy' ? 0.5 : 1));
     };
@@ -403,8 +403,8 @@ export default function RobotHead({ cursor, isHovered }) {
 
       antennaRef.current.rotation.z =
         Math.sin(t * CONFIG.antenna.wobbleSpeed) *
-        CONFIG.antenna.wobbleAmp *
-        wobbleIntensity +
+          CONFIG.antenna.wobbleAmp *
+          wobbleIntensity +
         Math.cos(t * CONFIG.antenna.wobbleSpeed * 0.6) * 0.08 * wobbleIntensity;
       antennaRef.current.rotation.x =
         Math.sin(t * 1.8) * 0.12 * wobbleIntensity +
@@ -439,8 +439,8 @@ export default function RobotHead({ cursor, isHovered }) {
       const pulseValue =
         0.09 +
         Math.sin(t * emotionData.pulseSpeed * 2.5) *
-        0.06 *
-        emotionData.energyLevel;
+          0.06 *
+          emotionData.energyLevel;
       glowRef.current.material.opacity = pulseValue * hoverBoost;
       glowRef.current.scale.setScalar(
         1.03 + Math.sin(t * emotionData.pulseSpeed * 1.5) * 0.015

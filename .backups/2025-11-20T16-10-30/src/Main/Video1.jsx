@@ -1,4 +1,3 @@
-
 import { useEffect, useState, lazy } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
@@ -115,7 +114,6 @@ export default function Video1() {
     </section>
   );
 }
-
 
 // import { useEffect, useState, lazy } from 'react';
 // import axios from 'axios';

@@ -1,48 +1,52 @@
 export const musicData = [
   {
     id: 1,
-    artist: "Âd Adarsh",
-    music: "Silent Ritual",
-    albumArt: "https://i1.sndcdn.com/artworks-P4DbVfnvKwyNYl4y-2qAruQ-t1080x1080.png",
+    artist: 'Âd Adarsh',
+    music: 'Silent Ritual',
+    albumArt:
+      'https://i1.sndcdn.com/artworks-P4DbVfnvKwyNYl4y-2qAruQ-t1080x1080.png',
     isSong: true,
     isLoading: false,
-    previewUrl:
-      `${import.meta.env.BASE_URL}Audio/Silent.mp3`
+    previewUrl: `${import.meta.env.BASE_URL}Audio/Silent.mp3`,
   },
   {
     id: 2,
-    artist: "Âd Adarsh",
-    music: "Haqeeqat",
-    albumArt: "https://i1.sndcdn.com/artworks-WyygoNytrVM35zM8-e0lpEg-t1080x1080.png",
+    artist: 'Âd Adarsh',
+    music: 'Haqeeqat',
+    albumArt:
+      'https://i1.sndcdn.com/artworks-WyygoNytrVM35zM8-e0lpEg-t1080x1080.png',
     isSong: true,
     isLoading: false,
-    previewUrl: `${import.meta.env.BASE_URL}Audio/Haqeeqat.mp3`
+    previewUrl: `${import.meta.env.BASE_URL}Audio/Haqeeqat.mp3`,
   },
   {
     id: 3,
-    artist: "Âd Adarsh",
-    music: "NUmber 2",
-    albumArt: "https://i1.sndcdn.com/artworks-lJpQmt2g4vYhTHzf-IKxLfg-t1080x1080.jpg",
+    artist: 'Âd Adarsh',
+    music: 'NUmber 2',
+    albumArt:
+      'https://i1.sndcdn.com/artworks-lJpQmt2g4vYhTHzf-IKxLfg-t1080x1080.jpg',
     isSong: true,
     isLoading: false,
-    previewUrl: `${import.meta.env.BASE_URL}Audio/NUmBer.mp3`
+    previewUrl: `${import.meta.env.BASE_URL}Audio/NUmBer.mp3`,
   },
   {
     id: 4,
-    artist: "Âd Adarsh",
-    music: "Unfelling",
-    albumArt: "https://i1.sndcdn.com/artworks-bomjdi0cYLIK2ise-FqxckA-t1080x1080.png",
+    artist: 'Âd Adarsh',
+    music: 'Unfelling',
+    albumArt:
+      'https://i1.sndcdn.com/artworks-bomjdi0cYLIK2ise-FqxckA-t1080x1080.png',
     isSong: true,
     isLoading: false,
-    previewUrl: `${import.meta.env.BASE_URL}Audio/Unfelling.mp3`
+    previewUrl: `${import.meta.env.BASE_URL}Audio/Unfelling.mp3`,
   },
   {
     id: 5,
-    artist: "Âd Adarsh",
-    music: "Phaser",
-    albumArt: "https://i1.sndcdn.com/artworks-njDMD8VzFGzRePRy-vDyuoA-t1080x1080.png",
+    artist: 'Âd Adarsh',
+    music: 'Phaser',
+    albumArt:
+      'https://i1.sndcdn.com/artworks-njDMD8VzFGzRePRy-vDyuoA-t1080x1080.png',
     isSong: true,
     isLoading: false,
-    previewUrl: `${import.meta.env.BASE_URL}Audio/Phaser.mp3`
-  }
+    previewUrl: `${import.meta.env.BASE_URL}Audio/Phaser.mp3`,
+  },
 ];

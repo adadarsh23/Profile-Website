@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
@@ -77,5 +76,5 @@ export default function Video1() {
       <VideoPlayer src={`https://www.youtube.com/embed/${videoId}`} />
       {/* <VideoPlayer src="https://videos.pexels.com/video-files/30333849/13003128_2560_1440_25fps.mp4"/> */}
     </section>
-  )
+  );
 }

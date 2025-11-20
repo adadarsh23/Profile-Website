@@ -52,8 +52,11 @@ export default function RobotFace() {
     ? '0 0 40px #ffffff, 0 0 80px #ffffff50, inset 0 0 20px #ffffff30'
     : '0 0 25px #ffffff, 0 0 50px #ffffff40, inset 0 0 15px #ffffff20';
 
-  const robotCanvas = useMemo(() => (
-    <ErrorBoundary fallback={<div className="w-full h-full bg-black rounded-full" />}>
+  const robotCanvas = useMemo(
+    () => (
+      <ErrorBoundary
+        fallback={<div className="w-full h-full bg-black rounded-full" />}
+      >
         <Canvas
           style={{ pointerEvents: 'none' }}
           camera={{ position: [0, 0, 3.5], fov: 50 }}
@@ -83,8 +86,10 @@ export default function RobotFace() {
             <Environment preset="city" />
           </Suspense>
         </Canvas>
-    </ErrorBoundary>
-  ), [cursor, velocity, isHovered]);
+      </ErrorBoundary>
+    ),
+    [cursor, velocity, isHovered]
+  );
 
   return (
     <div className="fixed bottom-4 right-14 sm:bottom-6 sm:right-18 z-50">

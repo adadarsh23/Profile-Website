@@ -90,7 +90,6 @@
 //   );
 // }
 
-
 import React, { lazy, Suspense, useEffect } from 'react';
 const Loading = lazy(() => import('../components/Loading'));
 const BlurText = lazy(() => import('../components/BlurText'));
@@ -142,5 +141,5 @@ export default function Header({ onAnimationComplete }) {
         </div> */}
       </Vortex>
     </div>
-  )
+  );
 }

@@ -61,27 +61,27 @@ export default defineConfig({
     // ✅ Bundle Visualizer - only run when ANALYZE=true
     ...(isAnalyze
       ? [
-        visualizer({
-          open: true, // Set to true to automatically open the report in your browser
-          filename: './stats.html',
-        }),
-      ]
+          visualizer({
+            open: true, // Set to true to automatically open the report in your browser
+            filename: './stats.html',
+          }),
+        ]
       : []),
     // removeConsole(),
     // ✅ Compression for production (Brotli + Gzip)
     ...(isProd
       ? [
-        compression({
-          algorithm: 'brotliCompress',
-          ext: '.br',
-          threshold: 1024, // Compress files > 1KB
-        }),
-        compression({
-          algorithm: 'gzip',
-          ext: '.gz',
-          threshold: 1024,
-        }),
-      ]
+          compression({
+            algorithm: 'brotliCompress',
+            ext: '.br',
+            threshold: 1024, // Compress files > 1KB
+          }),
+          compression({
+            algorithm: 'gzip',
+            ext: '.gz',
+            threshold: 1024,
+          }),
+        ]
       : []),
     // PWA plugin
     VitePWA({
@@ -111,7 +111,9 @@ export default defineConfig({
         runtimeCaching: [
           // Cache API calls to your backend
           {
-            urlPattern: ({ url }) => url.origin === 'https://ai-assistant-server-colf.onrender.com/api/gemini',
+            urlPattern: ({ url }) =>
+              url.origin ===
+              'https://ai-assistant-server-colf.onrender.com/api/gemini',
             handler: 'NetworkFirst',
             options: {
               cacheName: 'ai-assistant-api-cache',
@@ -173,11 +175,11 @@ export default defineConfig({
     // generated vendor chunks. Disable by default for modern deployments.
     ...(process.env.LEGACY_BUILD === 'true'
       ? [
-        legacy({
-          targets: ['defaults', 'Android >= 6', 'iOS >= 12'],
-          additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
-        }),
-      ]
+          legacy({
+            targets: ['defaults', 'Android >= 6', 'iOS >= 12'],
+            additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
+          }),
+        ]
       : []),
   ],
   resolve: {

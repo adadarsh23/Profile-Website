@@ -186,7 +186,11 @@ export default function Contact() {
                 className="bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-900 transition-colors disabled:bg-gray-500 disabled:cursor-not-allowed flex items-center justify-center"
               >
                 {loading ? (
-                  <button type="submit" disabled className="w-full h-full flex items-center justify-center">
+                  <button
+                    type="submit"
+                    disabled
+                    className="w-full h-full flex items-center justify-center"
+                  >
                     <>
                       <svg
                         className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
@@ -212,7 +216,9 @@ export default function Contact() {
                     </>
                   </button>
                 ) : (
-                  <button type="submit" className="w-full h-full">Send</button>
+                  <button type="submit" className="w-full h-full">
+                    Send
+                  </button>
                 )}
               </motion.div>
 

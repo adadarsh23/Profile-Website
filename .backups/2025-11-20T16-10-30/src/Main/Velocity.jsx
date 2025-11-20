@@ -23,7 +23,13 @@ export default function Velocity() {
   };
 
   return (
-    <motion.div ref={ref} className="overflow-hidden flex flex-col space-y-10" variants={containerVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
+    <motion.div
+      ref={ref}
+      className="overflow-hidden flex flex-col space-y-10"
+      variants={containerVariants}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+    >
       <ScrollVelocity
         texts={texts}
         velocity={100}

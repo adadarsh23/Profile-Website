@@ -31,7 +31,13 @@ export default function Scroll() {
   };
 
   return (
-    <motion.section ref={ref} className="bg-black" initial="hidden" animate={isInView ? 'visible' : 'hidden'} variants={containerVariants}>
+    <motion.section
+      ref={ref}
+      className="bg-black"
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      variants={containerVariants}
+    >
       <motion.div variants={itemVariants}>
         <InfiniteMenu items={socialLinks} />
       </motion.div>

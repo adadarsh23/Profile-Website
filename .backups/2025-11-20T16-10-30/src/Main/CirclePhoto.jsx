@@ -56,7 +56,9 @@ export default function CirclePhoto() {
         transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
         className="relative w-full h-[400px] sm:h-[500px] md:h-[600px]"
       >
-        <Suspense fallback={<div className="text-white">Loading Gallery...</div>}>
+        <Suspense
+          fallback={<div className="text-white">Loading Gallery...</div>}
+        >
           <CircularGallery
             bend={2}
             textColor="#ffffff"
