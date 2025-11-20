@@ -6,6 +6,7 @@ import { useAudioPlayer } from '@/hooks/useAudioPlayer';
 import { CustomSlider } from './CustomSlider';
 import { PlayPauseIcon } from './PlayPauseIcon';
 import { ArtworkTooltip } from './ArtworkTooltip';
+import Image from '../assets/topvinyl.png';
 
 interface MusicArtworkProps {
   artist: string;
@@ -124,10 +125,10 @@ const MusicArtwork = memo(function MusicArtwork({
           }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-          <div className="relative w-50 h-50 sm:w-70 sm:h-70">
+          <div className="relative w-45 h-45 sm:w-65 sm:h-65">
             <motion.div animate={vinylControls} className="w-full h-full">
               <img
-                src="https://pngimg.com/d/vinyl_PNG95.png"
+                src={Image}
                 alt="Vinyl Record"
                 className="w-full h-full object-contain"
                 loading="eager"

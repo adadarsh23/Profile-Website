@@ -91,19 +91,20 @@
 // }
 
 
-import React, { lazy, Suspense, memo } from 'react';
-
+import React, { lazy, Suspense } from 'react';
 import '../font/Striper_Complete/Fonts/WEB/css/striper.css';
 import Loading from '../components/Loading';
+// import BlurText from '../components/BlurText';
 const BlurText = lazy(() => import('../components/BlurText'));
 const Vortex = lazy(() => import('../components/Vortex'));
 
-const Header = memo(function Header({ onAnimationComplete }) {
-  const handleAnimationComplete = () => {
-    console.log('Animation completed!');
-    onAnimationComplete?.();
-  };
-  return (
+// const Header = memo(function Header({ onAnimationComplete }) {
+//   const handleAnimationComplete = () => {
+//     console.log('Animation completed!');
+//     onAnimationComplete?.();
+//   };
+function Header () {
+    return (
     <div className="relative w-full h-screen overflow-hidden bg-black flex flex-col items-center justify-center px-4 sm:px-6 md:px-12">
       <Vortex
         backgroundColor="black"
@@ -118,7 +119,7 @@ const Header = memo(function Header({ onAnimationComplete }) {
               delay={100}
               animateBy="words"
               direction="top"
-              onAnimationComplete={handleAnimationComplete}
+              // onAnimationComplete={handleAnimationComplete}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-center mb-6 sm:mb-8 flex flex-wrap justify-center items-center space-x-1 sm:space-x-2 text-white striper-regular"
             />
         </h2>
@@ -134,6 +135,7 @@ const Header = memo(function Header({ onAnimationComplete }) {
       </Vortex>
     </div>
   )
-});
+};
 
 export default Header;
+
