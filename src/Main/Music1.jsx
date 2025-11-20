@@ -5,21 +5,17 @@ import { musicData } from '../Data/musicData.jsx';
 const MusicArtwork = lazy(() => import('../components/MusicArt.tsx'));
 
 const BubbleText = ({ styles }) => {
-  if (!styles) return null;
-
-  const text = useMemo(() => 'Latest Music & Albums'.split(''), []);
-
+  if (!styles) return null; // Don't render until styles are loaded
   return (
     <motion.h2
-      className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl
-      font-light text-white p-4 sm:p-6 mb-8 md:mb-12 z-10 drop-shadow-lg"
+      className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white p-4 sm:p-6 mb-8 md:mb-12 z-10 drop-shadow-lg"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
-      {text.map((char, idx) => (
-        <span key={idx} className={styles.hoverText}>
-          {char}
+      {'Latest Music & Albums'.split('').map((child, idx) => (
+        <span className={styles.hoverText} key={idx}>
+          {child}
         </span>
       ))}
     </motion.h2>
@@ -30,14 +26,17 @@ function Music1() {
   const [styles, setStyles] = useState(null);
 
   // Load CSS module once
+  // useEffect(() => {
+  //   let mounted = true;
+  //   import('../Modules/bubble.module.css').then((mod) => {
+  //     if (mounted) setStyles(mod);
+  //   });
+  //   return () => {
+  //     mounted = false; // avoid memory leak
+  //   };
+  // }, []);
   useEffect(() => {
-    let mounted = true;
-    import('../Modules/bubble.module.css').then((mod) => {
-      if (mounted) setStyles(mod);
-    });
-    return () => {
-      mounted = false; // avoid memory leak
-    };
+    import('../Modules/bubble.module.css').then(setStyles);
   }, []);
 
   const containerVariants = useMemo(
