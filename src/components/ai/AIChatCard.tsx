@@ -25,6 +25,7 @@ import { useChatSession } from '../chat/useChatSession';
 import { useChatMemory } from '../chat/useChatMemory';
 import { formatResponse } from '../chat/formatResponse';
 import type { ChatMessage } from '../chat/chatTypes';
+import { aiSystemPrompt } from '../chat/aiInfo';
 import { useChatCompletion } from '../chat/useChatCompletion';
 import TypingIndicator, { AiStatus } from './TypingIndicator';
 import logoUrl from '../../assets/ai.png';
@@ -103,7 +104,12 @@ export default function AIChatCard({
         await new Promise((resolve) =>
           setTimeout(resolve, AI_THINKING_DELAY_MS)
         );
-        const aiText = await runChat([...messagesRef.current, userMsg]);
+        const historyWithSystemPrompt: ChatMessage[] = [
+          { sender: 'system', text: aiSystemPrompt, id: 'system-prompt' },
+          ...messagesRef.current,
+          userMsg,
+        ];
+        const aiText = await runChat(historyWithSystemPrompt);
         const formatted = formatResponse(aiText);
         const aiMsg: ChatMessage = {
           sender: 'ai',
@@ -155,7 +161,12 @@ export default function AIChatCard({
         await new Promise((resolve) =>
           setTimeout(resolve, AI_THINKING_DELAY_MS)
         );
-        const aiText = await runChat(historyForAi);
+        const historyWithSystemPrompt: ChatMessage[] = [
+          { sender: 'system', text: aiSystemPrompt, id: 'system-prompt' },
+          ...historyForAi,
+        ];
+
+        const aiText = await runChat(historyWithSystemPrompt);
         const formatted = formatResponse(aiText);
         const aiMsg: ChatMessage = {
           sender: 'ai',
@@ -197,7 +208,12 @@ export default function AIChatCard({
           await new Promise((resolve) =>
             setTimeout(resolve, AI_THINKING_DELAY_MS)
           );
-          const aiText = await runChat(historyToRegenerate);
+          const historyWithSystemPrompt: ChatMessage[] = [
+            { sender: 'system', text: aiSystemPrompt, id: 'system-prompt' },
+            ...historyToRegenerate,
+          ];
+
+          const aiText = await runChat(historyWithSystemPrompt);
           const formatted = formatResponse(aiText);
           const aiMsg: ChatMessage = {
             sender: 'ai',
