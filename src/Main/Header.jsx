@@ -90,10 +90,14 @@
 //   );
 // }
 
+
+
 import React, { lazy, Suspense } from 'react';
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react"
 import '../font/Striper_Complete/Fonts/WEB/css/striper.css';
 import Loading from '../components/Loading';
-import BlurText from '../components/BlurText';
+//import BlurText from '../components/BlurText';
 // const BlurText = lazy(() => import('../components/BlurText'));
 const Vortex = lazy(() => import('../components/Vortex'));
 
@@ -103,6 +107,63 @@ const Vortex = lazy(() => import('../components/Vortex'));
 //     onAnimationComplete?.();
 //   };
 function Header() {
+  const words = [
+    "Welcome To Âd Adarsh Profile",
+    "Crafting Dark Atmospheres",
+    "Producing Cinematic Beats",
+    "Where Sound Meets Emotion",
+    "Building Stories Through Music",
+    "Creating Sonic Worlds",
+    "Rhythms That Hit Deep",
+    "Mixing Raw Energy With Art",
+    "Sound Designed With Intent",
+    "Echoes Born From Silence",
+    "Beats Forged In Shadows",
+    "Music With A Pulse Of Its Own",
+    "Bass That Cuts Through The Dark",
+    "Every Sound Has A Story",
+    "Emotion Engineered In Waves",
+    "From Stillness To Impact",
+    "Creating Depth Through Noise",
+    "Dark Tones. Clean Edges.",
+    "When Vibes Turn Into Vision"
+  ];
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentWord = words[currentWordIndex];
+
+    if (isTyping && !isDeleting) {
+      // Typing forward
+      if (displayedText.length < currentWord.length) {
+        const timeout = setTimeout(() => {
+          setDisplayedText(currentWord.slice(0, displayedText.length + 1));
+        }, 100);
+        return () => clearTimeout(timeout);
+      } else {
+        // Wait before deleting
+        const timeout = setTimeout(() => {
+          setIsDeleting(true);
+        }, 2000);
+        return () => clearTimeout(timeout);
+      }
+    } else if (isDeleting) {
+      // Deleting
+      if (displayedText.length > 0) {
+        const timeout = setTimeout(() => {
+          setDisplayedText(displayedText.slice(0, -1));
+        }, 50);
+        return () => clearTimeout(timeout);
+      } else {
+        // Move to next word
+        setIsDeleting(false);
+        setCurrentWordIndex((prev) => (prev + 1) % words.length);
+      }
+    }
+  }, [displayedText, currentWordIndex, isTyping, isDeleting, words]);
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black flex flex-col items-center justify-center px-4 sm:px-6 md:px-12">
       <Vortex
@@ -112,16 +173,60 @@ function Header() {
         baseHue={1000}
         className="flex items-center flex-col justify-center px-2 md:px-10  py-4 w-full h-full"
       >
-        <h2 className="text-white text-2xl md:text-6xl font-bold text-center">
-          <BlurText
-            text="Welcome To Âd Adarsh Profile"
-            delay={100}
-            animateBy="words"
-            direction="top"
-            // onAnimationComplete={handleAnimationComplete}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-center mb-6 sm:mb-8 flex flex-wrap justify-center items-center space-x-1 sm:space-x-2 text-white striper-regular"
-          />
-        </h2>
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 1,
+            ease: [0.25, 0.1, 0.25, 1]
+          }}
+          whileHover={{
+            scale: 1.02,
+            transition: { duration: 0.3, ease: "easeInOut" }
+          }}
+          className="text-white text-2xl md:text-6xl font-bold text-center relative min-h-[80px] md:min-h-[120px] flex items-center justify-center striper-regular "
+        >
+          <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+            {displayedText}
+          </span>
+          <motion.span
+            animate={{ opacity: [1, 0] }}
+            transition={{
+              duration: 0.6,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut"
+            }}
+            className="inline-block ml-1 text-white"
+          >
+            |
+          </motion.span>
+
+          {/* Animated underline */}
+          {/* <motion.div
+            animate={{
+              scaleX: displayedText.length > 0 ? 1 : 0,
+              opacity: displayedText.length > 0 ? 1 : 0
+            }}
+            transition={{ duration: 0.5 }}
+            className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-gray-400 via-white to-gray-400 origin-left"
+          /> */}
+        </motion.h2>
+        {/* <motion.h2
+          initial={{ opacity: 0, scale: 0.8, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{
+            duration: 0.6,
+            ease: "easeOut"
+          }}
+          whileHover={{
+            scale: 1.05,
+            transition: { duration: 0.2 }
+          }}
+          className="text-white text-2xl md:text-6xl font-bold text-center striper-regular"
+        >
+          Welcome To Âd Adarsh Profile
+        </motion.h2> */}
         <p className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center striper-regular">
           Explore my projects, beats, and music production works.
         </p>

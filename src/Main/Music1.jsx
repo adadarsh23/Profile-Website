@@ -1,11 +1,11 @@
-import React, { lazy, Suspense, useEffect, useState, useMemo } from 'react';
+import React, { lazy, Suspense, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { musicData } from '../Data/musicData.jsx';
+import styles from '../Modules/bubble.module.css';
 
 const MusicArtwork = lazy(() => import('../components/MusicArt.tsx'));
 
-const BubbleText = ({ styles }) => {
-  if (!styles) return null; // Don't render until styles are loaded
+const BubbleText = () => {
   return (
     <motion.h2
       className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white p-4 sm:p-6 mb-8 md:mb-12 z-10 drop-shadow-lg"
@@ -23,22 +23,6 @@ const BubbleText = ({ styles }) => {
 };
 
 function Music1() {
-  const [styles, setStyles] = useState(null);
-
-  // Load CSS module once
-  // useEffect(() => {
-  //   let mounted = true;
-  //   import('../Modules/bubble.module.css').then((mod) => {
-  //     if (mounted) setStyles(mod);
-  //   });
-  //   return () => {
-  //     mounted = false; // avoid memory leak
-  //   };
-  // }, []);
-  useEffect(() => {
-    import('../Modules/bubble.module.css').then(setStyles);
-  }, []);
-
   const containerVariants = useMemo(
     () => ({
       hidden: { opacity: 0 },
@@ -69,7 +53,7 @@ function Music1() {
 
   return (
     <section className="bg-black text-white flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12 lg:mb-20">
-      <BubbleText styles={styles} />
+      <BubbleText />
 
       <motion.div
         className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 lg:gap-24 xl:gap-32"
