@@ -90,11 +90,9 @@
 //   );
 // }
 
-
-
 import React, { lazy, Suspense } from 'react';
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import Loading from '../components/Loading';
 //import BlurText from '../components/BlurText';
 // const BlurText = lazy(() => import('../components/BlurText'));
@@ -107,28 +105,28 @@ const Vortex = lazy(() => import('../components/Vortex'));
 //   };
 function Header() {
   const words = [
-    "Welcome To Âd Adarsh Profile",
-    "Crafting Dark Atmospheres",
-    "Producing Cinematic Beats",
-    "Where Sound Meets Emotion",
-    "Building Stories Through Music",
-    "Creating Sonic Worlds",
-    "Rhythms That Hit Deep",
-    "Mixing Raw Energy With Art",
-    "Sound Designed With Intent",
-    "Echoes Born From Silence",
-    "Beats Forged In Shadows",
-    "Music With A Pulse Of Its Own",
-    "Bass That Cuts Through The Dark",
-    "Every Sound Has A Story",
-    "Emotion Engineered In Waves",
-    "From Stillness To Impact",
-    "Creating Depth Through Noise",
-    "Dark Tones. Clean Edges.",
-    "When Vibes Turn Into Vision"
+    'Welcome To Âd Adarsh Profile',
+    'Crafting Dark Atmospheres',
+    'Producing Cinematic Beats',
+    'Where Sound Meets Emotion',
+    'Building Stories Through Music',
+    'Creating Sonic Worlds',
+    'Rhythms That Hit Deep',
+    'Mixing Raw Energy With Art',
+    'Sound Designed With Intent',
+    'Echoes Born From Silence',
+    'Beats Forged In Shadows',
+    'Music With A Pulse Of Its Own',
+    'Bass That Cuts Through The Dark',
+    'Every Sound Has A Story',
+    'Emotion Engineered In Waves',
+    'From Stillness To Impact',
+    'Creating Depth Through Noise',
+    'Dark Tones. Clean Edges.',
+    'When Vibes Turn Into Vision',
   ];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState("");
+  const [displayedText, setDisplayedText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -178,11 +176,11 @@ function Header() {
             animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: 1,
-              ease: [0.25, 0.1, 0.25, 1]
+              ease: [0.25, 0.1, 0.25, 1],
             }}
             whileHover={{
               scale: 1.02,
-              transition: { duration: 0.3, ease: "easeInOut" }
+              transition: { duration: 0.3, ease: 'easeInOut' },
             }}
             className="text-white text-2xl md:text-6xl font-bold text-center relative min-h-[80px] md:min-h-[120px] flex items-center justify-center striper-regular "
           >
@@ -194,8 +192,8 @@ function Header() {
               transition={{
                 duration: 0.6,
                 repeat: Infinity,
-                repeatType: "reverse",
-                ease: "easeInOut"
+                repeatType: 'reverse',
+                ease: 'easeInOut',
               }}
               className="inline-block ml-1 text-white"
             >

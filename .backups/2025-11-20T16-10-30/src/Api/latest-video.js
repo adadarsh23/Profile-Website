@@ -12,12 +12,9 @@ export default async function handler(req, res) {
     const CHANNEL_ID = process.env.VITE_YOUTUBE_CHANNEL_ID;
 
     if (!API_KEY || !CHANNEL_ID) {
-      return res
-        .status(500)
-        .json({
-          error:
-            'YouTube API Key or Channel ID is not configured on the server.',
-        });
+      return res.status(500).json({
+        error: 'YouTube API Key or Channel ID is not configured on the server.',
+      });
     }
 
     // Step 1: Get the 'uploads' playlist ID from the channel ID

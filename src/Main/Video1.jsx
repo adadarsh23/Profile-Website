@@ -85,7 +85,7 @@ export default function Video1() {
   }, []);
 
   return (
-    <section className="bg-black text-white  flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12 lg:mb-20">
+    <section className="bg-black text-white  flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 mb-8  sm:mb-12 lg:mb-20">
       <BubbleText styles={styles} />
       <div className="w-full max-w-4xl aspect-video flex items-center justify-center">
         {videoState.status === 'loading' && <Loading />}

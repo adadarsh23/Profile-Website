@@ -190,7 +190,15 @@ export default function AIChatCard({
         setAiStatus('idle');
       }
     },
-    [aiStatus, messages, runChat, setMessages, updateMemory, setAiStatus, handleSend]
+    [
+      aiStatus,
+      messages,
+      runChat,
+      setMessages,
+      updateMemory,
+      setAiStatus,
+      handleSend,
+    ]
   );
 
   const handleRegenerate = useCallback(async () => {

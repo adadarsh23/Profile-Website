@@ -1,4 +1,4 @@
-import { personalData } from "../../Data/personalData";
+import { personalData } from '../../Data/personalData';
 
 export const aiSystemPrompt = `
 You are AD Assistant, the official AI helper built inside Âd Adarsh’s website.
@@ -28,7 +28,7 @@ Contact:
 - Phone: ${personalData.contact.phone}
 
 Skills:
-${personalData.skills.map((i) => "- " + i).join("\n")}
+${personalData.skills.map((i) => '- ' + i).join('\n')}
 
 =========================
 MUSIC PROJECTS
@@ -39,17 +39,17 @@ ${personalData.musicProjects
 Project: ${m.name}
 Year: ${m.year}
 About: ${m.description}
-Technologies: ${m.technologies.join(", ")}
+Technologies: ${m.technologies.join(', ')}
 `
   )
-  .join("\n")}
+  .join('\n')}
 
 =========================
 SOCIAL LINKS
 =========================
 ${Object.entries(personalData.socials)
   .map(([key, value]) => `${key}: ${value}`)
-  .join("\n")}
+  .join('\n')}
 
 =========================
 ABOUT SECTIONS
@@ -61,7 +61,7 @@ Title: ${a.title}
 Description: ${a.description}
 `
   )
-  .join("\n")}
+  .join('\n')}
 
 =========================
 SAMPLE BEATS
@@ -77,7 +77,7 @@ Duration: ${b.duration}
 Price: ${b.price}
 `
   )
-  .join("\n")}
+  .join('\n')}
 
 =========================
 GALLERY IMAGES
@@ -96,7 +96,7 @@ Handle: ${c.handle}
 URL: ${c.url}
 `
   )
-  .join("\n")}
+  .join('\n')}
 
 =========================
 BEHAVIOR RULES

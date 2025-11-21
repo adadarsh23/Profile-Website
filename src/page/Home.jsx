@@ -40,13 +40,13 @@ export default function Home() {
       <Suspense fallback={<Loading />}>
         <Header onAnimationComplete={handleHeaderAnimationComplete} />
         <Scroll />
+        <Video1 />
+        <Music1 />
         <Velocity />
         <CirclePhoto />
         <Loop />
         {/* <Video /> */}
         {/* <Music /> */}
-        <Music1 />
-        <Video1 />
         {/* Hidden element to mark when all components are done rendering */}
         {/* <div style={{ display: 'none' }} onLoad={() => setIsLoaded(true)}></div> */}
       </Suspense>

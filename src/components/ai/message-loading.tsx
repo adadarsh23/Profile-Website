@@ -15,9 +15,9 @@ const MessageLoading: React.FC<MessageLoadingProps> = memo(
         height={height}
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
-        className="text-foreground"
+        className="text-foreground "
       >
-        <circle cx="4" cy="12" r="2" fill="currentColor">
+        <circle cx="4" cy="12" r="2" fill="white">
           <animate
             id="spinner_qFRN"
             begin="0;spinner_OcgL.end+0.25s"
@@ -28,7 +28,7 @@ const MessageLoading: React.FC<MessageLoadingProps> = memo(
             keySplines=".33,.66,.66,1;.33,0,.66,.33"
           />
         </circle>
-        <circle cx="12" cy="12" r="2" fill="currentColor">
+        <circle cx="12" cy="12" r="2" fill="white">
           <animate
             begin="spinner_qFRN.begin+0.1s"
             attributeName="cy"
@@ -38,7 +38,7 @@ const MessageLoading: React.FC<MessageLoadingProps> = memo(
             keySplines=".33,.66,.66,1;.33,0,.66,.33"
           />
         </circle>
-        <circle cx="20" cy="12" r="2" fill="currentColor">
+        <circle cx="20" cy="12" r="2" fill="white">
           <animate
             id="spinner_OcgL"
             begin="spinner_qFRN.begin+0.2s"
