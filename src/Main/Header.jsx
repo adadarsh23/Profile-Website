@@ -94,8 +94,7 @@
 
 import React, { lazy, Suspense } from 'react';
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react"
-import '../font/Striper_Complete/Fonts/WEB/css/striper.css';
+import { useState, useEffect } from "react";
 import Loading from '../components/Loading';
 //import BlurText from '../components/BlurText';
 // const BlurText = lazy(() => import('../components/BlurText'));
@@ -166,44 +165,45 @@ function Header() {
   }, [displayedText, currentWordIndex, isTyping, isDeleting, words]);
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black flex flex-col items-center justify-center px-4 sm:px-6 md:px-12">
-      <Vortex
-        backgroundColor="black"
-        rangeY={1000}
-        particleCount={1000}
-        baseHue={1000}
-        className="flex items-center flex-col justify-center px-2 md:px-10  py-4 w-full h-full"
-      >
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 1,
-            ease: [0.25, 0.1, 0.25, 1]
-          }}
-          whileHover={{
-            scale: 1.02,
-            transition: { duration: 0.3, ease: "easeInOut" }
-          }}
-          className="text-white text-2xl md:text-6xl font-bold text-center relative min-h-[80px] md:min-h-[120px] flex items-center justify-center striper-regular "
+      <Suspense fallback={<Loading />}>
+        <Vortex
+          backgroundColor="black"
+          rangeY={1000}
+          particleCount={1000}
+          baseHue={1000}
+          className="flex items-center flex-col justify-center px-2 md:px-10  py-4 w-full h-full"
         >
-          <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
-            {displayedText}
-          </span>
-          <motion.span
-            animate={{ opacity: [1, 0] }}
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{
-              duration: 0.6,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
+              duration: 1,
+              ease: [0.25, 0.1, 0.25, 1]
             }}
-            className="inline-block ml-1 text-white"
+            whileHover={{
+              scale: 1.02,
+              transition: { duration: 0.3, ease: "easeInOut" }
+            }}
+            className="text-white text-2xl md:text-6xl font-bold text-center relative min-h-[80px] md:min-h-[120px] flex items-center justify-center striper-regular "
           >
-            |
-          </motion.span>
+            <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+              {displayedText}
+            </span>
+            <motion.span
+              animate={{ opacity: [1, 0] }}
+              transition={{
+                duration: 0.6,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut"
+              }}
+              className="inline-block ml-1 text-white"
+            >
+              |
+            </motion.span>
 
-          {/* Animated underline */}
-          {/* <motion.div
+            {/* Animated underline */}
+            {/* <motion.div
             animate={{
               scaleX: displayedText.length > 0 ? 1 : 0,
               opacity: displayedText.length > 0 ? 1 : 0
@@ -211,8 +211,8 @@ function Header() {
             transition={{ duration: 0.5 }}
             className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-gray-400 via-white to-gray-400 origin-left"
           /> */}
-        </motion.h2>
-        {/* <motion.h2
+          </motion.h2>
+          {/* <motion.h2
           initial={{ opacity: 0, scale: 0.8, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{
@@ -227,16 +227,26 @@ function Header() {
         >
           Welcome To Âd Adarsh Profile
         </motion.h2> */}
-        <p className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center striper-regular">
-          Explore my projects, beats, and music production works.
-        </p>
-        {/* <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.2,
+              duration: 0.8,
+              ease: 'easeInOut',
+            }}
+            className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center striper-regular"
+          >
+            Explore my projects, beats, and music production works.
+          </motion.p>
+          {/* <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
           <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 transition duration-200 rounded-lg text-white shadow-[0px_2px_0px_0px_#FFFFFF40_inset]">
             Order now
           </button>
           <button className="px-4 py-2  text-white ">Watch trailer</button>
         </div> */}
-      </Vortex>
+        </Vortex>
+      </Suspense>
     </div>
   );
 }

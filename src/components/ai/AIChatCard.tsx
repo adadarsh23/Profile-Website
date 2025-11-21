@@ -44,6 +44,7 @@ export default function AIChatCard({
   const { updateMemory } = useChatMemory();
   const [input, setInput] = useState(''); // User input for the chatbox
   const [aiStatus, setAiStatus] = useState<AiStatus>('idle'); // Tracks AI's current state
+  const messagesRef = useRef(messages); // Ref to hold the latest messages
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Prevent background scroll when chat is open
@@ -56,6 +57,11 @@ export default function AIChatCard({
       document.body.style.overflow = originalOverflow;
     };
   }, []); // Empty dependency array ensures this runs only on mount and unmount
+
+  // Keep the messages ref updated with the latest messages
+  useEffect(() => {
+    messagesRef.current = messages;
+  }, [messages]);
 
   // Scroll to bottom on new messages
   useEffect(() => {
@@ -89,7 +95,7 @@ export default function AIChatCard({
         await new Promise((resolve) =>
           setTimeout(resolve, AI_THINKING_DELAY_MS)
         );
-        const aiText = await runChat([...messages, userMsg]);
+        const aiText = await runChat([...messagesRef.current, userMsg]);
         const formatted = formatResponse(aiText);
         const aiMsg: ChatMessage = {
           sender: 'ai',
@@ -98,7 +104,7 @@ export default function AIChatCard({
           timestamp: Date.now(),
         };
         setMessages((prev) => [...prev, aiMsg]);
-        updateMemory([...messages, userMsg, aiMsg]); // Update chat memory with full context
+        updateMemory([...messagesRef.current, userMsg, aiMsg]); // Update chat memory with full context
       } catch (err) {
         console.error('Chat Error:', err);
         const errorMsg: ChatMessage = {
@@ -114,8 +120,51 @@ export default function AIChatCard({
         setAiStatus('idle');
       }
     },
-    [input, aiStatus, messages, setMessages, updateMemory]
+    [input, aiStatus, setMessages, updateMemory]
   );
+
+  const handleRegenerate = useCallback(async () => {
+    if (aiStatus !== 'idle') return;
+
+    // Find the last user message to regenerate from
+    const lastUserMessageIndex = messages.findLastIndex(
+      (m) => m.sender === 'user'
+    );
+
+    if (lastUserMessageIndex === -1) return; // No user message to regenerate from
+
+    // History up to the last user message
+    const historyToRegenerate = messages.slice(0, lastUserMessageIndex + 1);
+
+    setMessages(historyToRegenerate); // Remove the old AI response
+    setAiStatus('thinking');
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, AI_THINKING_DELAY_MS));
+      const aiText = await runChat(historyToRegenerate);
+      const formatted = formatResponse(aiText);
+      const aiMsg: ChatMessage = {
+        sender: 'ai',
+        text: formatted,
+        id: `ai-regen-${Date.now()}`,
+        timestamp: Date.now(),
+      };
+      setMessages((prev) => [...prev, aiMsg]);
+      updateMemory([...historyToRegenerate, aiMsg]);
+    } catch (err) {
+      console.error('Chat Regeneration Error:', err);
+      const errorMsg: ChatMessage = {
+        sender: 'ai',
+        text: AI_ERROR_MESSAGE,
+        id: `err-regen-${Date.now()}`,
+        timestamp: Date.now(),
+      };
+      setMessages((prev) => [...prev, errorMsg]);
+      setAiStatus('error');
+    } finally {
+      setAiStatus('idle');
+    }
+  }, [aiStatus, messages, setMessages, updateMemory]);
 
   const handleClear = useCallback(() => {
     // Animate out all messages
@@ -125,27 +174,32 @@ export default function AIChatCard({
     setTimeout(clearSession, 300);
   }, [setMessages, clearSession]);
 
+  const formatChatHistory = useCallback(
+    (forSharing: boolean = false) => {
+      const formatTimestamp = (ts: number | undefined) => {
+        if (!ts) return 'N/A';
+        return new Date(ts).toLocaleString();
+      };
+
+      return messages
+        .map((msg) => {
+          const sender = msg.sender === 'user' ? '🧑 User' : '🤖 AI';
+          if (forSharing) {
+            return `${sender}:\n${msg.text}`;
+          }
+          const ts = formatTimestamp(msg.timestamp);
+          return `[${ts}] ${sender}:\n${msg.text}`;
+        })
+        .join('\n--------------------------------------\n\n');
+    },
+    [messages]
+  );
+
   const handleExport = useCallback(() => {
     if (!messages.length) return;
 
-    const now = new Date();
-    const fileName = `AI_Chat_${now.toISOString().replace(/[:.]/g, '-')}.txt`;
-
-    const formatTimestamp = (ts: number | undefined) => {
-      if (!ts) return 'N/A';
-      return new Date(ts).toLocaleString();
-    };
-
-    const formattedMessages = messages
-      .map((msg) => {
-        const ts = formatTimestamp(msg.timestamp);
-        const sender = msg.sender === 'user' ? '🧑 User' : '🤖 AI';
-        return `[${ts}] ${sender}:\n${msg.text}`;
-      })
-      .join('\n--------------------------------------\n\n');
-
     const header = [
-      '===== AI Chat Export =====',
+      '===== AD Assistant Chat Export =====',
       `Date: ${now.toLocaleDateString()}`,
       `Time: ${now.toLocaleTimeString()}`,
       `Total Messages: ${messages.length}`,
@@ -153,7 +207,11 @@ export default function AIChatCard({
       '', // Extra newline
     ].join('\n');
 
-    const blob = new Blob([header + formattedMessages], { type: 'text/plain' });
+    const now = new Date();
+    const fileName = `AI_Chat_${now.toISOString().replace(/[:.]/g, '-')}.txt`;
+    const blob = new Blob([header + formatChatHistory(false)], {
+      type: 'text/plain',
+    });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -165,16 +223,8 @@ export default function AIChatCard({
   const handleShare = useCallback(async () => {
     if (!messages.length) return;
 
-    const now = new Date();
-    const title = `AI Chat on ${now.toLocaleDateString()}`;
-
-    const formattedMessages = messages
-      .map((msg) => {
-        const sender = msg.sender === 'user' ? '🧑 User' : '🤖 AI';
-        return `${sender}:\n${msg.text}`;
-      })
-      .join('\n\n--------------------------------------\n\n');
-
+    const title = `AI Chat on ${new Date().toLocaleDateString()}`;
+    const formattedMessages = formatChatHistory(true);
     const textToShare = `===== ${title} =====\n\n${formattedMessages}`;
 
     if (navigator.share) {
@@ -194,7 +244,7 @@ export default function AIChatCard({
       // Fallback for browsers that don't support the Web Share API
       handleExport();
     }
-  }, [messages, handleExport]);
+  }, [messages, handleExport, formatChatHistory]);
 
   const headerVariants = {
     hidden: { opacity: 0 },
@@ -266,6 +316,7 @@ export default function AIChatCard({
               onClick={handleShare}
               className="icon-btn"
               title="Share or Export Chat"
+              aria-label="Share or Export Chat"
               whileHover={{ scale: 1.1, y: -1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -275,6 +326,7 @@ export default function AIChatCard({
               onClick={handleExport}
               className="icon-btn"
               title="Export Chat"
+              aria-label="Export Chat"
               whileHover={{ scale: 1.1, y: -1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -284,6 +336,7 @@ export default function AIChatCard({
               onClick={handleClear}
               className="icon-btn"
               title="Clear Chat"
+              aria-label="Clear Chat"
               whileHover={{ scale: 1.1, y: -1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -294,6 +347,7 @@ export default function AIChatCard({
                 onClick={onClose}
                 className="icon-btn"
                 title="Close Chat"
+                aria-label="Close Chat"
                 whileHover={{ scale: 1.1, y: -1 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -311,10 +365,7 @@ export default function AIChatCard({
           <AnimatePresence initial={false}>
             {messages.map((msg) => (
               <Suspense key={msg.id} fallback={<div className="w-full h-10" />}>
-                <ChatMessageBubble
-                  msg={msg}
-                  onRegenerate={() => handleSend(msg.text)}
-                />
+                <ChatMessageBubble msg={msg} onRegenerate={handleRegenerate} />
               </Suspense>
             ))}
           </AnimatePresence>
