@@ -20,10 +20,10 @@ export default function Navbar() {
         logoAlt="Adarsh Logo"
         items={[
           { label: 'Home', href: '/' },
-          { label: 'About', href: '/about' },
-          { label: 'Contact', href: '/contact' },
           { label: 'Sample', href: '/sample' },
+          { label: 'Contact', href: '/contact' },
           { label: 'Blog', href: '/blog' },
+          { label: 'About', href: '/about' },
         ]}
         activeHref="/"
         className="custom-nav"

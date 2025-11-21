@@ -15,6 +15,8 @@ import {
   Volume2,
   RefreshCw,
   X,
+  Pencil,
+  CheckCheck,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
@@ -30,35 +32,37 @@ const CodeBlock = memo(({ inline, className, children }) => {
   const handleCopyCode = () => copy(codeString);
 
   if (!inline) {
-    <div className="relative my-2">
-      <button
-        onClick={handleCopyCode}
-        className="absolute top-2 right-2 p-1.5 rounded-md bg-black/30 text-white/70 hover:bg-black/50 hover:text-white transition-all"
-        title="Copy code"
-      >
-        {copied ? (
-          <Check className="w-4 h-4 text-green-400" />
-        ) : (
-          <Copy className="w-4 h-4" />
-        )}
-      </button>
-      <SyntaxHighlighter
-        language={match ? match[1] : 'text'}
-        PreTag="div"
-        showLineNumbers={false}
-        wrapLongLines
-        style={vscDarkPlus}
-        customStyle={{
-          fontFamily: 'ui-monospace, monospace',
-          borderRadius: '0.5rem',
-          padding: '1rem',
-          fontSize: '0.875rem',
-          overflowX: 'auto',
-        }}
-      >
-        {codeString}
-      </SyntaxHighlighter>
-    </div>;
+    return (
+      <div className="relative my-2">
+        <button
+          onClick={handleCopyCode}
+          className="absolute top-2 right-2 p-1.5 rounded-md bg-black/30 text-white/70 hover:bg-black/50 hover:text-white transition-all"
+          title="Copy code"
+        >
+          {copied ? (
+            <Check className="w-4 h-4 text-green-400" />
+          ) : (
+            <Copy className="w-4 h-4" />
+          )}
+        </button>
+        <SyntaxHighlighter
+          language={match ? match[1] : 'text'}
+          PreTag="div"
+          showLineNumbers={false}
+          wrapLongLines
+          style={vscDarkPlus}
+          customStyle={{
+            fontFamily: 'ui-monospace, monospace',
+            borderRadius: '0.5rem',
+            padding: '1rem',
+            fontSize: '0.875rem',
+            overflowX: 'auto',
+          }}
+        >
+          {codeString}
+        </SyntaxHighlighter>
+      </div>
+    );
   }
 
   return (
@@ -73,11 +77,13 @@ const ChatMessageActions = ({
   allMessages,
   onRegenerate,
   isVisible,
+  onEdit,
 }: {
   msg: ChatMessage;
   allMessages?: ChatMessage[];
   onRegenerate?: () => void;
   isVisible: boolean;
+  onEdit: () => void;
 }) => {
   const isAI = msg.sender === 'ai';
   const [liked, setLiked] = useState(false);
@@ -111,6 +117,17 @@ const ChatMessageActions = ({
         isVisible && 'opacity-100 -bottom-5'
       )}
     >
+      {!isAI && (
+        <button
+          onClick={onEdit}
+          title="Edit"
+          className="icon-action-btn"
+          aria-label="Edit message"
+        >
+          <Pencil className="w-4 h-4" />
+        </button>
+      )}
+
       {isAI && (
         <>
           <button
@@ -192,13 +209,24 @@ export default function ChatMessageBubble({
   msg,
   onRegenerate,
   allMessages,
+  onEdit,
 }: {
   msg: ChatMessage;
   onRegenerate?: () => void;
   allMessages?: ChatMessage[];
+  onEdit: (id: string, newText: string) => void;
 }) {
   const isAI = msg.sender === 'ai';
   const [actionsVisible, setActionsVisible] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedText, setEditedText] = useState(msg.text);
+
+  const handleSave = () => {
+    if (editedText.trim() !== msg.text) {
+      onEdit(msg.id, editedText.trim());
+    }
+    setIsEditing(false);
+  };
 
   return (
     <motion.div
@@ -214,23 +242,48 @@ export default function ChatMessageBubble({
         actionsVisible && 'z-10' // Ensure it's on top when actions are visible
       )}
     >
-      {/* Markdown Content */}
-      <div
-        className={cn(
-          'prose prose-sm max-w-none prose-p:text-inherit prose-headings:text-inherit prose-strong:text-inherit',
-          isAI ? 'prose-invert' : ''
-        )}
-      >
-        <ReactMarkdown
-          rehypePlugins={[rehypeRaw]}
-          remarkPlugins={[remarkGfm]}
-          components={{
-            code: CodeBlock,
-          }}
+      {isEditing ? (
+        <div className="flex flex-col gap-2">
+          <textarea
+            value={editedText}
+            onChange={(e) => setEditedText(e.target.value)}
+            className="w-full p-2 text-sm bg-white/10 rounded-lg border border-black/90 text-black focus:outline-none focus:ring-1 focus:ring-white/50"
+            rows={Math.max(3, editedText.split('\n').length)}
+            autoFocus
+          />
+          <div className="flex justify-end gap-2">
+            <button
+              onClick={() => setIsEditing(false)}
+              className="text-xs text-gray-400 hover:text-white"
+            >
+              < X className="w-6 h-6" />
+            </button>
+            <button
+              onClick={handleSave}
+              className="flex items-center gap-1 text-xs text-green-400 hover:text-green-300"
+            >
+              <CheckCheck className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div
+          className={cn(
+            'prose prose-sm max-w-none prose-p:text-inherit prose-headings:text-inherit prose-strong:text-inherit',
+            isAI ? 'prose-invert' : ''
+          )}
         >
-          {msg.text}
-        </ReactMarkdown>
-      </div>
+          <ReactMarkdown
+            rehypePlugins={[rehypeRaw]}
+            remarkPlugins={[remarkGfm]}
+            components={{
+              code: CodeBlock,
+            }}
+          >
+            {msg.text}
+          </ReactMarkdown>
+        </div>
+      )}
 
       {/* Action Buttons - Appear on Hover */}
       <ChatMessageActions
@@ -238,6 +291,7 @@ export default function ChatMessageBubble({
         allMessages={allMessages}
         onRegenerate={onRegenerate}
         isVisible={actionsVisible}
+        onEdit={() => setIsEditing(true)}
       />
     </motion.div>
   );

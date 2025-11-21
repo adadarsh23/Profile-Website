@@ -42,7 +42,7 @@ function Footer() {
               rel="noopener noreferrer"
               className="text-white font-semibold hover:text-gray-400"
             >
-              Ad Adarsh
+              Âd Adarsh
             </a>
             . All Rights Reserved.
           </motion.span>

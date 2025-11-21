@@ -9,18 +9,26 @@ import {
   Suspense,
 } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trash2, FileText, PanelRightClose, Share2 } from 'lucide-react';
+import {
+  Trash2,
+  FileText,
+  PanelRightClose,
+  Share2,
+  // AlertTriangle,
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { runChat } from '@/lib/gemini';
+// import { runChat } from '@/lib/gemini';
 const ChatInput = lazy(() => import('./ChatInput'));
+// import ErrorBoundary from '../ErrorBoundary';
 const ChatMessageBubble = lazy(() => import('./ChatMessageBubble'));
 import { useChatSession } from '../chat/useChatSession';
 import { useChatMemory } from '../chat/useChatMemory';
 import { formatResponse } from '../chat/formatResponse';
 import type { ChatMessage } from '../chat/chatTypes';
+import { useChatCompletion } from '../chat/useChatCompletion';
 import TypingIndicator, { AiStatus } from './TypingIndicator';
-import logoUrl from '../../assets/Adarsh.png';
-
+import logoUrl from '../../assets/ai.png';
+// const RobotFaceWrapper = lazy(() => import('../RobotFaceWrapper'));
 // Constants for better maintainability
 const AI_THINKING_DELAY_MS = 500;
 const AI_ERROR_MESSAGE = '⚠️ Something went wrong. Please try again.';
@@ -43,7 +51,7 @@ export default function AIChatCard({
   const { messages, setMessages, clearSession } = useChatSession(initialMsg);
   const { updateMemory } = useChatMemory();
   const [input, setInput] = useState(''); // User input for the chatbox
-  const [aiStatus, setAiStatus] = useState<AiStatus>('idle'); // Tracks AI's current state
+  const { runChat, aiStatus, setAiStatus } = useChatCompletion();
   const messagesRef = useRef(messages); // Ref to hold the latest messages
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -120,9 +128,48 @@ export default function AIChatCard({
         setAiStatus('idle');
       }
     },
-    [input, aiStatus, setMessages, updateMemory]
+    [input, aiStatus, setMessages, updateMemory, runChat, setAiStatus]
   );
 
+  const handleEdit = useCallback(
+    async (messageId: string, newText: string) => {
+      if (aiStatus !== 'idle') return;
+
+      let messageIndex = -1;
+      const updatedMessages = messages.map((m, index) => {
+        if (m.id === messageId) {
+          messageIndex = index;
+          return { ...m, text: newText };
+        }
+        return m;
+      });
+
+      if (messageIndex === -1) return;
+
+      // Remove all messages after the edited one
+      const historyForAi = updatedMessages.slice(0, messageIndex + 1);
+      setMessages(historyForAi);
+
+      setAiStatus('thinking');
+
+      try {
+        const aiText = await runChat(historyForAi);
+        const formatted = formatResponse(aiText);
+        const aiMsg: ChatMessage = {
+          sender: 'ai',
+          text: formatted,
+          id: `ai-edit-${Date.now()}`,
+        };
+        setMessages((prev) => [...prev, aiMsg]);
+        updateMemory([...historyForAi, aiMsg]);
+      } catch (err) {
+        // Handle error as in handleSend
+      } finally {
+        setAiStatus('idle');
+      }
+    },
+    [aiStatus, messages, runChat, setMessages, updateMemory, setAiStatus]
+  );
   const handleRegenerate = useCallback(async () => {
     if (aiStatus !== 'idle') return;
 
@@ -175,7 +222,7 @@ export default function AIChatCard({
 
       return historyToRegenerate;
     });
-  }, [aiStatus, setMessages, updateMemory]);
+  }, [aiStatus, setMessages, updateMemory, runChat, setAiStatus]);
 
   const handleClear = useCallback(() => {
     // Animate out all messages
@@ -297,7 +344,7 @@ export default function AIChatCard({
       />
 
       {/* Chat Container */}
-      <div className="relative flex flex-col w-full h-full rounded-xl border border-white/10 overflow-hidden bg-black/90 backdrop-blur-xl">
+      <div className="relative z-10 flex flex-col w-full h-full rounded-xl border border-white/10 overflow-hidden bg-black/90 backdrop-blur-xl">
         {/* Header */}
         <motion.div
           className="flex justify-between items-center px-4 py-3 border-b border-white/10 z-10 flex-wrap gap-2"
@@ -314,7 +361,18 @@ export default function AIChatCard({
               ease: 'easeInOut',
             }}
           >
-            <img src={logoUrl} alt="Adarsh Logo" className="w-8 h-8 rounded" />
+            <img src={logoUrl} alt="Adarsh Logo" className="w-10 h-10 rounded" />
+            {/* <ErrorBoundary
+              fallback={<AlertTriangle className="w-8 h-8 text-yellow-400" />}
+            >
+              <Suspense
+                fallback={
+                  <div className="w-8 h-8 rounded bg-white/10 animate-pulse" />
+                }
+              >
+                <RobotFaceWrapper />
+              </Suspense>
+            </ErrorBoundary> */}
           </motion.div>
           <motion.h2
             className="text-lg font-semibold text-white"
@@ -379,7 +437,11 @@ export default function AIChatCard({
           <AnimatePresence initial={false}>
             {messages.map((msg) => (
               <Suspense key={msg.id} fallback={<div className="w-full h-10" />}>
-                <ChatMessageBubble msg={msg} onRegenerate={handleRegenerate} />
+                <ChatMessageBubble
+                  msg={msg}
+                  onRegenerate={handleRegenerate}
+                  onEdit={handleEdit}
+                />
               </Suspense>
             ))}
           </AnimatePresence>
