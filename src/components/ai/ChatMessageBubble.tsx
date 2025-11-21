@@ -259,7 +259,10 @@ export default function ChatMessageBubble({
   };
 
   return (
+    // By giving the motion.div a key that doesn't change (msg.id),
+    // we prevent it from re-animating every time the text inside updates.
     <motion.div
+      key={msg.id}
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}

@@ -7,22 +7,27 @@ export function useChatCompletion() {
   const [aiStatus, setAiStatus] = useState<AiStatus>('idle');
 
   const runChat = useCallback(
-    async (history: ChatMessage[]): Promise<string> => {
+    async (
+      history: ChatMessage[],
+      onStream: (chunk: string) => void
+    ): Promise<void> => {
       setAiStatus('fetching');
       try {
-        const response = await runGeminiChat(history);
-        setAiStatus('generating'); // Or could go straight to idle
-        return response;
+        // Assuming runGeminiChat can handle a streaming callback
+        await runGeminiChat(history, (chunk) => {
+          if (aiStatus !== 'generating') {
+            setAiStatus('generating');
+          }
+          onStream(chunk);
+        });
       } catch (error) {
         console.error('Error in useChatCompletion:', error);
         setAiStatus('error');
         // Re-throw to allow the caller to handle UI updates for errors
         throw error;
       }
-      // The caller is responsible for setting the status back to 'idle'
-      // after processing the response.
     },
-    []
+    [setAiStatus]
   );
 
   return { runChat, aiStatus, setAiStatus };

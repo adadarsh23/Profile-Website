@@ -103,16 +103,29 @@ export default function AIChatCard({
         await new Promise((resolve) =>
           setTimeout(resolve, AI_THINKING_DELAY_MS)
         );
-        const aiText = await runChat([...messagesRef.current, userMsg]);
-        const formatted = formatResponse(aiText);
+
         const aiMsg: ChatMessage = {
           sender: 'ai',
-          text: formatted,
+          text: '',
           id: `ai-${Date.now()}`,
           timestamp: Date.now(),
         };
         setMessages((prev) => [...prev, aiMsg]);
-        updateMemory([...messagesRef.current, userMsg, aiMsg]); // Update chat memory with full context
+
+        await runChat([...messagesRef.current, userMsg], (chunk) => {
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === aiMsg.id ? { ...m, text: m.text + chunk } : m
+            )
+          );
+        });
+
+        // After streaming is complete, format the final response
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === aiMsg.id ? { ...m, text: formatResponse(m.text) } : m
+          )
+        );
       } catch (err) {
         console.error('Chat Error:', err);
         const errorMsg: ChatMessage = {
@@ -153,15 +166,29 @@ export default function AIChatCard({
       setAiStatus('thinking');
 
       try {
-        const aiText = await runChat(historyForAi);
-        const formatted = formatResponse(aiText);
         const aiMsg: ChatMessage = {
           sender: 'ai',
-          text: formatted,
+          text: '',
           id: `ai-edit-${Date.now()}`,
         };
         setMessages((prev) => [...prev, aiMsg]);
-        updateMemory([...historyForAi, aiMsg]);
+
+        await runChat(historyForAi, (chunk) => {
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === aiMsg.id
+                ? { ...m, text: formatResponse(m.text + chunk) }
+                : m
+            )
+          );
+        });
+
+        // After streaming is complete, format the final response
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === aiMsg.id ? { ...m, text: formatResponse(m.text) } : m
+          )
+        );
       } catch (err) {
         // Handle error as in handleSend
       } finally {
@@ -195,16 +222,31 @@ export default function AIChatCard({
           await new Promise((resolve) =>
             setTimeout(resolve, AI_THINKING_DELAY_MS)
           );
-          const aiText = await runChat(historyToRegenerate);
-          const formatted = formatResponse(aiText);
+
           const aiMsg: ChatMessage = {
             sender: 'ai',
-            text: formatted,
+            text: '',
             id: `ai-regen-${Date.now()}`,
             timestamp: Date.now(),
           };
           setMessages((prev) => [...prev, aiMsg]);
-          updateMemory([...historyToRegenerate, aiMsg]);
+
+          await runChat(historyToRegenerate, (chunk) => {
+            setMessages((prev) =>
+              prev.map((m) =>
+                m.id === aiMsg.id
+                  ? { ...m, text: formatResponse(m.text + chunk) }
+                  : m
+              )
+            );
+          });
+
+          // After streaming is complete, format the final response
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === aiMsg.id ? { ...m, text: formatResponse(m.text) } : m
+            )
+          );
         } catch (err) {
           console.error('Chat Regeneration Error:', err);
           const errorMsg: ChatMessage = {
@@ -224,6 +266,12 @@ export default function AIChatCard({
     });
   }, [aiStatus, setMessages, updateMemory, runChat, setAiStatus]);
 
+  useEffect(() => {
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage) {
+      updateMemory(messages);
+    }
+  }, [messages, updateMemory]);
   const handleClear = useCallback(() => {
     // Animate out all messages
     setMessages([]);
@@ -361,7 +409,11 @@ export default function AIChatCard({
               ease: 'easeInOut',
             }}
           >
-            <img src={logoUrl} alt="Adarsh Logo" className="w-10 h-10 rounded" />
+            <img
+              src={logoUrl}
+              alt="Adarsh Logo"
+              className="w-10 h-10 rounded"
+            />
             {/* <ErrorBoundary
               fallback={<AlertTriangle className="w-8 h-8 text-yellow-400" />}
             >
