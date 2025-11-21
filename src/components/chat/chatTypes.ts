@@ -1,8 +1,9 @@
 /**
  * Represents the sender of a chat message.
- * 'ai' for messages from the AI, 'user' for messages from the user.
+ * 'ai' for messages from the AI, 'user' for messages from the user,
+ * and 'system' for internal system messages.
  */
-export type ChatSender = 'ai' | 'user';
+export type ChatSender = 'ai' | 'user' | 'system';
 
 /**
  * Represents a single message in the chat conversation.

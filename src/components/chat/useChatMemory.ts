@@ -1,5 +1,22 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import type { ChatMessage, ChatMemory } from './chatTypes';
+
+const MEMORY_STORAGE_KEY = 'aiChatMemory';
+
+/**
+ * Validates if the given data is a ChatMemory object.
+ * @param data The data to validate.
+ * @returns `true` if the data is a valid ChatMemory object, `false` otherwise.
+ */
+function isValidChatMemory(data: unknown): data is ChatMemory {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    'summary' in data &&
+    'keywords' in data &&
+    Array.isArray((data as ChatMemory).keywords)
+  );
+}
 
 // A list of common English stop words to filter out from keywords.
 const STOP_WORDS = new Set([
@@ -134,14 +151,40 @@ const STOP_WORDS = new Set([
 
 const MIN_KEYWORD_LENGTH = 4;
 const MAX_KEYWORDS = 8;
-const SUMMARY_MAX_LENGTH = 250;
+const SUMMARY_MAX_LENGTH = 300;
+const SUMMARY_MESSAGES_COUNT = 4; // Number of recent messages to include in summary
 
 /**
  * A custom hook to manage a client-side "memory" of the chat conversation,
  * including a summary and extracted keywords.
  */
 export function useChatMemory() {
-  const [memory, setMemory] = useState<ChatMemory | null>(null);
+  const [memory, setMemory] = useState<ChatMemory | null>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem(MEMORY_STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (isValidChatMemory(parsed)) {
+            return parsed;
+          }
+        }
+      } catch (error) {
+        console.error('Failed to parse chat memory from localStorage.', error);
+        localStorage.removeItem(MEMORY_STORAGE_KEY);
+      }
+    }
+    return null;
+  });
+
+  // Effect to persist memory to localStorage whenever it changes.
+  useEffect(() => {
+    try {
+      localStorage.setItem(MEMORY_STORAGE_KEY, JSON.stringify(memory));
+    } catch (error) {
+      console.error('Failed to save chat memory to localStorage:', error);
+    }
+  }, [memory]);
 
   /**
    * Updates the chat memory based on the provided message history.
@@ -153,7 +196,9 @@ export function useChatMemory() {
       return;
     }
 
-    const fullText = messages.map((m) => m.text).join(' ');
+    // Use a slice of recent messages for keyword extraction to keep it relevant.
+    const recentMessages = messages.slice(-SUMMARY_MESSAGES_COUNT * 2);
+    const fullText = recentMessages.map((m) => m.text).join(' ');
 
     // --- Enhanced Keyword Extraction ---
     const wordCounts = fullText
@@ -177,11 +222,24 @@ export function useChatMemory() {
           .map(([word]) => word)
       : [];
 
-    // --- Improved Summary Generation ---
+    // --- Smarter Summary Generation ---
+    // Combine the first user message with the last few messages for better context.
+    const firstUserMessage = messages.find((m) => m.sender === 'user');
+    const lastMessages = messages.slice(-SUMMARY_MESSAGES_COUNT);
+
+    let summaryText = lastMessages
+      .map((m) => `${m.sender}: ${m.text}`)
+      .join('\n');
+
+    if (firstUserMessage && !lastMessages.includes(firstUserMessage)) {
+      summaryText =
+        `Initial topic: ${firstUserMessage.text}\n...\n` + summaryText;
+    }
+
     const summary =
-      fullText.length > SUMMARY_MAX_LENGTH
-        ? `...${fullText.slice(-SUMMARY_MAX_LENGTH)}`
-        : fullText;
+      summaryText.length > SUMMARY_MAX_LENGTH
+        ? `...${summaryText.slice(-SUMMARY_MAX_LENGTH)}`
+        : summaryText;
 
     setMemory({ summary, keywords: keywords as readonly string[] });
   }, []);

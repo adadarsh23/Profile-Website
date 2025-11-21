@@ -9,7 +9,7 @@ export default function ChatInput({
 }: {
   value: string;
   onChange: (val: string) => void;
-  onSend: () => void;
+  onSend: (value: string) => void;
   disabled: boolean;
 }) {
   return (
@@ -22,12 +22,12 @@ export default function ChatInput({
         onKeyDown={(e) => {
           if (e.key === 'Enter' && !e.shiftKey && value.trim()) {
             e.preventDefault(); // Prevents newline in input
-            onSend();
+            onSend(value);
           }
         }}
       />
       <button
-        onClick={onSend}
+        onClick={() => onSend(value)}
         disabled={disabled}
         className={cn(
           'p-2 rounded-lg transition-colors',

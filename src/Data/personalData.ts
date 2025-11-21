@@ -5,7 +5,7 @@ export const personalData = {
     country: "India",
     state: "Delhi",
     city: "Delhi",
-    pincode: 110091,
+    pincode: 110096,
   },
 
   contact: {
@@ -19,8 +19,6 @@ export const personalData = {
     "Beat Making",
     "Sound Design",
     "Mixing and Mastering",
-    "Web Development (React, JavaScript, TypeScript)",
-
     // Branding / Artistic Lines
     "Crafting Dark Atmospheres",
     "Producing Cinematic Beats",

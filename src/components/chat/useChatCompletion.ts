@@ -9,20 +9,19 @@ export function useChatCompletion() {
   const runChat = useCallback(
     async (history: ChatMessage[]): Promise<string> => {
       setAiStatus('fetching');
+
       try {
         const response = await runGeminiChat(history);
-        setAiStatus('generating'); // Or could go straight to idle
         return response;
       } catch (error) {
-        console.error('Error in useChatCompletion:', error);
+        console.error('Error during chat completion:', error);
         setAiStatus('error');
         // Re-throw to allow the caller to handle UI updates for errors
         throw error;
       }
-      // The caller is responsible for setting the status back to 'idle'
-      // after processing the response.
+      // The caller is responsible for setting the status back to 'idle' in a finally block.
     },
-    []
+    [setAiStatus]
   );
 
   return { runChat, aiStatus, setAiStatus };

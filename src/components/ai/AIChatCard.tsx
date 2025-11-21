@@ -84,7 +84,7 @@ export default function AIChatCard({
   }, [messages, aiStatus]);
 
   const handleSend = useCallback(
-    async (text?: string) => {
+    async (text: string) => {
       const trimmed = (text || input).trim();
       if (!trimmed || aiStatus !== 'idle') return; // Prevent sending if AI is busy
 
@@ -134,11 +134,11 @@ export default function AIChatCard({
         setAiStatus('idle');
       }
     },
-    [input, aiStatus, setMessages, updateMemory, runChat, setAiStatus]
+    [aiStatus, setMessages, updateMemory, runChat, setAiStatus, input]
   );
 
   const handleEdit = useCallback(
-    async (messageId: string, newText: string) => {
+    async (messageId: string | undefined, newText: string) => {
       if (aiStatus !== 'idle') return;
 
       let messageIndex = -1;
@@ -190,7 +190,7 @@ export default function AIChatCard({
         setAiStatus('idle');
       }
     },
-    [aiStatus, messages, runChat, setMessages, updateMemory, setAiStatus]
+    [aiStatus, messages, runChat, setMessages, updateMemory, setAiStatus, handleSend]
   );
 
   const handleRegenerate = useCallback(async () => {
@@ -203,41 +203,39 @@ export default function AIChatCard({
     if (lastUserMessageIndex !== -1) {
       const historyToRegenerate = messages.slice(0, lastUserMessageIndex + 1);
 
-      (async () => {
-        try {
-          await new Promise((resolve) =>
-            setTimeout(resolve, AI_THINKING_DELAY_MS)
-          );
-          const historyWithSystemPrompt: ChatMessage[] = [
-            { sender: 'system', text: aiSystemPrompt, id: 'system-prompt' },
-            ...historyToRegenerate,
-          ];
+      try {
+        await new Promise((resolve) =>
+          setTimeout(resolve, AI_THINKING_DELAY_MS)
+        );
+        const historyWithSystemPrompt: ChatMessage[] = [
+          { sender: 'system', text: aiSystemPrompt, id: 'system-prompt' },
+          ...historyToRegenerate,
+        ];
 
-          const aiText = await runChat(historyWithSystemPrompt);
-          const formatted = formatResponse(aiText);
-          const aiMsg: ChatMessage = {
-            sender: 'ai',
-            text: formatted,
-            id: `ai-regen-${Date.now()}`, // Unique ID for regeneration
-            timestamp: Date.now(),
-          };
-          // Use a functional update to ensure we're building on the sliced history
-          setMessages([...historyToRegenerate, aiMsg]);
-          updateMemory([...historyToRegenerate, aiMsg]);
-        } catch (err) {
-          console.error('Chat Regeneration Error:', err);
-          const errorMsg: ChatMessage = {
-            sender: 'ai',
-            text: AI_ERROR_MESSAGE,
-            id: `err-regen-${Date.now()}`, // Unique ID for error
-            timestamp: Date.now(),
-          };
-          setMessages((prev) => [...prev, errorMsg]); // Add error to current messages
-          setAiStatus('error');
-        } finally {
-          setAiStatus('idle');
-        }
-      })();
+        const aiText = await runChat(historyWithSystemPrompt);
+        const formatted = formatResponse(aiText);
+        const aiMsg: ChatMessage = {
+          sender: 'ai',
+          text: formatted,
+          id: `ai-regen-${Date.now()}`, // Unique ID for regeneration
+          timestamp: Date.now(),
+        };
+        // Use a functional update to ensure we're building on the sliced history
+        setMessages([...historyToRegenerate, aiMsg]);
+        updateMemory([...historyToRegenerate, aiMsg]);
+      } catch (err) {
+        console.error('Chat Regeneration Error:', err);
+        const errorMsg: ChatMessage = {
+          sender: 'ai',
+          text: AI_ERROR_MESSAGE,
+          id: `err-regen-${Date.now()}`, // Unique ID for error
+          timestamp: Date.now(),
+        };
+        setMessages((prev) => [...prev, errorMsg]); // Add error to current messages
+        setAiStatus('error');
+      } finally {
+        setAiStatus('idle');
+      }
     }
     // No user messages found, do nothing.
   }, [aiStatus, messages, setMessages, updateMemory, runChat, setAiStatus]);
@@ -462,7 +460,7 @@ export default function AIChatCard({
                 <ChatMessageBubble
                   msg={msg}
                   onRegenerate={handleRegenerate}
-                  onEdit={(newText) => handleEdit(msg.id, newText)}
+                  onEdit={(newText) => handleEdit(msg.id, newText)} // Pass the message ID here
                 />
               </Suspense>
             ))}
@@ -480,7 +478,7 @@ export default function AIChatCard({
             <ChatInput
               value={input}
               onChange={setInput}
-              onSend={() => handleSend()}
+              onSend={handleSend}
               disabled={aiStatus !== 'idle' || !input.trim()}
             />
           </Suspense>

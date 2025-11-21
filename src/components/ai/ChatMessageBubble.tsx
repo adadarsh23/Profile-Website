@@ -244,7 +244,7 @@ const ChatMessageBubble = memo(function ChatMessageBubble({
   msg: ChatMessage;
   onRegenerate?: () => void;
   allMessages?: ChatMessage[];
-  onEdit: (newText: string) => void;
+  onEdit: (newText: string) => void; // Keep this as is, but we will call it from a different place
 }) {
   const isAI = msg.sender === 'ai';
   const [actionsVisible, setActionsVisible] = useState(false);
