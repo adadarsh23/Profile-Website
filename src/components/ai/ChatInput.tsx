@@ -19,7 +19,12 @@ export default function ChatInput({
         placeholder="Type a message..."
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        onKeyDown={(e) => e.key === 'Enter' && onSend()}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && !e.shiftKey && value.trim()) {
+            e.preventDefault(); // Prevents newline in input
+            onSend();
+          }
+        }}
       />
       <button
         onClick={onSend}

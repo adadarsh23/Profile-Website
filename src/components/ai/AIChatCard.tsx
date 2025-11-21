@@ -126,45 +126,56 @@ export default function AIChatCard({
   const handleRegenerate = useCallback(async () => {
     if (aiStatus !== 'idle') return;
 
-    // Find the last user message to regenerate from
-    const lastUserMessageIndex = messages.findLastIndex(
-      (m) => m.sender === 'user'
-    );
-
-    if (lastUserMessageIndex === -1) return; // No user message to regenerate from
-
-    // History up to the last user message
-    const historyToRegenerate = messages.slice(0, lastUserMessageIndex + 1);
-
-    setMessages(historyToRegenerate); // Remove the old AI response
     setAiStatus('thinking');
 
-    try {
-      await new Promise((resolve) => setTimeout(resolve, AI_THINKING_DELAY_MS));
-      const aiText = await runChat(historyToRegenerate);
-      const formatted = formatResponse(aiText);
-      const aiMsg: ChatMessage = {
-        sender: 'ai',
-        text: formatted,
-        id: `ai-regen-${Date.now()}`,
-        timestamp: Date.now(),
-      };
-      setMessages((prev) => [...prev, aiMsg]);
-      updateMemory([...historyToRegenerate, aiMsg]);
-    } catch (err) {
-      console.error('Chat Regeneration Error:', err);
-      const errorMsg: ChatMessage = {
-        sender: 'ai',
-        text: AI_ERROR_MESSAGE,
-        id: `err-regen-${Date.now()}`,
-        timestamp: Date.now(),
-      };
-      setMessages((prev) => [...prev, errorMsg]);
-      setAiStatus('error');
-    } finally {
-      setAiStatus('idle');
-    }
-  }, [aiStatus, messages, setMessages, updateMemory]);
+    setMessages((currentMessages) => {
+      const lastUserMessageIndex = currentMessages.findLastIndex(
+        (m) => m.sender === 'user'
+      );
+
+      if (lastUserMessageIndex === -1) {
+        setAiStatus('idle');
+        return currentMessages;
+      }
+
+      const historyToRegenerate = currentMessages.slice(
+        0,
+        lastUserMessageIndex + 1
+      );
+
+      (async () => {
+        try {
+          await new Promise((resolve) =>
+            setTimeout(resolve, AI_THINKING_DELAY_MS)
+          );
+          const aiText = await runChat(historyToRegenerate);
+          const formatted = formatResponse(aiText);
+          const aiMsg: ChatMessage = {
+            sender: 'ai',
+            text: formatted,
+            id: `ai-regen-${Date.now()}`,
+            timestamp: Date.now(),
+          };
+          setMessages((prev) => [...prev, aiMsg]);
+          updateMemory([...historyToRegenerate, aiMsg]);
+        } catch (err) {
+          console.error('Chat Regeneration Error:', err);
+          const errorMsg: ChatMessage = {
+            sender: 'ai',
+            text: AI_ERROR_MESSAGE,
+            id: `err-regen-${Date.now()}`,
+            timestamp: Date.now(),
+          };
+          setMessages((prev) => [...prev, errorMsg]);
+          setAiStatus('error');
+        } finally {
+          setAiStatus('idle');
+        }
+      })();
+
+      return historyToRegenerate;
+    });
+  }, [aiStatus, setMessages, updateMemory]);
 
   const handleClear = useCallback(() => {
     // Animate out all messages
@@ -198,6 +209,7 @@ export default function AIChatCard({
   const handleExport = useCallback(() => {
     if (!messages.length) return;
 
+    const now = new Date();
     const header = [
       '===== AD Assistant Chat Export =====',
       `Date: ${now.toLocaleDateString()}`,
@@ -207,7 +219,6 @@ export default function AIChatCard({
       '', // Extra newline
     ].join('\n');
 
-    const now = new Date();
     const fileName = `AI_Chat_${now.toISOString().replace(/[:.]/g, '-')}.txt`;
     const blob = new Blob([header + formatChatHistory(false)], {
       type: 'text/plain',
@@ -218,7 +229,7 @@ export default function AIChatCard({
     a.download = fileName;
     a.click();
     URL.revokeObjectURL(url);
-  }, [messages]);
+  }, [messages, formatChatHistory]);
 
   const handleShare = useCallback(async () => {
     if (!messages.length) return;
@@ -241,6 +252,9 @@ export default function AIChatCard({
         handleExport();
       }
     } else {
+      console.log(
+        'Web Share API not supported, falling back to direct download.'
+      );
       // Fallback for browsers that don't support the Web Share API
       handleExport();
     }
