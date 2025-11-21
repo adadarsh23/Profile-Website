@@ -151,44 +151,46 @@ export default function AIChatCard({
       setMessages(historyForAi);
 
       setAiStatus('thinking');
-
       try {
+        await new Promise((resolve) =>
+          setTimeout(resolve, AI_THINKING_DELAY_MS)
+        );
         const aiText = await runChat(historyForAi);
         const formatted = formatResponse(aiText);
         const aiMsg: ChatMessage = {
           sender: 'ai',
           text: formatted,
           id: `ai-edit-${Date.now()}`,
+          timestamp: Date.now(),
         };
         setMessages((prev) => [...prev, aiMsg]);
         updateMemory([...historyForAi, aiMsg]);
       } catch (err) {
-        // Handle error as in handleSend
+        console.error('Chat Edit Error:', err);
+        const errorMsg: ChatMessage = {
+          sender: 'ai',
+          text: AI_ERROR_MESSAGE,
+          id: `err-edit-${Date.now()}`,
+          timestamp: Date.now(),
+        };
+        setMessages((prev) => [...prev, errorMsg]);
+        setAiStatus('error');
       } finally {
         setAiStatus('idle');
       }
     },
     [aiStatus, messages, runChat, setMessages, updateMemory, setAiStatus]
   );
+
   const handleRegenerate = useCallback(async () => {
     if (aiStatus !== 'idle') return;
 
-    setAiStatus('thinking');
+    const lastUserMessageIndex = messages.findLastIndex(
+      (m) => m.sender === 'user'
+    );
 
-    setMessages((currentMessages) => {
-      const lastUserMessageIndex = currentMessages.findLastIndex(
-        (m) => m.sender === 'user'
-      );
-
-      if (lastUserMessageIndex === -1) {
-        setAiStatus('idle');
-        return currentMessages;
-      }
-
-      const historyToRegenerate = currentMessages.slice(
-        0,
-        lastUserMessageIndex + 1
-      );
+    if (lastUserMessageIndex !== -1) {
+      const historyToRegenerate = messages.slice(0, lastUserMessageIndex + 1);
 
       (async () => {
         try {
@@ -200,29 +202,29 @@ export default function AIChatCard({
           const aiMsg: ChatMessage = {
             sender: 'ai',
             text: formatted,
-            id: `ai-regen-${Date.now()}`,
+            id: `ai-regen-${Date.now()}`, // Unique ID for regeneration
             timestamp: Date.now(),
           };
-          setMessages((prev) => [...prev, aiMsg]);
+          // Use a functional update to ensure we're building on the sliced history
+          setMessages([...historyToRegenerate, aiMsg]);
           updateMemory([...historyToRegenerate, aiMsg]);
         } catch (err) {
           console.error('Chat Regeneration Error:', err);
           const errorMsg: ChatMessage = {
             sender: 'ai',
             text: AI_ERROR_MESSAGE,
-            id: `err-regen-${Date.now()}`,
+            id: `err-regen-${Date.now()}`, // Unique ID for error
             timestamp: Date.now(),
           };
-          setMessages((prev) => [...prev, errorMsg]);
+          setMessages((prev) => [...prev, errorMsg]); // Add error to current messages
           setAiStatus('error');
         } finally {
           setAiStatus('idle');
         }
       })();
-
-      return historyToRegenerate;
-    });
-  }, [aiStatus, setMessages, updateMemory, runChat, setAiStatus]);
+    }
+    // No user messages found, do nothing.
+  }, [aiStatus, messages, setMessages, updateMemory, runChat, setAiStatus]);
 
   const handleClear = useCallback(() => {
     // Animate out all messages
@@ -444,7 +446,7 @@ export default function AIChatCard({
                 <ChatMessageBubble
                   msg={msg}
                   onRegenerate={handleRegenerate}
-                  onEdit={handleEdit}
+                  onEdit={(newText) => handleEdit(msg.id, newText)}
                 />
               </Suspense>
             ))}

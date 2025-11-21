@@ -235,7 +235,7 @@ const ChatMessageActions = ({
   );
 };
 
-export default function ChatMessageBubble({
+const ChatMessageBubble = memo(function ChatMessageBubble({
   msg,
   onRegenerate,
   allMessages,
@@ -244,7 +244,7 @@ export default function ChatMessageBubble({
   msg: ChatMessage;
   onRegenerate?: () => void;
   allMessages?: ChatMessage[];
-  onEdit: (id: string, newText: string) => void;
+  onEdit: (newText: string) => void;
 }) {
   const isAI = msg.sender === 'ai';
   const [actionsVisible, setActionsVisible] = useState(false);
@@ -253,7 +253,7 @@ export default function ChatMessageBubble({
 
   const handleSave = () => {
     if (editedText.trim() !== msg.text) {
-      onEdit(msg.id, editedText.trim());
+      onEdit(editedText.trim());
     }
     setIsEditing(false);
   };
@@ -310,9 +310,17 @@ export default function ChatMessageBubble({
             remarkPlugins={[remarkGfm]}
             components={{
               code: (props) => <CodeBlock {...props} />,
-              a: ({ node, ...props }) => (
-                <a {...props} target="_blank" rel="noopener noreferrer" />
-              ),
+              a: ({ node, ...props }) =>
+                isAI ? (
+                  <a
+                    {...props}
+                    className="text-blue-400 hover:text-blue-300 underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                ) : (
+                  <a {...props} target="_blank" rel="noopener noreferrer" />
+                ),
             }}
           >
             {msg.text}
@@ -330,4 +338,6 @@ export default function ChatMessageBubble({
       />
     </motion.div>
   );
-}
+});
+
+export default ChatMessageBubble;
