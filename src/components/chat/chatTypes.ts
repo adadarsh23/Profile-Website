@@ -9,6 +9,10 @@ export type ChatSender = 'ai' | 'user';
  */
 export type ChatMessage = {
   /**
+   * A unique identifier for the message.
+   */
+  readonly id: string;
+  /**
    * The entity that sent the message.
    */
   readonly sender: ChatSender;

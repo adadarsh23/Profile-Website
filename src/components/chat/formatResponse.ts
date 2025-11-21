@@ -1,11 +1,3 @@
-// // TypeScript
-// export function formatResponse(text: string) {
-//   // Keep Markdown syntax clean and readable
-//   return text
-//     .replace(/\n{3,}/g, '\n\n') // normalize spacing
-//     .trim();
-// }
-
 /**
  * Formats and sanitizes a raw text response, often from an AI,
  * to ensure it's clean, readable, and safe for rendering.
@@ -20,18 +12,29 @@ export function formatResponse(text: string | null | undefined): string {
     return '';
   }
 
-  // Normalize line endings to LF
-  let formattedText = text.replace(/\r\n/g, '\n');
+  let formattedText = text
+    .replace(/\r\n/g, '\n') // Normalize line endings to LF
+    .replace(/```(\w+)\s*\n/g, '```$1\n') // Remove space after language in code blocks
+    .replace(/\n```/g, '\n\n```'); // Ensure newline before closing code fence
 
   // Ensure there's a newline before and after fenced code blocks
-  // This prevents lists or other text from merging with code blocks.
-  formattedText = formattedText.replace(/(\S)(```)/g, '$1\n$2'); // Before opening fence
-  formattedText = formattedText.replace(/(```)(\S)/g, '$1\n$2'); // After closing fence
+  formattedText = formattedText.replace(/([^\n])\n(```)/g, '$1\n\n$2');
+  formattedText = formattedText.replace(/(```)\n([^\n])/g, '$1\n\n$2');
+
+  // Add a newline before lists if they follow a non-newline character
+  formattedText = formattedText.replace(/([^\n])(\n\s*[-*] )/g, '$1\n$2');
+
+  // Automatically linkify URLs that are not already part of a markdown link
+  // This regex looks for URLs that are not preceded by `](` or followed by `)`.
+  // It's a simplified approach and might not cover all edge cases.
+  const urlRegex = /(?<!\]\()https?:\/\/[^\s]+(?!\))/g;
+  formattedText = formattedText.replace(urlRegex, (url) => {
+    // Avoid double-wrapping if it's already a link
+    return `${url}`;
+  });
 
   // Collapse more than two consecutive newlines into just two.
-  // This helps in maintaining clean spacing between paragraphs.
   formattedText = formattedText.replace(/\n{3,}/g, '\n\n');
 
-  // Trim leading/trailing whitespace from the entire response.
   return formattedText.trim();
 }

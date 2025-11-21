@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, memo, useCallback } from 'react';
+import { useState, memo, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
@@ -23,6 +23,32 @@ import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import { useSpeechSynthesis } from '@/hooks/useSpeechSynthesis';
 import type { ChatMessage } from '../chat/chatTypes';
 
+const Mermaid = memo(({ code }: { code: string }) => {
+  const [svg, setSvg] = useState('');
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    import('mermaid').then(async (mermaid) => {
+      mermaid.default.initialize({ startOnLoad: false, theme: 'dark' });
+      try {
+        const { svg: renderedSvg } = await mermaid.default.render(
+          `mermaid-graph-${Math.random().toString(36).substring(2, 9)}`,
+          code
+        );
+        setSvg(renderedSvg);
+        setError('');
+      } catch (e) {
+        setError('Failed to render Mermaid diagram.');
+        console.error(e);
+      }
+    });
+  }, [code]);
+
+  if (error) return <pre className="text-red-400">{error}</pre>;
+  if (svg) return <div dangerouslySetInnerHTML={{ __html: svg }} />;
+  return <div className="p-4 text-center">Rendering graph...</div>;
+});
+
 // Memoized CodeBlock component for performance and clean code
 const CodeBlock = memo(({ inline, className, children }) => {
   const { copied, copy } = useCopyToClipboard();
@@ -30,6 +56,10 @@ const CodeBlock = memo(({ inline, className, children }) => {
   const codeString = String(children).replace(/\n$/, '');
 
   const handleCopyCode = () => copy(codeString);
+
+  if (match && match[1] === 'mermaid') {
+    return <Mermaid code={codeString} />;
+  }
 
   if (!inline) {
     return (
@@ -256,7 +286,7 @@ export default function ChatMessageBubble({
               onClick={() => setIsEditing(false)}
               className="text-xs text-gray-400 hover:text-white"
             >
-              < X className="w-6 h-6" />
+              <X className="w-6 h-6" />
             </button>
             <button
               onClick={handleSave}
@@ -272,12 +302,17 @@ export default function ChatMessageBubble({
             'prose prose-sm max-w-none prose-p:text-inherit prose-headings:text-inherit prose-strong:text-inherit',
             isAI ? 'prose-invert' : ''
           )}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
         >
           <ReactMarkdown
             rehypePlugins={[rehypeRaw]}
             remarkPlugins={[remarkGfm]}
             components={{
               code: CodeBlock,
+              a: ({ node, ...props }) => (
+                <a {...props} target="_blank" rel="noopener noreferrer" />
+              ),
             }}
           >
             {msg.text}
