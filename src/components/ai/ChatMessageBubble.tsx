@@ -251,7 +251,7 @@ export default function ChatMessageBubble({
             rows={Math.max(3, editedText.split('\n').length)}
             autoFocus
           />
-          <div className="flex justify-end gap-2">
+          <div className="flex justify-start gap-2">
             <button
               onClick={() => setIsEditing(false)}
               className="text-xs text-gray-400 hover:text-white"
