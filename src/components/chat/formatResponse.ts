@@ -14,12 +14,11 @@ export function formatResponse(text: string | null | undefined): string {
 
   let formattedText = text
     .replace(/\r\n/g, '\n') // Normalize line endings to LF
-    .replace(/```(\w+)\s*\n/g, '```$1\n') // Remove space after language in code blocks
-    .replace(/\n```/g, '\n\n```'); // Ensure newline before closing code fence
+    .replace(/```(\w+)\s*\n/g, '```$1\n'); // Remove space after language in code blocks
 
-  // Ensure there's a newline before and after fenced code blocks
-  formattedText = formattedText.replace(/([^\n])\n(```)/g, '$1\n\n$2');
-  formattedText = formattedText.replace(/(```)\n([^\n])/g, '$1\n\n$2');
+  // Ensure there's a newline before and after fenced code blocks, but not if it's already there.
+  formattedText = formattedText.replace(/([^\n])\n(```)/g, '$1\n\n$2'); // Before opening fence
+  formattedText = formattedText.replace(/(```)\n([^\n])/g, '$1\n\n$2'); // After closing fence
 
   // Add a newline before lists if they follow a non-newline character
   formattedText = formattedText.replace(/([^\n])(\n\s*[-*] )/g, '$1\n$2');
