@@ -1,3 +1,5 @@
+import { galleryImages } from "./GalleryData";
+
 export const personalData = {
   creatorName: 'Âd Adarsh',
 
@@ -189,21 +191,39 @@ export const personalData = {
     },
   ],
 
-  galleryImages: Array.from({ length: 12 }).map((_, i) => ({
-    image: `https://picsum.photos/seed/${i + 1}/800/600?grayscale`,
-    text: [
-      'Bridge',
-      'Desk Setup',
-      'Waterfall',
-      'Strawberries',
-      'Deep Diving',
-      'Train Track',
-      'Santorini',
-      'Blurry Lights',
-      'New York',
-      'Good Boy',
-      'Coastline',
-      'Palm Trees',
-    ][i],
-  })),
+  // galleryImages: Array.from({ length: 12 }).map((_, i) => ({
+  //   image: `https://picsum.photos/seed/${i + 1}/800/600?grayscale`,
+  //   text: [
+  //     'Bridge',
+  //     'Desk Setup',
+  //     'Waterfall',
+  //     'Strawberries',
+  //     'Deep Diving',
+  //     'Train Track',
+  //     'Santorini',
+  //     'Blurry Lights',
+  //     'New York',
+  //     'Good Boy',
+  //     'Coastline',
+  //     'Palm Trees',
+  //   ][i],
+  // })),
+  galleryImages : [
+  {
+    image: `${import.meta.env.BASE_URL}Photo/Photo1.jpg`,
+    text: 'Red Flowers',
+  },
+  {
+    image: `${import.meta.env.BASE_URL}Photo/Photo2.jpg`,
+    text: '23',
+  },
+  {
+    image: `${import.meta.env.BASE_URL}Photo/Photo3.jpg`,
+    text: 'Red Gradient',
+  },
+  {
+    image: `${import.meta.env.BASE_URL}Photo/Photo4.jpg`,
+    text: 'Ai',
+  }
+],
 };
