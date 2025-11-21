@@ -309,7 +309,7 @@ export default function ChatMessageBubble({
             rehypePlugins={[rehypeRaw]}
             remarkPlugins={[remarkGfm]}
             components={{
-              code: CodeBlock,
+              code: (props) => <CodeBlock {...props} />,
               a: ({ node, ...props }) => (
                 <a {...props} target="_blank" rel="noopener noreferrer" />
               ),
