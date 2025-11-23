@@ -31,7 +31,7 @@ import TypingIndicator, { AiStatus } from './TypingIndicator';
 import logoUrl from '../../assets/ai.png';
 // const RobotFaceWrapper = lazy(() => import('../RobotFaceWrapper'));
 // Constants for better maintainability
-const AI_THINKING_DELAY_MS = 500;
+const AI_THINKING_DELAY_MS = 1000;
 const AI_ERROR_MESSAGE = '⚠️ Something went wrong. Please try again.';
 
 export default function AIChatCard({

@@ -90,19 +90,173 @@
 //   );
 // }
 
-import React, { lazy, Suspense } from 'react';
+// import React, { lazy, Suspense } from 'react';
+// import { motion } from 'framer-motion';
+// import { useState, useEffect } from 'react';
+// import Loading from '../components/Loading';
+// //import BlurText from '../components/BlurText';
+// // const BlurText = lazy(() => import('../components/BlurText'));
+// const Vortex = lazy(() => import('../components/Vortex'));
+
+// // const Header = memo(function Header({ onAnimationComplete }) {
+// //   const handleAnimationComplete = () => {
+// //     console.log('Animation completed!');
+// //     onAnimationComplete?.();
+// //   };
+// function Header() {
+//   const words = [
+//     'Welcome To Âd Adarsh Profile',
+//     'Crafting Dark Atmospheres',
+//     'Producing Cinematic Beats',
+//     'Where Sound Meets Emotion',
+//     'Building Stories Through Music',
+//     'Creating Sonic Worlds',
+//     'Rhythms That Hit Deep',
+//     'Mixing Raw Energy With Art',
+//     'Sound Designed With Intent',
+//     'Echoes Born From Silence',
+//     'Beats Forged In Shadows',
+//     'Music With A Pulse Of Its Own',
+//     'Bass That Cuts Through The Dark',
+//     'Every Sound Has A Story',
+//     'Emotion Engineered In Waves',
+//     'From Stillness To Impact',
+//     'Creating Depth Through Noise',
+//     'Dark Tones. Clean Edges.',
+//     'When Vibes Turn Into Vision',
+//   ];
+//   const [currentWordIndex, setCurrentWordIndex] = useState(0);
+//   const [displayedText, setDisplayedText] = useState('');
+//   const [isTyping, setIsTyping] = useState(true);
+//   const [isDeleting, setIsDeleting] = useState(false);
+
+//   useEffect(() => {
+//     const currentWord = words[currentWordIndex];
+
+//     if (isTyping && !isDeleting) {
+//       // Typing forward
+//       if (displayedText.length < currentWord.length) {
+//         const timeout = setTimeout(() => {
+//           setDisplayedText(currentWord.slice(0, displayedText.length + 1));
+//         }, 100);
+//         return () => clearTimeout(timeout);
+//       } else {
+//         // Wait before deleting
+//         const timeout = setTimeout(() => {
+//           setIsDeleting(true);
+//         }, 2000);
+//         return () => clearTimeout(timeout);
+//       }
+//     } else if (isDeleting) {
+//       // Deleting
+//       if (displayedText.length > 0) {
+//         const timeout = setTimeout(() => {
+//           setDisplayedText(displayedText.slice(0, -1));
+//         }, 50);
+//         return () => clearTimeout(timeout);
+//       } else {
+//         // Move to next word
+//         setIsDeleting(false);
+//         setCurrentWordIndex((prev) => (prev + 1) % words.length);
+//       }
+//     }
+//   }, [displayedText, currentWordIndex, isTyping, isDeleting, words]);
+//   return (
+//     // <Suspense fallback={<Loading />}>
+//       <div className="relative w-full h-screen overflow-hidden bg-black flex flex-col items-center justify-center px-4 sm:px-6 md:px-12">
+//         <Vortex
+//           backgroundColor="black"
+//           rangeY={1000}
+//           particleCount={1000}
+//           baseHue={1000}
+//           className="flex items-center flex-col justify-center px-2 md:px-10  py-4 w-full h-full"
+//         >
+//           <motion.h2
+//             initial={{ opacity: 0, y: 30 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{
+//               duration: 1,
+//               ease: [0.25, 0.1, 0.25, 1],
+//             }}
+//             whileHover={{
+//               scale: 1.02,
+//               transition: { duration: 0.3, ease: 'easeInOut' },
+//             }}
+//             className="text-white text-2xl md:text-6xl font-bold text-center relative min-h-[80px] md:min-h-[120px] flex items-center justify-center striper-regular "
+//           >
+//             <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+//               {displayedText}
+//             </span>
+//             <motion.span
+//               animate={{ opacity: [1, 0] }}
+//               transition={{
+//                 duration: 0.6,
+//                 repeat: Infinity,
+//                 repeatType: 'reverse',
+//                 ease: 'easeInOut',
+//               }}
+//               className="inline-block ml-1 text-white"
+//             >
+//               |
+//             </motion.span>
+
+//             {/* Animated underline */}
+//             {/* <motion.div
+//             animate={{
+//               scaleX: displayedText.length > 0 ? 1 : 0,
+//               opacity: displayedText.length > 0 ? 1 : 0
+//             }}
+//             transition={{ duration: 0.5 }}
+//             className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-gray-400 via-white to-gray-400 origin-left"
+//           /> */}
+//           </motion.h2>
+//           {/* <motion.h2
+//           initial={{ opacity: 0, scale: 0.8, y: 20 }}
+//           animate={{ opacity: 1, scale: 1, y: 0 }}
+//           transition={{
+//             duration: 0.6,
+//             ease: "easeOut"
+//           }}
+//           whileHover={{
+//             scale: 1.05,
+//             transition: { duration: 0.2 }
+//           }}
+//           className="text-white text-2xl md:text-6xl font-bold text-center striper-regular"
+//         >
+//           Welcome To Âd Adarsh Profile
+//         </motion.h2> */}
+//           <motion.p
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{
+//               delay: 0.2,
+//               duration: 0.8,
+//               ease: 'easeInOut',
+//             }}
+//             className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center striper-regular"
+//           >
+//             Explore my projects, beats, and music production works.
+//           </motion.p>
+//           {/* <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
+//           <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 transition duration-200 rounded-lg text-white shadow-[0px_2px_0px_0px_#FFFFFF40_inset]">
+//             Order now
+//           </button>
+//           <button className="px-4 py-2  text-white ">Watch trailer</button>
+//         </div> */}
+//         </Vortex>
+//       </div>
+//     // </Suspense>
+//   );
+// }
+
+// export default Header;
+
+
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import Loading from '../components/Loading';
-//import BlurText from '../components/BlurText';
-// const BlurText = lazy(() => import('../components/BlurText'));
-const Vortex = lazy(() => import('../components/Vortex'));
+import Vortex from '../components/Vortex'; // <-- load normally (fix)
 
-// const Header = memo(function Header({ onAnimationComplete }) {
-//   const handleAnimationComplete = () => {
-//     console.log('Animation completed!');
-//     onAnimationComplete?.();
-//   };
 function Header() {
   const words = [
     'Welcome To Âd Adarsh Profile',
@@ -125,126 +279,73 @@ function Header() {
     'Dark Tones. Clean Edges.',
     'When Vibes Turn Into Vision',
   ];
+
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState('');
-  const [isTyping, setIsTyping] = useState(true);
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const currentWord = words[currentWordIndex];
 
-    if (isTyping && !isDeleting) {
-      // Typing forward
+    if (!isDeleting) {
       if (displayedText.length < currentWord.length) {
-        const timeout = setTimeout(() => {
+        const t = setTimeout(() => {
           setDisplayedText(currentWord.slice(0, displayedText.length + 1));
-        }, 100);
-        return () => clearTimeout(timeout);
+        }, 90);
+        return () => clearTimeout(t);
       } else {
-        // Wait before deleting
-        const timeout = setTimeout(() => {
-          setIsDeleting(true);
-        }, 2000);
-        return () => clearTimeout(timeout);
-      }
-    } else if (isDeleting) {
-      // Deleting
-      if (displayedText.length > 0) {
-        const timeout = setTimeout(() => {
-          setDisplayedText(displayedText.slice(0, -1));
-        }, 50);
-        return () => clearTimeout(timeout);
-      } else {
-        // Move to next word
-        setIsDeleting(false);
-        setCurrentWordIndex((prev) => (prev + 1) % words.length);
+        const t = setTimeout(() => setIsDeleting(true), 1500);
+        return () => clearTimeout(t);
       }
     }
-  }, [displayedText, currentWordIndex, isTyping, isDeleting, words]);
+
+    if (displayedText.length > 0) {
+      const t = setTimeout(() => {
+        setDisplayedText(displayedText.slice(0, -1));
+      }, 40);
+      return () => clearTimeout(t);
+    } else {
+      setIsDeleting(false);
+      setCurrentWordIndex(prev => (prev + 1) % words.length);
+    }
+  }, [displayedText, currentWordIndex, isDeleting, words]);
+
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black flex flex-col items-center justify-center px-4 sm:px-6 md:px-12">
-      <Suspense fallback={<Loading />}>
-        <Vortex
-          backgroundColor="black"
-          rangeY={1000}
-          particleCount={1000}
-          baseHue={1000}
-          className="flex items-center flex-col justify-center px-2 md:px-10  py-4 w-full h-full"
+      <Vortex
+        backgroundColor="black"
+        rangeY={1000}
+        particleCount={1000}
+        baseHue={1000}
+        className="flex items-center flex-col justify-center px-2 md:px-10 py-4 w-full h-full"
+      >
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-white text-2xl md:text-6xl font-bold text-center min-h-[80px] md:min-h-[120px] striper-regular"
         >
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 1,
-              ease: [0.25, 0.1, 0.25, 1],
-            }}
-            whileHover={{
-              scale: 1.02,
-              transition: { duration: 0.3, ease: 'easeInOut' },
-            }}
-            className="text-white text-2xl md:text-6xl font-bold text-center relative min-h-[80px] md:min-h-[120px] flex items-center justify-center striper-regular "
+          <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+            {displayedText}
+          </span>
+          <motion.span
+            animate={{ opacity: [1, 0] }}
+            transition={{ duration: 0.6, repeat: Infinity, repeatType: 'reverse' }}
+            className="inline-block ml-1 text-white"
           >
-            <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
-              {displayedText}
-            </span>
-            <motion.span
-              animate={{ opacity: [1, 0] }}
-              transition={{
-                duration: 0.6,
-                repeat: Infinity,
-                repeatType: 'reverse',
-                ease: 'easeInOut',
-              }}
-              className="inline-block ml-1 text-white"
-            >
-              |
-            </motion.span>
+            |
+          </motion.span>
+        </motion.h2>
 
-            {/* Animated underline */}
-            {/* <motion.div
-            animate={{
-              scaleX: displayedText.length > 0 ? 1 : 0,
-              opacity: displayedText.length > 0 ? 1 : 0
-            }}
-            transition={{ duration: 0.5 }}
-            className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-gray-400 via-white to-gray-400 origin-left"
-          /> */}
-          </motion.h2>
-          {/* <motion.h2
-          initial={{ opacity: 0, scale: 0.8, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{
-            duration: 0.6,
-            ease: "easeOut"
-          }}
-          whileHover={{
-            scale: 1.05,
-            transition: { duration: 0.2 }
-          }}
-          className="text-white text-2xl md:text-6xl font-bold text-center striper-regular"
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center striper-regular"
         >
-          Welcome To Âd Adarsh Profile
-        </motion.h2> */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 0.2,
-              duration: 0.8,
-              ease: 'easeInOut',
-            }}
-            className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center striper-regular"
-          >
-            Explore my projects, beats, and music production works.
-          </motion.p>
-          {/* <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
-          <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 transition duration-200 rounded-lg text-white shadow-[0px_2px_0px_0px_#FFFFFF40_inset]">
-            Order now
-          </button>
-          <button className="px-4 py-2  text-white ">Watch trailer</button>
-        </div> */}
-        </Vortex>
-      </Suspense>
+          Explore my projects, beats, and music production works.
+        </motion.p>
+      </Vortex>
     </div>
   );
 }

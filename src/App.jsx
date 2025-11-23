@@ -6,7 +6,8 @@ import ErrorBoundary from './components/ErrorBoundary';
 
 // Core components (imported synchronously)
 import Navbar from './Main/Navbar';
-import Footer from './components/Footer';
+const Footer = React.lazy(() => import('./Main/Footer'));
+// import Footer from './Main/Footer';
 
 // Page components with proper error handling
 const loadComponent = (importPromise) => {
@@ -109,6 +110,14 @@ export default function App() {
                 <SplashCursor />
                 <SmoothScrollProvider />
                 <RobotFaceWrapper />
+                <InternetStatus />
+                <ScrollToTopButton />
+                <CacheClean />
+                <div className="enhancement-components">
+                  <InternetStatus />
+                  <ScrollToTopButton />
+                  <CacheClean />
+                </div>
               </React.Fragment>
             </Suspense>
           </ErrorBoundary>
@@ -127,9 +136,9 @@ export default function App() {
                 <Routes>
                   {[
                     { path: '/', element: <Home /> },
-                    { path: '/about', element: <About /> },
-                    { path: '/contact', element: <Contact /> },
                     { path: '/sample', element: <Sample /> },
+                    { path: '/contact', element: <Contact /> },
+                    { path: '/about', element: <About /> },
                     { path: '/blog', element: <Blog /> },
                     { path: '*', element: <NotFound /> },
                   ].map(({ path, element }) => (
@@ -149,7 +158,7 @@ export default function App() {
           </main>
 
           {/* UI Enhancement Components */}
-          <ErrorBoundary fallback={null}>
+          {/* <ErrorBoundary fallback={null}>
             <Suspense fallback={null}>
               <div className="enhancement-components">
                 <InternetStatus />
@@ -157,7 +166,7 @@ export default function App() {
                 <CacheClean />
               </div>
             </Suspense>
-          </ErrorBoundary>
+          </ErrorBoundary> */}
 
           {/* Footer - Always render */}
           <footer>

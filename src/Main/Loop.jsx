@@ -79,7 +79,7 @@ export default function Loop() {
             curveAmount={300}
             direction="right"
             interactive={true}
-            className="text-9xl sm:text-7xl md:text-9xl lg:text-9xl font-semibold leading-none tracking-tight select-none"
+            className="text-9xl font-semibold leading-none tracking-tight select-none"
           />
         </div>
       </Suspense>

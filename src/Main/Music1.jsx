@@ -1,7 +1,7 @@
 import React, { useEffect, useState, lazy, Suspense, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { musicData } from '../Data/musicData.jsx';
-
+import Loading from '../components/Loading.jsx';
 const MusicArtwork = lazy(() => import('../components/MusicArt.tsx'));
 
 // const BubbleText = () => {
@@ -75,7 +75,8 @@ function Music1() {
 
   return (
     <section className="bg-black text-white flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12 lg:mb-20">
-      <BubbleText styles={styles} />
+
+      {styles && <BubbleText styles={styles} />}
 
       <motion.div
         className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 lg:gap-24 xl:gap-32"
@@ -86,9 +87,7 @@ function Music1() {
       >
         {safeMusicData.map((song) => (
           <motion.div key={song.id || song.music} variants={itemVariants}>
-            <Suspense
-              fallback={<div className="text-gray-400">Loading...</div>}
-            >
+            <Suspense fallback={<div><Loading /></div>}>
               <MusicArtwork {...song} />
             </Suspense>
           </motion.div>
