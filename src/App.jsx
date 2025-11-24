@@ -110,9 +110,6 @@ export default function App() {
                 <SplashCursor />
                 <SmoothScrollProvider />
                 <RobotFaceWrapper />
-                <InternetStatus />
-                <ScrollToTopButton />
-                <CacheClean />
                 <div className="enhancement-components">
                   <InternetStatus />
                   <ScrollToTopButton />
