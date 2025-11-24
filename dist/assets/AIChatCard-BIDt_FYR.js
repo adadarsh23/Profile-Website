@@ -1,0 +1,904 @@
+const __vite__mapDeps = (
+  i,
+  m = __vite__mapDeps,
+  d = m.f ||
+    (m.f = [
+      'assets/ChatInput-UM6_xijg.js',
+      'assets/vendor-DEG5g0yW.js',
+      'assets/utils-65uuWg0a.js',
+      'assets/ChatMessageBubble-gBt2-eiP.js',
+    ])
+) => i.map((i) => d[i]);
+import {
+  r as e,
+  j as t,
+  m as n,
+  b9 as a,
+  ba as s,
+  bb as i,
+  bc as r,
+  A as o,
+  _ as l,
+} from './vendor-DEG5g0yW.js';
+import { c } from './utils-65uuWg0a.js';
+const d = 'aiPersistentChatHistory';
+function useChatSession(t) {
+  const [n, a] = e.useState(() => {
+    if ('undefined' != typeof window)
+      try {
+        const t = localStorage.getItem(d);
+        if (t) {
+          const n = JSON.parse(t);
+          if (
+            ((e = n),
+            Array.isArray(e) &&
+              e.every((e) => e && 'id' in e && 'sender' in e && 'text' in e))
+          )
+            return n;
+        }
+      } catch (n) {
+        localStorage.removeItem(d);
+      }
+    var e;
+    return [...t];
+  });
+  e.useEffect(() => {
+    try {
+      localStorage.setItem(d, JSON.stringify(n));
+    } catch (e) {}
+  }, [n]);
+  const s = e.useCallback(() => {
+    try {
+      (localStorage.removeItem(d), a([...t]));
+    } catch (e) {}
+  }, [t]);
+  return { messages: n, setMessages: a, clearSession: s };
+}
+const h = 'aiChatMemory';
+const m = new Set([
+  'i',
+  'me',
+  'my',
+  'myself',
+  'we',
+  'our',
+  'ours',
+  'ourselves',
+  'you',
+  'your',
+  'yours',
+  'yourself',
+  'yourselves',
+  'he',
+  'him',
+  'his',
+  'himself',
+  'she',
+  'her',
+  'hers',
+  'herself',
+  'it',
+  'its',
+  'itself',
+  'they',
+  'them',
+  'their',
+  'theirs',
+  'themselves',
+  'what',
+  'which',
+  'who',
+  'whom',
+  'this',
+  'that',
+  'these',
+  'those',
+  'am',
+  'is',
+  'are',
+  'was',
+  'were',
+  'be',
+  'been',
+  'being',
+  'have',
+  'has',
+  'had',
+  'having',
+  'do',
+  'does',
+  'did',
+  'doing',
+  'a',
+  'an',
+  'the',
+  'and',
+  'but',
+  'if',
+  'or',
+  'because',
+  'as',
+  'until',
+  'while',
+  'of',
+  'at',
+  'by',
+  'for',
+  'with',
+  'about',
+  'against',
+  'between',
+  'into',
+  'through',
+  'during',
+  'before',
+  'after',
+  'above',
+  'below',
+  'to',
+  'from',
+  'up',
+  'down',
+  'in',
+  'out',
+  'on',
+  'off',
+  'over',
+  'under',
+  'again',
+  'further',
+  'then',
+  'once',
+  'here',
+  'there',
+  'when',
+  'where',
+  'why',
+  'how',
+  'all',
+  'any',
+  'both',
+  'each',
+  'few',
+  'more',
+  'most',
+  'other',
+  'some',
+  'such',
+  'no',
+  'nor',
+  'not',
+  'only',
+  'own',
+  'same',
+  'so',
+  'than',
+  'too',
+  'very',
+  's',
+  't',
+  'can',
+  'will',
+  'just',
+  'don',
+  'should',
+  'now',
+]);
+function useChatMemory() {
+  const [t, n] = e.useState(() => {
+    if ('undefined' != typeof window)
+      try {
+        const t = localStorage.getItem(h);
+        if (t) {
+          const n = JSON.parse(t);
+          if (
+            'object' == typeof (e = n) &&
+            null !== e &&
+            'summary' in e &&
+            'keywords' in e &&
+            Array.isArray(e.keywords)
+          )
+            return n;
+        }
+      } catch (t) {
+        localStorage.removeItem(h);
+      }
+    var e;
+    return null;
+  });
+  e.useEffect(() => {
+    try {
+      localStorage.setItem(h, JSON.stringify(t));
+    } catch (e) {}
+  }, [t]);
+  const a = e.useCallback((e) => {
+    if (0 === e.length) return void n(null);
+    const t = e
+        .slice(-8)
+        .map((e) => e.text)
+        .join(' '),
+      a = t
+        .toLowerCase()
+        .match(/\b\w+\b/g)
+        ?.filter((e) => e.length >= 4 && !m.has(e))
+        .reduce((e, t) => ((e[t] = (e[t] || 0) + 1), e), {}),
+      s = a
+        ? Object.entries(a)
+            .sort(([, e], [, t]) => t - e)
+            .slice(0, 8)
+            .map(([e]) => e)
+        : [],
+      i = e.find((e) => 'user' === e.sender),
+      r = e.slice(-4);
+    let o = r.map((e) => `${e.sender}: ${e.text}`).join('\n');
+    i && !r.includes(i) && (o = `Initial topic: ${i.text}\n...\n` + o);
+    const l = o.length > 300 ? `...${o.slice(-300)}` : o;
+    n({ summary: l, keywords: s });
+  }, []);
+  return { memory: t, updateMemory: a };
+}
+function formatResponse(e) {
+  if (!e) return '';
+  let t = e.replace(/\r\n/g, '\n').replace(/```(\w+)\s*\n/g, '```$1\n');
+  ((t = t.replace(/([^\n])\n(```)/g, '$1\n\n$2')),
+    (t = t.replace(/(```)\n([^\n])/g, '$1\n\n$2')),
+    (t = t.replace(/([^\n])(\n\s*[-*] )/g, '$1\n$2')));
+  const n = new RegExp('(?<!\\]\\()https?:\\/\\/[^\\s]+(?!\\))', 'g');
+  return (
+    (t = t.replace(n, (e) => `${e}`)),
+    (t = t.replace(/\n{3,}/g, '\n\n')),
+    t.trim()
+  );
+}
+const u = {
+    creatorName: 'Âd Adarsh',
+    location: {
+      country: 'India',
+      state: 'Delhi',
+      city: 'Delhi',
+      pincode: 110096,
+    },
+    contact: { email: 'adadarsh523@gmail.com', phone: '+91-9319247835' },
+    skills: [
+      'Music Production (FL Studio)',
+      'Beat Making',
+      'Sound Design',
+      'Mixing and Mastering',
+      'Crafting Dark Atmospheres',
+      'Producing Cinematic Beats',
+      'Where Sound Meets Emotion',
+      'Building Stories Through Music',
+      'Creating Sonic Worlds',
+      'Rhythms That Hit Deep',
+      'Mixing Raw Energy With Art',
+      'Sound Designed With Intent',
+      'Echoes Born From Silence',
+      'Beats Forged In Shadows',
+      'Music With A Pulse Of Its Own',
+      'Bass That Cuts Through The Dark',
+      'Every Sound Has A Story',
+      'Emotion Engineered In Waves',
+      'From Stillness To Impact',
+      'Creating Depth Through Noise',
+      'Dark Tones. Clean Edges.',
+      'When Vibes Turn Into Vision',
+    ],
+    musicProjects: [
+      {
+        name: 'Silent Ritual',
+        year: 2025,
+        description:
+          'Silent Ritual is a collection of 10 atmospheric tracks crafted for artists and creators. Produced, mixed, and mastered by Âd Adarsh.',
+        technologies: ['FL Studio', 'Serum', 'Splice Samples'],
+      },
+      {
+        name: 'Haqeeqat',
+        year: 2025,
+        description:
+          'A melodic love song blending emotional depth with clean production. Produced, mixed, and mastered by Âd Adarsh.',
+        technologies: ['FL Studio', 'Omnisphere', 'Splice Samples'],
+      },
+      {
+        name: 'Number 2',
+        year: 2024,
+        description:
+          'A high-energy Hip-Hop track with punchy drums and catchy hooks. First official track released by Âd Adarsh.',
+        technologies: ['FL Studio'],
+      },
+      {
+        name: 'Unfelling',
+        year: 2024,
+        description:
+          'A dark, atmospheric track with eerie melodies and deep basslines. Fully produced, mixed, and mastered by Âd Adarsh.',
+        technologies: ['FL Studio', 'Splice Samples'],
+      },
+      {
+        name: 'Phaser',
+        year: 2025,
+        description:
+          'An energetic EDM track featuring bright synths and powerful rhythms.',
+        technologies: ['FL Studio'],
+      },
+    ],
+    socials: {
+      soundcloud: 'https://soundcloud.com/adadarsh23',
+      youtube: 'https://youtube.com/c/adadarsh23',
+      instagram: 'https://instagram.com/adadarsh23',
+      github: 'https://github.com/adadarsh23',
+      linkedin: 'https://linkedin.com/in/adadarsh23',
+      twitter: 'https://twitter.com/adadarsh23',
+      spotify: 'https://open.spotify.com/artist/7nd9x69ZcOpoft6TMDnXCa',
+      itunes: 'https://music.apple.com/us/artist/%C3%A2d-adarsh/1794512299',
+      facebook: 'https://www.facebook.com/adadarsh23',
+      pinterest: 'https://in.pinterest.com/adadarsh23/_saved/',
+      reddit: 'https://www.reddit.com/user/adadarsh23',
+      threads: 'https://www.threads.net/@adadarsh23',
+      whatsappChannel:
+        'https://www.whatsapp.com/channel/0029VbB809Y5a23uHr5XFz0a',
+      telegram: 'https://t.me/adadarsh23',
+      discord: 'https://discord.com/invite/h2hwYue3',
+      snapchat: 'https://www.snapchat.com/@adadarsh2.3',
+      gameProfile: 'https://adadarsh23.github.io/Portfolio/game.html',
+    },
+    about: [
+      {
+        title: 'Our Mission',
+        description:
+          'Build high-quality, scalable, and meaningful digital experiences that solve real problems.',
+      },
+      {
+        title: 'Our Vision',
+        description:
+          'Empower creators and developers with modern tools, fast workflows, and innovation-driven thinking.',
+      },
+      {
+        title: 'Our Values',
+        description:
+          'Innovation, simplicity, transparency, and continuous improvement across all projects.',
+      },
+    ],
+    sampleBeats: [
+      {
+        id: 1,
+        title: 'Midnight Chill',
+        artist: 'Adarsh',
+        genre: 'Lo-fi',
+        bpm: 85,
+        duration: '2:45',
+        image: 'https://placehold.co/400x300/png?text=Midnight+Chill',
+        url: 'https://example.com/midnight-chill.mp3',
+        price: 'Free',
+        download: 'https://example.com/midnight-chill.mp3',
+      },
+      {
+        id: 2,
+        title: 'Trap Energy',
+        artist: 'BeatMaster',
+        genre: 'Trap',
+        bpm: 140,
+        duration: '3:15',
+        image: 'https://placehold.co/400x300/png?text=Trap+Energy',
+        url: 'https://example.com/trap-energy.mp3',
+        price: '$19.99',
+        download: 'https://example.com/trap-energy.mp3',
+      },
+      {
+        id: 3,
+        title: 'Summer Vibes',
+        artist: 'DJ Wave',
+        genre: 'House',
+        bpm: 120,
+        duration: '4:05',
+        image: 'https://placehold.co/400x300/png?text=Summer+Vibes',
+        url: 'https://example.com/summer-vibes.mp3',
+        price: '$14.99',
+        download: 'https://example.com/summer-vibes.mp3',
+      },
+      {
+        id: 4,
+        title: 'Dark Mode',
+        artist: 'SynthLord',
+        genre: 'EDM',
+        bpm: 128,
+        duration: '3:50',
+        image: 'https://placehold.co/400x300/png?text=Dark+Mode',
+        url: 'https://example.com/dark-mode.mp3',
+        price: 'Free',
+        download: 'https://example.com/dark-mode.mp3',
+      },
+    ],
+    blogCreators: [
+      {
+        image: 'https://i.pravatar.cc/300?img=1',
+        title: 'Sarah Johnson',
+        subtitle: 'Music Producer & Beatmaker',
+        handle: '@sarahbeats',
+        borderColor: '#FF4D6D',
+        gradient: 'linear-gradient(145deg, #FF4D6D, #000)',
+        url: 'https://soundcloud.com/sarahjohnson',
+      },
+      {
+        image: 'https://i.pravatar.cc/300?img=2',
+        title: 'Mike Chen',
+        subtitle: 'Electronic Music Producer',
+        handle: '@mikeelectro',
+        borderColor: '#F59E0B',
+        gradient: 'linear-gradient(180deg, #F59E0B, #000)',
+        url: 'https://spotify.com/artist/mikechen',
+      },
+    ],
+    galleryImages: [
+      { image: 'https://i.ibb.co/0Vt8cMRV/Photo1.jpg', text: 'Red Flowers' },
+      { image: 'https://i.ibb.co/39HW4P07/Photo2.jpg', text: '23' },
+      { image: 'https://i.ibb.co/6RF1WhR7/Photo3.jpg', text: 'Red Gradient' },
+      { image: 'https://i.ibb.co/QF0JJMSm/Photo4.jpg', text: 'Ai' },
+    ],
+  },
+  p = `\nYou are AD Assistant, the official AI helper built inside Âd Adarsh’s website.\n\nYour job:\n1. Answer questions about Âd Adarsh, his music, his projects, his skills, and his journey.\n2. Give guidance on music production, sound design, beat making, mixing and mastering.\n3. Help users explore the website sections and understand what each page offers.\n4. Maintain a professional, clear, and natural tone.\n\nUse ONLY the data provided below. If the user asks for anything you don’t have info for, respond honestly and stay helpful.\n\n=========================\nCREATOR INFORMATION (AUTO-FETCHED)\n=========================\n\nName: ${u.creatorName}\n\nLocation:\n- Country: ${u.location.country}\n- State: ${u.location.state}\n- City: ${u.location.city}\n- Pincode: ${u.location.pincode}\n\nContact:\n- Email: ${u.contact.email}\n- Phone: ${u.contact.phone}\n\nSkills:\n${u.skills.map((e) => '- ' + e).join('\n')}\n\n=========================\nMUSIC PROJECTS\n=========================\n${u.musicProjects.map((e) => `\nProject: ${e.name}\nYear: ${e.year}\nAbout: ${e.description}\nTechnologies: ${e.technologies.join(', ')}\n`).join('\n')}\n\n=========================\nSOCIAL LINKS\n=========================\n${Object.entries(
+    u.socials
+  )
+    .map(([e, t]) => `${e}: ${t}`)
+    .join(
+      '\n'
+    )}\n\n=========================\nABOUT SECTIONS\n=========================\n${u.about.map((e) => `\nTitle: ${e.title}\nDescription: ${e.description}\n`).join('\n')}\n\n=========================\nSAMPLE BEATS\n=========================\n${u.sampleBeats.map((e) => `\nBeat: ${e.title}\nArtist: ${e.artist}\nGenre: ${e.genre}\nBPM: ${e.bpm}\nDuration: ${e.duration}\nPrice: ${e.price}\n`).join('\n')}\n\n=========================\nGALLERY IMAGES\n=========================\nTotal Images: ${u.galleryImages.length}\n\n=========================\nBLOG CREATORS\n=========================\n${u.blogCreators.map((e) => `\nCreator: ${e.title}\nRole: ${e.subtitle}\nHandle: ${e.handle}\nURL: ${e.url}\n`).join('\n')}\n\n=========================\nBEHAVIOR RULES\n=========================\n\n1. Keep responses short, clear, and natural.\n2. Don’t over-explain.\n3. Talk like a smart, friendly guide.\n4. Give practical steps for music or coding questions.\n5. Help with any topic, but stay neutral if it's not about Âd Adarsh.\n6. Never invent information about Âd Adarsh.\n7. If you don’t know something, say so.\n8. Prioritize clarity and honesty.\n9. Keep the tone professional but conversational.\n10. No emojis unless the user uses them.\n11. If the user uses abusive or dirty language, stay calm and respond professionally without mirroring the abuse.\n\n=========================\nPERSONALITY\n=========================\n\n- Direct and confident.\n- Helpful and informative.\n- Creative when discussing music.\n- Technical but simplified when discussing coding.\n- Avoid robotic or repetitive tone.\n\n=========================\nWEBSITE STRUCTURE\n=========================\n\n1. Home\n\nShows your latest music, albums, videos, photo gallery with captions, and all social links.\n\n2. Sample\n\nFeatures sample beats with preview players and direct download links.\n\n3. Contact\n\nIncludes a simple contact form and your main communication channels.\n\n4. Blog\n\nHighlights featured creators and links to your external profiles.\n\n5. About\n\nPresents your mission, vision, values, and personal journey in music.\n\nRespond based on these rules and data.\n`;
+function delay(e) {
+  return new Promise((t) => setTimeout(t, e));
+}
+function useChatCompletion() {
+  const [t, n] = e.useState('idle');
+  return {
+    runChat: e.useCallback(
+      async (e) => {
+        n('fetching');
+        try {
+          return await (async function (e) {
+            const t = e.map((e) => ({
+              role: 'ai' === e.sender ? 'model' : 'user',
+              content: e.text,
+            }));
+            let n = 0;
+            for (; n < 3; )
+              try {
+                const e = new AbortController(),
+                  a = setTimeout(() => e.abort(), 15e3),
+                  s = await fetch(
+                    'https://ai-assistant-server-colf.onrender.com/api/gemini',
+                    {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ messages: t }),
+                      signal: e.signal,
+                    }
+                  );
+                if ((clearTimeout(a), !s.ok)) {
+                  if (429 === s.status) {
+                    (n++, await delay(1500 * n));
+                    continue;
+                  }
+                  throw new Error(`Gemini request failed (${s.status})`);
+                }
+                const i = await s.json();
+                return (
+                  i.data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+                  '⚠️ No response from Gemini.'
+                );
+              } catch (a) {
+                if (n >= 2)
+                  return '⚠️ Gemini is currently unavailable. Please try again later.';
+                (n++, await delay(1500 * n));
+              }
+            return '❌ Gemini API limit reached. Please try again later.';
+          })(e);
+        } catch (t) {
+          throw (n('error'), t);
+        }
+      },
+      [n]
+    ),
+    aiStatus: t,
+    setAiStatus: n,
+  };
+}
+const g = e.memo(({ width: e = 24, height: n = 24 }) =>
+    t.jsxs('svg', {
+      width: e,
+      height: n,
+      viewBox: '0 0 24 24',
+      xmlns: 'http://www.w3.org/2000/svg',
+      className: 'text-foreground ',
+      children: [
+        t.jsx('circle', {
+          cx: '4',
+          cy: '12',
+          r: '2',
+          fill: 'white',
+          children: t.jsx('animate', {
+            id: 'spinner_qFRN',
+            begin: '0;spinner_OcgL.end+0.25s',
+            attributeName: 'cy',
+            calcMode: 'spline',
+            dur: '0.6s',
+            values: '12;6;12',
+            keySplines: '.33,.66,.66,1;.33,0,.66,.33',
+          }),
+        }),
+        t.jsx('circle', {
+          cx: '12',
+          cy: '12',
+          r: '2',
+          fill: 'white',
+          children: t.jsx('animate', {
+            begin: 'spinner_qFRN.begin+0.1s',
+            attributeName: 'cy',
+            calcMode: 'spline',
+            dur: '0.6s',
+            values: '12;6;12',
+            keySplines: '.33,.66,.66,1;.33,0,.66,.33',
+          }),
+        }),
+        t.jsx('circle', {
+          cx: '20',
+          cy: '12',
+          r: '2',
+          fill: 'white',
+          children: t.jsx('animate', {
+            id: 'spinner_OcgL',
+            begin: 'spinner_qFRN.begin+0.2s',
+            attributeName: 'cy',
+            calcMode: 'spline',
+            dur: '0.6s',
+            values: '12;6;12',
+            keySplines: '.33,.66,.66,1;.33,0,.66,.33',
+          }),
+        }),
+      ],
+    })
+  ),
+  y = e.memo(({ status: e }) =>
+    'idle' === e || 'error' === e
+      ? null
+      : t.jsx(n.div, {
+          className:
+            'flex items-center gap-3 px-4 py-3 rounded-xl max-w-[40%] bg-white/10 self-start',
+          initial: { opacity: 0, y: 10 },
+          animate: { opacity: 1, y: 0 },
+          exit: { opacity: 0, y: 10 },
+          transition: { duration: 0.3, ease: 'easeOut' },
+          children: t.jsx(g, {}),
+        })
+  ),
+  w = e.lazy(() =>
+    l(() => import('./ChatInput-UM6_xijg.js'), __vite__mapDeps([0, 1, 2]))
+  ),
+  f = e.lazy(() =>
+    l(
+      () => import('./ChatMessageBubble-gBt2-eiP.js'),
+      __vite__mapDeps([3, 1, 2])
+    )
+  ),
+  b = 1e3,
+  x = '⚠️ Something went wrong. Please try again.';
+function AIChatCard({ className: l, onClose: d }) {
+  const h = [
+      {
+        sender: 'ai',
+        id: `ai-initial-${Date.now()}`,
+        text: '👋 Hey there! I’m your AD assistant. How can I help?',
+      },
+    ],
+    { messages: m, setMessages: u, clearSession: g } = useChatSession(h),
+    { updateMemory: v } = useChatMemory(),
+    [S, C] = e.useState(''),
+    { runChat: j, aiStatus: $, setAiStatus: k } = useChatCompletion(),
+    A = e.useRef(m),
+    D = e.useRef(null);
+  (e.useEffect(() => {
+    const e = document.body.style.overflow;
+    return (
+      (document.body.style.overflow = 'hidden'),
+      () => {
+        document.body.style.overflow = e;
+      }
+    );
+  }, []),
+    e.useEffect(() => {
+      A.current = m;
+    }, [m]),
+    e.useEffect(() => {
+      D.current &&
+        D.current.scrollTo({ top: D.current.scrollHeight, behavior: 'smooth' });
+    }, [m, $]));
+  const E = e.useCallback(
+      async (e) => {
+        const t = (e || S).trim();
+        if (!t || 'idle' !== $) return;
+        const n = {
+          sender: 'user',
+          text: t,
+          id: `user-${Date.now()}`,
+          timestamp: Date.now(),
+        };
+        (u((e) => [...e, n]), C(''), k('thinking'));
+        try {
+          await new Promise((e) => setTimeout(e, b));
+          const e = [
+              { sender: 'system', text: p, id: 'system-prompt' },
+              ...A.current,
+              n,
+            ],
+            t = await j(e),
+            a = {
+              sender: 'ai',
+              text: formatResponse(t),
+              id: `ai-${Date.now()}`,
+              timestamp: Date.now(),
+            };
+          (u((e) => [...e, a]), v([...A.current, n, a]));
+        } catch (a) {
+          const e = {
+            sender: 'ai',
+            text: x,
+            id: `err-${Date.now()}`,
+            timestamp: Date.now(),
+          };
+          (u((t) => [...t, e]), k('error'));
+        } finally {
+          k('idle');
+        }
+      },
+      [$, u, v, j, k, S]
+    ),
+    T = e.useCallback(
+      async (e, t) => {
+        if ('idle' !== $) return;
+        let n = -1;
+        const a = m.map((a, s) =>
+          a.id === e ? ((n = s), { ...a, text: t }) : a
+        );
+        if (-1 === n) return;
+        const s = a.slice(0, n + 1);
+        (u(s), k('thinking'));
+        try {
+          await new Promise((e) => setTimeout(e, b));
+          const e = [{ sender: 'system', text: p, id: 'system-prompt' }, ...s],
+            t = await j(e),
+            n = {
+              sender: 'ai',
+              text: formatResponse(t),
+              id: `ai-edit-${Date.now()}`,
+              timestamp: Date.now(),
+            };
+          (u((e) => [...e, n]), v([...s, n]));
+        } catch (i) {
+          const e = {
+            sender: 'ai',
+            text: x,
+            id: `err-edit-${Date.now()}`,
+            timestamp: Date.now(),
+          };
+          (u((t) => [...t, e]), k('error'));
+        } finally {
+          k('idle');
+        }
+      },
+      [$, m, j, u, v, k, E]
+    ),
+    I = e.useCallback(async () => {
+      if ('idle' !== $) return;
+      const e = m.findLastIndex((e) => 'user' === e.sender);
+      if (-1 !== e) {
+        const n = m.slice(0, e + 1);
+        try {
+          await new Promise((e) => setTimeout(e, b));
+          const e = [{ sender: 'system', text: p, id: 'system-prompt' }, ...n],
+            t = await j(e),
+            a = {
+              sender: 'ai',
+              text: formatResponse(t),
+              id: `ai-regen-${Date.now()}`,
+              timestamp: Date.now(),
+            };
+          (u([...n, a]), v([...n, a]));
+        } catch (t) {
+          const e = {
+            sender: 'ai',
+            text: x,
+            id: `err-regen-${Date.now()}`,
+            timestamp: Date.now(),
+          };
+          (u((t) => [...t, e]), k('error'));
+        } finally {
+          k('idle');
+        }
+      }
+    }, [$, m, u, v, j, k]),
+    N = e.useCallback(() => {
+      (u([]), setTimeout(g, 300));
+    }, [u, g]),
+    R = e.useCallback(
+      (e = !1) =>
+        m
+          .map((t) => {
+            const n = 'user' === t.sender ? '🧑 User' : '🤖 AI';
+            if (e) return `${n}:\n${t.text}`;
+            return `[${((e) => (e ? new Date(e).toLocaleString() : 'N/A'))(t.timestamp)}] ${n}:\n${t.text}`;
+          })
+          .join('\n--------------------------------------\n\n'),
+      [m]
+    ),
+    M = e.useCallback(() => {
+      if (!m.length) return;
+      const e = new Date(),
+        t = [
+          '===== AD Assistant Chat Export =====',
+          `Date: ${e.toLocaleDateString()}`,
+          `Time: ${e.toLocaleTimeString()}`,
+          `Total Messages: ${m.length}`,
+          '======================================',
+          '',
+        ].join('\n'),
+        n = `AI_Chat_${e.toISOString().replace(/[:.]/g, '-')}.txt`,
+        a = new Blob([t + R(!1)], { type: 'text/plain' }),
+        s = URL.createObjectURL(a),
+        i = document.createElement('a');
+      ((i.href = s), (i.download = n), i.click(), URL.revokeObjectURL(s));
+    }, [m, R]),
+    O = e.useCallback(async () => {
+      if (!m.length) return;
+      const e = `AI Chat on ${new Date().toLocaleDateString()}`,
+        t = `===== ${e} =====\n\n${R(!0)}`;
+      if (navigator.share)
+        try {
+          await navigator.share({ title: e, text: t });
+        } catch (n) {
+          M();
+        }
+      else M();
+    }, [m, M, R]),
+    P = { hidden: { y: -20, opacity: 0 }, visible: { y: 0, opacity: 1 } };
+  return t.jsxs('div', {
+    className: c(
+      'relative w-full h-full rounded-2xl overflow-hidden p-[2px]',
+      l
+    ),
+    children: [
+      t.jsx(n.div, {
+        className: 'absolute inset-0 rounded-2xl border-2 border-white/20',
+        animate: { rotate: [0, 360] },
+        transition: { duration: 25, repeat: 1 / 0, ease: 'linear' },
+      }),
+      t.jsxs('div', {
+        className:
+          'relative z-10 flex flex-col w-full h-full rounded-xl border border-white/10 overflow-hidden bg-black/90 backdrop-blur-xl',
+        children: [
+          t.jsxs(n.div, {
+            className:
+              'flex justify-between items-center px-4 py-3 border-b border-white/10 z-10 flex-wrap gap-2',
+            variants: {
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+              },
+            },
+            initial: 'hidden',
+            animate: 'visible',
+            children: [
+              t.jsx(n.div, {
+                variants: P,
+                animate: { scale: 1.05 },
+                transition: {
+                  duration: 2,
+                  repeatType: 'reverse',
+                  ease: 'easeInOut',
+                },
+                children: t.jsx('img', {
+                  src: '/assets/ai-bylrERJO.png',
+                  alt: 'Adarsh Logo',
+                  className: 'w-10 h-10 rounded',
+                }),
+              }),
+              t.jsx(n.h2, {
+                className: 'text-lg font-semibold text-white',
+                variants: P,
+                children: 'AD Assistant',
+              }),
+              t.jsxs(n.div, {
+                className: 'flex items-center gap-3',
+                variants: P,
+                children: [
+                  t.jsx(n.button, {
+                    onClick: O,
+                    className: 'icon-btn',
+                    title: 'Share or Export Chat',
+                    'aria-label': 'Share or Export Chat',
+                    whileHover: { scale: 1.1, y: -1 },
+                    whileTap: { scale: 0.9 },
+                    children: t.jsx(a, { className: 'w-4 h-4' }),
+                  }),
+                  t.jsx(n.button, {
+                    onClick: M,
+                    className: 'icon-btn',
+                    title: 'Export Chat',
+                    'aria-label': 'Export Chat',
+                    whileHover: { scale: 1.1, y: -1 },
+                    whileTap: { scale: 0.9 },
+                    children: t.jsx(s, { className: 'w-4 h-4' }),
+                  }),
+                  t.jsx(n.button, {
+                    onClick: N,
+                    className: 'icon-btn',
+                    title: 'Clear Chat',
+                    'aria-label': 'Clear Chat',
+                    whileHover: { scale: 1.1, y: -1 },
+                    whileTap: { scale: 0.9 },
+                    children: t.jsx(i, { className: 'w-4 h-4' }),
+                  }),
+                  d &&
+                    t.jsx(n.button, {
+                      onClick: d,
+                      className: 'icon-btn',
+                      title: 'Close Chat',
+                      'aria-label': 'Close Chat',
+                      whileHover: { scale: 1.1, y: -1 },
+                      whileTap: { scale: 0.9 },
+                      children: t.jsx(r, { className: 'w-4 h-4' }),
+                    }),
+                ],
+              }),
+            ],
+          }),
+          t.jsxs('div', {
+            ref: D,
+            className:
+              'flex-1 px-4 py-3 overflow-y-auto space-y-3 text-sm flex flex-col relative z-10',
+            children: [
+              t.jsx(o, {
+                initial: !1,
+                children: m.map((n) =>
+                  t.jsx(
+                    e.Suspense,
+                    {
+                      fallback: t.jsx('div', { className: 'w-full h-10' }),
+                      children: t.jsx(f, {
+                        msg: n,
+                        onRegenerate: I,
+                        onEdit: (e) => T(n.id, e),
+                      }),
+                    },
+                    n.id
+                  )
+                ),
+              }),
+              t.jsx(y, { status: $ }),
+            ],
+          }),
+          t.jsx(n.div, {
+            variants: {
+              hidden: { y: 20, opacity: 0 },
+              visible: {
+                y: 0,
+                opacity: 1,
+                transition: { duration: 0.3, ease: 'easeOut', delay: 0.4 },
+              },
+            },
+            initial: 'hidden',
+            animate: 'visible',
+            children: t.jsx(e.Suspense, {
+              fallback: t.jsx('div', {
+                className: 'p-3 border-t border-white/10 h-[53px]',
+              }),
+              children: t.jsx(w, {
+                value: S,
+                onChange: C,
+                onSend: E,
+                disabled: 'idle' !== $ || !S.trim(),
+              }),
+            }),
+          }),
+        ],
+      }),
+    ],
+  });
+}
+export { AIChatCard as default };

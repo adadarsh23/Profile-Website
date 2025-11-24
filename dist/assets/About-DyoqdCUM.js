@@ -1,0 +1,192 @@
+const __vite__mapDeps = (
+  i,
+  m = __vite__mapDeps,
+  d = m.f ||
+    (m.f = [
+      'assets/index-Cxrg4Q2y.js',
+      'assets/vendor-DEG5g0yW.js',
+      'assets/index-CrYdpk0W.css',
+      'assets/card-CY1I62XV.js',
+      'assets/utils-65uuWg0a.js',
+      'assets/button-8FkZKzs7.js',
+      'assets/bubble.module-YQKLPTNq.js',
+      'assets/bubble-C_vl8Ga6.css',
+    ])
+) => i.map((i) => d[i]);
+import { r as e, _ as t, j as a, m as i } from './vendor-DEG5g0yW.js';
+const s = [
+    {
+      title: 'Our Mission',
+      description:
+        'Create high-quality, scalable, and impactful software solutions that solve real-world problems and delight users.',
+    },
+    {
+      title: 'Our Vision',
+      description:
+        'Inspire and empower developers with intuitive tools, reusable components, and modern frameworks that accelerate innovation.',
+    },
+    {
+      title: 'Our Values',
+      description:
+        'Commitment to innovation, simplicity, transparency, and continuous improvement in everything we build and deliver.',
+    },
+  ],
+  n = e.lazy(() =>
+    t(
+      () => import('./index-Cxrg4Q2y.js').then((e) => e.a),
+      __vite__mapDeps([0, 1, 2])
+    )
+  ),
+  {
+    Card: r,
+    CardContent: l,
+    CardHeader: d,
+    CardTitle: o,
+    CardDescription: c,
+  } = {
+    Card: e.lazy(() =>
+      t(() => import('./card-CY1I62XV.js'), __vite__mapDeps([3, 1, 4])).then(
+        (e) => ({ default: e.Card })
+      )
+    ),
+    CardContent: e.lazy(() =>
+      t(() => import('./card-CY1I62XV.js'), __vite__mapDeps([3, 1, 4])).then(
+        (e) => ({ default: e.CardContent })
+      )
+    ),
+    CardHeader: e.lazy(() =>
+      t(() => import('./card-CY1I62XV.js'), __vite__mapDeps([3, 1, 4])).then(
+        (e) => ({ default: e.CardHeader })
+      )
+    ),
+    CardTitle: e.lazy(() =>
+      t(() => import('./card-CY1I62XV.js'), __vite__mapDeps([3, 1, 4])).then(
+        (e) => ({ default: e.CardTitle })
+      )
+    ),
+    CardDescription: e.lazy(() =>
+      t(() => import('./card-CY1I62XV.js'), __vite__mapDeps([3, 1, 4])).then(
+        (e) => ({ default: e.CardDescription })
+      )
+    ),
+  },
+  m = e.lazy(() =>
+    t(() => import('./button-8FkZKzs7.js'), __vite__mapDeps([5, 1, 4])).then(
+      (e) => ({ default: e.Button })
+    )
+  );
+function About() {
+  const [x, u] = e.useState(null);
+  e.useEffect(() => {
+    t(
+      () => import('./bubble.module-YQKLPTNq.js'),
+      __vite__mapDeps([6, 7])
+    ).then((e) => {
+      u(e.default);
+    });
+  }, []);
+  const BubbleText = () =>
+      x
+        ? a.jsx(i.h2, {
+            className:
+              'text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white p-4 sm:p-6 mb-8 md:mb-12 z-10 drop-shadow-lg',
+            initial: { y: -20, opacity: 0 },
+            animate: { y: 0, opacity: 1 },
+            transition: { duration: 0.6, ease: 'easeOut' },
+            children: 'About Us'
+              .split('')
+              .map((e, t) =>
+                a.jsx('span', { className: x.hoverText, children: e }, t)
+              ),
+          })
+        : null,
+    h = {
+      hidden: { y: 20, opacity: 0 },
+      visible: {
+        y: 0,
+        opacity: 1,
+        transition: { type: 'spring', stiffness: 100 },
+      },
+    };
+  return a.jsxs('div', {
+    className:
+      '\n      relative bg-black text-white min-h-screen flex flex-col items-center justify-center\n      px-4 sm:px-6 md:px-12 py-12\n      mt-10 mx-4 sm:mx-6 md:mx-12 lg:mx-16\n      overflow-hidden\n    ',
+    children: [
+      a.jsx(BubbleText, {}),
+      a.jsxs(i.div, {
+        className: 'w-full max-w-7xl mx-auto flex flex-col items-center',
+        variants: {
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.1, delayChildren: 0.3 },
+          },
+        },
+        initial: 'hidden',
+        animate: 'visible',
+        children: [
+          a.jsx(i.p, {
+            className:
+              'max-w-3xl text-center text-base sm:text-lg md:text-xl mb-16 leading-relaxed',
+            variants: h,
+            children:
+              'Welcome to our platform. We focus on creating immersive music and beats using modern production tools. We aim to deliver high-quality, engaging, and unique sound experiences using creative workflows and advanced software.',
+          }),
+          a.jsx('div', {
+            className:
+              'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full',
+            children: s.map((t, s) =>
+              a.jsx(
+                e.Suspense,
+                {
+                  fallback: a.jsx('div', { children: a.jsx(n, {}) }),
+                  children: a.jsx(i.div, {
+                    variants: h,
+                    whileHover: { y: -8, scale: 1.03 },
+                    transition: { type: 'spring', stiffness: 300 },
+                    className: 'h-full',
+                    children: a.jsxs(r, {
+                      className: 'bg-black-900 border border-gray-700 h-full',
+                      children: [
+                        a.jsx(d, {
+                          children: a.jsx(o, {
+                            className: 'text-white text-xl',
+                            children: t.title,
+                          }),
+                        }),
+                        a.jsx(l, {
+                          children: a.jsx(c, {
+                            className: 'text-gray-300',
+                            children: t.description,
+                          }),
+                        }),
+                      ],
+                    }),
+                  }),
+                },
+                s
+              )
+            ),
+          }),
+          a.jsx(i.div, {
+            className: 'mt-16',
+            variants: h,
+            children: a.jsx(e.Suspense, {
+              fallback: a.jsx(n, {}),
+              children: a.jsx('a', {
+                href: '/contact',
+                children: a.jsx(m, {
+                  variant: 'outline',
+                  className:
+                    'text-white bg-black border-white hover:bg-gray-800 transition-colors duration-300',
+                  children: 'Contact Us',
+                }),
+              }),
+            }),
+          }),
+        ],
+      }),
+    ],
+  });
+}
+export { About as default };

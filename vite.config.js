@@ -215,7 +215,7 @@ export default defineConfig({
     commonjsOptions: {
       transformMixedEsModules: true,
     },
-    chunkSizeWarningLimit: 5000,
+    chunkSizeWarningLimit: 6500,
     sourcemap: !isProd,
     cssCodeSplit: true,
     outDir: 'dist',

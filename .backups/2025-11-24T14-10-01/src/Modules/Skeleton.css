@@ -1,0 +1,114 @@
+/* ------------------------------ */
+/* SHIMMER EFFECT – Ultra Smooth  */
+/* ------------------------------ */
+
+@keyframes shimmer-ray {
+  0% {
+    transform: translateX(-120%) translateZ(0);
+  }
+  100% {
+    transform: translateX(120%) translateZ(0);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer-ray 1.8s linear infinite;
+  will-change: transform;
+}
+
+/* ------------------------------ */
+/* BOUNCE DOTS – Cleaner & Snappier */
+/* ------------------------------ */
+
+@keyframes bounce {
+  0%,
+  85%,
+  100% {
+    transform: scale(0) translateZ(0);
+  }
+  40% {
+    transform: scale(1) translateZ(0);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 1.2s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.delay-150 {
+  animation-delay: 0.15s;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+}
+.delay-450 {
+  animation-delay: 0.45s;
+}
+
+/* ------------------------------ */
+/* FADE-IN ENTRY – More Cinematic */
+/* ------------------------------ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97) translateZ(0);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) translateZ(0);
+    filter: blur(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.65s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  will-change: opacity, transform, filter;
+}
+
+/* ------------------------------ */
+/* BONUS VARIANTS (Optional)      */
+/* ------------------------------ */
+
+/* Slight stagger delay call */
+.delay-600 {
+  animation-delay: 0.6s;
+}
+.delay-750 {
+  animation-delay: 0.75s;
+}
+
+/* Subtle hover shimmer pulse */
+@keyframes shimmer-pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.hover-shimmer:hover {
+  animation: shimmer-pulse 1.2s ease-in-out infinite;
+}
+
+/* Soft breathing animation */
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+.animate-breathe {
+  animation: breathe 3s ease-in-out infinite;
+}

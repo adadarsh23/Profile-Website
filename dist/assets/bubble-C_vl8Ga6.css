@@ -1,0 +1,23 @@
+._hoverText_rxah8_1 {
+  transition:
+    0.35s font-weight,
+    0.35s color;
+}
+._hoverText_rxah8_1:hover {
+  font-weight: 900;
+  color: #eef2ff;
+}
+._hoverText_rxah8_1:hover + ._hoverText_rxah8_1 {
+  font-weight: 500;
+  color: #c7d2fe;
+}
+._hoverText_rxah8_1:hover + ._hoverText_rxah8_1 + ._hoverText_rxah8_1 {
+  font-weight: 300;
+}
+._hoverText_rxah8_1:has(+ ._hoverText_rxah8_1:hover) {
+  font-weight: 500;
+  color: #c7d2fe;
+}
+._hoverText_rxah8_1:has(+ ._hoverText_rxah8_1 + ._hoverText_rxah8_1:hover) {
+  font-weight: 300;
+}

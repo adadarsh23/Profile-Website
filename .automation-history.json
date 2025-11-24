@@ -1,5 +1,12 @@
 [
   {
+    "action": "lint-format",
+    "status": "success",
+    "duration": 106905,
+    "timestamp": "2025-11-24T14:12:25.593Z",
+    "user": "adars"
+  },
+  {
     "action": "test-coverage",
     "status": "failed",
     "duration": 16359,

@@ -1,4 +1,4 @@
-export const galleryImages =  [
+export const galleryImages = [
   {
     image: `https://i.ibb.co/0Vt8cMRV/Photo1.jpg`,
     text: 'Red Flowers',
@@ -14,5 +14,5 @@ export const galleryImages =  [
   {
     image: `https://i.ibb.co/QF0JJMSm/Photo4.jpg`,
     text: 'Ai',
-  }
+  },
 ];
