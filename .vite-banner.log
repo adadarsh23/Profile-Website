@@ -1671,3 +1671,8 @@
 [2025-12-14T16:35:03.801Z] [INFO] Config resolved for mode: development
 [2025-12-14T16:35:15.074Z] [INFO] Vite dev server started successfully
 [2025-12-14T16:35:15.079Z] [INFO] Production build started
+[2025-12-14T17:06:00.096Z] [INFO] Config resolved for mode: production
+[2025-12-14T17:06:00.314Z] [INFO] Production build started
+[2025-12-14T17:06:24.679Z] [INFO] Production build completed in 24293ms
+[2025-12-14T17:06:47.078Z] [INFO] Vite dev server stopped
+[2025-12-14T17:07:07.172Z] [INFO] Config resolved for mode: production

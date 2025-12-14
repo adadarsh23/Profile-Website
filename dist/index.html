@@ -89,7 +89,8 @@
     <!-- Preload font CSS without blocking -->
 
     <!-- Fallback if JS is disabled -->
-    <noscript> </noscript>
+    <noscript>
+    </noscript>
     <link
       rel="preload"
       as="style"
@@ -123,45 +124,23 @@
         }
       }
     </script>
-    <script type="module" crossorigin src="/assets/index-Cxrg4Q2y.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/vendor-DEG5g0yW.js" />
-    <link rel="stylesheet" crossorigin href="/assets/index-CrYdpk0W.css" />
-    <link
-      rel="sitemap"
-      type="application/xml"
-      title="Sitemap"
-      href="/sitemap.xml"
-    />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script>
-  </head>
+    <script type="module" crossorigin src="/assets/index-C0HAslsb.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-CAHoof4P.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DZkb0gxj.css">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
 
   <body>
     <div id="root"></div>
-
-    <script>
-      window.addEventListener('load', () => {
-        const perfData = performance.getEntriesByType('navigation')[0];
-        console.log(
-          '%c⚡ Performance Metrics',
-          'color: #42b983; font-weight: bold; font-size: 14px;'
-        );
-        console.log(
-          'DOM Content Loaded:',
-          Math.round(
-            perfData.domContentLoadedEventEnd -
-              perfData.domContentLoadedEventStart
-          ) + 'ms'
-        );
-        console.log(
-          'Page Load Time:',
-          Math.round(perfData.loadEventEnd - perfData.loadEventStart) + 'ms'
-        );
-        console.log(
-          'Total Load Time:',
-          Math.round(perfData.loadEventEnd - perfData.fetchStart) + 'ms'
-        );
-      });
-    </script>
-  </body>
+  
+          <script>
+            window.addEventListener('load', () => {
+              const perfData = performance.getEntriesByType('navigation')[0];
+              console.log('%c⚡ Performance Metrics', 'color: #42b983; font-weight: bold; font-size: 14px;');
+              console.log('DOM Content Loaded:', Math.round(perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart) + 'ms');
+              console.log('Page Load Time:', Math.round(perfData.loadEventEnd - perfData.loadEventStart) + 'ms');
+              console.log('Total Load Time:', Math.round(perfData.loadEventEnd - perfData.fetchStart) + 'ms');
+            });
+          </script>
+        </body>
 </html>

@@ -1,0 +1,1 @@
+import{u as r,r as t}from"./vendor-CAHoof4P.js";import{i as a,t as e}from"./index-C0HAslsb.js";function AnalyticsTracker(){const s=r();return t.useEffect(()=>{a()},[]),t.useEffect(()=>{e(s.pathname)},[s]),null}export{AnalyticsTracker as default};
