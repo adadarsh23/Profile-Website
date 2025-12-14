@@ -37,7 +37,7 @@ export default function Sample() {
     <section className="relative bg-black text-white min-h-screen flex flex-col items-center justify-center py-24 px-4 sm:px-6 lg:px-8">
       <BubbleText />
       <motion.div
-        className="w-full max-w-7xl mt-10 mb-35 md:mt-16 "
+        className="w-full max-w-7xl mt-10 mb-35 "
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
