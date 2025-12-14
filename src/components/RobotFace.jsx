@@ -127,8 +127,7 @@ export default function RobotFace() {
         >
           <SheetTitle className="sr-only">AD Assistant</SheetTitle>
           <SheetDescription className="sr-only">
-            An interactive chat with an AD assistant. You can ask questions
-            about the portfolio or have a general conversation.
+            An interactive chat with an AD assistant.
           </SheetDescription>
 
           <motion.div

@@ -8,27 +8,20 @@ import {
   lazy,
   Suspense,
 } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Trash2,
-  FileText,
-  PanelRightClose,
-  Share2,
-  // AlertTriangle,
-} from 'lucide-react';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 // import { runChat } from '@/lib/gemini';
 const ChatInput = lazy(() => import('./ChatInput'));
 // import ErrorBoundary from '../ErrorBoundary';
-const ChatMessageBubble = lazy(() => import('./ChatMessageBubble'));
 import { useChatSession } from '../chat/useChatSession';
 import { useChatMemory } from '../chat/useChatMemory';
 import { formatResponse } from '../chat/formatResponse';
 import type { ChatMessage } from '../chat/chatTypes';
 import { aiSystemPrompt } from '../chat/aiInfo';
 import { useChatCompletion } from '../chat/useChatCompletion';
-import TypingIndicator, { AiStatus } from './TypingIndicator';
-import logoUrl from '../../assets/ai.png';
+import { ChatHeader } from './ChatHeader';
+import { ChatMessageList } from './ChatMessageList';
+// import logoUrl from '../../assets/ai.png';
 // const RobotFaceWrapper = lazy(() => import('../RobotFaceWrapper'));
 // Constants for better maintainability
 const AI_THINKING_DELAY_MS = 1000;
@@ -54,7 +47,6 @@ export default function AIChatCard({
   const [input, setInput] = useState(''); // User input for the chatbox
   const { runChat, aiStatus, setAiStatus } = useChatCompletion();
   const messagesRef = useRef(messages); // Ref to hold the latest messages
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   // Prevent background scroll when chat is open
   useEffect(() => {
@@ -71,17 +63,6 @@ export default function AIChatCard({
   useEffect(() => {
     messagesRef.current = messages;
   }, [messages]);
-
-  // Scroll to bottom on new messages
-  useEffect(() => {
-    // Effect to scroll to the bottom of the chat on new messages or status changes
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({
-        top: scrollRef.current.scrollHeight,
-        behavior: 'smooth',
-      });
-    }
-  }, [messages, aiStatus]);
 
   const handleSend = useCallback(
     async (text: string) => {
@@ -331,19 +312,6 @@ export default function AIChatCard({
     }
   }, [messages, handleExport, formatChatHistory]);
 
-  const headerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-    },
-  };
-
-  const headerItemVariants = {
-    hidden: { y: -20, opacity: 0 },
-    visible: { y: 0, opacity: 1 },
-  };
-
   const inputVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -370,113 +338,20 @@ export default function AIChatCard({
       {/* Chat Container */}
       <div className="relative z-10 flex flex-col w-full h-full rounded-xl border border-white/10 overflow-hidden bg-black/90 backdrop-blur-xl">
         {/* Header */}
-        <motion.div
-          className="flex justify-between items-center px-4 py-3 border-b border-white/10 z-10 flex-wrap gap-2"
-          variants={headerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.div
-            variants={headerItemVariants}
-            animate={{ scale: 1.05 }}
-            transition={{
-              duration: 2,
-              repeatType: 'reverse',
-              ease: 'easeInOut',
-            }}
-          >
-            <img
-              src={logoUrl}
-              alt="Adarsh Logo"
-              className="w-10 h-10 rounded"
-            />
-            {/* <ErrorBoundary
-              fallback={<AlertTriangle className="w-8 h-8 text-yellow-400" />}
-            >
-              <Suspense
-                fallback={
-                  <div className="w-8 h-8 rounded bg-white/10 animate-pulse" />
-                }
-              >
-                <RobotFaceWrapper />
-              </Suspense>
-            </ErrorBoundary> */}
-          </motion.div>
-          <motion.h2
-            className="text-lg font-semibold text-white"
-            variants={headerItemVariants}
-          >
-            AD Assistant
-          </motion.h2>
-          <motion.div
-            className="flex items-center gap-3"
-            variants={headerItemVariants}
-          >
-            <motion.button
-              onClick={handleShare}
-              className="icon-btn"
-              title="Share or Export Chat"
-              aria-label="Share or Export Chat"
-              whileHover={{ scale: 1.1, y: -1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Share2 className="w-4 h-4" />
-            </motion.button>
-            <motion.button
-              onClick={handleExport}
-              className="icon-btn"
-              title="Export Chat"
-              aria-label="Export Chat"
-              whileHover={{ scale: 1.1, y: -1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <FileText className="w-4 h-4" />
-            </motion.button>
-            <motion.button
-              onClick={handleClear}
-              className="icon-btn"
-              title="Clear Chat"
-              aria-label="Clear Chat"
-              whileHover={{ scale: 1.1, y: -1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Trash2 className="w-4 h-4" />
-            </motion.button>
-            {onClose && (
-              <motion.button
-                onClick={onClose}
-                className="icon-btn"
-                title="Close Chat"
-                aria-label="Close Chat"
-                whileHover={{ scale: 1.1, y: -1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <PanelRightClose className="w-4 h-4" />
-              </motion.button>
-            )}
-          </motion.div>
-        </motion.div>
+        <ChatHeader
+          onShare={handleShare}
+          onExport={handleExport}
+          onClear={handleClear}
+          onClose={onClose}
+        />
 
         {/* Messages */}
-        <div
-          ref={scrollRef}
-          className="flex-1 px-4 py-3 overflow-y-auto space-y-3 text-sm flex flex-col relative z-10"
-        >
-          <AnimatePresence initial={false}>
-            {messages.map((msg) => (
-              <Suspense key={msg.id} fallback={<div className="w-full h-10" />}>
-                <ChatMessageBubble
-                  msg={msg}
-                  onRegenerate={handleRegenerate}
-                  onEdit={(newText) => handleEdit(msg.id, newText)} // Pass the message ID here
-                />
-              </Suspense>
-            ))}
-          </AnimatePresence>
-
-          {/* Render the enhanced TypingIndicator based on aiStatus */}
-          <TypingIndicator status={aiStatus} />
-        </div>
+        <ChatMessageList
+          messages={messages}
+          aiStatus={aiStatus}
+          onRegenerate={handleRegenerate}
+          onEdit={handleEdit}
+        />
 
         <motion.div variants={inputVariants} initial="hidden" animate="visible">
           <Suspense

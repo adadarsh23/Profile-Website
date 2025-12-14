@@ -344,7 +344,7 @@ function Header() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center striper-regular"
+          className="text-white text-sm md:text-2xl max-w-xl mt-1 text-center striper-regular"
         >
           Explore my projects, beats, and music production works.
         </motion.p>
