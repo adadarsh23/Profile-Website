@@ -1,0 +1,2 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/SocialShare-DFK4nLsf.js","assets/vendor-D-MnxTGK.js","assets/index-By0ANCys.js","assets/index-DHGRPMsa.css"])))=>i.map(i=>d[i]);
+import{j as r,r as s,_ as a}from"./vendor-D-MnxTGK.js";import{L as e}from"./index-By0ANCys.js";const o=s.lazy(()=>a(()=>import("./SocialShare-DFK4nLsf.js"),__vite__mapDeps([0,1,2,3])));function WebShare(){return r.jsx(s.Suspense,{fallback:r.jsx(e,{}),children:r.jsx(o,{})})}export{WebShare as default};

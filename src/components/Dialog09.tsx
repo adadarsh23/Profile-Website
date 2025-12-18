@@ -192,7 +192,7 @@ export default function Dialog09({
         className="
         bottom-[clamp(10px,2vw,20px)]
     left-[clamp(120px,2vw,130px)]
-    [@media(max-width:480px)]:left-[clamp(50px,2vw,30px)]
+    [@media(max-width:480px)]:left-[clamp(55px,2vw,60px)]
     fixed z-48
     flex h-10 w-10 cursor-pointer items-center justify-center
     rounded-full border  text-white shadow-lg backdrop-blur-md hover:shadow-xl "
