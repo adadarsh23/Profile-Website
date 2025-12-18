@@ -36,12 +36,15 @@ const ScrollToTopButton = loadComponent(
 );
 const InternetStatus = loadComponent(import('./components/InternetStatus.jsx'));
 const CacheClean = loadComponent(import('./Main/CacheClean.jsx'));
+// const CookieConsent = loadComponent(import('./components/CookieConsent.jsx'));
 const WebSocket = loadComponent(import('./WebSocket.jsx'));
 const LiquidCursor = loadComponent(
   import('./components/LiquidCursor.tsx').then((module) => ({
     default: module.LiquidCursor,
   }))
 );
+
+const WebShare = loadComponent(import('./components/WebShare.tsx'));
 
 const SplashCursor = loadComponent(import('./components/SplashCursor.jsx'));
 
@@ -111,11 +114,13 @@ export default function App() {
                 <SplashCursor />
                 <SmoothScrollProvider />
                 <RobotFaceWrapper />
-                <div className="enhancement-components">
+                <WebShare />
+                 <div className="enhancement-components"> 
                   <InternetStatus />
                   <ScrollToTopButton />
                   <CacheClean />
-                </div>
+                  {/* <CookieConsent /> */}
+                </div> 
               </React.Fragment>
             </Suspense>
           </ErrorBoundary>
@@ -182,7 +187,7 @@ export default function App() {
             exponential={true}
             opacity={1}
           />
-        </div>
+        </div> 
       </ErrorBoundary>
     </StatsigSetup>
   );
