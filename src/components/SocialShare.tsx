@@ -21,9 +21,8 @@ export default function SocialShare() {
         position: 'fixed',
         bottom: '20px',
         left: isMobile ? '20px' : '120px',
-        zIndex: 1000,
+        zIndex: 48,
       }}
-      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
