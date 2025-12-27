@@ -1,59 +1,3 @@
-// // src/lib/gemini.ts
-// export type ChatMessage = {
-//   sender: 'user' | 'ai';
-//   text: string;
-// };
-
-// // ✅ Gemini 2.0 Flash endpoint (v1beta) + CORS proxy
-// const MODEL_ID = 'gemini-2.0-flash';
-// const API_URL = `https://cors-anywhere.herokuapp.com/https://generativelanguage.googleapis.com/v1beta/models/${MODEL_ID}:generateContent`;
-
-// const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
-
-// if (!apiKey) {
-//   throw new Error('❌ Missing environment variable: VITE_GOOGLE_API_KEY');
-// }
-
-// // ✅ Main chat function
-// export async function runChat(history: ChatMessage[]): Promise<string> {
-//   const prompt = history
-//     .map((msg) => `${msg.sender === 'user' ? 'User' : 'AI'}: ${msg.text}`)
-//     .join('\n');
-
-//   try {
-//     const response = await fetch(`${API_URL}?key=${apiKey}`, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         // Required by cors-anywhere proxy
-//         'x-requested-with': 'XMLHttpRequest',
-//       },
-//       body: JSON.stringify({
-//         contents: [
-//           {
-//             parts: [{ text: prompt }],
-//           },
-//         ],
-//       }),
-//     });
-
-//     if (!response.ok) {
-//       const err = await response.text();
-//       console.error('❌ Gemini API Error:', err);
-//       throw new Error(`Gemini request failed (${response.status})`);
-//     }
-
-//     const data = await response.json();
-//     const output =
-//       data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-//       '⚠️ Gemini returned no response.';
-//     return output.trim();
-//   } catch (error) {
-//     console.error('❌ Gemini Chat Error:', error);
-//     return '⚠️ Something went wrong while fetching from Gemini.';
-//   }
-// }
-
 // src/lib/gemini.ts
 export type ChatMessage = {
   sender: 'ai' | 'user';
@@ -110,7 +54,29 @@ export async function runChat(chatHistory: ChatMessage[]): Promise<string> {
           await delay(1500 * attempts);
           continue;
         }
-        throw new Error(`Gemini request failed (${response.status})`);
+        // Try to read the response body to surface a helpful server message
+        let bodyText: string | undefined;
+        try {
+          const text = await response.text();
+          if (text) {
+            try {
+              const json = JSON.parse(text);
+              bodyText =
+                json.message ||
+                json.error ||
+                json.data?.message ||
+                JSON.stringify(json);
+            } catch {
+              bodyText = text;
+            }
+          }
+        } catch (e) {
+          // ignore body read errors
+        }
+
+        throw new Error(
+          `Gemini request failed (${response.status})${bodyText ? `: ${bodyText}` : ''}`
+        );
       }
 
       const serverData: ServerResponse = await response.json();
@@ -121,6 +87,10 @@ export async function runChat(chatHistory: ChatMessage[]): Promise<string> {
     } catch (err) {
       if (attempts >= maxRetries - 1) {
         console.error('❌ Gemini Chat Error:', err);
+        const message =
+          err instanceof Error ? err.message : String(err ?? 'Unknown error');
+        // If the error already includes a helpful server message, return it so the UI can show it.
+        if (message) return message;
         return '⚠️ Gemini is currently unavailable. Please try again later.';
       }
       attempts++;
