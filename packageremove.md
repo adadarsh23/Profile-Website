@@ -23,9 +23,11 @@
 "@sentry/tracing": "^7.120.4",
 "@statsig/session-replay": "^3.30.0",
 "@statsig/web-analytics": "^3.30.0",
+"@tailwindcss/vite": "^4.1.18", // add dev dep
 "storybook": "^10.0.8",
 "animejs": "^4.2.2",
 "boxen": "^8.0.1",
+"chalk": "^5.6.2",// add dev dep
 "crypto": "^1.0.1",
 "dotenv": "^17.2.3",
 "express-async-handler": "^1.2.0",

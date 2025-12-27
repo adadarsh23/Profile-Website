@@ -15,8 +15,8 @@ function CacheClean() {
     >
       <Suspense fallback={<Loading />}>
         <EnhancedCacheCleaner
-          autoReload={false}
-          silent={false}
+          autoReload={true}
+          silent={true}
           debug={true}
           progressUI={true}
           statusIndicator={true}

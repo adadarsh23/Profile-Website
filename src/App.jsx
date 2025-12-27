@@ -1,11 +1,13 @@
 import React, { Suspense } from 'react';
 import StatsigSetup from './StatsigSetup';
 import { Routes, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import Loading from './components/Loading';
 import ErrorBoundary from './components/ErrorBoundary';
 
 // Core components (imported synchronously)
 import Navbar from './Main/Navbar';
+import StructuredData from './Data/StructuredData.jsx';
 const Footer = React.lazy(() => import('./Main/Footer'));
 const loadComponent = (importPromise) => {
   return React.lazy(() =>
@@ -60,6 +62,9 @@ export default function App() {
     <StatsigSetup>
       <ErrorBoundary>
         <div className="app-container">
+          <Helmet>
+            <StructuredData />
+          </Helmet>
           <GradualBlur
             target="page"
             position="top"

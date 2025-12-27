@@ -1,16 +1,30 @@
-import React, { useState, useEffect, useMemo, memo } from 'react';
+import React, { useState, useEffect, useMemo, memo, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Pause } from 'lucide-react';
 
 const Beats = memo(function Beats({ items = [], baseRadius = 220 }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [previewing, setPreviewing] = useState(null); // track audio preview id
+  const audioRef = useRef(null);
 
   // ✅ Handle resize
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
+    let timeoutId;
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => setWindowWidth(window.innerWidth), 150);
+    };
+
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timeoutId);
+      // Cleanup audio on unmount
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
   }, []);
 
   // ✅ Dynamic radius scaling with clamp (mobile → 4K)
@@ -22,7 +36,7 @@ const Beats = memo(function Beats({ items = [], baseRadius = 220 }) {
   }, [windowWidth, baseRadius]);
 
   // ✅ Decide layout: circle OR grid
-  const useGridLayout = windowWidth < 480 || items.length > 10;
+  const useGridLayout = windowWidth < 768 || items.length > 10;
 
   // ✅ Precompute positions for circle layout
   const positions = useMemo(() => {
@@ -38,30 +52,29 @@ const Beats = memo(function Beats({ items = [], baseRadius = 220 }) {
 
   // ✅ Handle audio preview toggle
   const togglePreview = (id, url) => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio();
+      audioRef.current.onended = () => setPreviewing(null);
+    }
+
+    const audio = audioRef.current;
+
     if (previewing === id) {
-      const audio = document.getElementById(`audio-${id}`);
-      if (audio) audio.pause();
+      audio.pause();
       setPreviewing(null);
     } else {
-      if (previewing !== null) {
-        const prevAudio = document.getElementById(`audio-${previewing}`);
-        if (prevAudio) prevAudio.pause();
-      }
-      const audio = document.getElementById(`audio-${id}`);
-      if (audio) {
-        audio.play();
-        setPreviewing(id);
-      }
+      audio.src = url;
+      audio.play().catch((e) => console.error('Audio play failed:', e));
+      setPreviewing(id);
     }
   };
 
   return (
     <div
-      className={`relative mx-auto ${
-        useGridLayout
-          ? 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6'
-          : ''
-      }`}
+      className={`relative mx-auto ${useGridLayout
+        ? 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4 max-w-7xl'
+        : ''
+        }`}
       style={
         useGridLayout
           ? {}
@@ -69,7 +82,7 @@ const Beats = memo(function Beats({ items = [], baseRadius = 220 }) {
       }
     >
       {items.length === 0 && (
-        <div className="text-center text-gray-400 py-12 w-full">
+        <div className="col-span-full text-center text-gray-400 py-12 w-full">
           🎧 No beats available yet
         </div>
       )}
@@ -88,12 +101,12 @@ const Beats = memo(function Beats({ items = [], baseRadius = 220 }) {
               useGridLayout
                 ? {}
                 : {
-                    position: 'absolute',
-                    left: x,
-                    top: y,
-                    width: 'clamp(130px, 20vw, 210px)',
-                    height: 'clamp(170px, 30vw, 250px)',
-                  }
+                  position: 'absolute',
+                  left: x,
+                  top: y,
+                  width: 'clamp(130px, 20vw, 210px)',
+                  height: 'clamp(170px, 30vw, 250px)',
+                }
             }
             whileHover={{
               scale: 1.06,
@@ -130,9 +143,6 @@ const Beats = memo(function Beats({ items = [], baseRadius = 220 }) {
                       <Play className="w-4 h-4 text-white" />
                     )}
                   </button>
-
-                  {/* Hidden audio element */}
-                  <audio id={`audio-${item.id}`} src={item.url} />
                 </div>
 
                 {/* Title & Artist */}
@@ -163,11 +173,10 @@ const Beats = memo(function Beats({ items = [], baseRadius = 220 }) {
                     href={item.download}
                     aria-label={`Download or buy ${item.title}`}
                     download={item.price === 'Free' ? true : undefined}
-                    className={`block text-center focus:outline-none focus:ring-2 focus:ring-white/40 ${
-                      item.price === 'Free'
-                        ? 'bg-white text-black hover:bg-gray-200'
-                        : 'bg-gradient-to-r from-gray-800 to-black hover:from-black hover:to-gray-900 text-white'
-                    } font-medium text-xs md:text-sm py-2 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-xl`}
+                    className={`block text-center focus:outline-none focus:ring-2 focus:ring-white/40 ${item.price === 'Free'
+                      ? 'bg-white text-black hover:bg-gray-200'
+                      : 'bg-gradient-to-r from-gray-800 to-black hover:from-black hover:to-gray-900 text-white'
+                      } font-medium text-xs md:text-sm py-2 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-xl`}
                   >
                     {item.price === 'Free'
                       ? '⬇ Download'

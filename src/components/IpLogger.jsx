@@ -60,7 +60,7 @@ export default function IpLogger() {
         if (error) throw error;
 
         if (isMounted) {
-          console.log('Visitor data stored successfully:', visitorData);
+          // console.log('Visitor data stored successfully:', visitorData);
           localStorage.setItem('visitorLogged', 'true');
         }
       } catch (err) {
