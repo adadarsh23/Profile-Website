@@ -1,0 +1,922 @@
+[
+  {
+    "dependencies": [],
+    "devDependencies": ["tw-animate-css"],
+    "missing": {},
+    "using": {
+      "@eslint/js": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\eslint.config.js"
+      ],
+      "globals": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\eslint.config.js"
+      ],
+      "eslint-plugin-react": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\eslint.config.js"
+      ],
+      "eslint-plugin-react-hooks": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\eslint.config.js"
+      ],
+      "eslint-plugin-react-refresh": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\eslint.config.js"
+      ],
+      "@eslint/eslintrc": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\eslint.config.js"
+      ],
+      "eslint": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\eslint.config.js",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json"
+      ],
+      "lighthouse": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\lighthouse-audit.js"
+      ],
+      "chrome-launcher": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\lighthouse-audit.js"
+      ],
+      "chalk": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\lighthouse-audit.js",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\unused-fix.mjs",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\plugins\\terminalBanner.jsx"
+      ],
+      "depcheck": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\unused-fix.mjs"
+      ],
+      "gh-pages": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json"
+      ],
+      "prettier": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json"
+      ],
+      "rollup-plugin-visualizer": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "vite": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "vitest": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "@types/node": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\tsconfig.node.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "terser": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "jsdom": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "react": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\AnalyticsTracker.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\App.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\main.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\monitoring.js",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\StatsigSetup.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\WebSocket.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\plugins\\UltraUltraSmartCacheCleaner.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\About.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Blog.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Contact.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Gallery.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Home.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\NotFound.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Sample.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\CacheClean.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\CirclePhoto.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Footer.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Header.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Loop.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Music.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Music1.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Navbar.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Scroll.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Velocity.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video1.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\EditMessageForm.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useAudioPlayer.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useCopyToClipboard.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useMousePosition.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useSmoothMousePosition.js",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useSpeechSynthesis.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Data\\LoopData.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ArtworkTooltip.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Beats.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\BlurText.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Button.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatInput.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatLoadingSkeleton.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatMessageActions.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChromaGrid.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CircularGallery.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CookieConsent.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CurvedLoop.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CustomSlider.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Dialog09.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ErrorBoundary.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\FuzzyText.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\GradualBlur.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\HomeSkeleton.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Hyperspeed.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ImageSpotlight.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\InfiniteMenu.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\InternetStatus.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\IpLogger.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\LiquidCursor.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Loading.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\LogoLoop.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Map.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\MusicArt.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\PillNav.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\PlayPauseIcon.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotFace.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotFaceWrapper.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotHead.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ScrollToTopButton.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ScrollVelocity.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\SmoothScrollProvider.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\SocialShare.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\SplashCursor.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\VideoPlay.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Vortex.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\WebShare.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\WebSocketClient.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\button.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\card.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\input.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\label.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\sheet.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\chat\\useChatCompletion.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\chat\\useChatMemory.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\chat\\useChatSession.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\AIChatCard.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatHeader.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatInput.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageActions.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageBubble.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageList.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\CodeBlock.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\EditMessageForm.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\message-loading.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\MessageContent.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\TypingIndicator.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\ErrorBoundary.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\LazyLoadSection.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\PrismaticBurst.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\ThreeBackground.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\Ai\\ai-chat.tsx"
+      ],
+      "@vitejs/plugin-react": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "@tailwindcss/vite": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "vite-plugin-compression": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "vite-plugin-pwa": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "vite-plugin-sitemap": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "@vitejs/plugin-legacy": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "react-ga4": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\analytics.js"
+      ],
+      "react-router-dom": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\AnalyticsTracker.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\App.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\main.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\NotFound.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\PillNav.jsx"
+      ],
+      "react-dom": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\AnalyticsTracker.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\App.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\main.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\About.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Blog.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Contact.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Gallery.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\NotFound.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Sample.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\CacheClean.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\CirclePhoto.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Footer.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Header.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Loop.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Music.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Music1.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Navbar.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Scroll.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Velocity.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video1.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ArtworkTooltip.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Beats.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\BlurText.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatInput.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CookieConsent.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CustomSlider.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Dialog09.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\MusicArt.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\PillNav.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotFace.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotHead.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ScrollVelocity.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\SocialShare.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\VideoPlay.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Vortex.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\label.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\sheet.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\AIChatCard.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatHeader.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageBubble.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageList.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\TypingIndicator.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\ThreeBackground.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\Ai\\ai-chat.tsx"
+      ],
+      "@sentry/react": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\monitoring.js"
+      ],
+      "logrocket": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\monitoring.js"
+      ],
+      "@statsig/react-bindings": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\StatsigSetup.jsx"
+      ],
+      "framer-motion": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\About.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Blog.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Contact.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Gallery.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\NotFound.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Sample.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\CacheClean.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\CirclePhoto.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Footer.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Header.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Loop.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Music.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Music1.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Navbar.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Scroll.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Velocity.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video1.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ArtworkTooltip.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Beats.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\BlurText.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatInput.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CookieConsent.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CustomSlider.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Dialog09.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\MusicArt.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotFace.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ScrollVelocity.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\SocialShare.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\VideoPlay.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Vortex.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\AIChatCard.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatHeader.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageBubble.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageList.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\TypingIndicator.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\Ai\\ai-chat.tsx"
+      ],
+      "@types/react": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Gallery.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\EditMessageForm.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useAudioPlayer.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useCopyToClipboard.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useMousePosition.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useSpeechSynthesis.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ArtworkTooltip.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Button.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatInput.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatMessageActions.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CustomSlider.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Dialog09.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ImageSpotlight.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\LiquidCursor.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\MusicArt.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\PlayPauseIcon.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\SocialShare.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\VideoPlay.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Vortex.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\WebShare.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\button.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\card.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\input.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\label.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\sheet.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\chat\\useChatCompletion.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\chat\\useChatMemory.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\chat\\useChatSession.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\AIChatCard.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageActions.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageBubble.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageList.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\CodeBlock.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\EditMessageForm.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\message-loading.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\MessageContent.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\TypingIndicator.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\Ai\\ai-chat.tsx"
+      ],
+      "react-intersection-observer": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\CirclePhoto.jsx"
+      ],
+      "react-icons": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Footer.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Data\\LoopData.jsx"
+      ],
+      "axios": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video1.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Api\\latest-video.js"
+      ],
+      "@supabase/supabase-js": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\lib\\supabaseClient.js"
+      ],
+      "clsx": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\lib\\utils.ts"
+      ],
+      "tailwind-merge": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\lib\\utils.ts"
+      ],
+      "lucide-react": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\EditMessageForm.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Beats.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatInput.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatMessageActions.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CookieConsent.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Dialog09.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\InternetStatus.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\PlayPauseIcon.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ScrollToTopButton.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\VideoPlay.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\sheet.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatHeader.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatInput.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageActions.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\CodeBlock.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\EditMessageForm.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\Ai\\ai-chat.tsx"
+      ],
+      "@radix-ui/react-slot": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Button.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\button.tsx"
+      ],
+      "class-variance-authority": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Button.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\button.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\sheet.tsx"
+      ],
+      "gsap": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChromaGrid.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\LiquidCursor.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\PillNav.jsx"
+      ],
+      "ogl": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CircularGallery.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\PrismaticBurst.jsx"
+      ],
+      "mathjs": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\GradualBlur.jsx"
+      ],
+      "three": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Hyperspeed.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotFace.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotHead.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\ThreeBackground.jsx"
+      ],
+      "postprocessing": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Hyperspeed.jsx"
+      ],
+      "gl-matrix": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\InfiniteMenu.jsx"
+      ],
+      "uuid": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\IpLogger.jsx"
+      ],
+      "@gsap/react": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\LiquidCursor.tsx"
+      ],
+      "@react-three/fiber": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotFace.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotHead.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\ThreeBackground.jsx"
+      ],
+      "@react-three/drei": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotFace.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\ThreeBackground.jsx"
+      ],
+      "lenis": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\SmoothScrollProvider.jsx"
+      ],
+      "simplex-noise": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Vortex.tsx"
+      ],
+      "@radix-ui/react-label": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\label.tsx"
+      ],
+      "@types/react-dom": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\label.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\sheet.tsx"
+      ],
+      "@radix-ui/react-dialog": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\sheet.tsx"
+      ],
+      "react-syntax-highlighter": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\CodeBlock.tsx"
+      ],
+      "react-markdown": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\MessageContent.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\Ai\\ai-chat.tsx"
+      ],
+      "rehype-raw": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\MessageContent.tsx"
+      ],
+      "remark-gfm": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\MessageContent.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\Ai\\ai-chat.tsx"
+      ]
+    },
+    "invalidFiles": {
+      "C:\\Users\\adars\\Downloads\\profile-Website\\tsconfig.app.json": "SyntaxError: C:\\Users\\adars\\Downloads\\profile-Website\\tsconfig.app.json: Expected double-quoted property name in JSON at position 34 (line 2 column 33)\n    at parse (<anonymous>)\n    at Object..json (node:internal/modules/cjs/loader:1905:39)\n    at Module.load (node:internal/modules/cjs/loader:1481:32)\n    at Module._load (node:internal/modules/cjs/loader:1300:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)\n    at Module.require (node:internal/modules/cjs/loader:1504:12)\n    at require (node:internal/modules/helpers:152:16)\n    at readJSON (C:\\Users\\adars\\Downloads\\profile-Website\\node_modules\\depcheck\\dist\\utils\\index.js:24:10)\n    at parseTTypeScript (C:\\Users\\adars\\Downloads\\profile-Website\\node_modules\\depcheck\\dist\\special\\ttypescript.js:16:41)",
+      "C:\\Users\\adars\\Downloads\\profile-Website\\tsconfig.node.json": "SyntaxError: C:\\Users\\adars\\Downloads\\profile-Website\\tsconfig.node.json: Unexpected token '/', \"// tsconfi\"... is not valid JSON\n    at parse (<anonymous>)\n    at Object..json (node:internal/modules/cjs/loader:1905:39)\n    at Module.load (node:internal/modules/cjs/loader:1481:32)\n    at Module._load (node:internal/modules/cjs/loader:1300:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)\n    at Module.require (node:internal/modules/cjs/loader:1504:12)\n    at require (node:internal/modules/helpers:152:16)\n    at readJSON (C:\\Users\\adars\\Downloads\\profile-Website\\node_modules\\depcheck\\dist\\utils\\index.js:24:10)\n    at parseTTypeScript (C:\\Users\\adars\\Downloads\\profile-Website\\node_modules\\depcheck\\dist\\special\\ttypescript.js:16:41)"
+    },
+    "invalidDirs": {}
+  },
+  {
+    "dependencies": [],
+    "devDependencies": [],
+    "missing": {},
+    "using": {
+      "@eslint/js": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\eslint.config.js"
+      ],
+      "globals": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\eslint.config.js"
+      ],
+      "eslint-plugin-react": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\eslint.config.js"
+      ],
+      "eslint-plugin-react-hooks": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\eslint.config.js"
+      ],
+      "eslint-plugin-react-refresh": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\eslint.config.js"
+      ],
+      "@eslint/eslintrc": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\eslint.config.js"
+      ],
+      "eslint": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\eslint.config.js",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json"
+      ],
+      "lighthouse": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\lighthouse-audit.js"
+      ],
+      "chrome-launcher": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\lighthouse-audit.js"
+      ],
+      "chalk": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\lighthouse-audit.js",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\unused-fix.mjs",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\plugins\\terminalBanner.jsx"
+      ],
+      "depcheck": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\unused-fix.mjs"
+      ],
+      "gh-pages": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json"
+      ],
+      "prettier": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json"
+      ],
+      "rollup-plugin-visualizer": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "vite": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "vitest": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "@types/node": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "terser": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "jsdom": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "react": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\package.json",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\AnalyticsTracker.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\App.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\main.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\monitoring.js",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\StatsigSetup.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\WebSocket.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\plugins\\UltraUltraSmartCacheCleaner.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\About.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Blog.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Contact.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Gallery.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Home.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\NotFound.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Sample.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\CacheClean.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\CirclePhoto.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Footer.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Header.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Loop.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Music.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Music1.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Navbar.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Scroll.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Velocity.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video1.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\EditMessageForm.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useAudioPlayer.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useCopyToClipboard.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useMousePosition.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useSmoothMousePosition.js",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useSpeechSynthesis.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Data\\LoopData.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ArtworkTooltip.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Beats.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\BlurText.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Button.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatInput.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatLoadingSkeleton.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatMessageActions.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChromaGrid.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CircularGallery.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CookieConsent.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CurvedLoop.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CustomSlider.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Dialog09.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ErrorBoundary.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\FuzzyText.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\GradualBlur.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\HomeSkeleton.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Hyperspeed.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ImageSpotlight.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\InfiniteMenu.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\InternetStatus.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\IpLogger.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\LiquidCursor.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Loading.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\LogoLoop.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Map.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\MusicArt.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\PillNav.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\PlayPauseIcon.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotFace.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotFaceWrapper.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotHead.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ScrollToTopButton.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ScrollVelocity.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\SmoothScrollProvider.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\SocialShare.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\SplashCursor.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\VideoPlay.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Vortex.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\WebShare.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\WebSocketClient.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\button.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\card.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\input.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\label.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\sheet.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\chat\\useChatCompletion.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\chat\\useChatMemory.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\chat\\useChatSession.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\AIChatCard.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatHeader.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatInput.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageActions.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageBubble.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageList.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\CodeBlock.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\EditMessageForm.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\message-loading.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\MessageContent.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\TypingIndicator.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\ErrorBoundary.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\LazyLoadSection.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\PrismaticBurst.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\ThreeBackground.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\Ai\\ai-chat.tsx"
+      ],
+      "@vitejs/plugin-react": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "@tailwindcss/vite": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "vite-plugin-compression": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "vite-plugin-pwa": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "vite-plugin-sitemap": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "@vitejs/plugin-legacy": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\vite.config.js"
+      ],
+      "react-ga4": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\analytics.js"
+      ],
+      "react-router-dom": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\AnalyticsTracker.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\App.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\main.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\NotFound.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\PillNav.jsx"
+      ],
+      "react-dom": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\AnalyticsTracker.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\App.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\main.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\About.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Blog.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Contact.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Gallery.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\NotFound.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Sample.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\CacheClean.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\CirclePhoto.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Footer.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Header.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Loop.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Music.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Music1.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Navbar.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Scroll.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Velocity.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video1.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ArtworkTooltip.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Beats.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\BlurText.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatInput.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CookieConsent.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CustomSlider.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Dialog09.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\MusicArt.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\PillNav.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotFace.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotHead.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ScrollVelocity.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\SocialShare.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\VideoPlay.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Vortex.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\label.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\sheet.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\AIChatCard.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatHeader.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageBubble.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageList.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\TypingIndicator.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\ThreeBackground.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\Ai\\ai-chat.tsx"
+      ],
+      "@sentry/react": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\monitoring.js"
+      ],
+      "logrocket": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\monitoring.js"
+      ],
+      "@statsig/react-bindings": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\StatsigSetup.jsx"
+      ],
+      "framer-motion": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\About.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Blog.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Contact.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Gallery.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\NotFound.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Sample.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\CacheClean.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\CirclePhoto.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Footer.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Header.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Loop.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Music.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Music1.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Navbar.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Scroll.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Velocity.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video1.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ArtworkTooltip.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Beats.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\BlurText.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatInput.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CookieConsent.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CustomSlider.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Dialog09.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\MusicArt.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotFace.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ScrollVelocity.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\SocialShare.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\VideoPlay.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Vortex.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\AIChatCard.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatHeader.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageBubble.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageList.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\TypingIndicator.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\Ai\\ai-chat.tsx"
+      ],
+      "@types/react": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\page\\Gallery.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\EditMessageForm.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useAudioPlayer.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useCopyToClipboard.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useMousePosition.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\useSpeechSynthesis.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ArtworkTooltip.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Button.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatInput.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatMessageActions.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CustomSlider.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Dialog09.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ImageSpotlight.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\LiquidCursor.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\MusicArt.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\PlayPauseIcon.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\SocialShare.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\VideoPlay.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Vortex.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\WebShare.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\button.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\card.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\input.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\label.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\sheet.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\chat\\useChatCompletion.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\chat\\useChatMemory.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\chat\\useChatSession.ts",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\AIChatCard.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageActions.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageBubble.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageList.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\CodeBlock.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\EditMessageForm.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\message-loading.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\MessageContent.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\TypingIndicator.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\Ai\\ai-chat.tsx"
+      ],
+      "react-intersection-observer": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\CirclePhoto.jsx"
+      ],
+      "react-icons": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Footer.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Data\\LoopData.jsx"
+      ],
+      "axios": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Main\\Video1.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Api\\latest-video.js"
+      ],
+      "@supabase/supabase-js": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\lib\\supabaseClient.js"
+      ],
+      "clsx": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\lib\\utils.ts"
+      ],
+      "tailwind-merge": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\lib\\utils.ts"
+      ],
+      "lucide-react": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\hooks\\EditMessageForm.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Beats.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatInput.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChatMessageActions.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CookieConsent.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Dialog09.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\InternetStatus.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\PlayPauseIcon.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ScrollToTopButton.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\VideoPlay.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\sheet.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatHeader.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatInput.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\ChatMessageActions.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\CodeBlock.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\EditMessageForm.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\Ai\\ai-chat.tsx"
+      ],
+      "@radix-ui/react-slot": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Button.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\button.tsx"
+      ],
+      "class-variance-authority": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Button.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\button.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\sheet.tsx"
+      ],
+      "gsap": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ChromaGrid.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\LiquidCursor.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\PillNav.jsx"
+      ],
+      "ogl": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\CircularGallery.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\PrismaticBurst.jsx"
+      ],
+      "mathjs": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\GradualBlur.jsx"
+      ],
+      "three": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Hyperspeed.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotFace.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotHead.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\ThreeBackground.jsx"
+      ],
+      "postprocessing": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Hyperspeed.jsx"
+      ],
+      "gl-matrix": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\InfiniteMenu.jsx"
+      ],
+      "uuid": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\IpLogger.jsx"
+      ],
+      "@gsap/react": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\LiquidCursor.tsx"
+      ],
+      "@react-three/fiber": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotFace.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotHead.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\ThreeBackground.jsx"
+      ],
+      "@react-three/drei": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\RobotFace.jsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\ThreeBackground.jsx"
+      ],
+      "lenis": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\SmoothScrollProvider.jsx"
+      ],
+      "simplex-noise": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\Vortex.tsx"
+      ],
+      "@radix-ui/react-label": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\label.tsx"
+      ],
+      "@types/react-dom": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\label.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\sheet.tsx"
+      ],
+      "@radix-ui/react-dialog": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ui\\sheet.tsx"
+      ],
+      "react-syntax-highlighter": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\CodeBlock.tsx"
+      ],
+      "react-markdown": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\MessageContent.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\Ai\\ai-chat.tsx"
+      ],
+      "rehype-raw": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\MessageContent.tsx"
+      ],
+      "remark-gfm": [
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\components\\ai\\MessageContent.tsx",
+        "C:\\Users\\adars\\Downloads\\profile-Website\\src\\Bin\\Ai\\ai-chat.tsx"
+      ]
+    },
+    "invalidFiles": {},
+    "invalidDirs": {}
+  }
+]

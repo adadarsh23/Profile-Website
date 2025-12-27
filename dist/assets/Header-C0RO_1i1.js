@@ -1,0 +1,275 @@
+import { r as e, t, j as r, m as i } from './vendor-iWomKbAA.js';
+import { c as n } from './utils-DfWtT5OB.js';
+const Vortex = (s) => {
+  const a = e.useRef(null),
+    o = e.useRef(null),
+    l = s.particleCount || 700,
+    c = 9 * l,
+    h = s.rangeY || 100,
+    u = s.baseSpeed || 0,
+    d = s.rangeSpeed || 1.5,
+    m = s.baseRadius || 1,
+    g = s.rangeRadius || 2,
+    p = s.baseHue || 220,
+    f = s.backgroundColor || '#000000';
+  let x = 0;
+  const w = t();
+  let y = new Float32Array(c),
+    b = [0, 0];
+  const v = 2 * Math.PI,
+    rand = (e) => e * Math.random(),
+    lerp = (e, t, r) => (1 - r) * e + r * t,
+    initParticles = () => {
+      ((x = 0), (y = new Float32Array(c)));
+      for (let e = 0; e < c; e += 9) initParticle(e);
+    },
+    initParticle = (e) => {
+      const t = a.current;
+      if (!t) return;
+      let r, i, n, s, o, l, c, f, x;
+      var w;
+      ((r = rand(t.width)),
+        (i = b[1] + ((w = h) - rand(2 * w))),
+        (n = 0),
+        (s = 0),
+        (o = 0),
+        (l = 50 + rand(150)),
+        (c = u + rand(d)),
+        (f = m + rand(g)),
+        (x = p + rand(100)),
+        y.set([r, i, 0, 0, 0, l, c, f, x], e));
+    },
+    draw = (e, t) => {
+      (x++,
+        t.clearRect(0, 0, e.width, e.height),
+        (t.fillStyle = f),
+        t.fillRect(0, 0, e.width, e.height),
+        drawParticles(t),
+        renderGlow(e, t),
+        renderToScreen(e, t),
+        window.requestAnimationFrame(() => draw(e, t)));
+    },
+    drawParticles = (e) => {
+      for (let t = 0; t < c; t += 9) updateParticle(t, e);
+    },
+    updateParticle = (e, t) => {
+      const r = a.current;
+      if (!r) return;
+      let i,
+        n,
+        s,
+        o,
+        l,
+        c,
+        h,
+        u,
+        d,
+        m,
+        g,
+        p,
+        f = 1 + e,
+        b = 2 + e,
+        T = 3 + e,
+        j = 4 + e,
+        C = 5 + e,
+        S = 6 + e,
+        E = 7 + e,
+        N = 8 + e;
+      ((n = y[e]),
+        (s = y[f]),
+        (i = 3 * w(0.00125 * n, 0.00125 * s, 5e-4 * x) * v),
+        (o = lerp(y[b], Math.cos(i), 0.5)),
+        (l = lerp(y[T], Math.sin(i), 0.5)),
+        (c = y[j]),
+        (h = y[C]),
+        (u = y[S]),
+        (d = n + o * u),
+        (m = s + l * u),
+        (g = y[E]),
+        (p = y[N]),
+        drawParticle(n, s, d, m, c, h, g, p, t),
+        c++,
+        (y[e] = d),
+        (y[f] = m),
+        (y[b] = o),
+        (y[T] = l),
+        (y[j] = c),
+        (checkBounds(n, s, r) || c > h) && initParticle(e));
+    },
+    drawParticle = (e, t, r, i, n, s, a, o, l) => {
+      (l.save(),
+        (l.lineCap = 'round'),
+        (l.lineWidth = a),
+        (l.strokeStyle = `hsla(${o},100%,60%,${((e, t) => {
+          let r = 0.5 * t;
+          return Math.abs(((e + r) % t) - r) / r;
+        })(n, s)})`),
+        l.beginPath(),
+        l.moveTo(e, t),
+        l.lineTo(r, i),
+        l.stroke(),
+        l.closePath(),
+        l.restore());
+    },
+    checkBounds = (e, t, r) => e > r.width || e < 0 || t > r.height || t < 0,
+    resize = (e, t) => {
+      const { innerWidth: r, innerHeight: i } = window;
+      ((e.width = r),
+        (e.height = i),
+        (b[0] = 0.5 * e.width),
+        (b[1] = 0.5 * e.height));
+    },
+    renderGlow = (e, t) => {
+      (t.save(),
+        (t.filter = 'blur(8px) brightness(200%)'),
+        (t.globalCompositeOperation = 'lighter'),
+        t.drawImage(e, 0, 0),
+        t.restore(),
+        t.save(),
+        (t.filter = 'blur(4px) brightness(200%)'),
+        (t.globalCompositeOperation = 'lighter'),
+        t.drawImage(e, 0, 0),
+        t.restore());
+    },
+    renderToScreen = (e, t) => {
+      (t.save(),
+        (t.globalCompositeOperation = 'lighter'),
+        t.drawImage(e, 0, 0),
+        t.restore());
+    };
+  return (
+    e.useEffect(() => {
+      (() => {
+        const e = a.current,
+          t = o.current;
+        if (e && t) {
+          const t = e.getContext('2d');
+          t && (resize(e), initParticles(), draw(e, t));
+        }
+      })();
+      const handleResize = () => {
+        const e = a.current,
+          t = e?.getContext('2d');
+        e && t && resize(e);
+      };
+      return (
+        window.addEventListener('resize', handleResize),
+        () => window.removeEventListener('resize', handleResize)
+      );
+    }, []),
+    r.jsxs('div', {
+      className: n('relative h-full w-full', s.containerClassName),
+      children: [
+        r.jsx(i.div, {
+          initial: { opacity: 0 },
+          animate: { opacity: 1 },
+          ref: o,
+          className:
+            'absolute h-full w-full inset-0 z-0 bg-transparent flex items-center justify-center',
+          children: r.jsx('canvas', { ref: a }),
+        }),
+        r.jsx('div', {
+          className: n('relative z-10', s.className),
+          children: s.children,
+        }),
+      ],
+    })
+  );
+};
+function Header() {
+  const t = [
+      'Welcome To Âd Adarsh Profile',
+      'Crafting Dark Atmospheres',
+      'Producing Cinematic Beats',
+      'Where Sound Meets Emotion',
+      'Building Stories Through Music',
+      'Creating Sonic Worlds',
+      'Rhythms That Hit Deep',
+      'Mixing Raw Energy With Art',
+      'Sound Designed With Intent',
+      'Echoes Born From Silence',
+      'Beats Forged In Shadows',
+      'Music With A Pulse Of Its Own',
+      'Bass That Cuts Through The Dark',
+      'Every Sound Has A Story',
+      'Emotion Engineered In Waves',
+      'From Stillness To Impact',
+      'Creating Depth Through Noise',
+      'Dark Tones. Clean Edges.',
+      'When Vibes Turn Into Vision',
+    ],
+    [n, s] = e.useState(0),
+    [a, o] = e.useState(''),
+    [l, c] = e.useState(!1);
+  return (
+    e.useEffect(() => {
+      const e = t[n];
+      if (!l) {
+        if (a.length < e.length) {
+          const t = setTimeout(() => {
+            o(e.slice(0, a.length + 1));
+          }, 90);
+          return () => clearTimeout(t);
+        }
+        {
+          const e = setTimeout(() => c(!0), 1500);
+          return () => clearTimeout(e);
+        }
+      }
+      if (a.length > 0) {
+        const e = setTimeout(() => {
+          o(a.slice(0, -1));
+        }, 40);
+        return () => clearTimeout(e);
+      }
+      (c(!1), s((e) => (e + 1) % t.length));
+    }, [a, n, l, t]),
+    r.jsx('div', {
+      className:
+        'relative w-full h-screen overflow-hidden bg-black flex flex-col items-center justify-center px-4 sm:px-6 md:px-12',
+      children: r.jsxs(Vortex, {
+        backgroundColor: 'black',
+        rangeY: 1e3,
+        particleCount: 1e3,
+        baseHue: 1e3,
+        className:
+          'flex items-center flex-col justify-center px-2 md:px-10 py-4 w-full h-full',
+        children: [
+          r.jsxs(i.h2, {
+            initial: { opacity: 0, y: 30 },
+            animate: { opacity: 1, y: 0 },
+            transition: { duration: 1 },
+            className:
+              'text-white text-2xl md:text-6xl font-bold text-center min-h-[80px] md:min-h-[120px] striper-regular',
+            children: [
+              r.jsx('span', {
+                className:
+                  'bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent',
+                children: a,
+              }),
+              r.jsx(i.span, {
+                animate: { opacity: [1, 0] },
+                transition: {
+                  duration: 0.6,
+                  repeat: 1 / 0,
+                  repeatType: 'reverse',
+                },
+                className: 'inline-block ml-1 text-white',
+                children: '|',
+              }),
+            ],
+          }),
+          r.jsx(i.p, {
+            initial: { opacity: 0, y: 20 },
+            animate: { opacity: 1, y: 0 },
+            transition: { delay: 0.2, duration: 0.8 },
+            className:
+              'text-white text-sm md:text-2xl max-w-xl mt-1 text-center striper-regular',
+            children: 'Explore my projects, beats, and music production works.',
+          }),
+        ],
+      }),
+    })
+  );
+}
+export { Header as default };

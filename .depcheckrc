@@ -1,0 +1,9 @@
+{
+  "ignorePatterns": [
+    "tsconfig.app.json",
+    "tsconfig.node.json"
+  ],
+  "ignores": [
+    "tw-animate-css"
+  ]
+}

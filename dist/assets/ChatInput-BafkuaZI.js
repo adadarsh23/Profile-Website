@@ -1,0 +1,38 @@
+import { j as e, bh as t } from './vendor-iWomKbAA.js';
+import { c as o } from './utils-DfWtT5OB.js';
+function ChatInput({ value: r, onChange: s, onSend: a, disabled: n }) {
+  return e.jsxs('div', {
+    className:
+      'flex items-center gap-2 p-3 border-t border-white/10 relative z-10',
+    children: [
+      e.jsx('input', {
+        className:
+          'flex-1 px-3 py-2 text-sm bg-black/50 rounded-lg border border-white/10 text-white focus:outline-none focus:ring-1 focus:ring-white/50',
+        placeholder: 'Type a message...',
+        value: r,
+        onChange: (e) => s(e.target.value),
+        onFocus: (e) => {
+          setTimeout(() => {
+            e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 300);
+        },
+        onKeyDown: (e) => {
+          'Enter' === e.key &&
+            !e.shiftKey &&
+            r.trim() &&
+            (e.preventDefault(), a(r));
+        },
+      }),
+      e.jsx('button', {
+        onClick: () => a(r),
+        disabled: n,
+        className: o(
+          'p-2 rounded-lg transition-colors',
+          n ? 'bg-black/10 cursor-not-allowed' : 'bg-white/10 hover:bg-white/20'
+        ),
+        children: e.jsx(t, { className: 'w-4 h-4 text-white' }),
+      }),
+    ],
+  });
+}
+export { ChatInput as default };
