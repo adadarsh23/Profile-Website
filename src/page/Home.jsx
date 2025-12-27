@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import Loading from '@/components/Loading';
+// import HomeSkeleton from '@/components/HomeSkeleton';
 
 const Header = lazy(() => import('../Main/Header'));
 const Scroll = lazy(() => import('../Main/Scroll'));
@@ -38,6 +39,7 @@ export default function Home() {
   return (
     <main>
       <Suspense fallback={<Loading />}>
+      {/* <Suspense fallback={<HomeSkeleton />}> */}
         <Header onAnimationComplete={handleHeaderAnimationComplete} />
         <Scroll />
         <Video1 />

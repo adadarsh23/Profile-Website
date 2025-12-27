@@ -120,7 +120,7 @@ export default function App() {
                   <ScrollToTopButton />
                   <CacheClean />
                   {/* <CookieConsent /> */}
-                </div> 
+                </div>
               </React.Fragment>
             </Suspense>
           </ErrorBoundary>
