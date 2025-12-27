@@ -1,0 +1,1 @@
+import{u as r,r as t}from"./vendor-DEvyvm6K.js";import{i as a,t as e}from"./index-K_zrQAc8.js";function AnalyticsTracker(){const s=r();return t.useEffect(()=>{a()},[]),t.useEffect(()=>{e(s.pathname)},[s]),null}export{AnalyticsTracker as default};
