@@ -48,11 +48,13 @@ export async function runChat(chatHistory: ChatMessage[]): Promise<string> {
       if (!response.ok) {
         if (response.status === 429) {
           attempts++;
-          console.warn(
-            `⚠️ Rate limit hit. Retrying... (${attempts}/${maxRetries})`
-          );
-          await delay(1500 * attempts);
-          continue;
+          if (attempts < maxRetries) {
+            console.warn(
+              `⚠️ Rate limit hit. Retrying... (${attempts}/${maxRetries})`
+            );
+            await delay(1500 * attempts);
+            continue;
+          }
         }
         // Try to read the response body to surface a helpful server message
         let bodyText: string | undefined;
