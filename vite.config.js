@@ -22,44 +22,6 @@ const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
 const isProd = process.env.NODE_ENV === 'production';
 const isAnalyze = process.env.ANALYZE === 'true';
 
-function getManualChunk(id) {
-  if (!id.includes('node_modules')) {
-    return undefined;
-  }
-
-  if (
-    id.includes('framer-motion') ||
-    id.includes('gsap') ||
-    id.includes('@gsap')
-  ) {
-    return 'motion';
-  }
-
-  if (
-    id.includes('three') ||
-    id.includes('@react-three') ||
-    id.includes('postprocessing') ||
-    id.includes('/ogl/')
-  ) {
-    return 'three-stack';
-  }
-
-  if (
-    id.includes('react-markdown') ||
-    id.includes('remark-gfm') ||
-    id.includes('rehype-raw') ||
-    id.includes('react-syntax-highlighter')
-  ) {
-    return 'markdown';
-  }
-
-  if (id.includes('lucide-react') || id.includes('react-icons')) {
-    return 'icons';
-  }
-
-  return 'vendor';
-}
-
 export default defineConfig({
   base: '/',
   logLevel: 'info',
@@ -231,7 +193,7 @@ export default defineConfig({
     modulePreload: {
       polyfill: true,
     },
-    minify: isProd ? 'terser' : false,
+    minify: isProd ? 'esbuild' : false,
     commonjsOptions: {
       transformMixedEsModules: true,
     },
@@ -240,21 +202,11 @@ export default defineConfig({
     cssCodeSplit: true,
     outDir: 'dist',
     assetsDir: 'assets',
-    rollupOptions: {
-      output: {
-        manualChunks: getManualChunk,
-      },
-    },
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-      mangle: {
-        keep_classnames: true,
-        keep_fnames: true,
-      },
-    },
+    esbuild: isProd
+      ? {
+          drop: ['console', 'debugger'],
+        }
+      : undefined,
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'ogl'],
