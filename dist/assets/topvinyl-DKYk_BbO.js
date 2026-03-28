@@ -1,1 +1,0 @@
-var a="/assets/topvinyl-CvgmgTDP.png";export{a as default};

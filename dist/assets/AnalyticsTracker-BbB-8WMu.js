@@ -1,1 +1,0 @@
-import{a as r}from"./rolldown-runtime-CFsVclU_.js";import{V as a}from"./icons-CLmcVQm1.js";import{ai as s}from"./vendor-BFZav_oY.js";import{n as t,t as o}from"./index-Ba20KBGd.js";var n=r(a(),1);function AnalyticsTracker(){const r=s();return(0,n.useEffect)(()=>{o()},[]),(0,n.useEffect)(()=>{t(r.pathname)},[r]),null}export{AnalyticsTracker as default};

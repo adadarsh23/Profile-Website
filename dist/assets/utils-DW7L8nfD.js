@@ -1,1 +1,0 @@
-import{X as n,Y as r}from"./vendor-BFZav_oY.js";function cn(...o){return r(n(o))}export{cn as t};

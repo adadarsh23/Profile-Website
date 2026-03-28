@@ -1,1 +1,0 @@
-import{s as e}from"./markdown-B4kQ1M-3.js";var a=e();function SkeletonBlock({className:e="",rounded:o="rounded-2xl"}){return(0,a.jsx)("div",{"aria-hidden":"true",className:`animate-pulse bg-white/8 ${o} ${e}`})}export{SkeletonBlock as t};
