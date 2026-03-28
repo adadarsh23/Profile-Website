@@ -1,0 +1,1 @@
+import{Q as o}from"./vendor-BFZav_oY.js";export default o();

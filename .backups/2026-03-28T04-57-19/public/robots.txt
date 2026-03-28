@@ -1,0 +1,8 @@
+# Allow all bots to crawl the website
+User-agent: *
+Disallow: /node_modules/
+Disallow: /dist/
+Disallow: /private/
+
+# Sitemap location (replace with actual URL if available)
+Sitemap: https://adadarsh23.netlify.app/sitemap.xml
