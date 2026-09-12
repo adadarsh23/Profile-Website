@@ -1,9 +1,6 @@
 {
-  "ignorePatterns": [
-    "tsconfig.app.json",
-    "tsconfig.node.json"
-  ],
   "ignores": [
+    "virtual:pwa-register",
     "tw-animate-css"
   ]
 }

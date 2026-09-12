@@ -1,0 +1,7 @@
+2026/09/12-08:40:32.594 84c Reusing MANIFEST C:\Code\Profile-Website\tmp-chrome\Default\WebStorage\2\IndexedDB\indexeddb.leveldb/MANIFEST-000001
+2026/09/12-08:40:32.595 84c Recovering log #3
+2026/09/12-08:40:32.596 84c Reusing old log C:\Code\Profile-Website\tmp-chrome\Default\WebStorage\2\IndexedDB\indexeddb.leveldb/000003.log 
+2026/09/12-08:40:48.475 4eb8 Level-0 table #5: started
+2026/09/12-08:40:48.485 4eb8 Level-0 table #5: 19984 bytes OK
+2026/09/12-08:40:48.491 4eb8 Delete type=0 #3
+2026/09/12-08:40:48.491 52a0 Manual compaction at level-0 from '\x00\x02\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x03\x00\x00\x00' @ 0 : 0; will stop at (end)

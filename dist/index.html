@@ -66,7 +66,7 @@
       content="Explore Ad Adarsh's profile website featuring projects, web development, and creative coding."
     />
     <meta property="og:image" content="/adarsh-social-preview.webp" />
-    <meta property="og:url" content="https://yourdomain.com" />
+    <meta property="og:url" content="https://adadarsh23.netlify.app" />
     <meta property="og:type" content="website" />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -80,16 +80,86 @@
     <!-- Microsoft Tiles -->
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Security Headers (meta-level) -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://browser.sentry-cdn.com https://*.statsig.com https://*.logrocket.io https://cdn.lr-in.com https://cdn.lr-ingest.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com data:;
+        img-src 'self' data: blob: https: http:;
+        connect-src 'self'
+          https://*.sentry.io
+          https://*.supabase.co
+          https://*.google-analytics.com
+          https://www.googletagmanager.com
+          https://*.googleapis.com
+          https://www.googleapis.com
+          https://*.youtube.com
+          https://youtube.com
+          https://*.google.com
+          https://*.statsig.com
+          https://api.statsig.com
+          https://*.statsigapi.net
+          https://statsigapi.net
+          https://*.featureassets.org
+          https://featureassets.org
+          https://*.prodregistryv2.org
+          https://prodregistryv2.org
+          https://*.assetsconfigcdn.org
+          https://assetsconfigcdn.org
+          https://cloudflare-dns.com
+          https://ai-assistant-server-colf.onrender.com
+          https://*.onrender.com
+          https://ipapi.co
+          https://*.ipapi.co
+          https://api64.ipify.org
+          https://api.ipify.org
+          https://formspree.io
+          https://*.formspree.io
+          https://*.logrocket.io
+          https://*.lr-ingest.com
+          https://*.lr-in.com
+          https://*.lr-in-1.com
+          wss:
+          ws:;
+        media-src 'self' blob: data: https:;
+        worker-src 'self' blob:;
+        child-src 'self' blob: https://www.youtube.com https://youtube.com https://www.google.com;
+        frame-src 'self' https://www.youtube.com https://youtube.com https://www.youtube-nocookie.com https://www.google.com https://maps.google.com;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self' https://formspree.io;
+        upgrade-insecure-requests;
+      "
+    />
+
     <!-- Google Fonts Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- Preload + Non-blocking load -->
     <!-- Preload font CSS without blocking -->
+    <link
+      rel="preload"
+      href="/font/Striper_Complete/Fonts/WEB/css/striper.css"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
 
     <!-- Fallback if JS is disabled -->
     <noscript>
+      <link
+        rel="stylesheet"
+        href="/font/Striper_Complete/Fonts/WEB/css/striper.css"
+      />
     </noscript>
     <link
       rel="preload"
@@ -127,10 +197,14 @@
         }
       }
     </script>
-    <script type="module" crossorigin src="/assets/index-DsyuzcZj.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-8CAIHoW7.css">
+    <script type="module" crossorigin src="/assets/index-BtsjhmBx.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-react-CPvw8qTU.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-markdown-DPAm6Ezq.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-monitoring-CIYecsB0.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-animation-DQXHe_Fs.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-BBW5_-8K.css">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-  <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
+  <link rel="manifest" href="/manifest.webmanifest"></head>
 
   <body>
     <div id="root"></div>

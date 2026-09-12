@@ -1,10 +1,11 @@
 {
   "extends": "./tsconfig.json", // Inherit base settings from tsconfig.json
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "composite": true, // Required if referenced by other tsconfig files
     "tsBuildInfoFile": "./node_modules/.tsbuildinfo/tsconfig.app.tsbuildinfo", // For faster incremental builds
     "target": "ES2022", // Or "ESNext" - modern JS for browser environments
-    "lib": ["ES2022", "DOM", "DOM.Iterable"], // Standard modern JS libs plus DOM for browser APIs
+    "lib": ["ES2023", "DOM", "DOM.Iterable"], // Standard modern JS libs plus DOM for browser APIs
     "module": "ESNext", // Or "ES2022" - use modern module system
     "skipLibCheck": true, // Skip type checking of declaration files, reduces build time
     "moduleResolution": "bundler", // Modern module resolution for bundlers like Vite
