@@ -121,7 +121,7 @@ export const ChatInput = memo(function ChatInput({
           placeholder={
             isBusy
               ? 'AD Assistant is generating response...'
-              : 'Ask about albums, beats, FL Studio, booking...'
+              : 'Ask about albums, beats, FL Studio'
           }
           className={cn(
             'chat-scroll flex-1 max-h-[120px] min-h-[42px] resize-none overflow-y-hidden bg-transparent px-3 py-2 text-[15px] sm:text-sm text-white placeholder-zinc-500 focus:outline-none leading-relaxed overscroll-y-contain'

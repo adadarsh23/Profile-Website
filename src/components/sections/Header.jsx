@@ -75,7 +75,7 @@ function Header() {
             className="striper-regular min-h-[80px] text-center text-2xl font-bold text-white md:min-h-[120px] md:text-6xl"
             aria-live="polite"
           >
-            <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent text-white ">{displayedText}</span>
+            <span className="text-white">{displayedText}</span>
             <motion.span
               animate={{ opacity: [1, 0] }}
               transition={{
