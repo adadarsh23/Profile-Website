@@ -16,32 +16,34 @@ Welcome to the official repository for **Âd Adarsh**'s profile and music portfo
 - 📍 **Location:** Delhi, India
 - 🎚️ **Specialties:** Music Production, Sound Design, Mixing & Mastering, Beat Making
 - 🎼 **Genres:** Hip-Hop, Cinematic, Ambient, EDM, Trap, and Lo-fi
-- 💡 **Philosophy:** *"Music isn’t just sound — it’s the architecture of emotion."*
+- 💡 **Philosophy:** _"Music isn’t just sound — it’s the architecture of emotion."_
 - 💻 **Tech & Sound Fusion:** Blending DAW-based production with modern web engineering, interactive 3D soundscapes, and AI-driven assistants.
 
 ---
 
 ## 🎶 Featured Releases & Music Projects
 
-| Project | Year | Description | Production Tools |
-| :--- | :---: | :--- | :--- |
-| **Silent Ritual** | 2025 | A 10-track atmospheric collection crafted for creators and artists. Full production, mix, and master. | FL Studio, Serum, Splice |
-| **Haqeeqat** | 2025 | Melodic love song blending deep emotional storytelling with pristine production. | FL Studio, Omnisphere, Splice |
-| **Number 2** | 2024 | Debut release featuring high-energy Hip-Hop bounce, punchy percussion, and catchy hooks. | FL Studio |
-| **Unfelling** | 2024 | Dark, atmospheric release with eerie synth textures, deep sub-basslines, and suspenseful rhythm. | FL Studio, Splice |
-| **Phaser** | 2025 | High-energy electronic dance track driven by cutting synths and driving rhythmic progression. | FL Studio |
+| Project           | Year | Description                                                                                           | Production Tools              |
+| :---------------- | :--: | :---------------------------------------------------------------------------------------------------- | :---------------------------- |
+| **Silent Ritual** | 2025 | A 10-track atmospheric collection crafted for creators and artists. Full production, mix, and master. | FL Studio, Serum, Splice      |
+| **Haqeeqat**      | 2025 | Melodic love song blending deep emotional storytelling with pristine production.                      | FL Studio, Omnisphere, Splice |
+| **Number 2**      | 2024 | Debut release featuring high-energy Hip-Hop bounce, punchy percussion, and catchy hooks.              | FL Studio                     |
+| **Unfelling**     | 2024 | Dark, atmospheric release with eerie synth textures, deep sub-basslines, and suspenseful rhythm.      | FL Studio, Splice             |
+| **Phaser**        | 2025 | High-energy electronic dance track driven by cutting synths and driving rhythmic progression.         | FL Studio                     |
 
 ---
 
 ## 🛠️ Tools & Studio Stack
 
 ### Music Production & Audio
+
 - **DAW:** FL Studio
 - **Synthesizers & VSTs:** Xfer Serum, Spectrasonics Omnisphere, Massive X, Splice
 - **Audio Processing & FX:** RC-20 Retro Color, FabFilter Suite, ValhallaDSP, iZotope Ozone, Waves Audio
 - **Hardware:** MIDI Keyboard Controller, Studio Audio Interface, Studio Monitors & Reference Headphones
 
 ### Web Application & Engineering
+
 - **Core Framework:** [React 19](https://react.dev/) + [Vite](https://vite.dev/) + [TypeScript](https://www.typescriptlang.org/)
 - **Styling & UI:** [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), Lucide Icons
 - **Animation & 3D:** [Three.js](https://threejs.org/) / React Three Fiber, [GSAP](https://greensock.com/gsap/), [Framer Motion](https://www.framer.com/motion/)
@@ -55,18 +57,22 @@ Welcome to the official repository for **Âd Adarsh**'s profile and music portfo
 To run Âd Adarsh's portfolio website locally:
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/adadarsh23/Profile-Website.git
 cd Profile-Website
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 npm install
 ```
 
 ### 3. Setup Environment Variables
+
 Create a `.env` file in the project root (refer to `.env.example`):
+
 ```env
 VITE_FORMSPREE_URL=your_formspree_endpoint
 VITE_GEMINI_API_KEY=your_gemini_api_key
@@ -76,11 +82,13 @@ VITE_GA4_MEASUREMENT_ID=your_ga4_measurement_id
 ```
 
 ### 4. Run Development Server
+
 ```bash
 npm run dev
 ```
 
 ### 5. Build for Production
+
 ```bash
 npm run build
 npm run preview

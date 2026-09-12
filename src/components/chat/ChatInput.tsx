@@ -1,9 +1,15 @@
 // src/components/chat/ChatInput.tsx
 'use client';
 
-import { useRef, useEffect, useCallback, memo } from 'react';
+import { useRef, useEffect, useLayoutEffect, useCallback, memo } from 'react';
 import { ArrowUp, Square } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+const useIsomorphicLayoutEffect =
+  typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
+const MIN_HEIGHT = 42;
+const MAX_HEIGHT = 120;
 
 interface ChatInputProps {
   value: string;
@@ -23,23 +29,68 @@ export const ChatInput = memo(function ChatInput({
   isBusy = false,
 }: ChatInputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const prevValueRef = useRef(value);
 
-  // Auto-resize textarea height smoothly
+  // Auto-resize textarea height smoothly without scroll-jumping
   const adjustHeight = useCallback(() => {
     const el = textareaRef.current;
     if (!el) return;
-    el.style.height = 'auto';
+
     if (!value) {
-      el.style.height = '42px';
+      el.style.height = `${MIN_HEIGHT}px`;
+      el.style.overflowY = 'hidden';
+      el.scrollTop = 0;
+      prevValueRef.current = '';
       return;
     }
-    const newHeight = Math.min(el.scrollHeight, 120);
-    el.style.height = `${Math.max(42, newHeight)}px`;
+
+    const isShrinking = value.length < prevValueRef.current.length;
+    prevValueRef.current = value;
+
+    // If text is already at max height and expanding/typing, don't reset height to 'auto'
+    // This prevents scroll-jumping to top while typing multi-line messages
+    const currentHeight = el.offsetHeight;
+    if (!isShrinking && currentHeight >= MAX_HEIGHT) {
+      if (el.style.overflowY !== 'auto') {
+        el.style.overflowY = 'auto';
+      }
+      return;
+    }
+
+    const prevScrollTop = el.scrollTop;
+    const isNearBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 24;
+
+    // Temporarily reset height to calculate actual content scrollHeight
+    el.style.height = 'auto';
+    const scrollHeight = el.scrollHeight;
+
+    if (scrollHeight > MAX_HEIGHT) {
+      el.style.height = `${MAX_HEIGHT}px`;
+      el.style.overflowY = 'auto';
+      // If user was typing at the bottom, keep following the cursor; otherwise restore position
+      if (isNearBottom) {
+        el.scrollTop = el.scrollHeight;
+      } else {
+        el.scrollTop = prevScrollTop;
+      }
+    } else {
+      el.style.height = `${Math.max(MIN_HEIGHT, scrollHeight)}px`;
+      el.style.overflowY = 'hidden';
+      el.scrollTop = 0;
+    }
   }, [value]);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     adjustHeight();
   }, [value, adjustHeight]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      adjustHeight();
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [adjustHeight]);
 
   const handleSend = useCallback(() => {
     const trimmed = value.trim();
@@ -66,13 +117,14 @@ export const ChatInput = memo(function ChatInput({
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={handleKeyDown}
           rows={1}
+          data-lenis-prevent="true"
           placeholder={
             isBusy
               ? 'AD Assistant is generating response...'
               : 'Ask about albums, beats, FL Studio, booking...'
           }
           className={cn(
-            'flex-1 max-h-[120px] min-h-[42px] resize-none bg-transparent px-3 py-2 text-[15px] sm:text-sm text-white placeholder-zinc-500 focus:outline-none leading-relaxed overscroll-contain'
+            'chat-scroll flex-1 max-h-[120px] min-h-[42px] resize-none overflow-y-hidden bg-transparent px-3 py-2 text-[15px] sm:text-sm text-white placeholder-zinc-500 focus:outline-none leading-relaxed overscroll-y-contain'
           )}
         />
 

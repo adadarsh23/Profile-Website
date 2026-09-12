@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { User, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { ChatMessage } from './chatTypes';
+import type { AiStatus } from './TypingIndicator';
 import { ChatMessageActions } from './ChatMessageActions';
 import { EditMessageForm } from './EditMessageForm';
 import { MessageContent } from './MessageContent';
@@ -14,6 +15,7 @@ import { RobotFaceAvatar } from './RobotFaceAvatar';
 export interface ChatMessageBubbleProps {
   msg: ChatMessage;
   isLatest?: boolean;
+  aiStatus?: AiStatus;
   onRegenerate?: () => void;
   allMessages?: ChatMessage[];
   onEdit: (newText: string) => void;
@@ -23,6 +25,7 @@ export interface ChatMessageBubbleProps {
 export const ChatMessageBubble = memo(function ChatMessageBubble({
   msg,
   isLatest,
+  aiStatus,
   onRegenerate,
   allMessages,
   onEdit,
@@ -80,7 +83,16 @@ export const ChatMessageBubble = memo(function ChatMessageBubble({
           )}
         >
           {isAI ? (
-            <RobotFaceAvatar size={22} isSpeaking={isLatest && !msg.text} />
+            <RobotFaceAvatar
+              size={22}
+              isThinking={
+                isLatest &&
+                (aiStatus === 'fetching' ||
+                  aiStatus === 'thinking' ||
+                  !msg.text)
+              }
+              isSpeaking={isLatest && aiStatus === 'generating'}
+            />
           ) : (
             <User className="h-3.5 w-3.5 text-zinc-900" />
           )}
@@ -144,7 +156,7 @@ export const ChatMessageBubble = memo(function ChatMessageBubble({
           )}
 
           {/* Integrated Actions Toolbar */}
-          {!isEditing && (
+          {!isEditing && Boolean(msg.text?.trim()) && (
             <ChatMessageActions
               msg={msg}
               allMessages={allMessages}

@@ -28,10 +28,10 @@ export default function Navbar() {
         ]}
         className="custom-nav"
         ease="power2.easeOut"
-        baseColor="#000000"
-        pillColor="#ffffff"
-        hoveredPillTextColor="#ffffff"
-        pillTextColor="#000000"
+        baseColor="#ffffff"
+        pillColor="#000000"
+        hoveredPillTextColor="#000000"
+        pillTextColor="#ffffff"
       />
     </motion.nav>
   );

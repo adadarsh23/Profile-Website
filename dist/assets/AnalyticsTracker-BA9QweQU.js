@@ -1,0 +1,1 @@
+import{u as o,b as r}from"./vendor-react-CPvw8qTU.js";import{t as n}from"./index-BFrAj01e.js";import"./vendor-markdown-DPAm6Ezq.js";import"./vendor-monitoring-CIYecsB0.js";import"./vendor-animation-DQXHe_Fs.js";function t(){const t=o();return r.useEffect(()=>{n(t.pathname)},[t]),null}export{t as default};

@@ -80,6 +80,7 @@ export const ChatMessageList = memo(function ChatMessageList({
                 key={msg.id}
                 msg={msg}
                 isLatest={isLatest}
+                aiStatus={aiStatus}
                 allMessages={messages}
                 onRegenerate={onRegenerate}
                 onEdit={(newText) => onEdit(msg.id, newText)}

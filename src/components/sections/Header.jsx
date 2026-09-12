@@ -75,9 +75,7 @@ function Header() {
             className="striper-regular min-h-[80px] text-center text-2xl font-bold text-white md:min-h-[120px] md:text-6xl"
             aria-live="polite"
           >
-            <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
-              {displayedText}
-            </span>
+            <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent text-white ">{displayedText}</span>
             <motion.span
               animate={{ opacity: [1, 0] }}
               transition={{
@@ -96,7 +94,7 @@ function Header() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="striper-regular mt-3 max-w-2xl text-center text-sm leading-7 text-white/80 md:text-2xl"
+            className="striper-regular mt-3 max-w-2xl text-center text-sm leading-7 text-white md:text-2xl"
           >
             Explore my projects, beats, and music production work.
           </motion.p>

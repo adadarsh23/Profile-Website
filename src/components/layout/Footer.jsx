@@ -45,7 +45,7 @@ const FooterCopyright = memo(() => (
     className="text-sm text-gray-300 text-center md:text-left"
     variants={itemVariants}
   >
-    &copy; {new Date().getFullYear()} - Built by{' '}
+    {new Date().getFullYear()} - Built by{' '}
     <a
       href="https://github.com/adadarsh23"
       target="_blank"

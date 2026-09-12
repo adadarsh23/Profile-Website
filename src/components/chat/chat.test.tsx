@@ -212,4 +212,74 @@ describe('Chat UI Components', () => {
     expect(container.querySelector('.robot-eye')).not.toBeNull();
     expect(container.querySelector('.antenna-tip')).not.toBeNull();
   });
+
+  it('renders ChatMessageActions with always-visible classes on mobile for user messages', async () => {
+    const { ChatMessageActions } = await import('./ChatMessageActions');
+    const userMsg = {
+      id: 'msg-user-1',
+      sender: 'user' as const,
+      text: 'Tell me about beats',
+      timestamp: Date.now(),
+    };
+
+    await act(async () => {
+      root.render(<ChatMessageActions msg={userMsg} onEdit={() => {}} />);
+    });
+
+    const editBtn = container.querySelector('button[title="Edit prompt"]');
+    const copyBtn = container.querySelector('button[title="Copy text"]');
+    expect(editBtn).not.toBeNull();
+    expect(copyBtn).not.toBeNull();
+
+    // Verify container has opacity-100 on mobile
+    const actionsToolbar = container.firstElementChild as HTMLElement;
+    expect(actionsToolbar.className).toContain('opacity-100');
+    expect(actionsToolbar.className).toContain('sm:opacity-0');
+    expect(actionsToolbar.className).toContain('sm:group-hover:opacity-100');
+  });
+
+  it('renders ChatMessageActions with always-visible classes on mobile for AI response messages', async () => {
+    const { ChatMessageActions } = await import('./ChatMessageActions');
+    const aiMsg = {
+      id: 'msg-ai-1',
+      sender: 'ai' as const,
+      text: 'Here are details about albums and beats.',
+      timestamp: Date.now(),
+    };
+
+    const handleRegenerate = vi.fn();
+
+    await act(async () => {
+      root.render(
+        <ChatMessageActions msg={aiMsg} onRegenerate={handleRegenerate} />
+      );
+    });
+
+    const copyBtn = container.querySelector('button[title="Copy text"]');
+    const speakBtn = container.querySelector('button[title="Read aloud"]');
+    const regenBtn = container.querySelector(
+      'button[title="Regenerate answer"]'
+    );
+    const likeBtn = container.querySelector('button[title="Helpful response"]');
+    const dislikeBtn = container.querySelector(
+      'button[title="Unhelpful response"]'
+    );
+
+    expect(copyBtn).not.toBeNull();
+    expect(speakBtn).not.toBeNull();
+    expect(regenBtn).not.toBeNull();
+    expect(likeBtn).not.toBeNull();
+    expect(dislikeBtn).not.toBeNull();
+
+    const actionsToolbar = container.firstElementChild as HTMLElement;
+    expect(actionsToolbar.className).toContain('opacity-100');
+    expect(actionsToolbar.className).toContain('sm:opacity-0');
+    expect(actionsToolbar.className).toContain('sm:group-hover:opacity-100');
+
+    // Test clicking regenerate icon
+    await act(async () => {
+      (regenBtn as HTMLButtonElement).click();
+    });
+    expect(handleRegenerate).toHaveBeenCalledTimes(1);
+  });
 });

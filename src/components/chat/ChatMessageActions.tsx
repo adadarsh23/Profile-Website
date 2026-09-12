@@ -63,7 +63,9 @@ export const ChatMessageActions = memo(function ChatMessageActions({
       className={cn(
         'mt-2 flex items-center gap-1 transition-opacity duration-200',
         isAI ? 'justify-start text-zinc-400' : 'justify-end text-zinc-700',
-        isVisible ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+        isVisible
+          ? 'opacity-100'
+          : 'opacity-100 sm:opacity-0 sm:group-hover:opacity-100 [@media(hover:none)]:opacity-100'
       )}
     >
       {/* User Actions: Edit */}
@@ -74,11 +76,11 @@ export const ChatMessageActions = memo(function ChatMessageActions({
             e.stopPropagation();
             onEdit();
           }}
-          className="flex h-6 w-6 items-center justify-center rounded text-zinc-700 hover:bg-black/10 hover:text-black transition-colors"
+          className="flex h-6.5 w-6.5 sm:h-6 sm:w-6 items-center justify-center rounded text-zinc-700 hover:bg-black/10 hover:text-black active:scale-95 touch-manipulation transition-all"
           title="Edit prompt"
           aria-label="Edit prompt"
         >
-          <Pencil className="h-3 w-3" />
+          <Pencil className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
         </button>
       )}
 
@@ -90,7 +92,7 @@ export const ChatMessageActions = memo(function ChatMessageActions({
           handleCopy();
         }}
         className={cn(
-          'flex h-6 w-6 items-center justify-center rounded transition-colors',
+          'flex h-6.5 w-6.5 sm:h-6 sm:w-6 items-center justify-center rounded active:scale-95 touch-manipulation transition-all',
           isAI
             ? 'text-zinc-400 hover:bg-white/10 hover:text-white'
             : 'text-zinc-700 hover:bg-black/10 hover:text-black'
@@ -101,12 +103,12 @@ export const ChatMessageActions = memo(function ChatMessageActions({
         {copied ? (
           <Check
             className={cn(
-              'h-3 w-3',
+              'h-3.5 w-3.5 sm:h-3 sm:w-3',
               isAI ? 'text-emerald-400' : 'text-emerald-700'
             )}
           />
         ) : (
-          <Copy className="h-3 w-3" />
+          <Copy className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
         )}
       </button>
 
@@ -119,7 +121,7 @@ export const ChatMessageActions = memo(function ChatMessageActions({
             handleCopyAll();
           }}
           className={cn(
-            'flex h-6 w-6 items-center justify-center rounded transition-colors',
+            'flex h-6.5 w-6.5 sm:h-6 sm:w-6 items-center justify-center rounded active:scale-95 touch-manipulation transition-all',
             isAI
               ? 'text-zinc-400 hover:bg-white/10 hover:text-white'
               : 'text-zinc-700 hover:bg-black/10 hover:text-black'
@@ -130,12 +132,12 @@ export const ChatMessageActions = memo(function ChatMessageActions({
           {allCopied ? (
             <Check
               className={cn(
-                'h-3 w-3',
+                'h-3.5 w-3.5 sm:h-3 sm:w-3',
                 isAI ? 'text-cyan-400' : 'text-blue-700'
               )}
             />
           ) : (
-            <Copy className="h-3 w-3 rotate-45" />
+            <Copy className="h-3.5 w-3.5 sm:h-3 sm:w-3 rotate-45" />
           )}
         </button>
       )}
@@ -151,16 +153,16 @@ export const ChatMessageActions = memo(function ChatMessageActions({
               handleToggleSpeech();
             }}
             className={cn(
-              'flex h-6 w-6 items-center justify-center rounded hover:bg-white/10 hover:text-white transition-colors',
+              'flex h-6.5 w-6.5 sm:h-6 sm:w-6 items-center justify-center rounded hover:bg-white/10 hover:text-white active:scale-95 touch-manipulation transition-all',
               isSpeaking && 'text-cyan-400 animate-pulse bg-cyan-500/20'
             )}
             title={isSpeaking ? 'Stop reading' : 'Read aloud'}
             aria-label="Read message aloud"
           >
             {isSpeaking ? (
-              <Square className="h-2.5 w-2.5 fill-current" />
+              <Square className="h-3 w-3 sm:h-2.5 sm:w-2.5 fill-current" />
             ) : (
-              <Volume2 className="h-3 w-3" />
+              <Volume2 className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
             )}
           </button>
 
@@ -172,11 +174,11 @@ export const ChatMessageActions = memo(function ChatMessageActions({
                 e.stopPropagation();
                 onRegenerate();
               }}
-              className="flex h-6 w-6 items-center justify-center rounded hover:bg-white/10 hover:text-white transition-colors"
+              className="flex h-6.5 w-6.5 sm:h-6 sm:w-6 items-center justify-center rounded hover:bg-white/10 hover:text-white active:scale-95 touch-manipulation transition-all"
               title="Regenerate answer"
               aria-label="Regenerate answer"
             >
-              <RefreshCw className="h-3 w-3" />
+              <RefreshCw className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
             </button>
           )}
 
@@ -188,13 +190,13 @@ export const ChatMessageActions = memo(function ChatMessageActions({
               setReaction((prev) => (prev === 'liked' ? null : 'liked'));
             }}
             className={cn(
-              'flex h-6 w-6 items-center justify-center rounded hover:bg-white/10 hover:text-white transition-colors',
+              'flex h-6.5 w-6.5 sm:h-6 sm:w-6 items-center justify-center rounded hover:bg-white/10 hover:text-white active:scale-95 touch-manipulation transition-all',
               reaction === 'liked' && 'text-emerald-400 bg-emerald-500/10'
             )}
             title="Helpful response"
             aria-label="Helpful response"
           >
-            <ThumbsUp className="h-3 w-3" />
+            <ThumbsUp className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
           </button>
 
           <button
@@ -204,13 +206,13 @@ export const ChatMessageActions = memo(function ChatMessageActions({
               setReaction((prev) => (prev === 'disliked' ? null : 'disliked'));
             }}
             className={cn(
-              'flex h-6 w-6 items-center justify-center rounded hover:bg-white/10 hover:text-white transition-colors',
+              'flex h-6.5 w-6.5 sm:h-6 sm:w-6 items-center justify-center rounded hover:bg-white/10 hover:text-white active:scale-95 touch-manipulation transition-all',
               reaction === 'disliked' && 'text-rose-400 bg-rose-500/10'
             )}
             title="Unhelpful response"
             aria-label="Unhelpful response"
           >
-            <ThumbsDown className="h-3 w-3" />
+            <ThumbsDown className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
           </button>
         </>
       )}
